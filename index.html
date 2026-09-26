@@ -206,24 +206,9 @@
   .foot-links a:hover{color:var(--green)}
   .copyright{color:var(--muted);font-size:13px;margin-top:26px;text-align:center}
 
-  /* Hesaplama */
-  .calc-card{background:var(--cream-2);border-radius:var(--radius);padding:clamp(22px,4vw,40px);margin-top:50px;box-shadow:0 24px 50px -40px rgba(51,73,47,.6)}
-  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
-  .calc-group h3{font-size:18px;font-weight:600;color:var(--green-dark);margin-bottom:14px}
-  .calc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
-  .calc-field{display:grid;gap:6px;font-size:13px;color:var(--muted);align-content:end}
-  .calc-field input,.calc-field select{
-    width:100%;min-width:0;background:var(--cream);border:1.5px solid rgba(67,96,63,.15);border-radius:14px;
-    color:var(--ink);font-family:inherit;font-size:16px;padding:11px 13px;min-height:48px;transition:border-color .25s}
-  .calc-field input:focus,.calc-field select:focus{outline:none;border-color:var(--green)}
-  .calc-results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;padding-top:30px;border-top:1px solid rgba(67,96,63,.1)}
-  .calc-stat{background:var(--cream);border-radius:var(--radius-sm);padding:16px 18px}
-  .calc-stat b{display:block;font-size:clamp(20px,2.4vw,26px);font-weight:700;color:var(--green-dark);line-height:1.25}
-  .calc-stat span{font-size:12.5px;color:var(--muted)}
-  .calc-stat.hl{background:var(--green)}
-  .calc-stat.hl b,.calc-stat.hl span{color:var(--on-green)}
-  .calc-note{font-size:12.5px;color:var(--muted);margin-top:16px}
-  @media(max-width:760px){ .calc-grid{grid-template-columns:1fr} .calc-results{grid-template-columns:1fr 1fr} }
+  /* Hesaplama butonu */
+  .btn-calc{background:var(--cream);color:var(--green-dark);font-weight:600;letter-spacing:.04em}
+  .btn-calc:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(0,0,0,.35)}
 
   /* Kategori filtresi */
   .product-card[hidden]{display:none}
@@ -275,7 +260,7 @@
       <a href="#about">Hakkımızda</a>
       <a href="#gallery">Galeri</a>
       <a href="#process">Süreç</a>
-      <a href="#hesaplama">Hesaplama</a>
+      <a href="akvaryum-hesaplama/">Hesaplama</a>
       <a href="#contact">İletişim</a>
     </nav>
     <div class="nav-actions">
@@ -300,6 +285,10 @@
         <div class="hero-cta">
           <a href="#products" class="btn btn-sand">Koleksiyonu Keşfet</a>
           <a href="#contact" class="btn btn-ghost" style="color:var(--cream);border-color:rgba(244,241,233,.4)">Özel Tasarım Talebi</a>
+          <a href="akvaryum-hesaplama/" class="btn btn-calc">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h0M16 11h0M8 15h2M12 15h0M16 15h0M8 18h8"/></svg>
+            AKVARYUM LİTRE VE IŞIK HESAPLA
+          </a>
         </div>
         <div class="hero-stats">
           <div><div class="num">100%</div><div class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px;color:var(--sand)"><path d="M7 19H4.8a2 2 0 0 1-1.7-3l2.3-4M11 5.4 9 2 7 5.4M4.9 11.2 7 5.4h5.3"/><path d="M17 5l1.2 2.2a2 2 0 0 1 .1 1.9l-2.3 4M13 19h4.1a2 2 0 0 0 1.8-1l2.1-3.6M19.5 13.8 21 19l-5.2-.8"/></svg>Geri Dönüştürülebilir</div></div>
@@ -479,57 +468,6 @@
   </div>
 </section>
 
-<!-- HESAPLAMA -->
-<section class="section" id="hesaplama">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Hesaplama</span>
-      <h2>Akvaryum ışık ve litre hesaplama</h2>
-      <p class="lead">Ölçüleri girin; brüt ve net litreyi, yaklaşık dolu ağırlığı ve bitki yoğunluğuna göre gereken LED gücünü anında görün.</p>
-    </div>
-    <div class="calc-card reveal">
-      <div class="calc-grid">
-        <div class="calc-group">
-          <h3>Ölçüler</h3>
-          <div class="calc-row">
-            <label class="calc-field">Uzunluk (cm)<input type="number" id="cL" value="60" min="1" step="1" inputmode="decimal"></label>
-            <label class="calc-field">Derinlik (cm)<input type="number" id="cW" value="30" min="1" step="1" inputmode="decimal"></label>
-            <label class="calc-field">Yükseklik (cm)<input type="number" id="cH" value="36" min="1" step="1" inputmode="decimal"></label>
-          </div>
-          <div class="calc-row">
-            <label class="calc-field">Cam kalınlığı (mm)<input type="number" id="cT" value="6" min="0" step="1" inputmode="decimal"></label>
-            <label class="calc-field">Zemin kalınlığı (cm)<input type="number" id="cS" value="5" min="0" step="0.5" inputmode="decimal"></label>
-            <label class="calc-field">Su boşluğu (cm)<input type="number" id="cG" value="3" min="0" step="0.5" inputmode="decimal"></label>
-          </div>
-        </div>
-        <div class="calc-group">
-          <h3>Aydınlatma</h3>
-          <div class="calc-row" style="grid-template-columns:1fr">
-            <label class="calc-field">Akvaryum tipi
-              <select id="cP">
-                <option value="15,25">Balık / bitkisiz</option>
-                <option value="25,40" selected>Az ışık isteyen bitkiler (anubias, yosun, eğrelti)</option>
-                <option value="40,60">Orta yoğunluk bitkili</option>
-                <option value="60,100">Yoğun bitkili / halı bitkisi (CO₂ ile)</option>
-              </select>
-            </label>
-            <label class="calc-field">LED verimi (lümen / watt)<input type="number" id="cE" value="100" min="1" step="5" inputmode="decimal"></label>
-          </div>
-        </div>
-      </div>
-      <div class="calc-results" aria-live="polite">
-        <div class="calc-stat"><b id="rGross">–</b><span>Brüt hacim</span></div>
-        <div class="calc-stat hl"><b id="rNet">–</b><span>Net su hacmi</span></div>
-        <div class="calc-stat"><b id="rWeight">–</b><span>Dolu ağırlık (yaklaşık)</span></div>
-        <div class="calc-stat hl"><b id="rLumen">–</b><span>Önerilen ışık</span></div>
-        <div class="calc-stat"><b id="rWatt">–</b><span>LED gücü</span></div>
-        <div class="calc-stat"><b id="rHours">–</b><span>Günlük ışık süresi</span></div>
-      </div>
-      <p class="calc-note">Değerler yaklaşık bir rehberdir. Net hacim; cam kalınlığı, zemin ve üst boşluk düşülerek hesaplanır. Işık önerisi lümen/litre kuralına dayanır; 50 cm üzeri yüksekliklerde ışığın tabana ulaşması için daha güçlü armatür gerekebilir.</p>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="wrap contact-grid">
@@ -597,7 +535,7 @@
         <a href="#products">Koleksiyon</a>
         <a href="#about">Hakkımızda</a>
         <a href="#process">Süreç</a>
-        <a href="#hesaplama">Hesaplama</a>
+        <a href="akvaryum-hesaplama/">Hesaplama</a>
         <a href="#contact">İletişim</a>
       </nav>
     </div>
@@ -652,33 +590,6 @@
     document.getElementById('formFields').style.display='none';
     document.getElementById('formSuccess').style.display='block';
   });
-
-  // Akvaryum hesaplama
-  const cNum = id => Math.max(0, parseFloat(document.getElementById(id).value) || 0);
-  const cFmt = (n, d = 0) => n.toLocaleString('tr-TR', { maximumFractionDigits: d });
-  const cSet = (id, v) => { document.getElementById(id).textContent = v; };
-  function calc(){
-    const L = cNum('cL'), W = cNum('cW'), H = cNum('cH');
-    const t = cNum('cT') / 10, S = cNum('cS'), G = cNum('cG');
-    const gross = L * W * H / 1000;
-    const iL = Math.max(0, L - 2 * t), iW = Math.max(0, W - 2 * t);
-    const net = iL * iW * Math.max(0, H - t - S - G) / 1000;
-    // Cam ≈ 2.5 kg/L, zemin ≈ 1.6 kg/L, su ≈ 1 kg/L
-    const glass = (2 * (L * H + W * H) + L * W) * t / 1000 * 2.5;
-    const weight = net + glass + iL * iW * S / 1000 * 1.6;
-    const [lo, hi] = document.getElementById('cP').value.split(',').map(Number);
-    const eff = cNum('cE') || 1;
-    const hf = H > 50 ? 1 + (H - 50) / 100 : 1;
-    const lmLo = net * lo * hf, lmHi = net * hi * hf;
-    cSet('rGross', cFmt(gross, 1) + ' L');
-    cSet('rNet', cFmt(net, 1) + ' L');
-    cSet('rWeight', '~' + cFmt(weight) + ' kg');
-    cSet('rLumen', cFmt(lmLo) + '–' + cFmt(lmHi) + ' lm');
-    cSet('rWatt', cFmt(lmLo / eff) + '–' + cFmt(lmHi / eff) + ' W');
-    cSet('rHours', lo >= 60 ? '7–8 saat' : '6–8 saat');
-  }
-  document.querySelectorAll('#hesaplama input, #hesaplama select').forEach(el=>el.addEventListener('input', calc));
-  calc();
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
