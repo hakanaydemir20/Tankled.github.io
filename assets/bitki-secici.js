@@ -50,7 +50,9 @@
     ] },
   ];
   const SUBSTRATE = Object.fromEntries(SUBSTRATES.flatMap(g => g.items).map(s => [s.value, s]));
-  const phMax = p => parseFloat(String(p.bilgi[2]).split('–').pop().replace(',', '.'));
+  const rangeMax = v => parseFloat(String(v).split('–').pop().replace(',', '.'));
+  const phMax = p => rangeMax(p.bilgi[2]);
+  const tempMax = p => rangeMax(p.bilgi[1]);
 
   const LEAF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-14 14-14 0 9-6 14-14 14z"/><path d="M5 19 14 10"/></svg>';
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -69,14 +71,16 @@
       const sub = SUBSTRATE[zemin] || SUBSTRATE.aquasoil;
       if (sub.tur === 'yok' && p.zemin !== 'serbest') return;
       if (sub.tur === 'iri' && p.zemin === 'hali') return;
+      if (p.minLitre && litre < p.minLitre) return; // budanarak küçültülemeyen iri bitki
 
       const notes = [];
       if (co2Need === 'Önerilir' && !co2) notes.push('CO₂ ile daha iyi gelişir');
       if ((sub.tur === 'kum' || sub.tur === 'iri') && p.zemin === 'kok') notes.push('Köke tablet gübre verin');
-      if (sub.tur === 'kum' && p.zemin === 'hali') notes.push('İnce kum ve kök tableti ister; aquasoil daha iyi sonuç verir');
+      if (sub.tur === 'kum' && p.zemin === 'hali') notes.push('Kumda halı zor tutunur: ince taneli kum ve kök tableti şart; aquasoil çok daha iyi sonuç verir');
       if (sub.tur === 'kil' && p.zemin === 'hali') notes.push('Tane iri olduğu için halı yavaş yayılır');
       if (sub.sert && phMax(p) < 8) notes.push('Mercan kumu pH’ı yükseltir; bu bitki daha yumuşak suyu sever');
-      if (litre < 40 && p.buyuk) notes.push('Bu hacim için büyük kalabilir');
+      if (litre < 60 && p.buyuk) notes.push('Hızlı ve uzun büyür; bu hacimde sık budama gerekir');
+      if (tempMax(p) <= 26) notes.push(`Serin suyu sever: su sıcaklığı en fazla ${tempMax(p)} °C olmalı`);
       if (lmL >= 50 && light === 'Düşük') notes.push('Güçlü ışıkta yosunlanabilir; gölgeye yerleştirin');
 
       (notes.length ? dikkat : uygun).push({ p, cat, notes });
@@ -108,6 +112,10 @@
   .bs-summary b{font-size:22px;font-weight:700}
   .bs-summary span{font-size:13px;color:var(--on-green-muted)}
   .bs-warn{background:rgba(203,185,143,.25);color:#6b5b30;border-radius:14px;padding:12px 16px;font-size:13.5px}
+  .bs-rules{background:var(--cream);border-radius:14px;padding:12px 16px;font-size:13px;color:var(--muted)}
+  .bs-rules summary{cursor:pointer;font-weight:600;color:var(--green-deep)}
+  .bs-rules ul{margin:10px 0 6px 18px;display:grid;gap:6px}
+  .bs-rules b{color:var(--green-dark);font-weight:600}
   .bs-empty{color:var(--muted);font-size:14px;text-align:center;padding:14px}
   .bs-group h4{font-size:15px;font-weight:600;color:var(--green-dark);margin-bottom:10px;display:flex;align-items:center;gap:8px}
   .bs-group h4 small{font-size:12px;font-weight:600;background:rgba(67,96,63,.12);border-radius:100px;padding:1px 9px;color:var(--green-deep)}
@@ -120,7 +128,7 @@
   .bs-photo svg{width:26px;height:26px;opacity:.7}
   .bs-name{font-size:14px;font-weight:600;color:var(--green-dark);line-height:1.3}
   .bs-meta{font-size:12px;color:var(--muted);line-height:1.4}
-  .bs-note{font-size:12px;color:#7a6a3f;line-height:1.4;margin-top:2px}
+  .bs-note{display:block;font-size:12px;color:#7a6a3f;line-height:1.4;margin-top:3px}
   @media(max-width:560px){ .bs-form{grid-template-columns:1fr 1fr;gap:10px} .bs-wide{grid-column:1 / -1} .bs-list{grid-template-columns:1fr} }
   `;
 
@@ -156,7 +164,7 @@
             </div>
           </div>
         </div>
-        <p class="bs-hint">Işık gücünü armatürünüzün kutusunda ya da ürün sayfasında “lm” olarak bulabilirsiniz.</p>
+        <p class="bs-hint">Işık gücünü armatürünüzün kutusunda ya da ürün sayfasında “lm” olarak bulabilirsiniz. Birden fazla armatür varsa lümen değerlerini toplayın.</p>
         <div id="${id}-out" aria-live="polite"></div>
       </div>`;
 
@@ -170,7 +178,7 @@
         <span>
           <span class="bs-name">${esc(p.ad)}</span><br>
           <span class="bs-meta">${esc(cat.tab)} · ${esc(p.zorluk)} · ${esc(p.bilgi[5])}</span>
-          ${notes.map(n => `<span class="bs-note">• ${esc(n)}</span>`).join('<br>')}
+          ${notes.map(n => `<span class="bs-note">• ${esc(n)}</span>`).join('')}
         </span>
       </a>`;
 
@@ -198,6 +206,17 @@
           ${r.warnings.map(w => `<div class="bs-warn">${esc(w)}</div>`).join('')}
           ${group('Uygun bitkiler', r.uygun)}
           ${group('Dikkat ederek kullanılabilir', r.dikkat)}
+          <details class="bs-rules"><summary>Öneriler nasıl hesaplanıyor?</summary>
+            <ul>
+              <li><b>Işık:</b> Lümen ÷ litre ile litre başına ışık bulunur. 30 lm/L altı düşük, 30–50 orta, 50 ve üstü yüksek ışık sayılır. Bitki, ihtiyacından az ışık alacaksa listelenmez.</li>
+              <li><b>Derinlik:</b> Bu ölçü akvaryumun derinliğini hesaba katmaz. 45 cm’den yüksek akvaryumlarda tabana daha az ışık ulaşır; halı ve zemin bitkileri için bir üst ışık seviyesini hedefleyin.</li>
+              <li><b>CO₂:</b> CO₂’nin şart olduğu bitkiler, CO₂ yoksa listelenmez. CO₂’nin önerildiği bitkiler not ile gösterilir.</li>
+              <li><b>Zemin:</b> Zemin yoksa yalnızca bağlanan ve yüzen bitkiler; çakıl, lav kırığı ve ponzada halı bitkileri hariç tutulur. Besin içermeyen zeminlerde kökten beslenen bitkiler için tablet gübre notu eklenir.</li>
+              <li><b>Hacim:</b> Budanarak küçültülemeyen iri bitkiler (Amazon Kılıçotu 100 L, Aponogeton 80 L, Vallisneria 60 L) bu hacmin altında listelenmez.</li>
+              <li><b>Sıcaklık:</b> Serin suyu seven bitkiler, tropikal akvaryum (26–28 °C) için not ile gösterilir.</li>
+            </ul>
+            <p>Değerler hobide yaygın kabul gören aralıklardır; su değerleri, gübreleme ve bakım sonucu etkiler.</p>
+          </details>
           ${r.uygun.length + r.dikkat.length ? '' : '<p class="bs-empty">Bu koşullara uyan bitki bulunamadı. Işığı artırmayı, CO₂ eklemeyi ya da besleyici zemin kullanmayı deneyin.</p>'}
         </div>`;
       out.querySelectorAll('.bs-photo img').forEach(img => {

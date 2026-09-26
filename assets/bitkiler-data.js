@@ -9,7 +9,8 @@
  *     'govde'   = gövdeli, zemine dikilir
  *     'kok'     = kökten beslenir, besleyici zemin ya da kök tableti ister
  *     'hali'    = halı/ön zemin bitkisi, ince besleyici zemin ister
- * - buyuk: true = küçük (40 L altı) akvaryumlar için iri kalır
+ * - buyuk: true = hızlı ve uzun büyüyen gövdeli bitki; küçük akvaryumda sık budama ister
+ * - minLitre: budanarak küçültülemeyen iri bitkiler için gereken en az akvaryum hacmi
  */
 window.TANKLED_BITKILER = [
   {
@@ -46,14 +47,14 @@ window.TANKLED_BITKILER = [
       { foto: 'bucephalandra', ad: 'Bucephalandra', latin: 'Bucephalandra sp.', zorluk: 'Kolay', zemin: 'serbest',
         aciklama: 'Borneo kökenli, parlak ve renkli küçük yapraklı bir bitki. Anubias gibi taşa ya da kütüğe bağlanır.',
         bilgi: ['Düşük–orta', '22–28 °C', '6,0–7,5', 'Çok yavaş', 'Gerekmez', 'Ön'] },
-      { foto: 'amazon-kilicotu', ad: 'Amazon Kılıçotu', latin: 'Echinodorus grisebachii ‘Bleherae’', zorluk: 'Kolay', zemin: 'kok', buyuk: true,
-        aciklama: 'Geniş yapraklı, büyük rozet oluşturan klasik bir arka plan bitkisi. Köke verilen tablet gübreyi çok sever.',
+      { foto: 'amazon-kilicotu', ad: 'Amazon Kılıçotu', latin: 'Echinodorus grisebachii ‘Bleherae’', zorluk: 'Kolay', zemin: 'kok', minLitre: 100,
+        aciklama: 'Geniş yapraklı, 40–50 cm’ye kadar büyüyen büyük bir rozet bitkisi. En az 100 litrelik akvaryumlar için uygundur; köke verilen tablet gübreyi çok sever.',
         bilgi: ['Düşük–orta', '22–28 °C', '6,5–7,5', 'Orta', 'Gerekmez', 'Arka / orta'] },
-      { foto: 'vallisneria', ad: 'Vallisneria', latin: 'Vallisneria spiralis', zorluk: 'Kolay', zemin: 'kok', buyuk: true,
-        aciklama: 'Uzun, şerit gibi yapraklarıyla arka planda doğal bir perde oluşturur. Kök uzantılarıyla kendiliğinden çoğalır.',
+      { foto: 'vallisneria', ad: 'Vallisneria', latin: 'Vallisneria spiralis', zorluk: 'Kolay', zemin: 'kok', minLitre: 60,
+        aciklama: 'Uzun, şerit gibi yapraklarıyla arka planda doğal bir perde oluşturur. Yaprakları 50 cm’yi geçebilir; kök uzantılarıyla kendiliğinden çoğalır.',
         bilgi: ['Düşük–orta', '20–28 °C', '6,5–8,0', 'Hızlı', 'Gerekmez', 'Arka'] },
-      { foto: 'aponogeton', ad: 'Aponogeton', latin: 'Aponogeton crispus', zorluk: 'Kolay', zemin: 'kok', buyuk: true,
-        aciklama: 'Soğandan çıkan uzun, kenarları dalgalı yapraklar. Zaman zaman dinlenmeye geçip yaprak dökebilir, sonra yeniden sürer.',
+      { foto: 'aponogeton', ad: 'Aponogeton', latin: 'Aponogeton crispus', zorluk: 'Kolay', zemin: 'kok', minLitre: 80,
+        aciklama: 'Soğandan çıkan, 50 cm’ye uzanabilen kenarları dalgalı yapraklar. Zaman zaman dinlenmeye geçip yaprak dökebilir, sonra yeniden sürer.',
         bilgi: ['Düşük–orta', '22–28 °C', '6,0–7,5', 'Hızlı', 'Gerekmez', 'Arka / orta'] },
       { foto: 'limnophila-sessiliflora', ad: 'Limnophila Sessiliflora', latin: 'Limnophila sessiliflora', zorluk: 'Kolay', zemin: 'govde', buyuk: true,
         aciklama: 'İnce, tüy gibi yaprakları olan hızlı büyüyen gövdeli bir bitki. Arka planda yumuşak, gür bir görünüm verir.',
@@ -77,7 +78,7 @@ window.TANKLED_BITKILER = [
         aciklama: 'Yuvarlak yapraklı, uzun sarkık kökleri olan yüzen bir bitki. Betta ve yavru balıklar arasında dinlenmeyi sever.',
         bilgi: ['Düşük–orta', '20–28 °C', '6,0–7,5', 'Hızlı', 'Gerekmez', 'Yüzer'] },
       { foto: 'marimo', ad: 'Marimo Top Yosunu', latin: 'Aegagropila linnaei', zorluk: 'Kolay', zemin: 'serbest',
-        aciklama: 'Kadife dokulu, top şeklinde bir yosun. Arada bir çevrilirse her yüzü eşit yeşil kalır.',
+        aciklama: 'Kadife dokulu, top şeklinde bir yosun. Serin suyu sever; 25 °C’nin üzerinde zorlanır. Arada bir çevrilirse her yüzü eşit yeşil kalır.',
         bilgi: ['Düşük', '18–25 °C', '7,0–8,5', 'Çok yavaş', 'Gerekmez', 'Ön'] },
     ],
   },
@@ -115,7 +116,7 @@ window.TANKLED_BITKILER = [
       { foto: 'hydrocotyle-tripartita', ad: 'Hydrocotyle Tripartita', latin: 'Hydrocotyle tripartita', zorluk: 'Orta', zemin: 'govde',
         aciklama: 'Yonca benzeri minik yapraklarıyla zeminde ve kütük üzerinde sürünerek yayılır.',
         bilgi: ['Orta–yüksek', '20–28 °C', '6,0–7,5', 'Hızlı', 'Önerilir', 'Ön / kütük'] },
-      { foto: 'hemianthus-micranthemoides', ad: 'Pearl Weed', latin: 'Hemianthus micranthemoides', zorluk: 'Orta', zemin: 'govde',
+      { foto: 'hemianthus-micranthemoides', ad: 'Pearl Weed', latin: 'Hemianthus glomeratus', zorluk: 'Orta', zemin: 'govde',
         aciklama: 'Küçük yapraklı gövdeli bir bitki. Budandıkça sık bir çalıya dönüşür, orta planda yumuşak geçiş sağlar.',
         bilgi: ['Orta–yüksek', '20–28 °C', '6,0–7,5', 'Hızlı', 'Önerilir', 'Orta / arka'] },
       { foto: 'rotala-rotundifolia', ad: 'Rotala Rotundifolia', latin: 'Rotala rotundifolia', zorluk: 'Orta', zemin: 'govde',
