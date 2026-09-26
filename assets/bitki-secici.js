@@ -58,6 +58,34 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const fmt = (n, d = 0) => n.toLocaleString('tr-TR', { maximumFractionDigits: d });
 
+  // Tek bir bitkiyi akvaryum koşullarına göre değerlendirir.
+  // lumen boş bırakılırsa ışık kontrolü atlanır.
+  // Dönüş: { durum: 'uygun' | 'dikkat' | 'hayir', notes: [...], reasons: [...] }
+  function evaluate(p, { litre, lumen, zemin, co2 }) {
+    if (!p.zemin) return { durum: 'hayir', notes: [], reasons: ['Kara bitkisi; akvaryuma uygun değil'] };
+    const light = p.bilgi[0], co2Need = p.bilgi[4];
+    const sub = SUBSTRATE[zemin] || SUBSTRATE.aquasoil;
+    const lmL = lumen > 0 && litre > 0 ? lumen / litre : null;
+    const reasons = [], notes = [];
+
+    if (lmL !== null && lmL < LIGHT_MIN[light]) reasons.push(`Daha güçlü ışık ister (en az ${LIGHT_MIN[light]} lm/L)`);
+    if (co2Need === 'Şart' && !co2) reasons.push('CO₂ sistemi şart');
+    if (sub.tur === 'yok' && p.zemin !== 'serbest') reasons.push('Zemine dikilmesi gerekir');
+    if (sub.tur === 'iri' && p.zemin === 'hali') reasons.push('Halı bitkisi iri zemine tutunamaz');
+    if (p.minLitre && litre < p.minLitre) reasons.push(`En az ${p.minLitre} litrelik akvaryum ister`);
+
+    if (co2Need === 'Önerilir' && !co2) notes.push('CO₂ ile daha iyi gelişir');
+    if ((sub.tur === 'kum' || sub.tur === 'iri') && p.zemin === 'kok') notes.push('Köke tablet gübre verin');
+    if (sub.tur === 'kum' && p.zemin === 'hali') notes.push('Kumda halı zor tutunur: ince taneli kum ve kök tableti şart; aquasoil çok daha iyi sonuç verir');
+    if (sub.tur === 'kil' && p.zemin === 'hali') notes.push('Tane iri olduğu için halı yavaş yayılır');
+    if (sub.sert && phMax(p) < 8) notes.push('Mercan kumu pH’ı yükseltir; bu bitki daha yumuşak suyu sever');
+    if (litre < 60 && p.buyuk) notes.push('Hızlı ve uzun büyür; bu hacimde sık budama gerekir');
+    if (tempMax(p) <= 26) notes.push(`Serin suyu sever: su sıcaklığı en fazla ${tempMax(p)} °C olmalı`);
+    if (lmL !== null && lmL >= 50 && light === 'Düşük') notes.push('Güçlü ışıkta yosunlanabilir; gölgeye yerleştirin');
+
+    return { durum: reasons.length ? 'hayir' : notes.length ? 'dikkat' : 'uygun', notes, reasons };
+  }
+
   function match({ litre, lumen, zemin, co2 }) {
     const lmL = lumen / litre;
     const level = tankLevel(lmL);
@@ -65,25 +93,9 @@
 
     (window.TANKLED_BITKILER || []).forEach(cat => cat.plants.forEach(p => {
       if (!p.zemin) return; // paludaryum (kara) bitkileri akvaryuma önerilmez
-      const light = p.bilgi[0], co2Need = p.bilgi[4];
-      if (lmL < LIGHT_MIN[light]) return;
-      if (co2Need === 'Şart' && !co2) return;
-      const sub = SUBSTRATE[zemin] || SUBSTRATE.aquasoil;
-      if (sub.tur === 'yok' && p.zemin !== 'serbest') return;
-      if (sub.tur === 'iri' && p.zemin === 'hali') return;
-      if (p.minLitre && litre < p.minLitre) return; // budanarak küçültülemeyen iri bitki
-
-      const notes = [];
-      if (co2Need === 'Önerilir' && !co2) notes.push('CO₂ ile daha iyi gelişir');
-      if ((sub.tur === 'kum' || sub.tur === 'iri') && p.zemin === 'kok') notes.push('Köke tablet gübre verin');
-      if (sub.tur === 'kum' && p.zemin === 'hali') notes.push('Kumda halı zor tutunur: ince taneli kum ve kök tableti şart; aquasoil çok daha iyi sonuç verir');
-      if (sub.tur === 'kil' && p.zemin === 'hali') notes.push('Tane iri olduğu için halı yavaş yayılır');
-      if (sub.sert && phMax(p) < 8) notes.push('Mercan kumu pH’ı yükseltir; bu bitki daha yumuşak suyu sever');
-      if (litre < 60 && p.buyuk) notes.push('Hızlı ve uzun büyür; bu hacimde sık budama gerekir');
-      if (tempMax(p) <= 26) notes.push(`Serin suyu sever: su sıcaklığı en fazla ${tempMax(p)} °C olmalı`);
-      if (lmL >= 50 && light === 'Düşük') notes.push('Güçlü ışıkta yosunlanabilir; gölgeye yerleştirin');
-
-      (notes.length ? dikkat : uygun).push({ p, cat, notes });
+      const e = evaluate(p, { litre, lumen, zemin, co2 });
+      if (e.durum === 'uygun') uygun.push({ p, cat, notes: [] });
+      else if (e.durum === 'dikkat') dikkat.push({ p, cat, notes: e.notes });
     }));
 
     const warnings = [];
@@ -242,5 +254,5 @@
     return api;
   }
 
-  window.TankledBitkiSecici = { mount, match, SUBSTRATES };
+  window.TankledBitkiSecici = { mount, match, evaluate, tankLevel, SUBSTRATES, SUBSTRATE };
 })();

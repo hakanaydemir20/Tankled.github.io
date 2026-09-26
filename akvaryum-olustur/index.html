@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Akvaryumunuzu Oluşturun — Tankled</title>
+<meta name="description" content="Akvaryumunuzu 3 boyutlu tasarlayın: model ve ölçüleri seçin, zemin ve bitkileri yerleştirin, sonucu anında görün." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#5c7a5a;
+    --green-deep:#43603f;
+    --green-dark:#33492f;
+    --cream:#f4f1e9;
+    --cream-2:#ffffff;
+    --sand:#cbb98f;
+    --sand-deep:#b8a371;
+    --ink:#2b3329;
+    --muted:#6f7a68;
+    --on-green:#f3f1e7;
+    --on-green-muted:#cdd6c5;
+    --radius:30px;
+    --radius-sm:18px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --header:84px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Poppins',sans-serif;font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--green-dark)}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+  ::selection{background:var(--sand);color:var(--green-dark)}
+
+  header{height:var(--header);border-bottom:1px solid rgba(67,96,63,.1);background:var(--cream);position:relative;z-index:5}
+  .nav{max-width:1400px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;height:100%}
+  .logo img{height:56px;width:auto;display:block}
+  .back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--green-deep);
+    padding:10px 20px;border-radius:100px;border:1.5px solid rgba(67,96,63,.25);transition:background .3s,border-color .3s;white-space:nowrap}
+  .back:hover{border-color:var(--green);background:rgba(92,122,90,.08)}
+
+  /* Düzen: solda panel, sağda 3D görünüm */
+  .studio{display:grid;grid-template-columns:420px 1fr;min-height:calc(100vh - var(--header))}
+  .panel{padding:22px 18px 60px;border-right:1px solid rgba(67,96,63,.1);display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-content:start;min-width:0}
+  .row2 > *,.plant-tools > *{min-width:0}
+  .view{position:sticky;top:0;height:100vh;max-height:calc(100vh);background:radial-gradient(ellipse at 50% 38%, #ffffff 0%, #eef0e6 55%, #e2e5d7 100%)}
+  .view canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+  .view canvas:active{cursor:grabbing}
+
+  .intro h1{font-size:26px}
+  .intro p{font-size:13.5px;color:var(--muted);margin-top:6px}
+
+  .card{background:var(--cream-2);border-radius:var(--radius-sm);padding:16px;box-shadow:0 18px 40px -34px rgba(51,73,47,.6)}
+  .card h2{font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .step{width:26px;height:26px;border-radius:50%;background:var(--green);color:var(--on-green);font-size:12.5px;font-weight:600;display:grid;place-items:center;flex:none}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+  .models{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .model{position:relative;display:block}
+  .model input{position:absolute;opacity:0;pointer-events:none}
+  .model .box{display:grid;gap:2px;height:100%;border:1.5px solid rgba(67,96,63,.15);border-radius:14px;padding:10px 12px;background:var(--cream);cursor:pointer;transition:all .2s}
+  .model b{font-size:14px;font-weight:600;color:var(--green-dark)}
+  .model small{font-size:11.5px;color:var(--muted);line-height:1.35}
+  .model input:checked + .box{border-color:var(--green);background:rgba(92,122,90,.1);box-shadow:inset 0 0 0 1px var(--green)}
+  .model input:focus-visible + .box{outline:2px solid var(--green);outline-offset:2px}
+  .model input:disabled + .box{opacity:.55;cursor:not-allowed}
+
+  .dims{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  .dims[hidden]{display:none}
+  .field{display:grid;gap:5px;font-size:12px;color:var(--muted);min-width:0}
+  .field input,.field select{width:100%;min-width:0;background:var(--cream);border:1.5px solid rgba(67,96,63,.15);border-radius:12px;
+    color:var(--ink);font-family:inherit;font-size:16px;font-weight:500;padding:9px 10px;min-height:46px;transition:border-color .25s}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--green)}
+  .field input[type=range]{padding:0;min-height:30px;accent-color:var(--green);background:none;border:0}
+  .stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .stat{background:var(--green);color:var(--on-green);border-radius:12px;padding:8px 12px;font-size:12px;color:var(--on-green-muted)}
+  .stat b{display:block;color:var(--on-green);font-size:18px;font-weight:700;line-height:1.2}
+  .stat.light{background:var(--cream);color:var(--muted)}
+  .stat.light b{color:var(--green-dark)}
+
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .toggle{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .toggle label{position:relative;cursor:pointer}
+  .toggle input{position:absolute;opacity:0;pointer-events:none}
+  .toggle span{display:grid;place-items:center;min-height:46px;border-radius:12px;border:1.5px solid rgba(67,96,63,.15);background:var(--cream);font-size:14px;font-weight:500;color:var(--ink);transition:all .2s}
+  .toggle input:checked + span{background:var(--green);border-color:var(--green);color:var(--on-green)}
+  .toggle input:focus-visible + span{outline:2px solid var(--green);outline-offset:2px}
+  .warn{background:rgba(203,185,143,.25);color:#6b5b30;border-radius:12px;padding:9px 12px;font-size:12.5px;margin-top:8px}
+
+  .plant-tools{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+  .plant-tools input{flex:1;min-width:0;font:inherit;font-size:15px;background:var(--cream);border:1.5px solid rgba(67,96,63,.15);border-radius:100px;padding:9px 14px}
+  .plant-tools input:focus{outline:none;border-color:var(--green)}
+  .seg{display:flex;background:var(--cream);border-radius:100px;padding:3px}
+  .seg button{border:0;background:none;border-radius:100px;padding:6px 11px;font-size:12.5px;font-weight:500;color:var(--muted);white-space:nowrap}
+  .seg button[aria-pressed="true"]{background:var(--green-dark);color:var(--cream)}
+  .plist{display:grid;gap:6px;max-height:420px;overflow:auto;padding-right:4px}
+  .pitem{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;background:var(--cream);border-radius:12px;padding:7px}
+  .pitem.hayir{opacity:.6}
+  .thumb{width:44px;height:44px;border-radius:9px;overflow:hidden;background:rgba(92,122,90,.14);display:grid;place-items:center;color:var(--green)}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .thumb svg{width:22px;height:22px;opacity:.7}
+  .pname{font-size:13.5px;font-weight:600;color:var(--green-dark);line-height:1.25}
+  .pmeta{font-size:11.5px;color:var(--muted);line-height:1.35}
+  .badge{display:inline-block;font-size:10.5px;font-weight:600;border-radius:100px;padding:1px 7px;margin-right:4px}
+  .badge.uygun{background:rgba(92,122,90,.18);color:var(--green-deep)}
+  .badge.dikkat{background:rgba(203,185,143,.35);color:#6b5b30}
+  .badge.hayir{background:rgba(160,82,60,.14);color:#8a4a36}
+  .add{width:36px;height:36px;border-radius:50%;border:0;background:var(--green);color:var(--on-green);display:grid;place-items:center;transition:background .2s}
+  .add:hover{background:var(--green-deep)}
+  .add:disabled{background:rgba(67,96,63,.2);cursor:not-allowed}
+  .add:focus-visible,.icon:focus-visible,.btn:focus-visible,.seg button:focus-visible{outline:2px solid var(--green-dark);outline-offset:2px}
+
+  .chosen{display:grid;gap:6px;margin-top:12px}
+  .chosen:empty::before{content:'Henüz bitki eklenmedi. Yukarıdaki listeden “+” ile ekleyin.';font-size:12.5px;color:var(--muted)}
+  .citem{display:flex;align-items:center;gap:8px;background:rgba(92,122,90,.1);border-radius:12px;padding:6px 8px 6px 12px}
+  .citem span{flex:1;font-size:13px;font-weight:500;color:var(--green-dark);min-width:0}
+  .qty{display:flex;align-items:center;gap:4px}
+  .qty b{min-width:18px;text-align:center;font-size:13px}
+  .icon{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(67,96,63,.2);background:var(--cream-2);color:var(--green-deep);display:grid;place-items:center;font-size:15px;line-height:1}
+  .icon:hover{border-color:var(--green)}
+
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:100px;padding:10px 16px;font-size:13.5px;font-weight:600;
+    border:1.5px solid rgba(67,96,63,.25);background:var(--cream-2);color:var(--green-deep);transition:all .2s}
+  .btn:hover{border-color:var(--green);background:rgba(92,122,90,.08)}
+  .btn.primary{background:var(--green);border-color:var(--green);color:var(--on-green)}
+  .btn.primary:hover{background:var(--green-deep)}
+  .btn.wa{background:#25d366;border-color:#25d366;color:#fff}
+  .summary{font-size:13px;color:var(--muted);display:grid;gap:3px}
+  .summary b{color:var(--green-dark);font-weight:600}
+
+  /* 3D görünüm üzerindeki kontroller */
+  .vbar{position:absolute;left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;pointer-events:none}
+  .vbar > *{pointer-events:auto}
+  .vhint{font-size:12px;color:var(--muted);background:rgba(255,255,255,.75);backdrop-filter:blur(6px);border-radius:100px;padding:6px 12px}
+  .vbtns{display:flex;gap:6px}
+  .vbtns .btn{background:rgba(255,255,255,.85);backdrop-filter:blur(6px)}
+  .vbtns .btn[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
+  .loading{position:absolute;inset:0;display:grid;place-items:center;font-size:14px;color:var(--muted);pointer-events:none}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--green-dark);color:var(--cream);
+    font-size:13.5px;padding:10px 18px;border-radius:100px;transition:all .3s var(--ease);z-index:50;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%)}
+
+  @media(max-width:900px){
+    :root{--header:70px}
+    .logo img{height:42px}
+    .back{padding:8px 14px}
+    .studio{display:flex;flex-direction:column}
+    .view{order:-1;position:sticky;top:0;height:46vh;min-height:280px;z-index:4;border-bottom:1px solid rgba(67,96,63,.12)}
+    .panel{border-right:0;padding:16px 16px 60px}
+    .vhint{display:none}
+    .vbar{left:10px;right:10px;bottom:10px;justify-content:flex-end}
+    .vbtns .btn{padding:8px 12px;font-size:12.5px}
+  }
+  @media(max-width:420px){ .dims{grid-template-columns:1fr 1fr} }
+</style>
+<script type="importmap">
+{ "imports": { "three": "../assets/vendor/three/three.module.min.js", "three/addons/": "../assets/vendor/three/addons/" } }
+</script>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="../" class="logo" aria-label="Tankled ana sayfa"><img src="../assets/logo.png" alt="Tankled Aquarium" /></a>
+    <a href="../" class="back">← Ana sayfa</a>
+  </div>
+</header>
+
+<div class="studio">
+  <aside class="panel">
+    <div class="intro">
+      <h1>Akvaryumunuzu Oluşturun</h1>
+      <p>Modeli ve ölçüleri seçin, zemini ve bitkileri ekleyin. Sağdaki 3 boyutlu görünüm anında güncellenir; fareyle döndürüp yakınlaştırabilirsiniz.</p>
+    </div>
+
+    <section class="card">
+      <h2><span class="step">1</span> Model ve ölçüler</h2>
+      <div class="models" id="models"></div>
+      <div class="dims" id="dims">
+        <label class="field">Uzunluk (cm)<input type="number" id="dL" min="10" max="300" step="1" inputmode="decimal"></label>
+        <label class="field">Derinlik (cm)<input type="number" id="dW" min="10" max="150" step="1" inputmode="decimal"></label>
+        <label class="field">Yükseklik (cm)<input type="number" id="dH" min="10" max="150" step="1" inputmode="decimal"></label>
+        <label class="field">Cam (mm)<input type="number" id="dC" min="3" max="19" step="1" inputmode="decimal"></label>
+      </div>
+      <p class="hint" id="modelHint"></p>
+      <div class="stats">
+        <div class="stat"><b id="sGross">–</b>Brüt hacim</div>
+        <div class="stat"><b id="sNet">–</b>Net su (yaklaşık)</div>
+        <div class="stat light"><b id="sSize">–</b>Dış ölçü</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">2</span> Zemin</h2>
+      <label class="field">Zemin tipi<select id="zemin"></select></label>
+      <p class="hint" id="zeminDesc"></p>
+      <label class="field" style="margin-top:10px">Zemin kalınlığı (öndeki): <b id="kalVal" style="color:var(--green-dark)"></b>
+        <input type="range" id="kalinlik" min="1" max="12" step="0.5">
+      </label>
+      <p class="hint">Zemin arkaya doğru yükselir; bu doğal bir derinlik hissi verir.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">3</span> Işık ve CO₂</h2>
+      <div class="row2">
+        <label class="field">Işık gücü (lümen)<input type="number" id="lumen" min="0" step="50" inputmode="decimal" placeholder="ör. 1500"></label>
+        <div class="field">CO₂ sistemi
+          <div class="toggle" role="radiogroup" aria-label="CO₂ sistemi">
+            <label><input type="radio" name="co2" value="yok" checked><span>Yok</span></label>
+            <label><input type="radio" name="co2" value="var"><span>Var</span></label>
+          </div>
+        </div>
+      </div>
+      <p class="hint" id="lightInfo">Işık bilgisini girerseniz bitki önerileri ışığınıza göre de kontrol edilir.</p>
+      <div id="warnings"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">4</span> Bitkiler</h2>
+      <div class="plant-tools">
+        <input type="search" id="pq" placeholder="Bitki ara…" aria-label="Bitki ara" autocomplete="off">
+        <div class="seg" role="group" aria-label="Liste">
+          <button type="button" data-f="uygun" aria-pressed="true">Uygunlar</button>
+          <button type="button" data-f="tumu" aria-pressed="false">Tümü</button>
+        </div>
+      </div>
+      <div class="plist" id="plist"></div>
+      <h3 style="font-size:14px;font-weight:600;margin-top:16px">Akvaryumdaki bitkiler</h3>
+      <div class="chosen" id="chosen"></div>
+      <div class="actions">
+        <button type="button" class="btn" id="shuffle">↻ Yerleşimi değiştir</button>
+        <button type="button" class="btn" id="clearPlants">Bitkileri temizle</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">5</span> Tasarımınız</h2>
+      <div class="summary" id="summary"></div>
+      <div class="actions">
+        <a class="btn wa" id="waBtn" target="_blank" rel="noopener">WhatsApp ile Tankled’a gönder</a>
+        <button type="button" class="btn" id="copyLink">Bağlantıyı kopyala</button>
+        <button type="button" class="btn" id="download">Görseli indir</button>
+      </div>
+      <p class="hint">Bağlantı tasarımınızın tüm ayarlarını içerir; açan kişi aynı akvaryumu görür.</p>
+    </section>
+  </aside>
+
+  <div class="view" id="view">
+    <div class="loading" id="loading">3D görünüm yükleniyor…</div>
+    <div class="vbar">
+      <span class="vhint">Döndürmek için sürükleyin · Yakınlaştırmak için kaydırın</span>
+      <div class="vbtns">
+        <button type="button" class="btn" id="rotateBtn" aria-pressed="true">⟳ Otomatik döndür</button>
+        <button type="button" class="btn" id="resetBtn">Görünümü sıfırla</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/bitkiler-data.js"></script>
+<script src="../assets/bitki-secici.js"></script>
+<script type="module">
+  import { createAquarium } from '../assets/akvaryum-3d.js';
+
+  /*
+   * Tankled modelleri. 3D dosyaları assets/modeller/ klasörüne .glb olarak yüklenir;
+   * dosya yoksa model "yakında" olarak gösterilir. Ayarlar için assets/modeller/README.md.
+   *   ic: camın iç ölçüsü (cm) · icTaban: model tabanından cam içi zemine yükseklik (cm)
+   *   su: su yüksekliği (cm) · olcek: model birimi → cm (metre ile modellenmişse 100)
+   */
+  const MODELLER = [
+    { id: 'kutu', ad: 'Standart kutu', aciklama: 'Ölçüleri siz belirleyin' },
+    { id: 'betta', ad: 'Betta Serisi', aciklama: '14 × 14 × 20 cm', dosya: '../assets/modeller/betta-serisi.glb',
+      ic: { L: 14, W: 14, H: 20 }, icTaban: 0, olcek: 100 },
+    { id: 'nano', ad: 'Nano Serisi', aciklama: '25 × 25 × 30 cm', dosya: '../assets/modeller/nano-serisi.glb',
+      ic: { L: 25, W: 25, H: 30 }, icTaban: 0, olcek: 100 },
+    { id: 'paludarium', ad: 'Paludarium Serisi', aciklama: '45 × 30 × 60 cm · su 20 cm', dosya: '../assets/modeller/paludarium-serisi.glb',
+      ic: { L: 45, W: 30, H: 60 }, icTaban: 0, su: 20, olcek: 100 },
+  ];
+
+  const T = window.TankledBitkiSecici;
+  const CATS = window.TANKLED_BITKILER;
+  const AQUA = CATS.filter(c => c.id !== 'paludaryum').flatMap(c => c.plants.map(p => ({ p, cat: c })));
+  const byFoto = Object.fromEntries(AQUA.map(x => [x.p.foto, x]));
+  const $ = id => document.getElementById(id);
+  const fmt = (n, d = 0) => n.toLocaleString('tr-TR', { maximumFractionDigits: d });
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const LEAF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-14 14-14 0 9-6 14-14 14z"/><path d="M5 19 14 10"/></svg>';
+  const toast = msg => { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2200); };
+
+  /* ---------- Durum ---------- */
+  const state = {
+    model: 'kutu', L: 60, W: 30, H: 36, cam: 6,
+    zemin: 'aquasoil', kalinlik: 5,
+    lumen: null, co2: false,
+    plants: [ // { foto, adet }
+      { foto: 'java-egreltisi', adet: 1 }, { foto: 'anubias-nana', adet: 1 }, { foto: 'cryptocoryne-wendtii', adet: 2 },
+      { foto: 'limnophila-sessiliflora', adet: 2 }, { foto: 'java-yosunu', adet: 1 },
+    ],
+    seed: 1, filter: 'uygun', q: '',
+  };
+
+  // Bağlantıdaki tasarımı oku: #m=kutu&l=60&w=30&h=36&c=6&z=aquasoil&t=5&lm=1500&co2=1&p=foto:2,foto:1&s=1
+  (function readHash() {
+    const h = new URLSearchParams(location.hash.slice(1));
+    if (!h.size) return;
+    const num = (k, d) => { const v = parseFloat(h.get(k)); return Number.isFinite(v) ? v : d; };
+    if (MODELLER.some(m => m.id === h.get('m'))) state.model = h.get('m');
+    state.L = num('l', state.L); state.W = num('w', state.W); state.H = num('h', state.H); state.cam = num('c', state.cam);
+    if (T.SUBSTRATE[h.get('z')]) state.zemin = h.get('z');
+    state.kalinlik = num('t', state.kalinlik);
+    state.lumen = h.get('lm') ? num('lm', null) : null;
+    state.co2 = h.get('co2') === '1';
+    if (h.has('p')) state.plants = h.get('p').split(',').filter(Boolean).map(x => x.split(':')).filter(([f]) => byFoto[f]).map(([f, n]) => ({ foto: f, adet: Math.max(1, Math.min(20, parseInt(n) || 1)) }));
+    state.seed = num('s', 1);
+  })();
+
+  function writeHash() {
+    const h = new URLSearchParams({ m: state.model });
+    if (state.model === 'kutu') { h.set('l', state.L); h.set('w', state.W); h.set('h', state.H); h.set('c', state.cam); }
+    h.set('z', state.zemin); h.set('t', state.kalinlik);
+    if (state.lumen) h.set('lm', state.lumen);
+    if (state.co2) h.set('co2', 1);
+    h.set('p', state.plants.map(x => `${x.foto}:${x.adet}`).join(','));
+    h.set('s', state.seed);
+    history.replaceState(null, '', '#' + h.toString());
+  }
+
+  /* ---------- 3D ---------- */
+  let aq;
+  try {
+    aq = createAquarium($('view'), { onModelError: () => toast('3D model yüklenemedi; standart kutu gösteriliyor.') });
+    $('loading').remove();
+  } catch (e) {
+    $('loading').textContent = 'Tarayıcınız 3D görünümü desteklemiyor.';
+  }
+  aq && (aq.onAutoRotate = on => $('rotateBtn').setAttribute('aria-pressed', String(on)));
+  aq?.setSeed(state.seed);
+
+  const currentModel = () => MODELLER.find(m => m.id === state.model);
+  function tankDims() {
+    const m = currentModel();
+    if (m.id === 'kutu') {
+      const c = state.cam / 10;
+      return { L: state.L - 2 * c, W: state.W - 2 * c, H: state.H - c, water: state.H - c - 2, outer: `${state.L} × ${state.W} × ${state.H} cm` };
+    }
+    return { L: m.ic.L, W: m.ic.W, H: m.ic.H, water: m.su ?? m.ic.H - 2, outer: m.aciklama.split(' · ')[0] };
+  }
+  const litre = () => { const d = tankDims(); return d.L * d.W * d.H / 1000; };
+  const netLitre = () => {
+    const d = tankDims();
+    const sub = aq ? aq.avgSubstrate() : (state.zemin === 'yok' ? 0 : state.kalinlik * 1.25);
+    return Math.max(0, d.L * d.W * (d.water - sub) / 1000);
+  };
+
+  /* ---------- 1. Model ve ölçüler ---------- */
+  $('models').innerHTML = MODELLER.map(m => `
+    <label class="model"><input type="radio" name="model" value="${m.id}" ${m.id === state.model ? 'checked' : ''} ${m.dosya ? 'disabled' : ''}>
+      <span class="box"><b>${esc(m.ad)}</b><small id="mh-${m.id}">${esc(m.aciklama)}${m.dosya ? ' · kontrol ediliyor…' : ''}</small></span></label>`).join('');
+
+  // Tankled modellerinin 3D dosyası yüklenmiş mi?
+  MODELLER.filter(m => m.dosya).forEach(async m => {
+    let ok = false;
+    try { ok = (await fetch(m.dosya, { method: 'HEAD' })).ok; } catch {}
+    m.hazir = ok;
+    const input = document.querySelector(`input[name=model][value=${m.id}]`);
+    input.disabled = !ok;
+    $('mh-' + m.id).textContent = ok ? m.aciklama : `${m.aciklama} · 3D model yakında`;
+    if (!ok && state.model === m.id) { state.model = 'kutu'; document.querySelector('input[name=model][value=kutu]').checked = true; applyModel(); }
+  });
+
+  $('dL').value = state.L; $('dW').value = state.W; $('dH').value = state.H; $('dC').value = state.cam;
+
+  let modelTimer;
+  async function applyModel() {
+    const m = currentModel();
+    $('dims').hidden = m.id !== 'kutu';
+    $('modelHint').textContent = m.id === 'kutu'
+      ? 'Ölçüleri değiştirdikçe 3D model otomatik güncellenir.'
+      : 'Tankled tasarımı; ölçüler sabittir. Zemin ve bitkiler camın iç ölçüsüne göre yerleşir.';
+    if (aq) {
+      if (m.id === 'kutu') await aq.setModel({ tip: 'kutu', L: state.L, W: state.W, H: state.H, cam: state.cam / 10 });
+      else await aq.setModel({ tip: 'ozel', ...m });
+      aq.setSubstrate(state.zemin, state.zemin === 'yok' ? 0 : state.kalinlik);
+      aq.setPlants(state.plants.map(x => ({ plant: byFoto[x.foto].p, adet: x.adet })));
+    }
+    refresh();
+  }
+
+  document.querySelectorAll('input[name=model]').forEach(r => r.addEventListener('change', () => { state.model = r.value; applyModel(); }));
+  [['dL', 'L', 10, 300], ['dW', 'W', 10, 150], ['dH', 'H', 10, 150], ['dC', 'cam', 3, 19]].forEach(([id, key, min, max]) => {
+    $(id).addEventListener('input', () => {
+      const v = parseFloat($(id).value);
+      if (!Number.isFinite(v) || v < min || v > max) return;
+      state[key] = v;
+      clearTimeout(modelTimer);
+      modelTimer = setTimeout(applyModel, 120);
+    });
+    $(id).addEventListener('change', () => { $(id).value = state[key]; });
+  });
+
+  /* ---------- 2. Zemin ---------- */
+  $('zemin').innerHTML = T.SUBSTRATES.map(g => `<optgroup label="${g.grup}">${g.items.map(s => `<option value="${s.value}">${s.label}</option>`).join('')}</optgroup>`).join('');
+  $('zemin').value = state.zemin;
+  $('kalinlik').value = state.kalinlik;
+  function applySubstrate() {
+    $('zeminDesc').textContent = T.SUBSTRATE[state.zemin].desc;
+    $('kalinlik').disabled = state.zemin === 'yok';
+    $('kalVal').textContent = state.zemin === 'yok' ? '—' : `${fmt(state.kalinlik, 1)} cm`;
+    aq?.setSubstrate(state.zemin, state.zemin === 'yok' ? 0 : state.kalinlik);
+    refresh();
+  }
+  $('zemin').addEventListener('change', () => { state.zemin = $('zemin').value; applySubstrate(); });
+  $('kalinlik').addEventListener('input', () => { state.kalinlik = parseFloat($('kalinlik').value); applySubstrate(); });
+
+  /* ---------- 3. Işık ve CO₂ ---------- */
+  if (state.lumen) $('lumen').value = state.lumen;
+  document.querySelector(`input[name=co2][value=${state.co2 ? 'var' : 'yok'}]`).checked = true;
+  $('lumen').addEventListener('input', () => { const v = parseFloat($('lumen').value); state.lumen = v > 0 ? v : null; refresh(); });
+  document.querySelectorAll('input[name=co2]').forEach(r => r.addEventListener('change', () => { state.co2 = r.value === 'var'; refresh(); }));
+
+  /* ---------- 4. Bitkiler ---------- */
+  const params = () => ({ litre: litre(), lumen: state.lumen, zemin: state.zemin, co2: state.co2 });
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    state.filter = b.dataset.f;
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    renderPlantList();
+  }));
+  $('pq').addEventListener('input', () => { state.q = $('pq').value.trim().toLocaleLowerCase('tr'); renderPlantList(); });
+
+  function renderPlantList() {
+    const prm = params();
+    const order = { uygun: 0, dikkat: 1, hayir: 2 };
+    const rows = AQUA.map(x => ({ ...x, e: T.evaluate(x.p, prm) }))
+      .filter(x => state.filter === 'tumu' || x.e.durum !== 'hayir')
+      .filter(x => !state.q || (x.p.ad + ' ' + x.p.latin).toLocaleLowerCase('tr').includes(state.q))
+      .sort((a, b) => order[a.e.durum] - order[b.e.durum]);
+    const label = { uygun: 'Uygun', dikkat: 'Dikkat', hayir: 'Uygun değil' };
+    $('plist').innerHTML = rows.length ? rows.map(({ p, cat, e }) => `
+      <div class="pitem ${e.durum}">
+        <span class="thumb"><img src="../assets/bitkiler/${p.foto}.jpg" alt="" loading="lazy"></span>
+        <span>
+          <span class="pname">${esc(p.ad)}</span><br>
+          <span class="pmeta"><span class="badge ${e.durum}">${label[e.durum]}</span>${esc(cat.tab)} · ${esc(p.zorluk)} · ${esc(p.bilgi[5])}</span>
+          ${[...e.reasons, ...e.notes].slice(0, 2).map(n => `<br><span class="pmeta">• ${esc(n)}</span>`).join('')}
+        </span>
+        <button type="button" class="add" data-add="${p.foto}" aria-label="${esc(p.ad)} ekle" ${e.durum === 'hayir' ? 'disabled title="Bu akvaryuma uygun değil"' : ''}>+</button>
+      </div>`).join('') : '<p class="hint">Bu aramaya uyan bitki yok.</p>';
+    $('plist').querySelectorAll('.thumb img').forEach(img => {
+      const fb = () => { img.parentElement.innerHTML = LEAF; };
+      if (img.complete && img.naturalWidth === 0) fb(); else img.addEventListener('error', fb);
+    });
+  }
+  $('plist').addEventListener('click', e => {
+    const b = e.target.closest('[data-add]');
+    if (!b || b.disabled) return;
+    const f = b.dataset.add, ex = state.plants.find(x => x.foto === f);
+    if (ex) ex.adet = Math.min(20, ex.adet + 1); else state.plants.push({ foto: f, adet: 1 });
+    toast(`${byFoto[f].p.ad} eklendi`);
+    applyPlants();
+  });
+
+  function renderChosen() {
+    const prm = params();
+    $('chosen').innerHTML = state.plants.map(x => {
+      const e = T.evaluate(byFoto[x.foto].p, prm);
+      return `<div class="citem"><span>${esc(byFoto[x.foto].p.ad)}${e.durum === 'hayir' ? ` <span class="badge hayir" title="${esc(e.reasons.join(', '))}">Uygun değil</span>` : ''}</span>
+        <span class="qty"><button type="button" class="icon" data-dec="${x.foto}" aria-label="Azalt">−</button><b>${x.adet}</b><button type="button" class="icon" data-inc="${x.foto}" aria-label="Artır">+</button></span>
+        <button type="button" class="icon" data-del="${x.foto}" aria-label="Kaldır">×</button></div>`;
+    }).join('');
+  }
+  $('chosen').addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    const f = b.dataset.inc || b.dataset.dec || b.dataset.del;
+    const x = state.plants.find(p => p.foto === f);
+    if (!x) return;
+    if (b.dataset.inc) x.adet = Math.min(20, x.adet + 1);
+    if (b.dataset.dec) x.adet -= 1;
+    if (b.dataset.del || x.adet < 1) state.plants = state.plants.filter(p => p !== x);
+    applyPlants();
+  });
+  function applyPlants() {
+    aq?.setPlants(state.plants.map(x => ({ plant: byFoto[x.foto].p, adet: x.adet })));
+    refresh();
+  }
+  $('shuffle').addEventListener('click', () => { if (aq) state.seed = aq.shuffle(); refresh(); });
+  $('clearPlants').addEventListener('click', () => { state.plants = []; applyPlants(); });
+
+  /* ---------- Özet ve paylaşım ---------- */
+  function refresh() {
+    const d = tankDims();
+    $('sGross').textContent = `${fmt(litre(), 1)} L`;
+    $('sNet').textContent = `${fmt(netLitre(), 1)} L`;
+    $('sSize').textContent = d.outer;
+
+    // Işık bilgisi ve uyarılar
+    const warns = [];
+    if (state.lumen) {
+      const lmL = state.lumen / litre();
+      $('lightInfo').innerHTML = `Litre başına <b>${fmt(lmL)} lm/L</b> · Işık seviyeniz: <b>${T.tankLevel(lmL)}</b>`;
+      if (lmL >= 50 && !state.co2) warns.push('Işığınız güçlü ama CO₂ yok: bu dengesizlik yosun riskini artırır.');
+      if (lmL < 15) warns.push('Işığınız çok zayıf: bitkiler zor büyür. En az 20 lm/L önerilir.');
+      if (d.H > 45) warns.push('Akvaryum 45 cm’den yüksek: tabana daha az ışık ulaşır; zemin bitkileri için bir üst ışık seviyesini hedefleyin.');
+    } else {
+      $('lightInfo').textContent = 'Işık bilgisini girerseniz bitki önerileri ışığınıza göre de kontrol edilir.';
+    }
+    if (T.SUBSTRATE[state.zemin].sert) warns.push('Mercan / aragonit kumu suyu sertleştirir; çoğu akvaryum bitkisi yumuşak suyu sever.');
+    const bad = state.plants.filter(x => T.evaluate(byFoto[x.foto].p, params()).durum === 'hayir');
+    if (bad.length) warns.push(`Şu bitkiler seçtiğiniz koşullara uygun değil: ${bad.map(x => byFoto[x.foto].p.ad).join(', ')}.`);
+    $('warnings').innerHTML = warns.map(w => `<div class="warn">${esc(w)}</div>`).join('');
+
+    renderPlantList();
+    renderChosen();
+
+    const m = currentModel();
+    const plantsTxt = state.plants.length ? state.plants.map(x => `${byFoto[x.foto].p.ad}${x.adet > 1 ? ` ×${x.adet}` : ''}`).join(', ') : '—';
+    $('summary').innerHTML = `
+      <span><b>Model:</b> ${esc(m.ad)} (${esc(d.outer)})</span>
+      <span><b>Hacim:</b> ${fmt(litre(), 1)} L brüt · ~${fmt(netLitre(), 1)} L su</span>
+      <span><b>Zemin:</b> ${esc(T.SUBSTRATE[state.zemin].label)}${state.zemin === 'yok' ? '' : `, ${fmt(state.kalinlik, 1)} cm`}</span>
+      <span><b>Işık / CO₂:</b> ${state.lumen ? fmt(state.lumen) + ' lm' : 'belirtilmedi'} · CO₂ ${state.co2 ? 'var' : 'yok'}</span>
+      <span><b>Bitkiler:</b> ${esc(plantsTxt)}</span>`;
+
+    writeHash();
+    const msg = `Merhaba Tankled, sitenizde şu akvaryumu tasarladım:\n` +
+      `• Model: ${m.ad} (${d.outer})\n• Hacim: ${fmt(litre(), 1)} L\n• Zemin: ${T.SUBSTRATE[state.zemin].label}${state.zemin === 'yok' ? '' : `, ${fmt(state.kalinlik, 1)} cm`}\n` +
+      `• Işık / CO₂: ${state.lumen ? fmt(state.lumen) + ' lm' : 'belirtilmedi'}, CO₂ ${state.co2 ? 'var' : 'yok'}\n• Bitkiler: ${plantsTxt}\n\nTasarım: ${location.href}`;
+    $('waBtn').href = 'https://wa.me/905312172006?text=' + encodeURIComponent(msg);
+  }
+
+  $('copyLink').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(location.href); toast('Bağlantı kopyalandı'); }
+    catch { prompt('Bağlantıyı kopyalayın:', location.href); }
+  });
+  $('download').addEventListener('click', () => {
+    if (!aq) return;
+    const a = document.createElement('a');
+    a.href = aq.snapshot();
+    a.download = 'tankled-akvaryum.png';
+    a.click();
+  });
+  $('rotateBtn').addEventListener('click', () => {
+    const on = $('rotateBtn').getAttribute('aria-pressed') !== 'true';
+    $('rotateBtn').setAttribute('aria-pressed', String(on));
+    aq?.setAutoRotate(on);
+  });
+  $('resetBtn').addEventListener('click', () => aq?.resetView());
+
+  applySubstrate();
+  applyModel();
+</script>
+</body>
+</html>
