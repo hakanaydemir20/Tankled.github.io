@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Akvaryum Işık ve Litre Hesaplama</title>
+<meta name="description" content="Akvaryumunuzun litresini, ağırlığını ve ihtiyaç duyduğu LED ışık gücünü hesaplayın." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#5c7a5a;
+    --green-deep:#43603f;
+    --green-dark:#33492f;
+    --cream:#f4f1e9;
+    --cream-2:#ffffff;
+    --sand:#cbb98f;
+    --sand-deep:#b8a371;
+    --ink:#2b3329;
+    --muted:#6f7a68;
+    --on-green:#f3f1e7;
+    --radius:30px;
+    --radius-sm:18px;
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Poppins',sans-serif;
+    font-weight:300;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+  }
+  h1,h2,h3{font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--green-dark)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px;width:100%}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--sand-deep);font-weight:600;margin-bottom:14px;display:inline-block}
+  .lead{color:var(--muted);font-size:clamp(15px,1.5vw,18px);max-width:54ch}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+    font-family:inherit;font-size:14px;font-weight:500;
+    padding:12px 22px;border-radius:100px;border:1.5px solid rgba(67,96,63,.3);
+    color:var(--green-deep);transition:background .3s,border-color .3s;
+  }
+  .btn:hover{border-color:var(--green);background:rgba(92,122,90,.08)}
+  .btn:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+  header{border-bottom:1px solid rgba(67,96,63,.1)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:88px}
+  .logo img{height:56px;width:auto}
+
+  main{flex:1;padding:56px 0 80px}
+  .tool-card{
+    margin-top:32px;background:var(--cream-2);border-radius:var(--radius);
+    padding:clamp(20px,4vw,40px);box-shadow:0 20px 50px -30px rgba(51,73,47,.35);
+    min-height:280px;
+  }
+
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  fieldset{border:0;display:grid;gap:14px}
+  legend{font-weight:600;color:var(--green-dark);margin-bottom:10px;font-size:18px}
+  .row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  label{display:grid;gap:6px;font-size:13px;color:var(--muted);font-weight:400}
+  input,select{
+    font:inherit;font-size:16px;color:var(--ink);background:var(--cream);
+    border:1.5px solid rgba(67,96,63,.18);border-radius:12px;padding:10px 12px;width:100%;min-width:0;
+  }
+  input:focus,select:focus{outline:none;border-color:var(--green)}
+  .results{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px}
+  .stat{background:var(--cream);border-radius:var(--radius-sm);padding:16px}
+  .stat b{display:block;font-size:24px;font-weight:700;color:var(--green-dark);line-height:1.2}
+  .stat span{font-size:12px;color:var(--muted)}
+  .stat.hl{background:var(--green);}
+  .stat.hl b,.stat.hl span{color:var(--on-green)}
+  .note{font-size:12.5px;color:var(--muted);margin-top:14px}
+  .sep{height:1px;background:rgba(67,96,63,.1);margin:28px 0}
+
+  footer{padding:24px 0;font-size:13px;color:var(--muted);border-top:1px solid rgba(67,96,63,.1)}
+
+  @media (max-width:600px){
+    .nav{height:72px}
+    .logo img{height:44px}
+    main{padding:36px 0 56px}
+    .grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="../" class="logo" aria-label="Tankled ana sayfa">
+      <img src="../assets/logo.png" alt="Tankled Aquarium" />
+    </a>
+    <a href="../" class="btn">← Ana sayfa</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <span class="eyebrow">Tankled Araçları</span>
+    <h1>Akvaryum Işık ve Litre Hesaplama</h1>
+    <p class="lead" style="margin-top:14px">Akvaryumunuzun ölçülerini girin; brüt ve net litreyi, yaklaşık ağırlığı ve bitki yoğunluğuna göre gereken LED ışık gücünü anında görün.</p>
+
+    <section class="tool-card" id="tool">
+      <div class="grid">
+        <fieldset>
+          <legend>Ölçüler</legend>
+          <div class="row">
+            <label>Uzunluk (cm)<input type="number" id="L" value="60" min="1" step="1" inputmode="decimal"></label>
+            <label>Derinlik (cm)<input type="number" id="W" value="30" min="1" step="1" inputmode="decimal"></label>
+            <label>Yükseklik (cm)<input type="number" id="H" value="36" min="1" step="1" inputmode="decimal"></label>
+          </div>
+          <div class="row">
+            <label>Cam kalınlığı (mm)<input type="number" id="T" value="6" min="0" step="1" inputmode="decimal"></label>
+            <label>Zemin kalınlığı (cm)<input type="number" id="S" value="5" min="0" step="0.5" inputmode="decimal"></label>
+            <label>Su boşluğu (cm)<input type="number" id="G" value="3" min="0" step="0.5" inputmode="decimal"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Aydınlatma</legend>
+          <label>Akvaryum tipi
+            <select id="P">
+              <option value="15,25">Balık / bitkisiz</option>
+              <option value="25,40" selected>Az ışık isteyen bitkiler (anubias, yosun, eğrelti)</option>
+              <option value="40,60">Orta yoğunluk bitkili</option>
+              <option value="60,100">Yoğun bitkili / halı bitkisi (CO₂ ile)</option>
+            </select>
+          </label>
+          <label>LED verimi (lümen / watt)<input type="number" id="E" value="100" min="1" step="5" inputmode="decimal"></label>
+        </fieldset>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="results" aria-live="polite">
+        <div class="stat"><b id="rGross">–</b><span>Brüt hacim</span></div>
+        <div class="stat hl"><b id="rNet">–</b><span>Net su hacmi</span></div>
+        <div class="stat"><b id="rWeight">–</b><span>Dolu ağırlık (yaklaşık)</span></div>
+        <div class="stat hl"><b id="rLumen">–</b><span>Önerilen ışık</span></div>
+        <div class="stat"><b id="rWatt">–</b><span>LED gücü</span></div>
+        <div class="stat"><b id="rHours">–</b><span>Günlük ışık süresi</span></div>
+      </div>
+      <p class="note" id="note">Değerler yaklaşık bir rehberdir. Net hacim; cam kalınlığı, zemin ve üst boşluk düşülerek hesaplanır. Işık önerisi lümen/litre kuralına dayanır; 50 cm üzeri yüksekliklerde ışığın tabana ulaşması için daha güçlü armatür gerekebilir.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">© Tankled</div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const num = id => Math.max(0, parseFloat($(id).value) || 0);
+  const fmt = (n, d = 0) => n.toLocaleString('tr-TR', { maximumFractionDigits: d });
+
+  function calc() {
+    const L = num('L'), W = num('W'), H = num('H');
+    const t = num('T') / 10, S = num('S'), G = num('G');
+
+    const gross = L * W * H / 1000;
+    const iL = Math.max(0, L - 2 * t), iW = Math.max(0, W - 2 * t);
+    const waterH = Math.max(0, H - t - S - G);
+    const net = iL * iW * waterH / 1000;
+
+    // Cam ≈ 2.5 kg/L, zemin ≈ 1.6 kg/L, su ≈ 1 kg/L
+    const glass = (2 * (L * H + W * H) + L * W) * t / 1000 * 2.5;
+    const substrate = iL * iW * S / 1000 * 1.6;
+    const weight = net + glass + substrate;
+
+    const [lo, hi] = $('P').value.split(',').map(Number);
+    const eff = num('E') || 1;
+    const hFactor = H > 50 ? 1 + (H - 50) / 100 : 1;
+    const lmLo = net * lo * hFactor, lmHi = net * hi * hFactor;
+
+    $('rGross').textContent = fmt(gross, 1) + ' L';
+    $('rNet').textContent = fmt(net, 1) + ' L';
+    $('rWeight').textContent = '~' + fmt(weight) + ' kg';
+    $('rLumen').textContent = fmt(lmLo) + '–' + fmt(lmHi) + ' lm';
+    $('rWatt').textContent = fmt(lmLo / eff) + '–' + fmt(lmHi / eff) + ' W';
+    $('rHours').textContent = lo >= 60 ? '7–8 saat' : '6–8 saat';
+  }
+
+  document.querySelectorAll('input,select').forEach(el => el.addEventListener('input', calc));
+  calc();
+</script>
+</body>
+</html>
