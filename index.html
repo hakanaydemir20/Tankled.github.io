@@ -201,10 +201,40 @@
   /* Footer */
   footer{padding:46px 0 38px;border-top:1px solid rgba(67,96,63,.12)}
   .foot-grid{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-  .foot-links{display:flex;gap:24px}
+  .foot-links{display:flex;flex-wrap:wrap;gap:12px 24px}
   .foot-links a{font-size:14px;color:var(--muted);transition:color .25s}
   .foot-links a:hover{color:var(--green)}
   .copyright{color:var(--muted);font-size:13px;margin-top:26px;text-align:center}
+
+  /* Hesaplama */
+  .calc-card{background:var(--cream-2);border-radius:var(--radius);padding:clamp(22px,4vw,40px);margin-top:50px;box-shadow:0 24px 50px -40px rgba(51,73,47,.6)}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .calc-group h3{font-size:18px;font-weight:600;color:var(--green-dark);margin-bottom:14px}
+  .calc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+  .calc-field{display:grid;gap:6px;font-size:13px;color:var(--muted);align-content:end}
+  .calc-field input,.calc-field select{
+    width:100%;min-width:0;background:var(--cream);border:1.5px solid rgba(67,96,63,.15);border-radius:14px;
+    color:var(--ink);font-family:inherit;font-size:16px;padding:11px 13px;min-height:48px;transition:border-color .25s}
+  .calc-field input:focus,.calc-field select:focus{outline:none;border-color:var(--green)}
+  .calc-results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;padding-top:30px;border-top:1px solid rgba(67,96,63,.1)}
+  .calc-stat{background:var(--cream);border-radius:var(--radius-sm);padding:16px 18px}
+  .calc-stat b{display:block;font-size:clamp(20px,2.4vw,26px);font-weight:700;color:var(--green-dark);line-height:1.25}
+  .calc-stat span{font-size:12.5px;color:var(--muted)}
+  .calc-stat.hl{background:var(--green)}
+  .calc-stat.hl b,.calc-stat.hl span{color:var(--on-green)}
+  .calc-note{font-size:12.5px;color:var(--muted);margin-top:16px}
+  @media(max-width:760px){ .calc-grid{grid-template-columns:1fr} .calc-results{grid-template-columns:1fr 1fr} }
+
+  /* Kategori filtresi */
+  .product-card[hidden]{display:none}
+
+  /* WhatsApp */
+  .wa-btn{position:fixed;right:18px;bottom:18px;z-index:120;display:inline-flex;align-items:center;gap:10px;
+    background:#25d366;color:#fff;font-weight:600;font-size:14px;padding:12px 18px 12px 14px;border-radius:100px;
+    box-shadow:0 14px 30px -12px rgba(0,0,0,.45);transition:transform .3s var(--ease)}
+  .wa-btn:hover{transform:translateY(-2px)}
+  .wa-btn:focus-visible{outline:2px solid var(--green-dark);outline-offset:3px}
+  @media(max-width:560px){ .wa-btn span{display:none} .wa-btn{padding:14px} }
 
   /* Reveal */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -245,7 +275,7 @@
       <a href="#about">Hakkımızda</a>
       <a href="#gallery">Galeri</a>
       <a href="#process">Süreç</a>
-      <a href="akvaryum-hesaplama/">Hesaplama</a>
+      <a href="#hesaplama">Hesaplama</a>
       <a href="#contact">İletişim</a>
     </nav>
     <div class="nav-actions">
@@ -289,10 +319,10 @@
     </div>
 
     <div class="cats">
-      <button class="cat active"><span class="badge">6</span> Tümü</button>
-      <button class="cat">Akvaryum</button>
-      <button class="cat">Terraryum</button>
-      <button class="cat">Aquascape</button>
+      <button class="cat active" data-filter="all" aria-pressed="true"><span class="badge" id="catCount">3</span> Tümü</button>
+      <button class="cat" data-filter="akvaryum" aria-pressed="false">Akvaryum</button>
+      <button class="cat" data-filter="terraryum" aria-pressed="false">Terraryum</button>
+      <button class="cat" data-filter="aquascape" aria-pressed="false">Aquascape</button>
     </div>
   </div>
 </section>
@@ -306,7 +336,7 @@
       <p class="lead">Üç farklı karakter, sınırsız özelleştirme. Boyut, ahşap tonu ve aydınlatma size özel.</p>
     </div>
     <div class="product-grid">
-      <article class="product-card reveal">
+      <article class="product-card reveal" data-cat="akvaryum">
         <div class="product-media">
           <span class="product-tag">Popüler</span>
           <img src="assets/atlantis.png" alt="Atlantis betta akvaryumu" loading="lazy"/>
@@ -329,7 +359,7 @@
           </div>
         </div>
       </article>
-      <article class="product-card reveal">
+      <article class="product-card reveal" data-cat="akvaryum aquascape">
         <div class="product-media">
           <span class="product-tag">Yeni</span>
           <img src="assets/lagoon.png" alt="Lagoon aquascape" loading="lazy"/>
@@ -353,7 +383,7 @@
           </div>
         </div>
       </article>
-      <article class="product-card reveal">
+      <article class="product-card reveal" data-cat="terraryum aquascape">
         <div class="product-media">
           <span class="product-tag">İmza</span>
           <img src="assets/paludarium.jpeg" alt="Paludarium serisi" loading="lazy"/>
@@ -449,6 +479,57 @@
   </div>
 </section>
 
+<!-- HESAPLAMA -->
+<section class="section" id="hesaplama">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Hesaplama</span>
+      <h2>Akvaryum ışık ve litre hesaplama</h2>
+      <p class="lead">Ölçüleri girin; brüt ve net litreyi, yaklaşık dolu ağırlığı ve bitki yoğunluğuna göre gereken LED gücünü anında görün.</p>
+    </div>
+    <div class="calc-card reveal">
+      <div class="calc-grid">
+        <div class="calc-group">
+          <h3>Ölçüler</h3>
+          <div class="calc-row">
+            <label class="calc-field">Uzunluk (cm)<input type="number" id="cL" value="60" min="1" step="1" inputmode="decimal"></label>
+            <label class="calc-field">Derinlik (cm)<input type="number" id="cW" value="30" min="1" step="1" inputmode="decimal"></label>
+            <label class="calc-field">Yükseklik (cm)<input type="number" id="cH" value="36" min="1" step="1" inputmode="decimal"></label>
+          </div>
+          <div class="calc-row">
+            <label class="calc-field">Cam kalınlığı (mm)<input type="number" id="cT" value="6" min="0" step="1" inputmode="decimal"></label>
+            <label class="calc-field">Zemin kalınlığı (cm)<input type="number" id="cS" value="5" min="0" step="0.5" inputmode="decimal"></label>
+            <label class="calc-field">Su boşluğu (cm)<input type="number" id="cG" value="3" min="0" step="0.5" inputmode="decimal"></label>
+          </div>
+        </div>
+        <div class="calc-group">
+          <h3>Aydınlatma</h3>
+          <div class="calc-row" style="grid-template-columns:1fr">
+            <label class="calc-field">Akvaryum tipi
+              <select id="cP">
+                <option value="15,25">Balık / bitkisiz</option>
+                <option value="25,40" selected>Az ışık isteyen bitkiler (anubias, yosun, eğrelti)</option>
+                <option value="40,60">Orta yoğunluk bitkili</option>
+                <option value="60,100">Yoğun bitkili / halı bitkisi (CO₂ ile)</option>
+              </select>
+            </label>
+            <label class="calc-field">LED verimi (lümen / watt)<input type="number" id="cE" value="100" min="1" step="5" inputmode="decimal"></label>
+          </div>
+        </div>
+      </div>
+      <div class="calc-results" aria-live="polite">
+        <div class="calc-stat"><b id="rGross">–</b><span>Brüt hacim</span></div>
+        <div class="calc-stat hl"><b id="rNet">–</b><span>Net su hacmi</span></div>
+        <div class="calc-stat"><b id="rWeight">–</b><span>Dolu ağırlık (yaklaşık)</span></div>
+        <div class="calc-stat hl"><b id="rLumen">–</b><span>Önerilen ışık</span></div>
+        <div class="calc-stat"><b id="rWatt">–</b><span>LED gücü</span></div>
+        <div class="calc-stat"><b id="rHours">–</b><span>Günlük ışık süresi</span></div>
+      </div>
+      <p class="calc-note">Değerler yaklaşık bir rehberdir. Net hacim; cam kalınlığı, zemin ve üst boşluk düşülerek hesaplanır. Işık önerisi lümen/litre kuralına dayanır; 50 cm üzeri yüksekliklerde ışığın tabana ulaşması için daha güçlü armatür gerekebilir.</p>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="wrap contact-grid">
@@ -516,13 +597,18 @@
         <a href="#products">Koleksiyon</a>
         <a href="#about">Hakkımızda</a>
         <a href="#process">Süreç</a>
-        <a href="akvaryum-hesaplama/">Hesaplama</a>
+        <a href="#hesaplama">Hesaplama</a>
         <a href="#contact">İletişim</a>
       </nav>
     </div>
     <p class="copyright">© <span id="year"></span> Tankled. El işçiliğiyle, doğaya saygıyla üretilir.<br/>Hakan Aydemir tarafından tasarlanmıştır.</p>
   </div>
 </footer>
+
+<a class="wa-btn" href="https://wa.me/905312172006?text=Merhaba%20Tankled%2C%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp ile yazın">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.3A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 1a4 4 0 0 1-2.5-2.5l1-1-1-2z"/></svg>
+  <span>WhatsApp</span>
+</a>
 
 <script>
   // Header scroll
@@ -541,10 +627,15 @@
     navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded',false);
   }));
 
-  // Category toggle
+  // Category filter
+  const cards = document.querySelectorAll('.product-card');
+  document.getElementById('catCount').textContent = cards.length;
   document.querySelectorAll('.cat').forEach(c=>c.addEventListener('click',()=>{
-    document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
-    c.classList.add('active');
+    document.querySelectorAll('.cat').forEach(x=>{ x.classList.remove('active'); x.setAttribute('aria-pressed','false'); });
+    c.classList.add('active'); c.setAttribute('aria-pressed','true');
+    const f = c.dataset.filter;
+    cards.forEach(card=>{ card.hidden = f!=='all' && !card.dataset.cat.split(' ').includes(f); });
+    document.getElementById('products').scrollIntoView({behavior:'smooth'});
   }));
 
   // Reveal on scroll
@@ -561,6 +652,33 @@
     document.getElementById('formFields').style.display='none';
     document.getElementById('formSuccess').style.display='block';
   });
+
+  // Akvaryum hesaplama
+  const cNum = id => Math.max(0, parseFloat(document.getElementById(id).value) || 0);
+  const cFmt = (n, d = 0) => n.toLocaleString('tr-TR', { maximumFractionDigits: d });
+  const cSet = (id, v) => { document.getElementById(id).textContent = v; };
+  function calc(){
+    const L = cNum('cL'), W = cNum('cW'), H = cNum('cH');
+    const t = cNum('cT') / 10, S = cNum('cS'), G = cNum('cG');
+    const gross = L * W * H / 1000;
+    const iL = Math.max(0, L - 2 * t), iW = Math.max(0, W - 2 * t);
+    const net = iL * iW * Math.max(0, H - t - S - G) / 1000;
+    // Cam ≈ 2.5 kg/L, zemin ≈ 1.6 kg/L, su ≈ 1 kg/L
+    const glass = (2 * (L * H + W * H) + L * W) * t / 1000 * 2.5;
+    const weight = net + glass + iL * iW * S / 1000 * 1.6;
+    const [lo, hi] = document.getElementById('cP').value.split(',').map(Number);
+    const eff = cNum('cE') || 1;
+    const hf = H > 50 ? 1 + (H - 50) / 100 : 1;
+    const lmLo = net * lo * hf, lmHi = net * hi * hf;
+    cSet('rGross', cFmt(gross, 1) + ' L');
+    cSet('rNet', cFmt(net, 1) + ' L');
+    cSet('rWeight', '~' + cFmt(weight) + ' kg');
+    cSet('rLumen', cFmt(lmLo) + '–' + cFmt(lmHi) + ' lm');
+    cSet('rWatt', cFmt(lmLo / eff) + '–' + cFmt(lmHi / eff) + ' W');
+    cSet('rHours', lo >= 60 ? '7–8 saat' : '6–8 saat');
+  }
+  document.querySelectorAll('#hesaplama input, #hesaplama select').forEach(el=>el.addEventListener('input', calc));
+  calc();
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
