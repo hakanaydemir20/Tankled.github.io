@@ -96,21 +96,23 @@
   .cat-head h2{color:var(--cream);font-size:clamp(24px,3.4vw,34px)}
   .cat-head p{color:var(--on-green-muted);margin-top:8px;max-width:62ch}
 
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .empty{text-align:center;color:var(--muted);padding:60px 16px}
   .empty[hidden]{display:none}
   .empty b{display:block;font-size:18px;color:var(--green-dark);font-weight:600;margin-bottom:6px}
 
   /* Bitki kartı */
-  .plant{background:var(--cream-2);border-radius:var(--radius-sm);padding:16px;display:grid;grid-template-columns:132px 1fr;gap:16px;
-    box-shadow:0 18px 40px -34px rgba(51,73,47,.6);align-content:start}
+  .plant{background:var(--cream-2);border-radius:var(--radius-sm);overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 18px 40px -34px rgba(51,73,47,.6)}
   .plant[hidden]{display:none}
   .plant{scroll-margin-top:210px}
   .plant.flash{animation:flash 1.6s var(--ease)}
   @keyframes flash{0%,40%{box-shadow:0 0 0 3px var(--sand)}100%{box-shadow:0 18px 40px -34px rgba(51,73,47,.6)}}
-  .photo{width:132px;height:132px;border-radius:14px;overflow:hidden;background:rgba(92,122,90,.12);display:grid;place-items:center;color:var(--green)}
-  .photo img{width:100%;height:100%;object-fit:cover}
-  .photo svg{width:54px;height:54px;opacity:.7}
+  .photo{width:100%;aspect-ratio:4 / 3;overflow:hidden;background:rgba(92,122,90,.12);display:grid;place-items:center;color:var(--green)}
+  .photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+  .plant:hover .photo img{transform:scale(1.04)}
+  .photo svg{width:72px;height:72px;opacity:.55}
+  .plant-body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
   .title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
   .plant h3{font-size:17px;font-weight:600}
   .level{flex:none;font-size:11px;font-weight:600;letter-spacing:.04em;padding:3px 10px;border-radius:100px;margin-top:2px}
@@ -119,14 +121,15 @@
   .level.zor{background:rgba(160,82,60,.13);color:#8a4a36}
   .latin{font-size:12.5px;font-style:italic;color:var(--sand-deep);margin-top:2px}
   .desc{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.6}
-  .facts{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:12px;border-top:1px solid rgba(67,96,63,.1)}
-  .fact{background:var(--cream);border-radius:12px;padding:8px 10px;min-width:0}
-  .fact span{display:block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:500}
-  .fact b{display:block;font-size:13px;font-weight:600;color:var(--green-dark);line-height:1.35}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding-top:12px;margin-top:auto;border-top:1px solid rgba(67,96,63,.1)}
+  .desc{margin-bottom:14px}
+  .fact{background:var(--cream);border-radius:10px;padding:6px 8px;min-width:0}
+  .fact span{display:block;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .fact b{display:block;font-size:12px;font-weight:600;color:var(--green-dark);line-height:1.35}
 
   footer{padding:24px 0;font-size:13px;color:var(--muted);text-align:center;border-top:1px solid rgba(67,96,63,.1)}
 
-  @media(max-width:860px){ .grid{grid-template-columns:1fr} }
+  @media(max-width:920px){ .grid{grid-template-columns:1fr 1fr} }
   @media(max-width:560px){
     .nav{height:76px}
     .logo img{height:46px}
@@ -137,9 +140,7 @@
     .chips{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;width:100%;padding-bottom:2px;scrollbar-width:none}
     .chips::-webkit-scrollbar{display:none}
     .chip{flex:none}
-    .plant{grid-template-columns:96px 1fr;gap:12px;padding:14px}
-    .photo{width:96px;height:96px}
-    .facts{grid-template-columns:1fr 1fr}
+    .grid{grid-template-columns:1fr;gap:16px}
   }
 </style>
 </head>
@@ -217,16 +218,16 @@
         ${c.plants.map(p => `
           <article class="plant" id="p-${p.foto}" data-level="${p.zorluk}" data-text="${esc(norm([p.ad, p.latin, p.aciklama, c.tab, p.zorluk, ...p.bilgi].join(' ')))}">
             <div class="photo"><img src="../assets/bitkiler/${p.foto}.jpg" alt="${esc(p.ad)}" loading="lazy"></div>
-            <div>
+            <div class="plant-body">
               <div class="title-row">
                 <h3>${esc(p.ad)}</h3>
                 <span class="level ${norm(p.zorluk)}">${p.zorluk}</span>
               </div>
               <div class="latin">${esc(p.latin)}</div>
               <p class="desc">${esc(p.aciklama)}</p>
-            </div>
-            <div class="facts">
-              ${c.facts.map((f, i) => `<div class="fact"><span>${f}</span><b>${esc(p.bilgi[i])}</b></div>`).join('')}
+              <div class="facts">
+                ${c.facts.map((f, i) => `<div class="fact"><span>${f}</span><b>${esc(p.bilgi[i])}</b></div>`).join('')}
+              </div>
             </div>
           </article>`).join('')}
       </div>
