@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Akvaryum ve Paludaryum Bitkileri — Tankled</title>
+<meta name="description" content="Low tech, high tech akvaryum bitkileri ve paludaryum bitkileri: fotoğraflar, kısa açıklamalar ve yaşam koşulları." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#5c7a5a;
+    --green-deep:#43603f;
+    --green-dark:#33492f;
+    --cream:#f4f1e9;
+    --cream-2:#ffffff;
+    --sand:#cbb98f;
+    --sand-deep:#b8a371;
+    --ink:#2b3329;
+    --muted:#6f7a68;
+    --on-green:#f3f1e7;
+    --on-green-muted:#cdd6c5;
+    --radius:30px;
+    --radius-sm:18px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--cream);color:var(--ink);
+    font-family:'Poppins',sans-serif;font-weight:300;line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;
+  }
+  h1,h2,h3{font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--green-dark)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  ::selection{background:var(--sand);color:var(--green-dark)}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px;width:100%}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--sand-deep);font-weight:600;margin-bottom:12px;display:inline-block}
+
+  header{border-bottom:1px solid rgba(67,96,63,.1);background:var(--cream)}
+  .nav{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;height:96px}
+  .logo img{height:64px;width:auto}
+  .back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--green-deep);
+    padding:10px 20px;border-radius:100px;border:1.5px solid rgba(67,96,63,.25);transition:background .3s,border-color .3s;white-space:nowrap}
+  .back:hover{border-color:var(--green);background:rgba(92,122,90,.08)}
+
+  main{flex:1;padding:52px 0 80px}
+  .intro{text-align:center;max-width:640px;margin:0 auto}
+  .intro h1{font-size:clamp(30px,5vw,48px)}
+  .intro p{color:var(--muted);margin-top:12px}
+
+  /* Kategori sekmeleri */
+  .tabs{position:sticky;top:0;z-index:10;background:var(--cream);padding:14px 0;margin-top:26px;
+    display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .tab{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;font-size:14px;font-weight:500;
+    border:1.5px solid rgba(67,96,63,.18);background:var(--cream-2);color:var(--muted);transition:all .25s}
+  .tab:hover{border-color:var(--green);color:var(--green-dark)}
+  .tab.active{background:var(--green-dark);border-color:var(--green-dark);color:var(--cream)}
+  .tab .count{font-size:11px;border-radius:50%;width:20px;height:20px;display:grid;place-items:center;background:rgba(67,96,63,.12)}
+  .tab.active .count{background:var(--sand);color:var(--green-dark)}
+
+  /* Kategori bölümleri */
+  .cat{padding-top:40px;scroll-margin-top:64px}
+  .cat-head{background:var(--green);color:var(--on-green);border-radius:var(--radius);padding:clamp(22px,4vw,34px);margin-bottom:20px}
+  .cat-head h2{color:var(--cream);font-size:clamp(24px,3.4vw,34px)}
+  .cat-head p{color:var(--on-green-muted);margin-top:8px;max-width:62ch}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  /* Bitki kartı */
+  .plant{background:var(--cream-2);border-radius:var(--radius-sm);padding:16px;display:grid;grid-template-columns:132px 1fr;gap:16px;
+    box-shadow:0 18px 40px -34px rgba(51,73,47,.6)}
+  .photo{width:132px;height:132px;border-radius:14px;overflow:hidden;background:rgba(92,122,90,.12);display:grid;place-items:center;color:var(--green)}
+  .photo img{width:100%;height:100%;object-fit:cover}
+  .photo svg{width:54px;height:54px;opacity:.7}
+  .plant h3{font-size:17px;font-weight:600}
+  .latin{font-size:12.5px;font-style:italic;color:var(--sand-deep);margin-top:2px}
+  .desc{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.6}
+  .facts{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:12px;border-top:1px solid rgba(67,96,63,.1)}
+  .fact{background:var(--cream);border-radius:12px;padding:8px 10px;min-width:0}
+  .fact span{display:block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .fact b{display:block;font-size:13px;font-weight:600;color:var(--green-dark);line-height:1.35}
+
+  footer{padding:24px 0;font-size:13px;color:var(--muted);text-align:center;border-top:1px solid rgba(67,96,63,.1)}
+
+  @media(max-width:860px){ .grid{grid-template-columns:1fr} }
+  @media(max-width:560px){
+    .nav{height:76px}
+    .logo img{height:46px}
+    .back{padding:9px 14px}
+    main{padding:36px 0 56px}
+    .plant{grid-template-columns:96px 1fr;gap:12px;padding:14px}
+    .photo{width:96px;height:96px}
+    .facts{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="../" class="logo" aria-label="Tankled ana sayfa">
+      <img src="../assets/logo.png" alt="Tankled Aquarium" />
+    </a>
+    <a href="../" class="back">← Ana sayfa</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="intro">
+      <span class="eyebrow">Tankled Rehber</span>
+      <h1>Bitkiler</h1>
+      <p>Akvaryumunuz ve paludaryumunuz için bitki seçerken işinize yarayacak kısa bir rehber. Her kartta bitkinin fotoğrafı, kısa açıklaması ve yaşam koşulları var.</p>
+    </div>
+
+    <nav class="tabs" id="tabs" aria-label="Bitki kategorileri"></nav>
+    <div id="categories"></div>
+  </div>
+</main>
+
+<footer>© <span id="year"></span> Tankled</footer>
+
+<script>
+  /*
+   * Bitki listesi.
+   * Fotoğraf: assets/bitkiler/<foto>.jpg dosyası yüklendiğinde kartta otomatik görünür;
+   * yüklenene kadar yaprak çizimi gösterilir.
+   */
+  const CATEGORIES = [
+    {
+      id: 'low-tech',
+      title: 'Low Tech Bitkiler',
+      tab: 'Low Tech',
+      intro: 'Az ışıkla yetinen, CO₂ ve yoğun gübre istemeyen dayanıklı bitkiler. Yeni başlayanlar ve bakımı kolay bir akvaryum isteyenler için ideal.',
+      facts: ['Işık', 'Sıcaklık', 'pH', 'Büyüme', 'CO₂', 'Yerleşim'],
+      plants: [
+        { foto: 'anubias-nana', ad: 'Anubias Nana', latin: 'Anubias barteri var. nana',
+          aciklama: 'Kalın, koyu yeşil yapraklı, neredeyse her koşula dayanan bir bitki. Kökü toprağa gömülmez; taşa ya da kütüğe bağlanır.',
+          bilgi: ['Düşük', '22–28 °C', '6,0–7,5', 'Çok yavaş', 'Gerekmez', 'Ön / orta'] },
+        { foto: 'java-egreltisi', ad: 'Java Eğreltisi', latin: 'Microsorum pteropus',
+          aciklama: 'Uzun, mızrak şeklinde yaprakları olan klasik bir eğrelti. Kütüğe bağlanır, balıklar tarafından pek yenmez.',
+          bilgi: ['Düşük', '20–28 °C', '6,0–7,5', 'Yavaş', 'Gerekmez', 'Orta / arka'] },
+        { foto: 'java-yosunu', ad: 'Java Yosunu', latin: 'Taxiphyllum barbieri',
+          aciklama: 'Taş ve kütükleri yeşil bir halıyla kaplar. Karidesler ve yavru balıklar için harika bir saklanma alanıdır.',
+          bilgi: ['Düşük', '18–28 °C', '5,5–8,0', 'Orta', 'Gerekmez', 'Her yer'] },
+        { foto: 'cryptocoryne-wendtii', ad: 'Cryptocoryne Wendtii', latin: 'Cryptocoryne wendtii',
+          aciklama: 'Kahverengi–yeşil dalgalı yapraklarıyla doğal bir görünüm verir. Yeni ortama alışırken yaprak dökebilir, sonra tekrar çıkarır.',
+          bilgi: ['Düşük–orta', '22–28 °C', '6,0–8,0', 'Yavaş', 'Gerekmez', 'Ön / orta'] },
+        { foto: 'bucephalandra', ad: 'Bucephalandra', latin: 'Bucephalandra sp.',
+          aciklama: 'Borneo kökenli, parlak ve renkli küçük yapraklı bir bitki. Anubias gibi taşa ya da kütüğe bağlanır.',
+          bilgi: ['Düşük–orta', '22–28 °C', '6,0–7,5', 'Çok yavaş', 'Gerekmez', 'Ön'] },
+        { foto: 'vallisneria', ad: 'Vallisneria', latin: 'Vallisneria spiralis',
+          aciklama: 'Uzun, şerit gibi yapraklarıyla arka planda doğal bir perde oluşturur. Kök uzantılarıyla kendiliğinden çoğalır.',
+          bilgi: ['Düşük–orta', '20–28 °C', '6,5–8,0', 'Hızlı', 'Gerekmez', 'Arka'] },
+        { foto: 'hornwort', ad: 'Boynuz Yaprak', latin: 'Ceratophyllum demersum',
+          aciklama: 'Çok hızlı büyür ve sudaki fazla besini emerek yosunlaşmayı azaltır. Toprağa dikilebilir ya da yüzdürülebilir.',
+          bilgi: ['Düşük', '15–28 °C', '6,0–8,0', 'Çok hızlı', 'Gerekmez', 'Arka / yüzer'] },
+        { foto: 'marimo', ad: 'Marimo Top Yosunu', latin: 'Aegagropila linnaei',
+          aciklama: 'Kadife dokulu, top şeklinde bir yosun. Arada bir çevrilirse her yüzü eşit yeşil kalır.',
+          bilgi: ['Düşük', '18–25 °C', '7,0–8,5', 'Çok yavaş', 'Gerekmez', 'Ön'] },
+      ],
+    },
+    {
+      id: 'high-tech',
+      title: 'High Tech Bitkiler',
+      tab: 'High Tech',
+      intro: 'Güçlü ışık, CO₂ ve düzenli gübreleme ile en iyi halini alan bitkiler. Halı zeminler ve kırmızı tonlar için tercih edilir.',
+      facts: ['Işık', 'Sıcaklık', 'pH', 'Büyüme', 'CO₂', 'Yerleşim'],
+      plants: [
+        { foto: 'monte-carlo', ad: 'Monte Carlo', latin: 'Micranthemum tweediei',
+          aciklama: 'Küçük, yuvarlak yapraklarıyla zemini yemyeşil bir halıyla kaplar. Halı bitkilerinin en kolaylarından biridir.',
+          bilgi: ['Orta–yüksek', '20–28 °C', '6,0–7,5', 'Orta', 'Önerilir', 'Ön (halı)'] },
+        { foto: 'hc-cuba', ad: 'HC Cuba', latin: 'Hemianthus callitrichoides',
+          aciklama: 'Dünyanın en küçük yapraklı akvaryum bitkilerinden. Doğru koşullarda sık, kadife gibi bir halı oluşturur.',
+          bilgi: ['Yüksek', '20–28 °C', '6,0–7,0', 'Orta', 'Şart', 'Ön (halı)'] },
+        { foto: 'glossostigma', ad: 'Glossostigma', latin: 'Glossostigma elatinoides',
+          aciklama: 'Kaşık şeklinde küçük yaprakları olan, hızla yayılan bir halı bitkisi. Işık yetersizse yukarı doğru uzar.',
+          bilgi: ['Yüksek', '20–26 °C', '5,5–7,0', 'Hızlı', 'Şart', 'Ön (halı)'] },
+        { foto: 'cuce-saz', ad: 'Cüce Saz', latin: 'Eleocharis acicularis ‘Mini’',
+          aciklama: 'İnce, çim benzeri yapraklarıyla ön zeminde doğal bir çayır görünümü verir.',
+          bilgi: ['Orta–yüksek', '18–28 °C', '6,0–7,5', 'Orta', 'Önerilir', 'Ön'] },
+        { foto: 'rotala-rotundifolia', ad: 'Rotala Rotundifolia', latin: 'Rotala rotundifolia',
+          aciklama: 'Hızlı büyüyen gövdeli bir bitki. Güçlü ışıkta uçları pembe–kırmızıya döner, budandıkça sıklaşır.',
+          bilgi: ['Orta–yüksek', '20–28 °C', '6,0–7,5', 'Hızlı', 'Önerilir', 'Arka'] },
+        { foto: 'ludwigia-repens', ad: 'Ludwigia Repens', latin: 'Ludwigia repens ‘Rubin’',
+          aciklama: 'Yeşil bitkilerin arasında sıcak bir kırmızı vurgu yapar. Işık ve demir gübresi arttıkça rengi koyulaşır.',
+          bilgi: ['Orta–yüksek', '20–28 °C', '6,0–7,5', 'Hızlı', 'Önerilir', 'Orta / arka'] },
+        { foto: 'alternanthera-mini', ad: 'Alternanthera Mini', latin: 'Alternanthera reineckii ‘Mini’',
+          aciklama: 'Koyu kırmızı–mor yapraklı, kompakt bir bitki. Yeşil halının önünde güçlü bir renk kontrastı oluşturur.',
+          bilgi: ['Yüksek', '22–28 °C', '6,0–7,0', 'Orta', 'Şart', 'Ön / orta'] },
+      ],
+    },
+    {
+      id: 'paludaryum',
+      title: 'Paludaryum Bitkileri',
+      tab: 'Paludaryum',
+      intro: 'Su üstündeki nemli kara bölümü için bitkiler. Yüksek nemi sever; kütüklere, taşlara ve arka duvara yerleştirilir.',
+      facts: ['Işık', 'Nem', 'Sıcaklık', 'Büyüme', 'Sulama', 'Yerleşim'],
+      plants: [
+        { foto: 'fittonia', ad: 'Fittonia (Sinir Otu)', latin: 'Fittonia albivenis',
+          aciklama: 'Beyaz ya da pembe damarlı yapraklarıyla renkli bir zemin örtüsü. Nemli ortamı çok sever, kuruyunca hemen boynunu büker.',
+          bilgi: ['Dolaylı', '%60–90', '18–27 °C', 'Orta', 'Toprak hep nemli', 'Ön / zemin'] },
+        { foto: 'pothos', ad: 'Pothos', latin: 'Epipremnum aureum',
+          aciklama: 'Neredeyse her koşulda yaşayan sarmaşık. Kökleri suya sarkıtılırsa sudaki fazla besini emer.',
+          bilgi: ['Düşük–orta', '%50+', '18–30 °C', 'Hızlı', 'Az', 'Arka / tırmanıcı'] },
+        { foto: 'bromelya', ad: 'Bromelya', latin: 'Neoregelia sp.',
+          aciklama: 'Ortası renklenen rozet yapraklı bir bitki. Toprak yerine kütüğe bağlanabilir; ortadaki haznede su tutar.',
+          bilgi: ['Parlak dolaylı', '%60+', '18–28 °C', 'Yavaş', 'Haznesine su', 'Kütük / orta'] },
+        { foto: 'tillandsia', ad: 'Tillandsia (Hava Bitkisi)', latin: 'Tillandsia sp.',
+          aciklama: 'Toprağa ihtiyaç duymaz; nemi yapraklarından alır. Kütüklere tutturulur, püskürtmeden sonra kuruyabilmelidir.',
+          bilgi: ['Parlak dolaylı', 'Yüksek', '15–30 °C', 'Yavaş', 'Haftada 2–3 püskürtme', 'Kütük / üst'] },
+        { foto: 'peperomia-prostrata', ad: 'Peperomia Prostrata', latin: 'Peperomia prostrata',
+          aciklama: 'Kaplumbağa kabuğu desenli minik yuvarlak yaprakları olan sarkan bir bitki. Aşırı sulamayı sevmez.',
+          bilgi: ['Orta dolaylı', '%60+', '18–26 °C', 'Yavaş', 'Az', 'Sarkan / kenar'] },
+        { foto: 'selaginella', ad: 'Selaginella', latin: 'Selaginella sp.',
+          aciklama: 'Eğrelti benzeri, yumuşak dokulu bir zemin örtücü. Yüksek nemde gür ve parlak yeşil kalır.',
+          bilgi: ['Düşük–orta', '%70+', '18–26 °C', 'Orta', 'Toprak hep nemli', 'Zemin'] },
+        { foto: 'ficus-pumila', ad: 'Tırmanan İncir', latin: 'Ficus pumila',
+          aciklama: 'Küçük yapraklarıyla arka duvara tutunarak tırmanır ve kısa sürede yeşil bir fon oluşturur.',
+          bilgi: ['Orta', '%60+', '15–28 °C', 'Hızlı', 'Orta', 'Arka duvar'] },
+      ],
+    },
+  ];
+
+  const LEAF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-14 14-14 0 9-6 14-14 14z"/><path d="M5 19 14 10"/></svg>';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  document.getElementById('tabs').innerHTML = CATEGORIES.map((c, i) =>
+    `<a class="tab${i === 0 ? ' active' : ''}" href="#${c.id}">${esc(c.tab)}<span class="count">${c.plants.length}</span></a>`
+  ).join('');
+
+  document.getElementById('categories').innerHTML = CATEGORIES.map(c => `
+    <section class="cat" id="${c.id}">
+      <div class="cat-head">
+        <h2>${esc(c.title)}</h2>
+        <p>${esc(c.intro)}</p>
+      </div>
+      <div class="grid">
+        ${c.plants.map(p => `
+          <article class="plant">
+            <div class="photo"><img src="../assets/bitkiler/${p.foto}.jpg" alt="${esc(p.ad)}" loading="lazy"></div>
+            <div>
+              <h3>${esc(p.ad)}</h3>
+              <div class="latin">${esc(p.latin)}</div>
+              <p class="desc">${esc(p.aciklama)}</p>
+            </div>
+            <div class="facts">
+              ${c.facts.map((f, i) => `<div class="fact"><span>${f}</span><b>${esc(p.bilgi[i])}</b></div>`).join('')}
+            </div>
+          </article>`).join('')}
+      </div>
+    </section>`).join('');
+
+  // Fotoğraf yoksa yaprak çizimi göster
+  document.querySelectorAll('.photo img').forEach(img => {
+    const fallback = () => { img.parentElement.innerHTML = LEAF; };
+    if (img.complete && img.naturalWidth === 0) fallback();
+    else img.addEventListener('error', fallback);
+  });
+
+  // Görünen kategoriye göre sekmeyi vurgula
+  const tabs = [...document.querySelectorAll('.tab')];
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('.cat').forEach(s => io.observe(s));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
