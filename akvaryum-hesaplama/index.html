@@ -145,12 +145,22 @@
       </div>
       <p class="note" id="lumenNote">Hesap, litre başına lümen kuralına göre yapılır: Low Tech 20–30 lm/L, High Tech 50–80 lm/L. Değerler yaklaşık bir rehberdir.</p>
     </section>
+
+    <section class="card" id="bitki-sec">
+      <h2><span class="step">3</span> Akvaryumunuza bitki seçin</h2>
+      <p class="note" style="margin:-6px 0 18px">Kullandığınız ışığın lümen değerini, zemin tipini ve CO₂ durumunu girin; uygun bitkiler otomatik listelensin. Hacim yukarıdaki ölçülerden gelir.</p>
+      <div id="picker"></div>
+      <p class="note">Tüm bitkileri ve bakım bilgilerini <a href="../bitkiler/" style="color:var(--green-deep);font-weight:600;text-decoration:underline">Bitkiler</a> sayfasında bulabilirsiniz.</p>
+    </section>
   </div>
 </main>
 
 <footer>© <span id="year"></span> Tankled</footer>
 
+<script src="../assets/bitkiler-data.js"></script>
+<script src="../assets/bitki-secici.js"></script>
 <script>
+  const picker = TankledBitkiSecici.mount(document.getElementById('picker'));
   const RATES = { low: [20, 30], high: [50, 80] }; // lümen / litre
   const $ = id => document.getElementById(id);
   const val = id => Math.max(0, parseFloat($(id).value) || 0);
@@ -161,6 +171,7 @@
     const liters = L * W * H / 1000;
     const tech = document.querySelector('input[name="tech"]:checked').value;
     const [lo, hi] = RATES[tech];
+    picker.setLitre(liters);
 
     if (liters > 0) {
       $('liters').textContent = fmt(liters, 1) + ' L';
@@ -171,7 +182,7 @@
     }
   }
 
-  document.querySelectorAll('input').forEach(el => el.addEventListener('input', update));
+  document.querySelectorAll('#L, #W, #H, input[name="tech"]').forEach(el => el.addEventListener('input', update));
   $('year').textContent = new Date().getFullYear();
   update();
 </script>
