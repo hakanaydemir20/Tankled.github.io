@@ -118,6 +118,16 @@
 
   .chosen{display:grid;gap:6px;margin-top:12px}
   .chosen:empty::before{content:'Henüz bitki eklenmedi. Aşağıdaki listeden “+” ile ekleyin.';font-size:12.5px;color:var(--muted)}
+  .kg{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .hs-list{display:grid;gap:6px}
+  .hs-group{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:12px 0 6px}
+  .hs-item{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;background:var(--cream);border-radius:12px;padding:8px}
+  .hs-item.secili{background:rgba(92,122,90,.14);box-shadow:inset 0 0 0 1.5px rgba(92,122,90,.45)}
+  .swatch{width:34px;height:34px;border-radius:9px;box-shadow:inset 0 -6px 10px rgba(0,0,0,.25),inset 0 4px 8px rgba(255,255,255,.2)}
+  .swatch.odun{border-radius:17px 6px 17px 6px}
+  .quality{display:flex;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);border-radius:100px;padding:3px;border:1.5px solid rgba(67,96,63,.2)}
+  .quality button{border:0;background:none;border-radius:100px;padding:6px 12px;font-size:12.5px;font-weight:600;color:var(--muted)}
+  .quality button[aria-pressed="true"]{background:var(--green);color:var(--on-green)}
   .chosen-head{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
   .chosen-head small{font-size:12px;font-weight:600;background:rgba(67,96,63,.12);border-radius:100px;padding:1px 9px;color:var(--green-deep)}
   .citem{display:flex;align-items:center;gap:8px;background:rgba(92,122,90,.1);border-radius:12px;padding:6px 8px 6px 12px}
@@ -213,10 +223,22 @@
         <input type="range" id="kalinlik" min="1" max="12" step="0.5">
       </label>
       <p class="hint">Zemin arkaya doğru yükselir; bu doğal bir derinlik hissi verir.</p>
+      <div class="kg" id="kgBox">
+        <div class="stat"><b id="kgVal">–</b>Gereken zemin (tahmini)</div>
+        <div class="stat light"><b id="kgLt">–</b>Hacim</div>
+      </div>
+      <p class="hint" id="kgNote"></p>
     </section>
 
     <section class="card">
-      <h2><span class="step">3</span> Işık ve CO₂</h2>
+      <h2><span class="step">3</span> Taş ve kök</h2>
+      <p class="hint" style="margin:-4px 0 4px">Akvaryumcularda satılan taş ve kökler. Eklediğinizde akvaryuma yerleşir; Anubias, eğrelti ve yosun gibi bitkiler bunların üzerine tutunur.</p>
+      <div id="hsList"></div>
+      <div id="hsNotes"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">4</span> Işık ve CO₂</h2>
       <div class="row2">
         <label class="field">Işık gücü (lümen)<input type="number" id="lumen" min="0" step="50" inputmode="decimal" placeholder="ör. 1500"></label>
         <div class="field">CO₂ sistemi
@@ -231,7 +253,7 @@
     </section>
 
     <section class="card">
-      <h2><span class="step">4</span> Bitkiler</h2>
+      <h2><span class="step">5</span> Bitkiler</h2>
       <h3 class="chosen-head">Akvaryumdaki bitkiler <small id="chosenCount">0</small></h3>
       <div class="chosen" id="chosen"></div>
       <div class="actions" style="margin-bottom:16px">
@@ -250,7 +272,7 @@
     </section>
 
     <section class="card">
-      <h2><span class="step">5</span> Tasarımınız</h2>
+      <h2><span class="step">6</span> Tasarımınız</h2>
       <div class="summary" id="summary"></div>
       <div class="actions">
         <a class="btn wa" id="waBtn" target="_blank" rel="noopener">WhatsApp ile Tankled’a gönder</a>
@@ -266,6 +288,10 @@
     <div class="vbar">
       <span class="vhint">Döndürmek için sürükleyin · Yakınlaştırmak için kaydırın</span>
       <div class="vbtns">
+        <div class="quality" role="group" aria-label="Görüntü kalitesi">
+          <button type="button" data-q="yuksek" aria-pressed="true">Yüksek</button>
+          <button type="button" data-q="dengeli" aria-pressed="false">Dengeli</button>
+        </div>
         <button type="button" class="btn" id="rotateBtn" aria-pressed="true">⟳ Otomatik döndür</button>
         <button type="button" class="btn" id="resetBtn">Görünümü sıfırla</button>
       </div>
@@ -278,7 +304,7 @@
 <script src="../assets/bitkiler-data.js"></script>
 <script src="../assets/bitki-secici.js"></script>
 <script type="module">
-  import { createAquarium } from '../assets/akvaryum-3d.js';
+  import { createAquarium, HARDSCAPE } from '../assets/akvaryum-3d.js';
 
   /*
    * Tankled modelleri. 3D dosyaları assets/modeller/ klasörüne .glb olarak yüklenir;
@@ -315,6 +341,7 @@
       { foto: 'java-egreltisi', adet: 1 }, { foto: 'anubias-nana', adet: 1 }, { foto: 'cryptocoryne-wendtii', adet: 2 },
       { foto: 'limnophila-sessiliflora', adet: 2 }, { foto: 'java-yosunu', adet: 1 },
     ],
+    hardscape: [], // { id, adet }
     seed: 1, filter: 'uygun', q: '',
   };
 
@@ -330,6 +357,7 @@
     state.lumen = h.get('lm') ? num('lm', null) : null;
     state.co2 = h.get('co2') === '1';
     if (h.has('p')) state.plants = h.get('p').split(',').filter(Boolean).map(x => x.split(':')).filter(([f]) => byFoto[f]).map(([f, n]) => ({ foto: f, adet: Math.max(1, Math.min(20, parseInt(n) || 1)) }));
+    if (h.has('hs')) state.hardscape = h.get('hs').split(',').filter(Boolean).map(x => x.split(':')).filter(([id]) => HARDSCAPE.some(d => d.id === id)).map(([id, n]) => ({ id, adet: Math.max(1, Math.min(10, parseInt(n) || 1)) }));
     state.seed = num('s', 1);
   })();
 
@@ -340,6 +368,7 @@
     if (state.lumen) h.set('lm', state.lumen);
     if (state.co2) h.set('co2', 1);
     h.set('p', state.plants.map(x => `${x.foto}:${x.adet}`).join(','));
+    if (state.hardscape.length) h.set('hs', state.hardscape.map(x => `${x.id}:${x.adet}`).join(','));
     h.set('s', state.seed);
     history.replaceState(null, '', '#' + h.toString());
   }
@@ -347,7 +376,10 @@
   /* ---------- 3D ---------- */
   let aq;
   try {
-    aq = createAquarium($('view'), { onModelError: () => toast('3D model yüklenemedi; standart kutu gösteriliyor.') });
+    aq = createAquarium($('view'), {
+      onModelError: () => toast('3D model yüklenemedi; standart kutu gösteriliyor.'),
+      onQuality: (q, auto) => { setQualityUI(q); if (auto) toast('Cihazınız için görüntü kalitesi “Dengeli” yapıldı'); },
+    });
     $('loading').remove();
   } catch (e) {
     $('loading').textContent = 'Tarayıcınız 3D görünümü desteklemiyor.';
@@ -399,11 +431,13 @@
     if (aq) {
       if (m.id === 'kutu') await aq.setModel({ tip: 'kutu', L: state.L, W: state.W, H: state.H, cam: state.cam / 10 });
       else await aq.setModel({ tip: 'ozel', ...m });
-      aq.setSubstrate(state.zemin, state.zemin === 'yok' ? 0 : state.kalinlik);
-      aq.setPlants(state.plants.map(x => ({ plant: byFoto[x.foto].p, adet: x.adet })));
+      aq.setAll({ zemin: state.zemin, kalinlik: state.zemin === 'yok' ? 0 : state.kalinlik, plants: plantList(), hardscape: hardscapeList() });
     }
     refresh();
   }
+  const HS = Object.fromEntries(HARDSCAPE.map(d => [d.id, d]));
+  const plantList = () => state.plants.map(x => ({ plant: byFoto[x.foto].p, adet: x.adet }));
+  const hardscapeList = () => state.hardscape.map(x => ({ def: HS[x.id], adet: x.adet }));
 
   document.querySelectorAll('input[name=model]').forEach(r => r.addEventListener('change', () => { state.model = r.value; applyModel(); }));
   [['dL', 'L', 10, 300], ['dW', 'W', 10, 150], ['dH', 'H', 10, 150], ['dC', 'cam', 3, 19]].forEach(([id, key, min, max]) => {
@@ -516,11 +550,59 @@
     else if (b.dataset.dec) changeQty(b.dataset.dec, -1);
   });
   function applyPlants() {
-    aq?.setPlants(state.plants.map(x => ({ plant: byFoto[x.foto].p, adet: x.adet })));
+    aq?.setPlants(plantList());
     refresh();
   }
   $('shuffle').addEventListener('click', () => { if (aq) state.seed = aq.shuffle(); refresh(); });
   $('clearPlants').addEventListener('click', () => { if (!state.plants.length) return; state.plants = []; toast('Tüm bitkiler kaldırıldı'); applyPlants(); });
+
+  /* ---------- Taş ve kök ---------- */
+  function renderHardscape() {
+    const qty = id => state.hardscape.find(x => x.id === id)?.adet || 0;
+    const row = d => { const n = qty(d.id); return `
+      <div class="hs-item${n ? ' secili' : ''}">
+        <span class="swatch ${d.tur}" style="background:${d.renk}"></span>
+        <span><span class="pname">${esc(d.ad)}</span><br><span class="pmeta">${esc(d.aciklama)}</span></span>
+        ${n ? `<span class="pqty"><button type="button" class="icon" data-hdec="${d.id}" aria-label="${esc(d.ad)} azalt">−</button><b>${n}</b><button type="button" class="icon" data-hinc="${d.id}" aria-label="${esc(d.ad)} artır" ${n >= 10 ? 'disabled' : ''}>+</button></span>`
+            : `<button type="button" class="add" data-hinc="${d.id}" aria-label="${esc(d.ad)} ekle">+</button>`}
+      </div>`; };
+    $('hsList').innerHTML =
+      `<div class="hs-group">Taşlar</div><div class="hs-list">${HARDSCAPE.filter(d => d.tur === 'tas').map(row).join('')}</div>` +
+      `<div class="hs-group">Kökler ve odunlar</div><div class="hs-list">${HARDSCAPE.filter(d => d.tur === 'odun').map(row).join('')}</div>`;
+    $('hsNotes').innerHTML = state.hardscape.map(x => `<div class="warn"><b>${esc(HS[x.id].ad)}:</b> ${esc(HS[x.id].not)}</div>`).join('');
+  }
+  $('hsList').addEventListener('click', e => {
+    const b = e.target.closest('[data-hinc],[data-hdec]');
+    if (!b || b.disabled) return;
+    const id = b.dataset.hinc || b.dataset.hdec, ex = state.hardscape.find(x => x.id === id);
+    if (b.dataset.hinc) {
+      if (ex) ex.adet = Math.min(10, ex.adet + 1); else { state.hardscape.push({ id, adet: 1 }); toast(`${HS[id].ad} eklendi`); }
+    } else if (ex) {
+      ex.adet -= 1;
+      if (ex.adet < 1) { state.hardscape = state.hardscape.filter(x => x !== ex); toast(`${HS[id].ad} kaldırıldı`); }
+    }
+    aq?.setHardscape(hardscapeList());
+    refresh();
+  });
+
+  /* ---------- Zemin miktarı ---------- */
+  function substrateEstimate() {
+    const sub = T.SUBSTRATE[state.zemin], d = tankDims();
+    if (state.zemin === 'yok') return null;
+    const avg = aq ? aq.avgSubstrate() : state.kalinlik * 1.25;
+    const litres = d.L * d.W * avg / 1000;
+    let kg = litres * sub.yogunluk;
+    if (sub.katman) {
+      const alt = Math.min(litres, d.L * d.W * state.kalinlik * sub.katman.altOran / 1000);
+      kg = alt * sub.katman.alt + (litres - alt) * sub.katman.ust;
+    }
+    return { litres, kg };
+  }
+
+  /* ---------- Görüntü kalitesi ---------- */
+  function setQualityUI(q) { document.querySelectorAll('.quality button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.q === q))); }
+  document.querySelectorAll('.quality button').forEach(b => b.addEventListener('click', () => { aq?.setQuality(b.dataset.q); setQualityUI(b.dataset.q); }));
+  if (aq) setQualityUI(aq.quality);
 
   /* ---------- Özet ve paylaşım ---------- */
   function refresh() {
@@ -547,19 +629,33 @@
 
     renderPlantList();
     renderChosen();
+    renderHardscape();
+
+    const est = substrateEstimate();
+    $('kgBox').hidden = !est;
+    if (est) {
+      $('kgVal').textContent = est.kg < 10 ? `~${fmt(est.kg * 0.9, 1)}–${fmt(est.kg * 1.1, 1)} kg` : `~${fmt(est.kg * 0.9)}–${fmt(est.kg * 1.1)} kg`;
+      $('kgLt').textContent = `~${fmt(est.litres, 1)} L`;
+      const sub = T.SUBSTRATE[state.zemin];
+      $('kgNote').textContent = sub.katman
+        ? `Tahmini: altta ~${fmt(Math.min(est.litres, tankDims().L * tankDims().W * state.kalinlik * sub.katman.altOran / 1000), 1)} L besleyici katman, üstte kalan kısım kum/çakıl. Arkaya doğru yükselen eğim dahildir; %10 fazla almanız önerilir.`
+        : `Tahmini: ${sub.label.toLocaleLowerCase('tr')} için yaklaşık ${fmt(sub.yogunluk, 2)} kg/L yoğunlukla hesaplandı; arkaya doğru yükselen eğim dahildir. Ürünler litre ya da kg ile satılabilir; %10 fazla almanız önerilir.`;
+    } else $('kgNote').textContent = '';
 
     const m = currentModel();
+    const hsTxt = state.hardscape.length ? state.hardscape.map(x => `${HS[x.id].ad}${x.adet > 1 ? ` ×${x.adet}` : ''}`).join(', ') : '—';
     const plantsTxt = state.plants.length ? state.plants.map(x => `${byFoto[x.foto].p.ad}${x.adet > 1 ? ` ×${x.adet}` : ''}`).join(', ') : '—';
     $('summary').innerHTML = `
       <span><b>Model:</b> ${esc(m.ad)} (${esc(d.outer)})</span>
       <span><b>Hacim:</b> ${fmt(litre(), 1)} L brüt · ~${fmt(netLitre(), 1)} L su</span>
-      <span><b>Zemin:</b> ${esc(T.SUBSTRATE[state.zemin].label)}${state.zemin === 'yok' ? '' : `, ${fmt(state.kalinlik, 1)} cm`}</span>
+      <span><b>Zemin:</b> ${esc(T.SUBSTRATE[state.zemin].label)}${state.zemin === 'yok' ? '' : `, ${fmt(state.kalinlik, 1)} cm${est ? ` · ~${fmt(est.kg)} kg` : ''}`}</span>
       <span><b>Işık / CO₂:</b> ${state.lumen ? fmt(state.lumen) + ' lm' : 'belirtilmedi'} · CO₂ ${state.co2 ? 'var' : 'yok'}</span>
+      <span><b>Taş ve kök:</b> ${esc(hsTxt)}</span>
       <span><b>Bitkiler:</b> ${esc(plantsTxt)}</span>`;
 
     writeHash();
     const msg = `Merhaba Tankled, sitenizde şu akvaryumu tasarladım:\n` +
-      `• Model: ${m.ad} (${d.outer})\n• Hacim: ${fmt(litre(), 1)} L\n• Zemin: ${T.SUBSTRATE[state.zemin].label}${state.zemin === 'yok' ? '' : `, ${fmt(state.kalinlik, 1)} cm`}\n` +
+      `• Model: ${m.ad} (${d.outer})\n• Hacim: ${fmt(litre(), 1)} L\n• Zemin: ${T.SUBSTRATE[state.zemin].label}${state.zemin === 'yok' ? '' : `, ${fmt(state.kalinlik, 1)} cm${est ? ` (~${fmt(est.kg)} kg)` : ''}`}\n• Taş ve kök: ${hsTxt}\n` +
       `• Işık / CO₂: ${state.lumen ? fmt(state.lumen) + ' lm' : 'belirtilmedi'}, CO₂ ${state.co2 ? 'var' : 'yok'}\n• Bitkiler: ${plantsTxt}\n\nTasarım: ${location.href}`;
     $('waBtn').href = 'https://wa.me/905312172006?text=' + encodeURIComponent(msg);
   }

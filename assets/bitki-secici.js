@@ -15,37 +15,38 @@
   //   iri       = çakıl/taş; halı bitkileri tutunamaz, kökten beslenenlere tablet gerekir
   //   yok       = yalnızca bağlanan ve yüzen bitkiler
   // sert: true = suyu sertleştirir, pH'ı yükseltir
+  // yogunluk: yaklaşık kuru dökme yoğunluk (kg/L); kg tahmini için
   const SUBSTRATES = [
     { grup: 'Besleyici zeminler', items: [
-      { value: 'aquasoil', tur: 'besleyici', label: 'Akvaryum toprağı (aquasoil)',
+      { value: 'aquasoil', yogunluk: 0.95, tur: 'besleyici', label: 'Akvaryum toprağı (aquasoil)',
         desc: 'Besin içeren granül toprak. Halı ve kökten beslenen bitkiler için en iyi seçim; suyu hafif yumuşatır.' },
-      { value: 'katmanli', tur: 'besleyici', label: 'Besleyici alt katman + kum/çakıl üst katman',
+      { value: 'katmanli', yogunluk: 1.3, katman: { alt: 0.95, ust: 1.55, altOran: 0.45 }, tur: 'besleyici', label: 'Besleyici alt katman + kum/çakıl üst katman',
         desc: 'Altta besleyici katman, üstte kum ya da çakıl. Hem bitki beslenir hem doğal bir görünüm elde edilir.' },
-      { value: 'kil', tur: 'kil', label: 'Pişmiş kil granül (Flourite vb.)',
+      { value: 'kil', yogunluk: 1.1, tur: 'kil', label: 'Pişmiş kil granül (Flourite vb.)',
         desc: 'Demir içeren, çözünmeyen kil granül. Kökten beslenen bitkilere iyi gelir, uzun yıllar kullanılır.' },
     ] },
     { grup: 'Kumlar', items: [
-      { value: 'dere-kumu', tur: 'kum', label: 'Dere kumu',
+      { value: 'dere-kumu', yogunluk: 1.55, tur: 'kum', label: 'Dere kumu',
         desc: 'Doğal, yuvarlak taneli kum. Besin içermez; kökten beslenen bitkilere tablet gübre verin.' },
-      { value: 'silis', tur: 'kum', label: 'Silis (kuvars) kumu',
+      { value: 'silis', yogunluk: 1.5, tur: 'kum', label: 'Silis (kuvars) kumu',
         desc: 'Suyu etkilemeyen, temiz kum. Besin içermez; kökten beslenen bitkilere tablet gübre verin.' },
-      { value: 'bazalt', tur: 'kum', label: 'Siyah bazalt kumu',
+      { value: 'bazalt', yogunluk: 1.65, tur: 'kum', label: 'Siyah bazalt kumu',
         desc: 'Suyu etkilemeyen koyu renkli kum; bitkilerin rengini öne çıkarır. Besin içermez.' },
-      { value: 'renkli-kum', tur: 'kum', label: 'Renkli / dekoratif kum',
+      { value: 'renkli-kum', yogunluk: 1.5, tur: 'kum', label: 'Renkli / dekoratif kum',
         desc: 'Boyalı dekoratif kum. Besin içermez; bitki yetiştirmek için tablet gübre gerekir.' },
-      { value: 'mercan', tur: 'kum', sert: true, label: 'Mercan / aragonit kumu',
+      { value: 'mercan', yogunluk: 1.4, tur: 'kum', sert: true, label: 'Mercan / aragonit kumu',
         desc: 'Suyu sertleştirir ve pH’ı 8’in üzerine çıkarır. Yumuşak su seven bitkiler için uygun değildir.' },
     ] },
     { grup: 'Çakıl ve taş', items: [
-      { value: 'cakil', tur: 'iri', label: 'Akvaryum / dere çakılı',
+      { value: 'cakil', yogunluk: 1.55, tur: 'iri', label: 'Akvaryum / dere çakılı',
         desc: 'İri taneli çakıl. Halı bitkileri tutunamaz; kökten beslenenlere tablet gübre verin.' },
-      { value: 'lav', tur: 'iri', label: 'Lav kırığı (volkanik taş)',
+      { value: 'lav', yogunluk: 0.9, tur: 'iri', label: 'Lav kırığı (volkanik taş)',
         desc: 'Gözenekli, hafif volkanik taş; bakteriler ve kökler için iyi bir yuva. Halı bitkileri için fazla iri.' },
-      { value: 'ponza', tur: 'iri', label: 'Ponza taşı',
+      { value: 'ponza', yogunluk: 0.5, tur: 'iri', label: 'Ponza taşı',
         desc: 'Çok hafif, gözenekli taş. Genelde alt katman olarak kullanılır; halı bitkileri için fazla iri.' },
     ] },
     { grup: 'Diğer', items: [
-      { value: 'yok', tur: 'yok', label: 'Zemin yok (çıplak cam)',
+      { value: 'yok', yogunluk: 0, tur: 'yok', label: 'Zemin yok (çıplak cam)',
         desc: 'Yalnızca taşa/kütüğe bağlanan ve yüzen bitkiler yetiştirilebilir.' },
     ] },
   ];
