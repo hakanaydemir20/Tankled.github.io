@@ -97,6 +97,11 @@
   .plist{display:grid;gap:6px;max-height:420px;overflow:auto;padding-right:4px}
   .pitem{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;background:var(--cream);border-radius:12px;padding:7px}
   .pitem.hayir{opacity:.6}
+  .pitem.secili{background:rgba(92,122,90,.14);box-shadow:inset 0 0 0 1.5px rgba(92,122,90,.45);opacity:1}
+  .badge.eklendi{background:var(--green);color:var(--on-green)}
+  .pqty{display:flex;align-items:center;gap:4px}
+  .pqty b{min-width:18px;text-align:center;font-size:14px;font-weight:600;color:var(--green-dark)}
+  .pqty .icon{width:36px;height:36px;font-size:18px}
   .thumb{width:44px;height:44px;border-radius:9px;overflow:hidden;background:rgba(92,122,90,.14);display:grid;place-items:center;color:var(--green)}
   .thumb img{width:100%;height:100%;object-fit:cover}
   .thumb svg{width:22px;height:22px;opacity:.7}
@@ -112,13 +117,21 @@
   .add:focus-visible,.icon:focus-visible,.btn:focus-visible,.seg button:focus-visible{outline:2px solid var(--green-dark);outline-offset:2px}
 
   .chosen{display:grid;gap:6px;margin-top:12px}
-  .chosen:empty::before{content:'Henüz bitki eklenmedi. Yukarıdaki listeden “+” ile ekleyin.';font-size:12.5px;color:var(--muted)}
+  .chosen:empty::before{content:'Henüz bitki eklenmedi. Aşağıdaki listeden “+” ile ekleyin.';font-size:12.5px;color:var(--muted)}
+  .chosen-head{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .chosen-head small{font-size:12px;font-weight:600;background:rgba(67,96,63,.12);border-radius:100px;padding:1px 9px;color:var(--green-deep)}
   .citem{display:flex;align-items:center;gap:8px;background:rgba(92,122,90,.1);border-radius:12px;padding:6px 8px 6px 12px}
   .citem span{flex:1;font-size:13px;font-weight:500;color:var(--green-dark);min-width:0}
   .qty{display:flex;align-items:center;gap:4px}
   .qty b{min-width:18px;text-align:center;font-size:13px}
   .icon{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(67,96,63,.2);background:var(--cream-2);color:var(--green-deep);display:grid;place-items:center;font-size:15px;line-height:1}
   .icon:hover{border-color:var(--green)}
+  .icon:disabled{opacity:.4;cursor:not-allowed}
+  .remove{display:inline-flex;align-items:center;gap:5px;min-height:36px;padding:0 12px;border-radius:100px;border:1.5px solid rgba(160,82,60,.3);
+    background:var(--cream-2);color:#8a4a36;font-size:12.5px;font-weight:600;transition:all .2s}
+  .remove:hover{background:rgba(160,82,60,.1);border-color:#8a4a36}
+  .remove:focus-visible{outline:2px solid #8a4a36;outline-offset:2px}
+  .citem .qty .icon{width:36px;height:36px;font-size:17px}
 
   .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:100px;padding:10px 16px;font-size:13.5px;font-weight:600;
@@ -219,6 +232,13 @@
 
     <section class="card">
       <h2><span class="step">4</span> Bitkiler</h2>
+      <h3 class="chosen-head">Akvaryumdaki bitkiler <small id="chosenCount">0</small></h3>
+      <div class="chosen" id="chosen"></div>
+      <div class="actions" style="margin-bottom:16px">
+        <button type="button" class="btn" id="shuffle">↻ Yerleşimi değiştir</button>
+        <button type="button" class="btn" id="clearPlants">Bitkileri temizle</button>
+      </div>
+      <h3 class="chosen-head" style="margin-bottom:10px">Bitki ekle</h3>
       <div class="plant-tools">
         <input type="search" id="pq" placeholder="Bitki ara…" aria-label="Bitki ara" autocomplete="off">
         <div class="seg" role="group" aria-label="Liste">
@@ -227,12 +247,6 @@
         </div>
       </div>
       <div class="plist" id="plist"></div>
-      <h3 style="font-size:14px;font-weight:600;margin-top:16px">Akvaryumdaki bitkiler</h3>
-      <div class="chosen" id="chosen"></div>
-      <div class="actions">
-        <button type="button" class="btn" id="shuffle">↻ Yerleşimi değiştir</button>
-        <button type="button" class="btn" id="clearPlants">Bitkileri temizle</button>
-      </div>
     </section>
 
     <section class="card">
@@ -440,28 +454,48 @@
       .filter(x => !state.q || (x.p.ad + ' ' + x.p.latin).toLocaleLowerCase('tr').includes(state.q))
       .sort((a, b) => order[a.e.durum] - order[b.e.durum]);
     const label = { uygun: 'Uygun', dikkat: 'Dikkat', hayir: 'Uygun değil' };
-    $('plist').innerHTML = rows.length ? rows.map(({ p, cat, e }) => `
-      <div class="pitem ${e.durum}">
+    const qtyOf = f => state.plants.find(x => x.foto === f)?.adet || 0;
+    $('plist').innerHTML = rows.length ? rows.map(({ p, cat, e }) => { const n = qtyOf(p.foto); return `
+      <div class="pitem ${e.durum}${n ? ' secili' : ''}">
         <span class="thumb"><img src="../assets/bitkiler/${p.foto}.jpg" alt="" loading="lazy"></span>
         <span>
           <span class="pname">${esc(p.ad)}</span><br>
-          <span class="pmeta"><span class="badge ${e.durum}">${label[e.durum]}</span>${esc(cat.tab)} · ${esc(p.zorluk)} · ${esc(p.bilgi[5])}</span>
+          <span class="pmeta">${n ? '<span class="badge eklendi">Eklendi</span>' : ''}<span class="badge ${e.durum}">${label[e.durum]}</span>${esc(cat.tab)} · ${esc(p.zorluk)} · ${esc(p.bilgi[5])}</span>
           ${[...e.reasons, ...e.notes].slice(0, 2).map(n => `<br><span class="pmeta">• ${esc(n)}</span>`).join('')}
         </span>
-        <button type="button" class="add" data-add="${p.foto}" aria-label="${esc(p.ad)} ekle" ${e.durum === 'hayir' ? 'disabled title="Bu akvaryuma uygun değil"' : ''}>+</button>
-      </div>`).join('') : '<p class="hint">Bu aramaya uyan bitki yok.</p>';
+        ${n ? `<span class="pqty">
+            <button type="button" class="icon" data-dec="${p.foto}" aria-label="${esc(p.ad)} azalt">−</button><b>${n}</b>
+            <button type="button" class="icon" data-add="${p.foto}" aria-label="${esc(p.ad)} artır" ${e.durum === 'hayir' || n >= 20 ? 'disabled' : ''}>+</button>
+          </span>`
+          : `<button type="button" class="add" data-add="${p.foto}" aria-label="${esc(p.ad)} ekle" ${e.durum === 'hayir' ? 'disabled title="Bu akvaryuma uygun değil"' : ''}>+</button>`}
+      </div>`; }).join('') : '<p class="hint">Bu aramaya uyan bitki yok.</p>';
     $('plist').querySelectorAll('.thumb img').forEach(img => {
       const fb = () => { img.parentElement.innerHTML = LEAF; };
       if (img.complete && img.naturalWidth === 0) fb(); else img.addEventListener('error', fb);
     });
   }
-  $('plist').addEventListener('click', e => {
-    const b = e.target.closest('[data-add]');
-    if (!b || b.disabled) return;
-    const f = b.dataset.add, ex = state.plants.find(x => x.foto === f);
-    if (ex) ex.adet = Math.min(20, ex.adet + 1); else state.plants.push({ foto: f, adet: 1 });
-    toast(`${byFoto[f].p.ad} eklendi`);
+  // Adet değiştir: +1 / -1; 0'a inerse bitki tasarımdan çıkar
+  function changeQty(f, delta) {
+    const ex = state.plants.find(x => x.foto === f);
+    if (delta > 0) {
+      if (ex) ex.adet = Math.min(20, ex.adet + 1); else state.plants.push({ foto: f, adet: 1 });
+      if (!ex) toast(`${byFoto[f].p.ad} eklendi`);
+    } else if (ex) {
+      ex.adet -= 1;
+      if (ex.adet < 1) removePlant(f); else applyPlants();
+      return;
+    }
     applyPlants();
+  }
+  function removePlant(f) {
+    state.plants = state.plants.filter(x => x.foto !== f);
+    toast(`${byFoto[f].p.ad} kaldırıldı`);
+    applyPlants();
+  }
+  $('plist').addEventListener('click', e => {
+    const b = e.target.closest('[data-add],[data-dec]');
+    if (!b || b.disabled) return;
+    changeQty(b.dataset.add || b.dataset.dec, b.dataset.add ? 1 : -1);
   });
 
   function renderChosen() {
@@ -469,27 +503,24 @@
     $('chosen').innerHTML = state.plants.map(x => {
       const e = T.evaluate(byFoto[x.foto].p, prm);
       return `<div class="citem"><span>${esc(byFoto[x.foto].p.ad)}${e.durum === 'hayir' ? ` <span class="badge hayir" title="${esc(e.reasons.join(', '))}">Uygun değil</span>` : ''}</span>
-        <span class="qty"><button type="button" class="icon" data-dec="${x.foto}" aria-label="Azalt">−</button><b>${x.adet}</b><button type="button" class="icon" data-inc="${x.foto}" aria-label="Artır">+</button></span>
-        <button type="button" class="icon" data-del="${x.foto}" aria-label="Kaldır">×</button></div>`;
+        <span class="qty"><button type="button" class="icon" data-dec="${x.foto}" aria-label="${esc(byFoto[x.foto].p.ad)} azalt">−</button><b>${x.adet}</b><button type="button" class="icon" data-inc="${x.foto}" aria-label="${esc(byFoto[x.foto].p.ad)} artır" ${x.adet >= 20 ? 'disabled' : ''}>+</button></span>
+        <button type="button" class="remove" data-del="${x.foto}" aria-label="${esc(byFoto[x.foto].p.ad)} kaldır"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>Kaldır</button></div>`;
     }).join('');
+    $('chosenCount').textContent = state.plants.reduce((n, x) => n + x.adet, 0);
   }
   $('chosen').addEventListener('click', e => {
     const b = e.target.closest('button');
-    if (!b) return;
-    const f = b.dataset.inc || b.dataset.dec || b.dataset.del;
-    const x = state.plants.find(p => p.foto === f);
-    if (!x) return;
-    if (b.dataset.inc) x.adet = Math.min(20, x.adet + 1);
-    if (b.dataset.dec) x.adet -= 1;
-    if (b.dataset.del || x.adet < 1) state.plants = state.plants.filter(p => p !== x);
-    applyPlants();
+    if (!b || b.disabled) return;
+    if (b.dataset.del) removePlant(b.dataset.del);
+    else if (b.dataset.inc) changeQty(b.dataset.inc, 1);
+    else if (b.dataset.dec) changeQty(b.dataset.dec, -1);
   });
   function applyPlants() {
     aq?.setPlants(state.plants.map(x => ({ plant: byFoto[x.foto].p, adet: x.adet })));
     refresh();
   }
   $('shuffle').addEventListener('click', () => { if (aq) state.seed = aq.shuffle(); refresh(); });
-  $('clearPlants').addEventListener('click', () => { state.plants = []; applyPlants(); });
+  $('clearPlants').addEventListener('click', () => { if (!state.plants.length) return; state.plants = []; toast('Tüm bitkiler kaldırıldı'); applyPlants(); });
 
   /* ---------- Özet ve paylaşım ---------- */
   function refresh() {
