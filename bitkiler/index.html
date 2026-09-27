@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Akvaryum ve Paludaryum Bitkileri — Tankled</title>
+<meta name="description" content="Low tech, high tech akvaryum bitkileri ve paludaryum bitkileri: fotoğraflar, kısa açıklamalar ve yaşam koşulları. Arayın ve filtreleyin." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#5c7a5a;
+    --green-deep:#43603f;
+    --green-dark:#33492f;
+    --cream:#f4f1e9;
+    --cream-2:#ffffff;
+    --sand:#cbb98f;
+    --sand-deep:#b8a371;
+    --ink:#2b3329;
+    --muted:#6f7a68;
+    --on-green:#f3f1e7;
+    --on-green-muted:#cdd6c5;
+    --radius:30px;
+    --radius-sm:18px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--cream);color:var(--ink);
+    font-family:'Poppins',sans-serif;font-weight:300;line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;
+  }
+  h1,h2,h3{font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--green-dark)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  button{font:inherit;cursor:pointer}
+  ::selection{background:var(--sand);color:var(--green-dark)}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px;width:100%}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--sand-deep);font-weight:600;margin-bottom:12px;display:inline-block}
+
+  header{border-bottom:1px solid rgba(67,96,63,.1);background:var(--cream)}
+  .nav{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;height:96px}
+  .logo img{height:64px;width:auto}
+  .back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--green-deep);
+    padding:10px 20px;border-radius:100px;border:1.5px solid rgba(67,96,63,.25);transition:background .3s,border-color .3s;white-space:nowrap}
+  .back:hover{border-color:var(--green);background:rgba(92,122,90,.08)}
+
+  main{flex:1;padding:52px 0 80px}
+  .intro{text-align:center;max-width:640px;margin:0 auto}
+  .intro h1{font-size:clamp(30px,5vw,48px)}
+  .intro p{color:var(--muted);margin-top:12px}
+
+  /* Bitki seçici */
+  .picker{margin-top:26px;text-align:center}
+  .picker-btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:100px;padding:15px 28px;min-height:54px;
+    background:var(--green);color:var(--on-green);font-size:15px;font-weight:600;letter-spacing:.04em;
+    box-shadow:0 14px 30px -16px rgba(51,73,47,.8);transition:transform .3s var(--ease),background .3s}
+  .picker-btn:hover{transform:translateY(-2px);background:var(--green-deep)}
+  .picker-btn:focus-visible{outline:2px solid var(--green-dark);outline-offset:3px}
+  .picker-btn .chev{transition:transform .3s var(--ease)}
+  .picker-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+  .picker-panel{text-align:left;margin-top:18px;background:var(--cream-2);border-radius:var(--radius);padding:clamp(20px,4vw,32px);
+    box-shadow:0 24px 50px -40px rgba(51,73,47,.6)}
+  .picker-panel[hidden]{display:none}
+  .picker-panel h2{font-size:20px;font-weight:600;margin-bottom:4px}
+  .picker-panel > p{font-size:14px;color:var(--muted);margin-bottom:18px}
+
+  /* Arama ve filtreler */
+  .filters{position:sticky;top:0;z-index:10;background:var(--cream);padding:14px 0 12px;margin-top:26px;
+    border-bottom:1px solid rgba(67,96,63,.1)}
+  .search{position:relative;max-width:560px;margin:0 auto}
+  .search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+  .search input{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--cream-2);
+    border:1.5px solid rgba(67,96,63,.18);border-radius:100px;padding:12px 18px 12px 46px;min-height:50px;transition:border-color .25s}
+  .search input:focus{outline:none;border-color:var(--green)}
+  .chip-rows{display:flex;flex-direction:column;gap:8px;margin-top:12px;align-items:center}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
+  .chips-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-right:2px}
+  .chip{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:100px;font-size:13.5px;font-weight:500;
+    border:1.5px solid rgba(67,96,63,.18);background:var(--cream-2);color:var(--muted);transition:all .2s}
+  .chip:hover{border-color:var(--green);color:var(--green-dark)}
+  .chip[aria-pressed="true"]{background:var(--green-dark);border-color:var(--green-dark);color:var(--cream)}
+  .chip .count{font-size:11px;border-radius:100px;min-width:20px;height:20px;padding:0 5px;display:grid;place-items:center;background:rgba(67,96,63,.12)}
+  .chip[aria-pressed="true"] .count{background:var(--sand);color:var(--green-dark)}
+  .chip:focus-visible,.search input:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .status{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:10px;font-size:13px;color:var(--muted)}
+  .clear{background:none;border:0;color:var(--green-deep);font-weight:600;text-decoration:underline;text-underline-offset:3px;font-size:13px}
+
+  /* Kategori bölümleri */
+  .cat{padding-top:36px}
+  .cat[hidden]{display:none}
+  .cat-head{background:var(--green);color:var(--on-green);border-radius:var(--radius);padding:clamp(22px,4vw,34px);margin-bottom:20px}
+  .cat-head h2{color:var(--cream);font-size:clamp(24px,3.4vw,34px)}
+  .cat-head p{color:var(--on-green-muted);margin-top:8px;max-width:62ch}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .empty{text-align:center;color:var(--muted);padding:60px 16px}
+  .empty[hidden]{display:none}
+  .empty b{display:block;font-size:18px;color:var(--green-dark);font-weight:600;margin-bottom:6px}
+
+  /* Bitki kartı */
+  .plant{background:var(--cream-2);border-radius:var(--radius-sm);overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 18px 40px -34px rgba(51,73,47,.6)}
+  .plant[hidden]{display:none}
+  .plant{scroll-margin-top:210px}
+  .plant.flash{animation:flash 1.6s var(--ease)}
+  @keyframes flash{0%,40%{box-shadow:0 0 0 3px var(--sand)}100%{box-shadow:0 18px 40px -34px rgba(51,73,47,.6)}}
+  .photo{width:100%;aspect-ratio:4 / 3;overflow:hidden;background:rgba(92,122,90,.12);display:grid;place-items:center;color:var(--green)}
+  .photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+  .plant:hover .photo img{transform:scale(1.04)}
+  .photo svg{width:72px;height:72px;opacity:.55}
+  .plant-body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
+  .title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .plant h3{font-size:17px;font-weight:600}
+  .level{flex:none;font-size:11px;font-weight:600;letter-spacing:.04em;padding:3px 10px;border-radius:100px;margin-top:2px}
+  .level.kolay{background:rgba(92,122,90,.14);color:var(--green-deep)}
+  .level.orta{background:rgba(203,185,143,.3);color:#7a6a3f}
+  .level.zor{background:rgba(160,82,60,.13);color:#8a4a36}
+  .latin{font-size:12.5px;font-style:italic;color:var(--sand-deep);margin-top:2px}
+  .desc{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.6}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding-top:12px;margin-top:auto;border-top:1px solid rgba(67,96,63,.1)}
+  .desc{margin-bottom:14px}
+  .fact{background:var(--cream);border-radius:10px;padding:6px 8px;min-width:0}
+  .fact span{display:block;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .fact b{display:block;font-size:12px;font-weight:600;color:var(--green-dark);line-height:1.35}
+
+  footer{padding:24px 0;font-size:13px;color:var(--muted);text-align:center;border-top:1px solid rgba(67,96,63,.1)}
+
+  @media(max-width:920px){ .grid{grid-template-columns:1fr 1fr} }
+  @media(max-width:560px){
+    .nav{height:76px}
+    .logo img{height:46px}
+    .back{padding:9px 14px}
+    main{padding:36px 0 56px}
+    .filters{margin-top:18px}
+    .picker-btn{font-size:14px;letter-spacing:.02em;padding:14px 22px}
+    .chips{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;width:100%;padding-bottom:2px;scrollbar-width:none}
+    .chips::-webkit-scrollbar{display:none}
+    .chip{flex:none}
+    .grid{grid-template-columns:1fr;gap:16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="../" class="logo" aria-label="Tankled ana sayfa">
+      <img src="../assets/logo.png" alt="Tankled Aquarium" />
+    </a>
+    <a href="../" class="back">← Ana sayfa</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="intro">
+      <span class="eyebrow">Tankled Rehber</span>
+      <h1>Bitkiler</h1>
+      <p>Akvaryumunuz ve paludaryumunuz için bitki seçerken işinize yarayacak kısa bir rehber. Her kartta bitkinin fotoğrafı, kısa açıklaması ve yaşam koşulları var.</p>
+    </div>
+
+    <div class="picker" id="bitki-sec">
+      <button type="button" class="picker-btn" id="pickerBtn" aria-expanded="false" aria-controls="pickerPanel">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-14 14-14 0 9-6 14-14 14z"/><path d="M5 19 14 10"/></svg>
+        AKVARYUMUNUZA BİTKİ SEÇİN
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="picker-panel" id="pickerPanel" hidden>
+        <h2>Akvaryumunuza uygun bitkiler</h2>
+        <p>Akvaryumunuzun bilgilerini girin; ışığınıza, zemininize ve CO₂ durumunuza uyan bitkiler otomatik listelensin.</p>
+        <div id="picker"></div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <label class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="q" placeholder="Bitki ara… (ör. anubias, halı, kırmızı, yüzen)" aria-label="Bitki ara" autocomplete="off">
+      </label>
+      <div class="chip-rows">
+        <div class="chips" id="catChips" role="group" aria-label="Kategori"></div>
+        <div class="chips" id="levelChips" role="group" aria-label="Zorluk"></div>
+      </div>
+      <div class="status"><span id="resultCount" aria-live="polite"></span><button type="button" class="clear" id="clear" hidden>Filtreleri temizle</button></div>
+    </div>
+
+    <div id="categories"></div>
+    <div class="empty" id="empty" hidden><b>Aradığınız bitki bulunamadı</b>Farklı bir kelime deneyin ya da filtreleri temizleyin.</div>
+  </div>
+</main>
+
+<footer>© <span id="year"></span> Tankled</footer>
+
+<script src="../assets/bitkiler-data.js"></script>
+<script src="../assets/bitki-secici.js"></script>
+<script>
+  const CATEGORIES = window.TANKLED_BITKILER;
+  const LEVELS = ['Kolay', 'Orta', 'Zor'];
+  const LEAF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-14 14-14 0 9-6 14-14 14z"/><path d="M5 19 14 10"/></svg>';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // Türkçe karakterleri sadeleştirir: "ışık" ve "isik" aynı sonucu verir.
+  const norm = s => String(s).toLocaleLowerCase('tr')
+    .replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/ç/g, 'c')
+    .normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  // Kartlar
+  document.getElementById('categories').innerHTML = CATEGORIES.map(c => `
+    <section class="cat" id="${c.id}">
+      <div class="cat-head">
+        <h2>${esc(c.title)}</h2>
+        <p>${esc(c.intro)}</p>
+      </div>
+      <div class="grid">
+        ${c.plants.map(p => `
+          <article class="plant" id="p-${p.foto}" data-level="${p.zorluk}" data-text="${esc(norm([p.ad, p.latin, p.aciklama, c.tab, p.zorluk, ...p.bilgi].join(' ')))}">
+            <div class="photo"><img src="../assets/bitkiler/${p.foto}.jpg" alt="${esc(p.ad)}" loading="lazy"></div>
+            <div class="plant-body">
+              <div class="title-row">
+                <h3>${esc(p.ad)}</h3>
+                <span class="level ${norm(p.zorluk)}">${p.zorluk}</span>
+              </div>
+              <div class="latin">${esc(p.latin)}</div>
+              <p class="desc">${esc(p.aciklama)}</p>
+              <div class="facts">
+                ${c.facts.map((f, i) => `<div class="fact"><span>${f}</span><b>${esc(p.bilgi[i])}</b></div>`).join('')}
+              </div>
+            </div>
+          </article>`).join('')}
+      </div>
+    </section>`).join('');
+
+  // Fotoğraf yoksa yaprak çizimi göster
+  document.querySelectorAll('.photo img').forEach(img => {
+    const fallback = () => { img.parentElement.innerHTML = LEAF; };
+    if (img.complete && img.naturalWidth === 0) fallback();
+    else img.addEventListener('error', fallback);
+  });
+
+  // Filtre durumu
+  const state = { q: '', cat: 'all', level: 'all' };
+  const chip = (group, value, label) =>
+    `<button type="button" class="chip" data-group="${group}" data-value="${value}" aria-pressed="false">${label}<span class="count"></span></button>`;
+  document.getElementById('catChips').innerHTML =
+    '<span class="chips-label">Kategori</span>' + chip('cat', 'all', 'Tümü') + CATEGORIES.map(c => chip('cat', c.id, esc(c.tab))).join('');
+  document.getElementById('levelChips').innerHTML =
+    '<span class="chips-label">Zorluk</span>' + chip('level', 'all', 'Tümü') + LEVELS.map(l => chip('level', l, l)).join('');
+
+  const sections = [...document.querySelectorAll('.cat')];
+  const matchesText = card => !state.q || norm(state.q).split(/\s+/).every(w => card.dataset.text.includes(w));
+  const matchesLevel = (card, level = state.level) => level === 'all' || card.dataset.level === level;
+
+  function apply() {
+    let total = 0;
+    sections.forEach(sec => {
+      let shown = 0;
+      sec.querySelectorAll('.plant').forEach(card => {
+        const ok = (state.cat === 'all' || state.cat === sec.id) && matchesLevel(card) && matchesText(card);
+        card.hidden = !ok;
+        if (ok) shown++;
+      });
+      sec.hidden = shown === 0;
+      total += shown;
+    });
+
+    // Chip sayıları: diğer filtreler geçerliyken o seçeneğin kaç sonuç vereceği
+    document.querySelectorAll('.chip').forEach(btn => {
+      const { group, value } = btn.dataset;
+      btn.setAttribute('aria-pressed', String(state[group] === value));
+      let n = 0;
+      sections.forEach(sec => sec.querySelectorAll('.plant').forEach(card => {
+        const cat = group === 'cat' ? value : state.cat;
+        const level = group === 'level' ? value : state.level;
+        if ((cat === 'all' || cat === sec.id) && matchesLevel(card, level) && matchesText(card)) n++;
+      }));
+      btn.querySelector('.count').textContent = n;
+    });
+
+    const filtered = state.q || state.cat !== 'all' || state.level !== 'all';
+    document.getElementById('resultCount').textContent = `${total} bitki${filtered ? ' bulundu' : ''}`;
+    document.getElementById('clear').hidden = !filtered;
+    document.getElementById('empty').hidden = total > 0;
+  }
+
+  document.querySelectorAll('.chip').forEach(btn => btn.addEventListener('click', () => {
+    state[btn.dataset.group] = btn.dataset.value;
+    apply();
+  }));
+  const q = document.getElementById('q');
+  q.addEventListener('input', () => { state.q = q.value.trim(); apply(); });
+  document.getElementById('clear').addEventListener('click', () => {
+    Object.assign(state, { q: '', cat: 'all', level: 'all' });
+    q.value = '';
+    apply();
+  });
+
+  apply();
+
+  // Bitki seçici
+  const pickerBtn = document.getElementById('pickerBtn'), pickerPanel = document.getElementById('pickerPanel');
+  let pickerMounted = false;
+  function openPicker(open) {
+    if (open && !pickerMounted) { TankledBitkiSecici.mount(document.getElementById('picker')); pickerMounted = true; }
+    pickerPanel.hidden = !open;
+    pickerBtn.setAttribute('aria-expanded', String(open));
+  }
+  pickerBtn.addEventListener('click', () => openPicker(pickerPanel.hidden));
+
+  // #p-<bitki> bağlantısı: kart filtre yüzünden gizliyse filtreleri temizle, karta kaydır
+  function showFromHash() {
+    if (location.hash === '#bitki-sec') { openPicker(true); return; }
+    const card = location.hash.startsWith('#p-') && document.getElementById(location.hash.slice(1));
+    if (!card) return;
+    if (card.hidden) { Object.assign(state, { q: '', cat: 'all', level: 'all' }); q.value = ''; apply(); }
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+  }
+  window.addEventListener('hashchange', showFromHash);
+  showFromHash();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
