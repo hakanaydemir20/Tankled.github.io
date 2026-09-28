@@ -724,6 +724,146 @@ function buildFloating(foto, r) {
   return g;
 }
 
+/* ---------- Balıklar ---------- */
+
+// Balık türleri ve bakım kuralları (sayfa uygunluk kontrolünde de kullanır).
+// minLitre: altında önerilmez · rahatLitre: altında not düşülür · suru: önerilen en az sürü sayısı · maxAdet: en fazla adet
+// boy: yetişkin boyu (cm) · bolge: yüzdüğü su katmanı (0 = zemin, 1 = yüzey)
+export const BALIKLAR = [
+  { id: 'betta', ad: 'Beta balığı', latin: 'Betta splendens', boy: 6, minLitre: 20, maxAdet: 1, sicaklik: '24–28 °C',
+    aciklama: 'Uzun, dalgalı yüzgeçli, renkli labirent balığı. Su yüzeyinden hava da solur; sakin akıntı sever.',
+    not: 'Tek erkek beta bulundurulur; iki erkek dövüşür.', bolge: [0.55, 0.92] },
+  { id: 'neon', ad: 'Neon tetra', latin: 'Paracheirodon innesi', boy: 3.5, minLitre: 40, rahatLitre: 54, suru: 6, sicaklik: '22–26 °C',
+    aciklama: 'Parlak mavi şeritli, arkası kırmızı küçük balık. Sürü halinde, orta su katmanında yüzer.',
+    not: 'En az 6’lı sürü halinde bulundurun; tek başına strese girer.', bolge: [0.35, 0.7] },
+  { id: 'lepistes', ad: 'Lepistes (Guppy)', latin: 'Poecilia reticulata', boy: 4, minLitre: 30, sicaklik: '22–28 °C',
+    aciklama: 'Renkli yelpaze kuyruklu, hareketli ve canlı doğuran balık.',
+    not: 'Erkek ve dişi bir aradaysa hızla çoğalır.', bolge: [0.5, 0.9] },
+  { id: 'koridoras', ad: 'Panda koridoras', latin: 'Corydoras panda', boy: 4.5, minLitre: 40, rahatLitre: 54, suru: 6, sicaklik: '22–26 °C',
+    aciklama: 'Zeminde bıyıklarıyla yiyecek arayan, barışçıl ve sürü halinde yaşayan dip balığı.',
+    not: 'Sürü halinde (en az 6) bulundurun; bıyıkları için ince kum zemin tercih edilir.', bolge: [0, 0.12] },
+];
+
+// Balık gövdesi: +x yönüne bakan, kuyruğa doğru incelen elipsoit; renkler tepe noktası rengiyle
+function fishBody(len, height, width, colorFn) {
+  let geo = new THREE.SphereGeometry(1, 28, 18);
+  geo.deleteAttribute('uv');
+  geo = mergeVertices(geo);
+  const pos = geo.attributes.position, col = new Float32Array(pos.count * 3), c = new THREE.Color();
+  for (let i = 0; i < pos.count; i++) {
+    let x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    const taper = x < 0 ? 1 + x * 0.72 : 1 - x * x * 0.18; // kuyruğa doğru incelir, burun yuvarlak
+    y *= taper; z *= taper;
+    const u = (x + 1) / 2, v = y; // u: kuyruk(0) → baş(1), v: -1 alt … 1 üst
+    colorFn(c, u, v, z);
+    pos.setXYZ(i, x * len / 2, y * height / 2, z * width / 2);
+    col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+  }
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  geo.computeVertexNormals();
+  return geo;
+}
+
+function finShape(points) {
+  const sh = new THREE.Shape();
+  sh.moveTo(points[0][0], points[0][1]);
+  for (let i = 1; i < points.length; i++) sh.lineTo(points[i][0], points[i][1]);
+  const geo = new THREE.ShapeGeometry(sh);
+  return geo;
+}
+
+function finMat(color, opacity = 0.8) {
+  return new THREE.MeshStandardMaterial({ color, transparent: true, opacity, side: THREE.DoubleSide, roughness: 0.5, depthWrite: false });
+}
+
+// Tek bir balık modeli; group.userData.tail kuyruk pivotu (yüzerken sallanır)
+function buildFishModel(id, r) {
+  const outer = new THREE.Group(), g = new THREE.Group();
+  g.rotation.y = -Math.PI / 2; // model +x'e bakıyor; lookAt +z kullandığı için çevir
+  outer.add(g);
+  const bodyMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.35, metalness: 0.15 });
+  const tail = new THREE.Group();
+  let L = 4;
+  if (id === 'betta') {
+    const palettes = [['#8e0f1f', '#c3182c', '#3a2a8f'], ['#1d3fa3', '#2e6fd8', '#8a1a3a'], ['#5a1a8c', '#8a2fc4', '#c3182c'], ['#b3121e', '#e0382a', '#f2c14e']];
+    const [c0, c1, c2] = palettes[Math.floor(r() * palettes.length)];
+    L = 4.6;
+    const body = new THREE.Mesh(fishBody(L, 1.5, 1.0, (c, u, v) => c.set(c0).lerp(new THREE.Color(c1), clamp(0.5 + v * 0.4 + u * 0.2, 0, 1))), bodyMat);
+    g.add(body);
+    const fm = finMat(c1, 0.88), fm2 = finMat(c2, 0.82);
+    // uzun, dalgalı kuyruk ve sırt/anal yüzgeçleri
+    const tailGeo = finShape([[0, 0.3], [-1.8, 1.9], [-3.6, 2.2], [-4.2, 0.2], [-3.8, -2.0], [-2.0, -2.4], [0, -0.4]]);
+    const tm = new THREE.Mesh(tailGeo, fm); tail.add(tm);
+    tail.position.x = -L / 2 + 0.2;
+    g.add(tail);
+    const dorsal = new THREE.Mesh(finShape([[0.6, 0.55], [-0.4, 1.8], [-2.2, 1.9], [-2.3, 0.45]]), fm2);
+    const anal = new THREE.Mesh(finShape([[1.0, -0.5], [-0.2, -2.3], [-2.3, -2.6], [-2.3, -0.4]]), fm);
+    g.add(dorsal, anal);
+    g.userData.wave = [dorsal, anal];
+    const pect = new THREE.Mesh(finShape([[0, 0], [-0.9, 0.3], [-0.9, -0.3]]), finMat('#f3d8d8', 0.4));
+    pect.position.set(1.0, -0.15, 0.52); g.add(pect);
+  } else if (id === 'neon') {
+    L = 3.2;
+    const body = new THREE.Mesh(fishBody(L, 0.8, 0.5, (c, u, v) => {
+      if (v > 0.05 && v < 0.35 && u > 0.18) c.set('#27c8ff').lerp(new THREE.Color('#5ef0ff'), (v - 0.05) * 2);
+      else if (v <= 0.05 && u < 0.55) c.set('#e0263a');
+      else if (v >= 0.35) c.set('#5b6246');
+      else c.set('#d9dfe3');
+    }), bodyMat);
+    g.add(body);
+    const tm = new THREE.Mesh(finShape([[0, 0.12], [-0.7, 0.5], [-0.55, 0], [-0.7, -0.5], [0, -0.12]]), finMat('#e9eef0', 0.35));
+    tail.add(tm); tail.position.x = -L / 2 + 0.1; g.add(tail);
+    const dorsal = new THREE.Mesh(finShape([[0.1, 0.3], [-0.2, 0.62], [-0.45, 0.3]]), finMat('#e9eef0', 0.35));
+    g.add(dorsal);
+  } else if (id === 'lepistes') {
+    const tails = [['#ff7a1a', '#2b6fd8'], ['#2b6fd8', '#f2c14e'], ['#e0382a', '#1b1b1b'], ['#f2c14e', '#8a2fc4']];
+    const [t0, t1] = tails[Math.floor(r() * tails.length)];
+    L = 2.6;
+    const body = new THREE.Mesh(fishBody(L, 0.75, 0.5, (c, u, v) => c.set('#b8c2c6').lerp(new THREE.Color(u < 0.35 ? t0 : '#d8dde0'), u < 0.35 ? 0.6 : clamp(-v, 0, 0.5))), bodyMat);
+    g.add(body);
+    const tm = new THREE.Mesh(finShape([[0, 0.2], [-1.2, 1.1], [-1.9, 0.6], [-2.0, 0], [-1.9, -0.6], [-1.2, -1.1], [0, -0.2]]), finMat(t0, 0.85));
+    const spot = new THREE.Mesh(finShape([[-0.8, 0.5], [-1.6, 0.7], [-1.7, -0.3], [-0.9, -0.2]]), finMat(t1, 0.8));
+    spot.position.z = 0.01;
+    tail.add(tm, spot); tail.position.x = -L / 2 + 0.1; g.add(tail);
+    const dorsal = new THREE.Mesh(finShape([[0, 0.3], [-0.4, 0.8], [-0.9, 0.3]]), finMat(t0, 0.7));
+    g.add(dorsal);
+  } else if (id === 'koridoras') {
+    L = 3.8;
+    const body = new THREE.Mesh(fishBody(L, 1.4, 1.05, (c, u, v, z) => {
+      const eye = u > 0.78 && v > -0.1 && v < 0.6;          // gözdeki siyah bant
+      const back = u > 0.35 && u < 0.6 && v > 0.45;         // sırt lekesi
+      const tailSpot = u < 0.12;                             // kuyruk sapı lekesi
+      c.set(eye || back || tailSpot ? '#1c1a1a' : v < -0.4 ? '#f3ece6' : '#e9d9cf');
+    }), bodyMat);
+    body.scale.y = 0.9;
+    g.add(body);
+    const tm = new THREE.Mesh(finShape([[0, 0.2], [-0.9, 0.7], [-0.75, 0], [-0.9, -0.7], [0, -0.2]]), finMat('#e9e2dc', 0.6));
+    tail.add(tm); tail.position.x = -L / 2 + 0.15; g.add(tail);
+    const dorsal = new THREE.Mesh(finShape([[0.4, 0.55], [0.1, 1.35], [-0.4, 0.6]]), finMat('#1c1a1a', 0.85));
+    g.add(dorsal);
+    // bıyıklar
+    const bm = new THREE.MeshStandardMaterial({ color: '#e9d9cf', roughness: 0.6 });
+    for (const zz of [-0.18, 0.18]) {
+      const w = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.35, 4), bm);
+      w.position.set(L / 2 - 0.05, -0.4, zz); w.rotation.z = 0.8; g.add(w);
+    }
+    g.userData.dip = true;
+  }
+  // gözler
+  const eyeMat = new THREE.MeshStandardMaterial({ color: '#0d0d0d', roughness: 0.15, metalness: 0.3 });
+  const eyeR = L * 0.055;
+  for (const zz of [-1, 1]) {
+    const e = new THREE.Mesh(new THREE.SphereGeometry(eyeR, 10, 8), eyeMat);
+    e.position.set(L * 0.36, L * 0.05, zz * L * 0.1);
+    g.add(e);
+  }
+  outer.traverse(o => { if (o.isMesh) o.castShadow = true; });
+  outer.userData.tail = tail;
+  outer.userData.inner = g;
+  outer.userData.len = L;
+  return outer;
+}
+
 /* ---------- Ortam: arka plan, kaide, lamba ---------- */
 
 function backgroundTexture() {
@@ -837,7 +977,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     model: { tip: 'kutu', L: 60, W: 30, H: 36, cam: 0.6 },
     interior: null, // { L, W, H, y0, waterTop }
     zemin: 'aquasoil', kalinlik: 5,
-    plants: [], hardscape: [], seed: 1,
+    plants: [], hardscape: [], fish: [], seed: 1,
     quality: 'yuksek',
   };
 
@@ -1249,6 +1389,85 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     });
   }
 
+  // Yüzen balıklar: her biri bölgesi içinde rastgele hedeflere doğru yumuşakça yüzer
+  let swimmers = [];
+  function buildFish(g) {
+    const I = state.interior;
+    swimmers = [];
+    const r = rng(state.seed * 71 + 9);
+    const water = I.waterTop - I.y0;
+    const schools = {};
+    state.fish.forEach(({ def, adet }) => {
+      for (let k = 0; k < adet; k++) {
+        const m = buildFishModel(def.id, r);
+        const [b0, b1] = def.bolge;
+        const f = {
+          def, obj: m, speed: def.id === 'betta' ? 2.2 : def.id === 'koridoras' ? 2.4 : 4.5,
+          pos: new THREE.Vector3((r() - 0.5) * (I.L - 8), I.y0 + water * between(r, [b0, b1]) + 1, (r() - 0.5) * (I.W - 6)),
+          target: new THREE.Vector3(), phase: r() * 10, wait: 0,
+          zone: [b0, b1], offset: new THREE.Vector3((r() - 0.5) * 6, (r() - 0.5) * 2.5, (r() - 0.5) * 4),
+        };
+        if (def.suru) { schools[def.id] = schools[def.id] || { target: new THREE.Vector3(), timer: 0 }; f.school = schools[def.id]; }
+        m.position.copy(f.pos);
+        g.add(m);
+        swimmers.push(f);
+      }
+    });
+    swimmers.forEach(f => pickTarget(f, r));
+    Object.values(schools).forEach(sc => { sc.target.copy(swimmers.find(f => f.school === sc).pos); });
+    buildFish.r = r;
+  }
+  function pickTarget(f, r = Math.random) {
+    const I = state.interior, water = I.waterTop - I.y0, m = f.obj.userData.len + 1.5;
+    const x = (r() - 0.5) * Math.max(1, I.L - m * 2), z = (r() - 0.5) * Math.max(1, I.W - m * 2);
+    const floor = surfaceY(x, z);
+    let y = I.y0 + water * between(r, f.zone);
+    y = clamp(y, floor + (f.obj.userData.inner.userData.dip ? 0.9 : 3), I.waterTop - 1.5);
+    f.target.set(x, y, z);
+  }
+  const _dir = new THREE.Vector3(), _look = new THREE.Object3D(), _goal = new THREE.Vector3();
+  function updateFish(dt, t) {
+    if (!swimmers.length) return;
+    const I = state.interior;
+    const schoolsSeen = new Set();
+    swimmers.forEach(f => {
+      if (f.school && !schoolsSeen.has(f.school)) {
+        schoolsSeen.add(f.school);
+        f.school.timer -= dt;
+        if (f.school.timer <= 0) { const tmp = { ...f, target: f.school.target }; pickTarget(tmp); f.school.timer = 4 + Math.random() * 4; }
+      }
+      _goal.copy(f.school ? f.school.target : f.target);
+      if (f.school) _goal.add(f.offset);
+      if (f.wait > 0) { f.wait -= dt; _goal.copy(f.pos); }
+      _dir.subVectors(_goal, f.pos);
+      const d = _dir.length();
+      if (!f.school && d < 1.5) {
+        pickTarget(f);
+        if (f.def.id === 'betta' || f.def.id === 'koridoras') f.wait = 1 + Math.random() * 2.5; // arada durup dinlensin
+      }
+      const sp = f.wait > 0 ? 0.3 : f.speed * (0.7 + 0.3 * Math.sin(t * 0.7 + f.phase));
+      if (d > 0.05) f.pos.addScaledVector(_dir.normalize(), Math.min(d, sp * dt));
+      // akvaryum içinde kal
+      const m = f.obj.userData.len / 2 + 0.5;
+      f.pos.x = clamp(f.pos.x, -I.L / 2 + m, I.L / 2 - m);
+      f.pos.z = clamp(f.pos.z, -I.W / 2 + m, I.W / 2 - m);
+      f.pos.y = clamp(f.pos.y, surfaceY(f.pos.x, f.pos.z) + 0.8, I.waterTop - 1);
+      f.obj.position.copy(f.pos);
+      // yüzme yönüne yumuşak dönüş
+      if (d > 0.3 && f.wait <= 0) {
+        _look.position.copy(f.pos);
+        _look.lookAt(f.pos.x + _dir.x, f.pos.y + _dir.y * 0.4, f.pos.z + _dir.z);
+        f.obj.quaternion.slerp(_look.quaternion, Math.min(1, dt * 2.5));
+      }
+      // kuyruk ve yüzgeç hareketi
+      const beat = f.wait > 0 ? 2 : f.def.id === 'neon' ? 12 : 7;
+      f.obj.userData.tail.rotation.y = Math.sin(t * beat + f.phase) * (f.def.id === 'betta' ? 0.35 : 0.45);
+      const inner = f.obj.userData.inner;
+      inner.rotation.x = Math.sin(t * beat * 0.5 + f.phase) * 0.04;
+      (inner.userData.wave || []).forEach((w, i) => { w.rotation.x = Math.sin(t * 2.2 + f.phase + i) * 0.12; });
+    });
+  }
+
   function rebuildContent() {
     if (contentGroup) { root.remove(contentGroup); disposeTree(contentGroup); }
     contentGroup = new THREE.Group();
@@ -1263,6 +1482,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
       const anchors = buildHardscape(contentGroup, pick, rng(state.seed * 53 + 5));
       buildPlants(contentGroup, pick, r, anchors);
       buildWater(contentGroup);
+      buildFish(contentGroup);
     }
     root.add(contentGroup);
   }
@@ -1354,6 +1574,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     up.set(0, 1, 0).transformDirection(camera.matrixWorldInverse);
     U.uLightView.value.copy(up);
     if (waterSurface) waterSurface.material.normalMap.offset.set(U.uTime.value * 0.012, U.uTime.value * 0.007);
+    updateFish(dt, U.uTime.value);
     if (particles) {
       const a = particles.geometry.attributes.position, b = particles.userData.bounds;
       for (let i = 0; i < a.count; i++) {
@@ -1382,10 +1603,12 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     setSubstrate(zemin, kalinlik) { state.zemin = zemin; state.kalinlik = kalinlik; rebuildContent(); },
     setPlants(list) { state.plants = list; rebuildContent(); },
     setHardscape(list) { state.hardscape = list; rebuildContent(); },
-    setAll({ zemin, kalinlik, plants, hardscape }) {
+    setFish(list) { state.fish = list; rebuildContent(); },
+    setAll({ zemin, kalinlik, plants, hardscape, fish }) {
       if (zemin !== undefined) { state.zemin = zemin; state.kalinlik = kalinlik; }
       if (plants) state.plants = plants;
       if (hardscape) state.hardscape = hardscape;
+      if (fish) state.fish = fish;
       rebuildContent();
     },
     shuffle() { state.seed = (state.seed * 16807 + 11) % 2147483647; rebuildContent(); return state.seed; },
