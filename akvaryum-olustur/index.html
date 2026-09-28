@@ -272,7 +272,14 @@
     </section>
 
     <section class="card">
-      <h2><span class="step">6</span> Tasarımınız</h2>
+      <h2><span class="step">6</span> Balıklar</h2>
+      <p class="hint" style="margin:-4px 0 8px">Eklediğiniz balıklar akvaryumda yüzer. Akvaryum hacmine ve birbirleriyle uyumuna göre kontrol edilir.</p>
+      <div class="hs-list" id="fishList"></div>
+      <div id="fishNotes"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">7</span> Tasarımınız</h2>
       <div class="summary" id="summary"></div>
       <div class="actions">
         <a class="btn wa" id="waBtn" target="_blank" rel="noopener">WhatsApp ile Tankled’a gönder</a>
@@ -304,7 +311,7 @@
 <script src="../assets/bitkiler-data.js"></script>
 <script src="../assets/bitki-secici.js"></script>
 <script type="module">
-  import { createAquarium, HARDSCAPE } from '../assets/akvaryum-3d.js';
+  import { createAquarium, HARDSCAPE, BALIKLAR } from '../assets/akvaryum-3d.js';
 
   /*
    * Tankled modelleri. 3D dosyaları assets/modeller/ klasörüne .glb olarak yüklenir;
@@ -342,6 +349,7 @@
       { foto: 'limnophila-sessiliflora', adet: 2 }, { foto: 'java-yosunu', adet: 1 },
     ],
     hardscape: [], // { id, adet }
+    fish: [{ id: 'betta', adet: 1 }], // { id, adet } — örnek tasarımda bir beta yüzer
     seed: 1, filter: 'uygun', q: '',
   };
 
@@ -358,6 +366,8 @@
     state.co2 = h.get('co2') === '1';
     if (h.has('p')) state.plants = h.get('p').split(',').filter(Boolean).map(x => x.split(':')).filter(([f]) => byFoto[f]).map(([f, n]) => ({ foto: f, adet: Math.max(1, Math.min(20, parseInt(n) || 1)) }));
     if (h.has('hs')) state.hardscape = h.get('hs').split(',').filter(Boolean).map(x => x.split(':')).filter(([id]) => HARDSCAPE.some(d => d.id === id)).map(([id, n]) => ({ id, adet: Math.max(1, Math.min(10, parseInt(n) || 1)) }));
+    state.fish = []; // paylaşılan tasarımda balık yoksa örnek beta eklenmesin
+    if (h.has('fs')) state.fish = h.get('fs').split(',').filter(Boolean).map(x => x.split(':')).filter(([id]) => BALIKLAR.some(d => d.id === id)).map(([id, n]) => { const d = BALIKLAR.find(x => x.id === id); return { id, adet: Math.max(1, Math.min(d.maxAdet || 20, parseInt(n) || 1)) }; });
     state.seed = num('s', 1);
   })();
 
@@ -369,6 +379,7 @@
     if (state.co2) h.set('co2', 1);
     h.set('p', state.plants.map(x => `${x.foto}:${x.adet}`).join(','));
     if (state.hardscape.length) h.set('hs', state.hardscape.map(x => `${x.id}:${x.adet}`).join(','));
+    if (state.fish.length) h.set('fs', state.fish.map(x => `${x.id}:${x.adet}`).join(','));
     h.set('s', state.seed);
     history.replaceState(null, '', '#' + h.toString());
   }
@@ -431,13 +442,15 @@
     if (aq) {
       if (m.id === 'kutu') await aq.setModel({ tip: 'kutu', L: state.L, W: state.W, H: state.H, cam: state.cam / 10 });
       else await aq.setModel({ tip: 'ozel', ...m });
-      aq.setAll({ zemin: state.zemin, kalinlik: state.zemin === 'yok' ? 0 : state.kalinlik, plants: plantList(), hardscape: hardscapeList() });
+      aq.setAll({ zemin: state.zemin, kalinlik: state.zemin === 'yok' ? 0 : state.kalinlik, plants: plantList(), hardscape: hardscapeList(), fish: fishList() });
     }
     refresh();
   }
   const HS = Object.fromEntries(HARDSCAPE.map(d => [d.id, d]));
   const plantList = () => state.plants.map(x => ({ plant: byFoto[x.foto].p, adet: x.adet }));
   const hardscapeList = () => state.hardscape.map(x => ({ def: HS[x.id], adet: x.adet }));
+  const FS = Object.fromEntries(BALIKLAR.map(d => [d.id, d]));
+  const fishList = () => state.fish.map(x => ({ def: FS[x.id], adet: x.adet }));
 
   document.querySelectorAll('input[name=model]').forEach(r => r.addEventListener('change', () => { state.model = r.value; applyModel(); }));
   [['dL', 'L', 10, 300], ['dW', 'W', 10, 150], ['dH', 'H', 10, 150], ['dC', 'cam', 3, 19]].forEach(([id, key, min, max]) => {
@@ -585,6 +598,54 @@
     refresh();
   });
 
+  /* ---------- Balıklar ---------- */
+  // Bir türün bu akvaryumdaki uygunluğu: { durum, reasons, notes }
+  function fishEval(d, adet) {
+    const L = litre(), reasons = [], notes = [];
+    if (L < d.minLitre) reasons.push(`En az ${d.minLitre} litrelik akvaryum ister`);
+    if (d.rahatLitre && L < d.rahatLitre) notes.push(`${d.rahatLitre} L ve üzeri daha uygun`);
+    if (d.suru && adet && adet < d.suru) notes.push(`En az ${d.suru}’lı sürü önerilir (şu an ${adet})`);
+    if (d.id === 'koridoras' && T.SUBSTRATE[state.zemin].tur === 'iri') notes.push('İri zemin bıyıklarına zarar verebilir; ince kum tercih edin');
+    const has = id => state.fish.some(x => x.id === id);
+    if ((d.id === 'betta' && has('lepistes')) || (d.id === 'lepistes' && has('betta'))) notes.push('Beta, renkli uzun yüzgeçli lepistesleri rakip görüp saldırabilir; birlikte önerilmez');
+    return { durum: reasons.length ? 'hayir' : notes.length ? 'dikkat' : 'uygun', reasons, notes };
+  }
+  function renderFish() {
+    const label = { uygun: 'Uygun', dikkat: 'Dikkat', hayir: 'Uygun değil' };
+    $('fishList').innerHTML = BALIKLAR.map(d => {
+      const n = state.fish.find(x => x.id === d.id)?.adet || 0, e = fishEval(d, n), max = d.maxAdet || 20;
+      return `<div class="hs-item${n ? ' secili' : ''}">
+        <span class="swatch" style="background:${{ betta: 'linear-gradient(135deg,#8e0f1f,#3a2a8f)', neon: 'linear-gradient(180deg,#5b6246 30%,#27c8ff 30% 55%,#e0263a 55%)', lepistes: 'linear-gradient(90deg,#b8c2c6 45%,#ff7a1a 45%)', koridoras: 'radial-gradient(circle at 70% 40%,#1c1a1a 18%,#e9d9cf 19%)' }[d.id]}"></span>
+        <span><span class="pname">${esc(d.ad)}</span> <span class="pmeta"><i>${esc(d.latin)}</i></span><br>
+          <span class="pmeta"><span class="badge ${e.durum}">${label[e.durum]}</span>${esc(d.boy)} cm · ${esc(d.sicaklik)} · en az ${d.minLitre} L</span>
+          <br><span class="pmeta">${esc(d.aciklama)}</span>
+          ${[...e.reasons, ...e.notes].map(t => `<br><span class="pmeta">• ${esc(t)}</span>`).join('')}</span>
+        ${n ? `<span class="pqty"><button type="button" class="icon" data-fdec="${d.id}" aria-label="${esc(d.ad)} azalt">−</button><b>${n}</b><button type="button" class="icon" data-finc="${d.id}" aria-label="${esc(d.ad)} artır" ${n >= max || e.durum === 'hayir' ? 'disabled' : ''}>+</button></span>`
+            : `<button type="button" class="add" data-finc="${d.id}" aria-label="${esc(d.ad)} ekle" ${e.durum === 'hayir' ? 'disabled title="Bu akvaryuma uygun değil"' : ''}>+</button>`}
+      </div>`;
+    }).join('');
+    // Kalabalık uyarısı: yetişkin boyların toplamı, net su hacmine göre (kaba bir kural)
+    const cm = state.fish.reduce((s, x) => s + FS[x.id].boy * x.adet, 0), net = netLitre();
+    const warns = [];
+    state.fish.forEach(x => { if (FS[x.id].not) warns.push(`<b>${esc(FS[x.id].ad)}:</b> ${esc(FS[x.id].not)}`); });
+    if (cm > net * 1.2) warns.push(`Akvaryum kalabalık olabilir: balıkların toplam yetişkin boyu ~${fmt(cm)} cm, net su ~${fmt(net)} L. Daha az balık ya da daha büyük akvaryum önerilir.`);
+    $('fishNotes').innerHTML = warns.map(w => `<div class="warn">${w}</div>`).join('');
+  }
+  $('fishList').addEventListener('click', e => {
+    const b = e.target.closest('[data-finc],[data-fdec]');
+    if (!b || b.disabled) return;
+    const id = b.dataset.finc || b.dataset.fdec, ex = state.fish.find(x => x.id === id), d = FS[id];
+    if (b.dataset.finc) {
+      if (ex) ex.adet = Math.min(d.maxAdet || 20, ex.adet + 1);
+      else { state.fish.push({ id, adet: d.suru && d.suru <= 20 ? Math.min(d.suru, 20) : 1 }); toast(`${d.ad} eklendi`); }
+    } else if (ex) {
+      ex.adet -= 1;
+      if (ex.adet < 1) { state.fish = state.fish.filter(x => x !== ex); toast(`${d.ad} kaldırıldı`); }
+    }
+    aq?.setFish(fishList());
+    refresh();
+  });
+
   /* ---------- Zemin miktarı ---------- */
   function substrateEstimate() {
     const sub = T.SUBSTRATE[state.zemin], d = tankDims();
@@ -630,6 +691,7 @@
     renderPlantList();
     renderChosen();
     renderHardscape();
+    renderFish();
 
     const est = substrateEstimate();
     $('kgBox').hidden = !est;
@@ -644,6 +706,7 @@
 
     const m = currentModel();
     const hsTxt = state.hardscape.length ? state.hardscape.map(x => `${HS[x.id].ad}${x.adet > 1 ? ` ×${x.adet}` : ''}`).join(', ') : '—';
+    const fishTxt = state.fish.length ? state.fish.map(x => `${FS[x.id].ad}${x.adet > 1 ? ` ×${x.adet}` : ''}`).join(', ') : '—';
     const plantsTxt = state.plants.length ? state.plants.map(x => `${byFoto[x.foto].p.ad}${x.adet > 1 ? ` ×${x.adet}` : ''}`).join(', ') : '—';
     $('summary').innerHTML = `
       <span><b>Model:</b> ${esc(m.ad)} (${esc(d.outer)})</span>
@@ -651,12 +714,13 @@
       <span><b>Zemin:</b> ${esc(T.SUBSTRATE[state.zemin].label)}${state.zemin === 'yok' ? '' : `, ${fmt(state.kalinlik, 1)} cm${est ? ` · ~${fmt(est.kg)} kg` : ''}`}</span>
       <span><b>Işık / CO₂:</b> ${state.lumen ? fmt(state.lumen) + ' lm' : 'belirtilmedi'} · CO₂ ${state.co2 ? 'var' : 'yok'}</span>
       <span><b>Taş ve kök:</b> ${esc(hsTxt)}</span>
-      <span><b>Bitkiler:</b> ${esc(plantsTxt)}</span>`;
+      <span><b>Bitkiler:</b> ${esc(plantsTxt)}</span>
+      <span><b>Balıklar:</b> ${esc(fishTxt)}</span>`;
 
     writeHash();
     const msg = `Merhaba Tankled, sitenizde şu akvaryumu tasarladım:\n` +
       `• Model: ${m.ad} (${d.outer})\n• Hacim: ${fmt(litre(), 1)} L\n• Zemin: ${T.SUBSTRATE[state.zemin].label}${state.zemin === 'yok' ? '' : `, ${fmt(state.kalinlik, 1)} cm${est ? ` (~${fmt(est.kg)} kg)` : ''}`}\n• Taş ve kök: ${hsTxt}\n` +
-      `• Işık / CO₂: ${state.lumen ? fmt(state.lumen) + ' lm' : 'belirtilmedi'}, CO₂ ${state.co2 ? 'var' : 'yok'}\n• Bitkiler: ${plantsTxt}\n\nTasarım: ${location.href}`;
+      `• Işık / CO₂: ${state.lumen ? fmt(state.lumen) + ' lm' : 'belirtilmedi'}, CO₂ ${state.co2 ? 'var' : 'yok'}\n• Bitkiler: ${plantsTxt}\n• Balıklar: ${fishTxt}\n\nTasarım: ${location.href}`;
     $('waBtn').href = 'https://wa.me/905312172006?text=' + encodeURIComponent(msg);
   }
 

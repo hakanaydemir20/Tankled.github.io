@@ -7,7 +7,6 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
@@ -77,7 +76,7 @@ const U = {
   uTime: { value: 0 },
   uWaterTop: { value: 30 },
   uFloor: { value: 0 },
-  uCaustic: { value: 0.55 },
+  uCaustic: { value: 0.32 },
   uLightView: { value: new THREE.Vector3(0, 1, 0) },
   uSway: { value: 0.0009 },
 };
@@ -147,7 +146,7 @@ diffuseColor.rgb *= mix(c0, c1, smoothstep(0.1, 1.0, vT));
       .replace('#include <opaque_fragment>', `
 #ifdef TK_CAUSTICS
 if (vWPos.y < uWaterTop) {
-  float tkC = tkCaustic(vWPos.xz * 0.22 + vec2(3.0), uTime * 0.55);
+  float tkC = tkCaustic(vWPos.xz * 0.13 + vec2(3.0), uTime * 0.45);
   float tkUp = clamp(dot(normal, uLightView), 0.0, 1.0);
   outgoingLight += diffuseColor.rgb * tkC * uCaustic * (0.25 + 0.75 * tkUp);
   float tkD = clamp((uWaterTop - vWPos.y) / 70.0, 0.0, 1.0);
@@ -165,56 +164,79 @@ outgoingLight += diffuseColor.rgb * tkB * 0.5;
 
 /* ---------- Zemin görünümleri ---------- */
 
-// grain: tane yarıçapı (doku pikseli), tile: dokunun kapladığı cm, tas: üstüne serpilen taşlar [min, max] cm
+// mm: gerçek tane boyutu (mm), tas: üstüne serpilen taşlar [min, max] cm
+const TILE_CM = 20; // doku karosunun kapladığı alan (cm); büyük tutulur ki tekrar fark edilmesin
 const ZEMIN_GORUNUM = {
-  aquasoil:     { base: '#2b2420', palette: ['#3a302a', '#1f1a17', '#4a3d33', '#2e2622', '#56463a'], grain: 3.2, tile: 7 },
-  katmanli:     { base: '#c9b28a', palette: ['#d8c39c', '#b89d72', '#e3d4b3', '#a88d64', '#8d7a5c'], grain: 1.6, tile: 5, alt: 'aquasoil' },
-  kil:          { base: '#7a3f2a', palette: ['#8c4a31', '#6b3322', '#9a5a3c', '#5e2e1f', '#a8653f'], grain: 3.4, tile: 7 },
-  'dere-kumu':  { base: '#c9b28a', palette: ['#d8c39c', '#b89d72', '#e3d4b3', '#a88d64', '#8d7a5c'], grain: 1.6, tile: 5 },
-  silis:        { base: '#e9e4d8', palette: ['#f4f1ea', '#dcd6c8', '#ffffff', '#cfc8b8', '#e2dccd'], grain: 1.4, tile: 5 },
-  bazalt:       { base: '#262626', palette: ['#1b1b1b', '#333333', '#2a2a2a', '#444444', '#3a3a3a'], grain: 1.5, tile: 5 },
-  'renkli-kum': { base: '#d9c8a8', palette: ['#e05a5a', '#4f86d9', '#f2c14e', '#5bbf6a', '#b86bd6', '#f28ec0', '#ffffff'], grain: 1.9, tile: 5 },
-  mercan:       { base: '#efe9df', palette: ['#f7f3ec', '#e8dfd0', '#ffffff', '#e3d5c2', '#f0c9b5'], grain: 2.6, tile: 6 },
-  cakil:        { base: '#8f887c', palette: ['#a39b8e', '#7c756a', '#b8b0a2', '#6b655c', '#9c8a74'], grain: 4, tile: 10, tas: [0.7, 1.5],
+  aquasoil:     { base: '#2b2420', palette: ['#3a302a', '#1f1a17', '#4a3d33', '#2e2622', '#56463a'], mm: 2.6 },
+  katmanli:     { base: '#c9b28a', palette: ['#d8c39c', '#b89d72', '#e3d4b3', '#a88d64', '#8d7a5c'], mm: 0.9, alt: 'aquasoil' },
+  kil:          { base: '#7a3f2a', palette: ['#8c4a31', '#6b3322', '#9a5a3c', '#5e2e1f', '#a8653f'], mm: 3 },
+  'dere-kumu':  { base: '#c9b28a', palette: ['#d8c39c', '#b89d72', '#e3d4b3', '#a88d64', '#8d7a5c'], mm: 0.9 },
+  silis:        { base: '#e9e4d8', palette: ['#f4f1ea', '#dcd6c8', '#ffffff', '#cfc8b8', '#e2dccd'], mm: 0.7 },
+  bazalt:       { base: '#262626', palette: ['#1b1b1b', '#333333', '#2a2a2a', '#444444', '#3a3a3a'], mm: 0.8 },
+  'renkli-kum': { base: '#d9c8a8', palette: ['#e05a5a', '#4f86d9', '#f2c14e', '#5bbf6a', '#b86bd6', '#f28ec0', '#ffffff'], mm: 1.3 },
+  mercan:       { base: '#efe9df', palette: ['#f7f3ec', '#e8dfd0', '#ffffff', '#e3d5c2', '#f0c9b5'], mm: 1.6 },
+  cakil:        { base: '#8f887c', palette: ['#a39b8e', '#7c756a', '#b8b0a2', '#6b655c', '#9c8a74'], mm: 3.5, tas: [0.7, 1.5],
                   tasRenk: ['#a39b8e', '#7c756a', '#b8b0a2', '#6b655c', '#9c8a74', '#c2b7a3'] },
-  lav:          { base: '#4a2620', palette: ['#5e2e24', '#3b2420', '#6f3a2c', '#2a1a17', '#7a4030'], grain: 4, tile: 10, tas: [0.8, 1.9],
+  lav:          { base: '#4a2620', palette: ['#5e2e24', '#3b2420', '#6f3a2c', '#2a1a17', '#7a4030'], mm: 4, tas: [0.8, 1.9],
                   tasRenk: ['#6b3326', '#3b2420', '#7a3b2c', '#4f2a22', '#2e1d19'] },
-  ponza:        { base: '#d3ccbd', palette: ['#dcd6c9', '#c8c0af', '#e6e1d6', '#bdb4a2', '#d9d2c2'], grain: 4, tile: 10, tas: [0.6, 1.4],
+  ponza:        { base: '#d3ccbd', palette: ['#dcd6c9', '#c8c0af', '#e6e1d6', '#bdb4a2', '#d9d2c2'], mm: 3.5, tas: [0.6, 1.4],
                   tasRenk: ['#dcd6c9', '#c8c0af', '#e6e1d6', '#bdb4a2', '#cfc6b3'] },
   yok:          null,
 };
 
 const grainCache = new Map();
-// Zemin dokusu: renk haritası + aynı tanelerden üretilen normal haritası
+// Zemin dokusu: renk haritası + aynı tanelerden üretilen yumuşak normal haritası (dikişsiz, TILE_CM kaplar)
 function grainTextures(key) {
   if (grainCache.has(key)) return grainCache.get(key);
   const g = ZEMIN_GORUNUM[key];
-  const size = 512;
+  const size = 1024, pxPerCm = size / TILE_CM;
   const color = document.createElement('canvas'), height = document.createElement('canvas');
   color.width = color.height = height.width = height.height = size;
   const cx = color.getContext('2d'), hx = height.getContext('2d');
   cx.fillStyle = g.base; cx.fillRect(0, 0, size, size);
-  hx.fillStyle = '#303030'; hx.fillRect(0, 0, size, size);
+  hx.fillStyle = '#404040'; hx.fillRect(0, 0, size, size);
   const r = rng(hashStr(key));
-  const grain = g.grain * 2;
-  const n = Math.round((size * size) / (grain * grain * 2.0));
-  for (let i = 0; i < n; i++) {
-    const x = r() * size, y = r() * size, rad = grain * (0.5 + r() * 0.9), ang = r() * Math.PI, sq = 0.65 + r() * 0.35;
-    const col = g.palette[Math.floor(r() * g.palette.length)];
-    for (const [dx, dy] of [[0, 0], [size, 0], [-size, 0], [0, size], [0, -size]]) {
-      cx.fillStyle = col;
-      cx.beginPath(); cx.ellipse(x + dx, y + dy, rad, rad * sq, ang, 0, Math.PI * 2); cx.fill();
-      const gr = hx.createRadialGradient(x + dx - rad * 0.2, y + dy - rad * 0.2, 0, x + dx, y + dy, rad);
-      gr.addColorStop(0, '#ffffff'); gr.addColorStop(1, '#404040');
-      hx.fillStyle = gr;
-      hx.beginPath(); hx.ellipse(x + dx, y + dy, rad, rad * sq, ang, 0, Math.PI * 2); hx.fill();
+  const wrap = (x, y, rad, fn) => {
+    for (const dx of [0, size, -size]) for (const dy of [0, size, -size]) {
+      if (x + dx + rad < 0 || x + dx - rad > size || y + dy + rad < 0 || y + dy - rad > size) continue;
+      fn(x + dx, y + dy);
     }
+  };
+  // Taneler: gerçek boyutuna göre
+  const rad0 = Math.max(1.1, (g.mm / 10) * pxPerCm / 2);
+  const n = Math.min(90000, Math.round((size * size) / (rad0 * rad0 * 2.6)));
+  for (let i = 0; i < n; i++) {
+    const x = r() * size, y = r() * size, rad = rad0 * (0.6 + r() * 0.8), ang = r() * Math.PI, sq = 0.7 + r() * 0.3;
+    const col = g.palette[Math.floor(r() * g.palette.length)];
+    wrap(x, y, rad, (px, py) => {
+      cx.fillStyle = col;
+      cx.beginPath(); cx.ellipse(px, py, rad, rad * sq, ang, 0, Math.PI * 2); cx.fill();
+      hx.fillStyle = `rgb(${150 + (r() * 60) | 0},${150 + (r() * 60) | 0},${150 + (r() * 60) | 0})`;
+      hx.beginPath(); hx.ellipse(px, py, rad * 0.9, rad * sq * 0.9, ang, 0, Math.PI * 2); hx.fill();
+    });
   }
+  // Ton lekeleri: ıslak/kuru, koyu/açık bölgeler (tekrarı gizler)
+  for (let i = 0; i < 26; i++) {
+    const x = r() * size, y = r() * size, rad = size * (0.08 + r() * 0.18), dark = r() > 0.5;
+    wrap(x, y, rad, (px, py) => {
+      const gr = cx.createRadialGradient(px, py, 0, px, py, rad);
+      gr.addColorStop(0, dark ? 'rgba(20,15,10,.06)' : 'rgba(255,250,240,.05)');
+      gr.addColorStop(1, 'rgba(0,0,0,0)');
+      cx.fillStyle = gr; cx.fillRect(px - rad, py - rad, rad * 2, rad * 2);
+    });
+  }
+  // Yükseklik haritasını yumuşat → normal haritası titreşmesin
+  const soft = document.createElement('canvas');
+  soft.width = soft.height = size;
+  const sx = soft.getContext('2d');
+  sx.filter = 'blur(1.2px)';
+  sx.drawImage(height, 0, 0);
   const map = new THREE.CanvasTexture(color);
   map.wrapS = map.wrapT = THREE.RepeatWrapping;
   map.colorSpace = THREE.SRGBColorSpace;
   map.anisotropy = 8;
-  const normal = normalFromCanvas(height, 3);
+  const normal = normalFromCanvas(soft, 1.6);
+  normal.anisotropy = 8;
   const res = { map, normal };
   grainCache.set(key, res);
   return res;
@@ -702,6 +724,146 @@ function buildFloating(foto, r) {
   return g;
 }
 
+/* ---------- Balıklar ---------- */
+
+// Balık türleri ve bakım kuralları (sayfa uygunluk kontrolünde de kullanır).
+// minLitre: altında önerilmez · rahatLitre: altında not düşülür · suru: önerilen en az sürü sayısı · maxAdet: en fazla adet
+// boy: yetişkin boyu (cm) · bolge: yüzdüğü su katmanı (0 = zemin, 1 = yüzey)
+export const BALIKLAR = [
+  { id: 'betta', ad: 'Beta balığı', latin: 'Betta splendens', boy: 6, minLitre: 20, maxAdet: 1, sicaklik: '24–28 °C',
+    aciklama: 'Uzun, dalgalı yüzgeçli, renkli labirent balığı. Su yüzeyinden hava da solur; sakin akıntı sever.',
+    not: 'Tek erkek beta bulundurulur; iki erkek dövüşür.', bolge: [0.55, 0.92] },
+  { id: 'neon', ad: 'Neon tetra', latin: 'Paracheirodon innesi', boy: 3.5, minLitre: 40, rahatLitre: 54, suru: 6, sicaklik: '22–26 °C',
+    aciklama: 'Parlak mavi şeritli, arkası kırmızı küçük balık. Sürü halinde, orta su katmanında yüzer.',
+    not: 'En az 6’lı sürü halinde bulundurun; tek başına strese girer.', bolge: [0.35, 0.7] },
+  { id: 'lepistes', ad: 'Lepistes (Guppy)', latin: 'Poecilia reticulata', boy: 4, minLitre: 30, sicaklik: '22–28 °C',
+    aciklama: 'Renkli yelpaze kuyruklu, hareketli ve canlı doğuran balık.',
+    not: 'Erkek ve dişi bir aradaysa hızla çoğalır.', bolge: [0.5, 0.9] },
+  { id: 'koridoras', ad: 'Panda koridoras', latin: 'Corydoras panda', boy: 4.5, minLitre: 40, rahatLitre: 54, suru: 6, sicaklik: '22–26 °C',
+    aciklama: 'Zeminde bıyıklarıyla yiyecek arayan, barışçıl ve sürü halinde yaşayan dip balığı.',
+    not: 'Sürü halinde (en az 6) bulundurun; bıyıkları için ince kum zemin tercih edilir.', bolge: [0, 0.12] },
+];
+
+// Balık gövdesi: +x yönüne bakan, kuyruğa doğru incelen elipsoit; renkler tepe noktası rengiyle
+function fishBody(len, height, width, colorFn) {
+  let geo = new THREE.SphereGeometry(1, 28, 18);
+  geo.deleteAttribute('uv');
+  geo = mergeVertices(geo);
+  const pos = geo.attributes.position, col = new Float32Array(pos.count * 3), c = new THREE.Color();
+  for (let i = 0; i < pos.count; i++) {
+    let x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    const taper = x < 0 ? 1 + x * 0.72 : 1 - x * x * 0.18; // kuyruğa doğru incelir, burun yuvarlak
+    y *= taper; z *= taper;
+    const u = (x + 1) / 2, v = y; // u: kuyruk(0) → baş(1), v: -1 alt … 1 üst
+    colorFn(c, u, v, z);
+    pos.setXYZ(i, x * len / 2, y * height / 2, z * width / 2);
+    col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+  }
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  geo.computeVertexNormals();
+  return geo;
+}
+
+function finShape(points) {
+  const sh = new THREE.Shape();
+  sh.moveTo(points[0][0], points[0][1]);
+  for (let i = 1; i < points.length; i++) sh.lineTo(points[i][0], points[i][1]);
+  const geo = new THREE.ShapeGeometry(sh);
+  return geo;
+}
+
+function finMat(color, opacity = 0.8) {
+  return new THREE.MeshStandardMaterial({ color, transparent: true, opacity, side: THREE.DoubleSide, roughness: 0.5, depthWrite: false });
+}
+
+// Tek bir balık modeli; group.userData.tail kuyruk pivotu (yüzerken sallanır)
+function buildFishModel(id, r) {
+  const outer = new THREE.Group(), g = new THREE.Group();
+  g.rotation.y = -Math.PI / 2; // model +x'e bakıyor; lookAt +z kullandığı için çevir
+  outer.add(g);
+  const bodyMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.35, metalness: 0.15 });
+  const tail = new THREE.Group();
+  let L = 4;
+  if (id === 'betta') {
+    const palettes = [['#8e0f1f', '#c3182c', '#3a2a8f'], ['#1d3fa3', '#2e6fd8', '#8a1a3a'], ['#5a1a8c', '#8a2fc4', '#c3182c'], ['#b3121e', '#e0382a', '#f2c14e']];
+    const [c0, c1, c2] = palettes[Math.floor(r() * palettes.length)];
+    L = 4.6;
+    const body = new THREE.Mesh(fishBody(L, 1.5, 1.0, (c, u, v) => c.set(c0).lerp(new THREE.Color(c1), clamp(0.5 + v * 0.4 + u * 0.2, 0, 1))), bodyMat);
+    g.add(body);
+    const fm = finMat(c1, 0.88), fm2 = finMat(c2, 0.82);
+    // uzun, dalgalı kuyruk ve sırt/anal yüzgeçleri
+    const tailGeo = finShape([[0, 0.3], [-1.8, 1.9], [-3.6, 2.2], [-4.2, 0.2], [-3.8, -2.0], [-2.0, -2.4], [0, -0.4]]);
+    const tm = new THREE.Mesh(tailGeo, fm); tail.add(tm);
+    tail.position.x = -L / 2 + 0.2;
+    g.add(tail);
+    const dorsal = new THREE.Mesh(finShape([[0.6, 0.55], [-0.4, 1.8], [-2.2, 1.9], [-2.3, 0.45]]), fm2);
+    const anal = new THREE.Mesh(finShape([[1.0, -0.5], [-0.2, -2.3], [-2.3, -2.6], [-2.3, -0.4]]), fm);
+    g.add(dorsal, anal);
+    g.userData.wave = [dorsal, anal];
+    const pect = new THREE.Mesh(finShape([[0, 0], [-0.9, 0.3], [-0.9, -0.3]]), finMat('#f3d8d8', 0.4));
+    pect.position.set(1.0, -0.15, 0.52); g.add(pect);
+  } else if (id === 'neon') {
+    L = 3.2;
+    const body = new THREE.Mesh(fishBody(L, 0.8, 0.5, (c, u, v) => {
+      if (v > 0.05 && v < 0.35 && u > 0.18) c.set('#27c8ff').lerp(new THREE.Color('#5ef0ff'), (v - 0.05) * 2);
+      else if (v <= 0.05 && u < 0.55) c.set('#e0263a');
+      else if (v >= 0.35) c.set('#5b6246');
+      else c.set('#d9dfe3');
+    }), bodyMat);
+    g.add(body);
+    const tm = new THREE.Mesh(finShape([[0, 0.12], [-0.7, 0.5], [-0.55, 0], [-0.7, -0.5], [0, -0.12]]), finMat('#e9eef0', 0.35));
+    tail.add(tm); tail.position.x = -L / 2 + 0.1; g.add(tail);
+    const dorsal = new THREE.Mesh(finShape([[0.1, 0.3], [-0.2, 0.62], [-0.45, 0.3]]), finMat('#e9eef0', 0.35));
+    g.add(dorsal);
+  } else if (id === 'lepistes') {
+    const tails = [['#ff7a1a', '#2b6fd8'], ['#2b6fd8', '#f2c14e'], ['#e0382a', '#1b1b1b'], ['#f2c14e', '#8a2fc4']];
+    const [t0, t1] = tails[Math.floor(r() * tails.length)];
+    L = 2.6;
+    const body = new THREE.Mesh(fishBody(L, 0.75, 0.5, (c, u, v) => c.set('#b8c2c6').lerp(new THREE.Color(u < 0.35 ? t0 : '#d8dde0'), u < 0.35 ? 0.6 : clamp(-v, 0, 0.5))), bodyMat);
+    g.add(body);
+    const tm = new THREE.Mesh(finShape([[0, 0.2], [-1.2, 1.1], [-1.9, 0.6], [-2.0, 0], [-1.9, -0.6], [-1.2, -1.1], [0, -0.2]]), finMat(t0, 0.85));
+    const spot = new THREE.Mesh(finShape([[-0.8, 0.5], [-1.6, 0.7], [-1.7, -0.3], [-0.9, -0.2]]), finMat(t1, 0.8));
+    spot.position.z = 0.01;
+    tail.add(tm, spot); tail.position.x = -L / 2 + 0.1; g.add(tail);
+    const dorsal = new THREE.Mesh(finShape([[0, 0.3], [-0.4, 0.8], [-0.9, 0.3]]), finMat(t0, 0.7));
+    g.add(dorsal);
+  } else if (id === 'koridoras') {
+    L = 3.8;
+    const body = new THREE.Mesh(fishBody(L, 1.4, 1.05, (c, u, v, z) => {
+      const eye = u > 0.78 && v > -0.1 && v < 0.6;          // gözdeki siyah bant
+      const back = u > 0.35 && u < 0.6 && v > 0.45;         // sırt lekesi
+      const tailSpot = u < 0.12;                             // kuyruk sapı lekesi
+      c.set(eye || back || tailSpot ? '#1c1a1a' : v < -0.4 ? '#f3ece6' : '#e9d9cf');
+    }), bodyMat);
+    body.scale.y = 0.9;
+    g.add(body);
+    const tm = new THREE.Mesh(finShape([[0, 0.2], [-0.9, 0.7], [-0.75, 0], [-0.9, -0.7], [0, -0.2]]), finMat('#e9e2dc', 0.6));
+    tail.add(tm); tail.position.x = -L / 2 + 0.15; g.add(tail);
+    const dorsal = new THREE.Mesh(finShape([[0.4, 0.55], [0.1, 1.35], [-0.4, 0.6]]), finMat('#1c1a1a', 0.85));
+    g.add(dorsal);
+    // bıyıklar
+    const bm = new THREE.MeshStandardMaterial({ color: '#e9d9cf', roughness: 0.6 });
+    for (const zz of [-0.18, 0.18]) {
+      const w = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.35, 4), bm);
+      w.position.set(L / 2 - 0.05, -0.4, zz); w.rotation.z = 0.8; g.add(w);
+    }
+    g.userData.dip = true;
+  }
+  // gözler
+  const eyeMat = new THREE.MeshStandardMaterial({ color: '#0d0d0d', roughness: 0.15, metalness: 0.3 });
+  const eyeR = L * 0.055;
+  for (const zz of [-1, 1]) {
+    const e = new THREE.Mesh(new THREE.SphereGeometry(eyeR, 10, 8), eyeMat);
+    e.position.set(L * 0.36, L * 0.05, zz * L * 0.1);
+    g.add(e);
+  }
+  outer.traverse(o => { if (o.isMesh) o.castShadow = true; });
+  outer.userData.tail = tail;
+  outer.userData.inner = g;
+  outer.userData.len = L;
+  return outer;
+}
+
 /* ---------- Ortam: arka plan, kaide, lamba ---------- */
 
 function backgroundTexture() {
@@ -737,7 +899,7 @@ function buildLampBar(L, W, H) {
   const len = L * 0.92, y = H + 7;
   const bar = new THREE.Mesh(new THREE.BoxGeometry(len, 1.1, 5), alu);
   bar.position.y = y;
-  bar.castShadow = true;
+  bar.castShadow = false; // ışığın kaynağı olduğu için zemine gölge düşürmesin
   g.add(bar);
   const led = new THREE.Mesh(new THREE.PlaneGeometry(len - 2, 3.2), new THREE.MeshStandardMaterial({ color: '#ffffff', emissive: '#f2f6ff', emissiveIntensity: 3.2 }));
   led.rotation.x = Math.PI / 2;
@@ -815,29 +977,18 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     model: { tip: 'kutu', L: 60, W: 30, H: 36, cam: 0.6 },
     interior: null, // { L, W, H, y0, waterTop }
     zemin: 'aquasoil', kalinlik: 5,
-    plants: [], hardscape: [], seed: 1,
+    plants: [], hardscape: [], fish: [], seed: 1,
     quality: 'yuksek',
   };
 
   /* --- Post-processing --- */
-  let composer = null, gtao = null, bloom = null;
+  let composer = null, bloom = null;
   function buildComposer() {
     const w = Math.max(1, container.clientWidth), h = Math.max(1, container.clientHeight);
     const rt = new THREE.WebGLRenderTarget(w, h, { type: THREE.HalfFloatType, samples: 4 });
     composer = new EffectComposer(renderer, rt);
     composer.addPass(new RenderPass(scene, camera));
-    gtao = new GTAOPass(scene, camera, w, h);
-    gtao.output = GTAOPass.OUTPUT.Default;
-    gtao.blendIntensity = 0.85;
-    gtao.updateGtaoMaterial({ radius: 3, distanceExponent: 1, thickness: 3, scale: 1, samples: 16 });
-    gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, rings: 2, samples: 16 });
-    // cam, su ve arka pus gibi saydam katmanlar ortam gölgesi hesabına girmesin
-    const baseOverride = gtao.overrideVisibility.bind(gtao);
-    gtao.overrideVisibility = function () {
-      baseOverride();
-      this.scene.traverse(o => { if (o.userData.noAO) o.visible = false; });
-    };
-    composer.addPass(gtao);
+    // Not: ortam gölgesi (GTAO) zemin kesitinde çizgi/şerit izleri bıraktığı için kullanılmıyor
     bloom = new UnrealBloomPass(new THREE.Vector2(w, h), 0.35, 0.5, 1.1); // yalnızca lamba gibi parlak (HDR) kaynaklar parlasın
     composer.addPass(bloom);
     composer.addPass(new OutputPass());
@@ -858,14 +1009,15 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     if (!I || state.zemin === 'yok' || !ZEMIN_GORUNUM[state.zemin]) return I ? I.y0 : 0;
     const back = clamp((I.W / 2 - z) / I.W, 0, 1); // 0 ön, 1 arka
     const t = state.kalinlik;
-    const bumps = Math.sin(x * 0.21 + state.seed) * 0.25 + Math.sin(z * 0.33 + x * 0.07 + state.seed * 2) * 0.2;
-    return I.y0 + t * (0.85 + 0.75 * back * back) + bumps * Math.min(1, t / 3);
+    // düzensiz, yumuşak dalgalanma (düzenli sinüs çizgileri yerine)
+    const bumps = fbm(x * 0.03 + state.seed * 3.1, z * 0.045, state.seed * 0.37, 2) * 0.6;
+    return I.y0 + t * (0.85 + 0.75 * back * back) + bumps * Math.min(1, t / 4);
   }
 
   /* --- Akvaryum gövdesi --- */
   // Cam: yalnızca yansımaları ekler (additive), içeriği süt gibi örtmez
   const glassMat = new THREE.MeshPhysicalMaterial({
-    color: '#000000', roughness: 0.03, metalness: 0, clearcoat: 0.6, clearcoatRoughness: 0.03, envMapIntensity: 1.1,
+    color: '#000000', roughness: 0.03, metalness: 0, clearcoat: 0.25, clearcoatRoughness: 0.03, envMapIntensity: 0.45,
     transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
   });
   const glassEdgeMat = new THREE.MeshPhysicalMaterial({ color: '#86c4b0', transparent: true, opacity: 0.6, roughness: 0.05, clearcoat: 1, depthWrite: false });
@@ -955,10 +1107,13 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
   }
 
   /* --- İçerik: zemin, taş/kök, bitkiler, su --- */
-  function substrateMaterial(key, extra = {}) {
+  function substrateMaterial(key, { side = false } = {}) {
     const { map, normal } = grainTextures(key);
-    const m = new THREE.MeshStandardMaterial({ map, normalMap: normal, normalScale: new THREE.Vector2(0.9, 0.9), roughness: 0.95, metalness: 0, ...extra });
-    return underwater(m, { caustics: true });
+    const m = side
+      // Cam arkasından görünen kesit: sıkışmış/ıslak, biraz daha koyu; normal haritası yok (çizgi oluşmasın)
+      ? new THREE.MeshStandardMaterial({ map, color: '#cfc7bd', roughness: 1, metalness: 0, side: THREE.DoubleSide })
+      : new THREE.MeshStandardMaterial({ map, normalMap: normal, normalScale: new THREE.Vector2(0.35, 0.35), roughness: 0.95, metalness: 0 });
+    return underwater(m, { caustics: !side });
   }
 
   function buildSubstrate(g) {
@@ -971,7 +1126,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     for (let i = 0; i < pos.count; i++) pos.setY(i, surfaceY(pos.getX(i), pos.getZ(i)));
     top.computeVertexNormals();
     const uv = top.attributes.uv;
-    for (let i = 0; i < uv.count; i++) uv.setXY(i, pos.getX(i) / look.tile, pos.getZ(i) / look.tile);
+    for (let i = 0; i < uv.count; i++) uv.setXY(i, pos.getX(i) / TILE_CM, pos.getZ(i) / TILE_CM);
     const topMesh = new THREE.Mesh(top, substrateMaterial(state.zemin));
     topMesh.receiveShadow = true;
     g.add(topMesh);
@@ -992,7 +1147,6 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     edge(-I.L / 2, -I.W / 2, -I.L / 2, I.W / 2, nz);
     const altY = look.alt ? I.y0 + state.kalinlik * 0.45 : null;
     const layer = (key, yFrom, yTo) => {
-      const lk = ZEMIN_GORUNUM[key];
       const verts = [], uvs = [], idx = [];
       sides.forEach(pts => {
         const start = verts.length / 3;
@@ -1001,7 +1155,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
           if (i) run += Math.hypot(x - pts[i - 1][0], z - pts[i - 1][1]);
           const yb = yFrom, yt = yTo === null ? y : Math.min(y, yTo);
           verts.push(x, yb, z, x, yt, z);
-          uvs.push(run / lk.tile, yb / lk.tile, run / lk.tile, yt / lk.tile);
+          uvs.push(run / TILE_CM, yb / TILE_CM, run / TILE_CM, yt / TILE_CM);
         });
         for (let i = 0; i < pts.length - 1; i++) {
           const a = start + i * 2;
@@ -1013,7 +1167,9 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
       geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
       geo.setIndex(idx);
       geo.computeVertexNormals();
-      g.add(new THREE.Mesh(geo, substrateMaterial(key, { side: THREE.DoubleSide })));
+      const sideMesh = new THREE.Mesh(geo, substrateMaterial(key, { side: true }));
+      sideMesh.userData.noAO = true;
+      g.add(sideMesh);
     };
     if (look.alt) {
       layer(look.alt, I.y0, altY);
@@ -1035,7 +1191,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
       for (let i = 0; i < count; i++) {
         const s = between(r, look.tas) / 2;
         const x = (r() - 0.5) * (I.L - s * 2), z = (r() - 0.5) * (I.W - s * 2);
-        mats.push(mat4(x, surfaceY(x, z) + s * 0.1, z, r() * 3, r() * 3, r() * 3, s * (0.8 + r() * 0.5), s * (0.5 + r() * 0.3), s * (0.8 + r() * 0.5)));
+        mats.push(mat4(x, surfaceY(x, z) - s * 0.15, z, r() * 3, r() * 3, r() * 3, s * (0.8 + r() * 0.5), s * (0.5 + r() * 0.3), s * (0.8 + r() * 0.5)));
       }
       const mesh = new THREE.InstancedMesh(geo, underwater(new THREE.MeshStandardMaterial({ roughness: 0.9 }), { caustics: true }), mats.length);
       const col = new THREE.Color();
@@ -1233,6 +1389,85 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     });
   }
 
+  // Yüzen balıklar: her biri bölgesi içinde rastgele hedeflere doğru yumuşakça yüzer
+  let swimmers = [];
+  function buildFish(g) {
+    const I = state.interior;
+    swimmers = [];
+    const r = rng(state.seed * 71 + 9);
+    const water = I.waterTop - I.y0;
+    const schools = {};
+    state.fish.forEach(({ def, adet }) => {
+      for (let k = 0; k < adet; k++) {
+        const m = buildFishModel(def.id, r);
+        const [b0, b1] = def.bolge;
+        const f = {
+          def, obj: m, speed: def.id === 'betta' ? 2.2 : def.id === 'koridoras' ? 2.4 : 4.5,
+          pos: new THREE.Vector3((r() - 0.5) * (I.L - 8), I.y0 + water * between(r, [b0, b1]) + 1, (r() - 0.5) * (I.W - 6)),
+          target: new THREE.Vector3(), phase: r() * 10, wait: 0,
+          zone: [b0, b1], offset: new THREE.Vector3((r() - 0.5) * 6, (r() - 0.5) * 2.5, (r() - 0.5) * 4),
+        };
+        if (def.suru) { schools[def.id] = schools[def.id] || { target: new THREE.Vector3(), timer: 0 }; f.school = schools[def.id]; }
+        m.position.copy(f.pos);
+        g.add(m);
+        swimmers.push(f);
+      }
+    });
+    swimmers.forEach(f => pickTarget(f, r));
+    Object.values(schools).forEach(sc => { sc.target.copy(swimmers.find(f => f.school === sc).pos); });
+    buildFish.r = r;
+  }
+  function pickTarget(f, r = Math.random) {
+    const I = state.interior, water = I.waterTop - I.y0, m = f.obj.userData.len + 1.5;
+    const x = (r() - 0.5) * Math.max(1, I.L - m * 2), z = (r() - 0.5) * Math.max(1, I.W - m * 2);
+    const floor = surfaceY(x, z);
+    let y = I.y0 + water * between(r, f.zone);
+    y = clamp(y, floor + (f.obj.userData.inner.userData.dip ? 0.9 : 3), I.waterTop - 1.5);
+    f.target.set(x, y, z);
+  }
+  const _dir = new THREE.Vector3(), _look = new THREE.Object3D(), _goal = new THREE.Vector3();
+  function updateFish(dt, t) {
+    if (!swimmers.length) return;
+    const I = state.interior;
+    const schoolsSeen = new Set();
+    swimmers.forEach(f => {
+      if (f.school && !schoolsSeen.has(f.school)) {
+        schoolsSeen.add(f.school);
+        f.school.timer -= dt;
+        if (f.school.timer <= 0) { const tmp = { ...f, target: f.school.target }; pickTarget(tmp); f.school.timer = 4 + Math.random() * 4; }
+      }
+      _goal.copy(f.school ? f.school.target : f.target);
+      if (f.school) _goal.add(f.offset);
+      if (f.wait > 0) { f.wait -= dt; _goal.copy(f.pos); }
+      _dir.subVectors(_goal, f.pos);
+      const d = _dir.length();
+      if (!f.school && d < 1.5) {
+        pickTarget(f);
+        if (f.def.id === 'betta' || f.def.id === 'koridoras') f.wait = 1 + Math.random() * 2.5; // arada durup dinlensin
+      }
+      const sp = f.wait > 0 ? 0.3 : f.speed * (0.7 + 0.3 * Math.sin(t * 0.7 + f.phase));
+      if (d > 0.05) f.pos.addScaledVector(_dir.normalize(), Math.min(d, sp * dt));
+      // akvaryum içinde kal
+      const m = f.obj.userData.len / 2 + 0.5;
+      f.pos.x = clamp(f.pos.x, -I.L / 2 + m, I.L / 2 - m);
+      f.pos.z = clamp(f.pos.z, -I.W / 2 + m, I.W / 2 - m);
+      f.pos.y = clamp(f.pos.y, surfaceY(f.pos.x, f.pos.z) + 0.8, I.waterTop - 1);
+      f.obj.position.copy(f.pos);
+      // yüzme yönüne yumuşak dönüş
+      if (d > 0.3 && f.wait <= 0) {
+        _look.position.copy(f.pos);
+        _look.lookAt(f.pos.x + _dir.x, f.pos.y + _dir.y * 0.4, f.pos.z + _dir.z);
+        f.obj.quaternion.slerp(_look.quaternion, Math.min(1, dt * 2.5));
+      }
+      // kuyruk ve yüzgeç hareketi
+      const beat = f.wait > 0 ? 2 : f.def.id === 'neon' ? 12 : 7;
+      f.obj.userData.tail.rotation.y = Math.sin(t * beat + f.phase) * (f.def.id === 'betta' ? 0.35 : 0.45);
+      const inner = f.obj.userData.inner;
+      inner.rotation.x = Math.sin(t * beat * 0.5 + f.phase) * 0.04;
+      (inner.userData.wave || []).forEach((w, i) => { w.rotation.x = Math.sin(t * 2.2 + f.phase + i) * 0.12; });
+    });
+  }
+
   function rebuildContent() {
     if (contentGroup) { root.remove(contentGroup); disposeTree(contentGroup); }
     contentGroup = new THREE.Group();
@@ -1247,6 +1482,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
       const anchors = buildHardscape(contentGroup, pick, rng(state.seed * 53 + 5));
       buildPlants(contentGroup, pick, r, anchors);
       buildWater(contentGroup);
+      buildFish(contentGroup);
     }
     root.add(contentGroup);
   }
@@ -1338,6 +1574,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     up.set(0, 1, 0).transformDirection(camera.matrixWorldInverse);
     U.uLightView.value.copy(up);
     if (waterSurface) waterSurface.material.normalMap.offset.set(U.uTime.value * 0.012, U.uTime.value * 0.007);
+    updateFish(dt, U.uTime.value);
     if (particles) {
       const a = particles.geometry.attributes.position, b = particles.userData.bounds;
       for (let i = 0; i < a.count; i++) {
@@ -1366,10 +1603,12 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     setSubstrate(zemin, kalinlik) { state.zemin = zemin; state.kalinlik = kalinlik; rebuildContent(); },
     setPlants(list) { state.plants = list; rebuildContent(); },
     setHardscape(list) { state.hardscape = list; rebuildContent(); },
-    setAll({ zemin, kalinlik, plants, hardscape }) {
+    setFish(list) { state.fish = list; rebuildContent(); },
+    setAll({ zemin, kalinlik, plants, hardscape, fish }) {
       if (zemin !== undefined) { state.zemin = zemin; state.kalinlik = kalinlik; }
       if (plants) state.plants = plants;
       if (hardscape) state.hardscape = hardscape;
+      if (fish) state.fish = fish;
       rebuildContent();
     },
     shuffle() { state.seed = (state.seed * 16807 + 11) % 2147483647; rebuildContent(); return state.seed; },
