@@ -7,7 +7,6 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
@@ -77,7 +76,7 @@ const U = {
   uTime: { value: 0 },
   uWaterTop: { value: 30 },
   uFloor: { value: 0 },
-  uCaustic: { value: 0.55 },
+  uCaustic: { value: 0.32 },
   uLightView: { value: new THREE.Vector3(0, 1, 0) },
   uSway: { value: 0.0009 },
 };
@@ -147,7 +146,7 @@ diffuseColor.rgb *= mix(c0, c1, smoothstep(0.1, 1.0, vT));
       .replace('#include <opaque_fragment>', `
 #ifdef TK_CAUSTICS
 if (vWPos.y < uWaterTop) {
-  float tkC = tkCaustic(vWPos.xz * 0.22 + vec2(3.0), uTime * 0.55);
+  float tkC = tkCaustic(vWPos.xz * 0.13 + vec2(3.0), uTime * 0.45);
   float tkUp = clamp(dot(normal, uLightView), 0.0, 1.0);
   outgoingLight += diffuseColor.rgb * tkC * uCaustic * (0.25 + 0.75 * tkUp);
   float tkD = clamp((uWaterTop - vWPos.y) / 70.0, 0.0, 1.0);
@@ -165,56 +164,79 @@ outgoingLight += diffuseColor.rgb * tkB * 0.5;
 
 /* ---------- Zemin görünümleri ---------- */
 
-// grain: tane yarıçapı (doku pikseli), tile: dokunun kapladığı cm, tas: üstüne serpilen taşlar [min, max] cm
+// mm: gerçek tane boyutu (mm), tas: üstüne serpilen taşlar [min, max] cm
+const TILE_CM = 20; // doku karosunun kapladığı alan (cm); büyük tutulur ki tekrar fark edilmesin
 const ZEMIN_GORUNUM = {
-  aquasoil:     { base: '#2b2420', palette: ['#3a302a', '#1f1a17', '#4a3d33', '#2e2622', '#56463a'], grain: 3.2, tile: 7 },
-  katmanli:     { base: '#c9b28a', palette: ['#d8c39c', '#b89d72', '#e3d4b3', '#a88d64', '#8d7a5c'], grain: 1.6, tile: 5, alt: 'aquasoil' },
-  kil:          { base: '#7a3f2a', palette: ['#8c4a31', '#6b3322', '#9a5a3c', '#5e2e1f', '#a8653f'], grain: 3.4, tile: 7 },
-  'dere-kumu':  { base: '#c9b28a', palette: ['#d8c39c', '#b89d72', '#e3d4b3', '#a88d64', '#8d7a5c'], grain: 1.6, tile: 5 },
-  silis:        { base: '#e9e4d8', palette: ['#f4f1ea', '#dcd6c8', '#ffffff', '#cfc8b8', '#e2dccd'], grain: 1.4, tile: 5 },
-  bazalt:       { base: '#262626', palette: ['#1b1b1b', '#333333', '#2a2a2a', '#444444', '#3a3a3a'], grain: 1.5, tile: 5 },
-  'renkli-kum': { base: '#d9c8a8', palette: ['#e05a5a', '#4f86d9', '#f2c14e', '#5bbf6a', '#b86bd6', '#f28ec0', '#ffffff'], grain: 1.9, tile: 5 },
-  mercan:       { base: '#efe9df', palette: ['#f7f3ec', '#e8dfd0', '#ffffff', '#e3d5c2', '#f0c9b5'], grain: 2.6, tile: 6 },
-  cakil:        { base: '#8f887c', palette: ['#a39b8e', '#7c756a', '#b8b0a2', '#6b655c', '#9c8a74'], grain: 4, tile: 10, tas: [0.7, 1.5],
+  aquasoil:     { base: '#2b2420', palette: ['#3a302a', '#1f1a17', '#4a3d33', '#2e2622', '#56463a'], mm: 2.6 },
+  katmanli:     { base: '#c9b28a', palette: ['#d8c39c', '#b89d72', '#e3d4b3', '#a88d64', '#8d7a5c'], mm: 0.9, alt: 'aquasoil' },
+  kil:          { base: '#7a3f2a', palette: ['#8c4a31', '#6b3322', '#9a5a3c', '#5e2e1f', '#a8653f'], mm: 3 },
+  'dere-kumu':  { base: '#c9b28a', palette: ['#d8c39c', '#b89d72', '#e3d4b3', '#a88d64', '#8d7a5c'], mm: 0.9 },
+  silis:        { base: '#e9e4d8', palette: ['#f4f1ea', '#dcd6c8', '#ffffff', '#cfc8b8', '#e2dccd'], mm: 0.7 },
+  bazalt:       { base: '#262626', palette: ['#1b1b1b', '#333333', '#2a2a2a', '#444444', '#3a3a3a'], mm: 0.8 },
+  'renkli-kum': { base: '#d9c8a8', palette: ['#e05a5a', '#4f86d9', '#f2c14e', '#5bbf6a', '#b86bd6', '#f28ec0', '#ffffff'], mm: 1.3 },
+  mercan:       { base: '#efe9df', palette: ['#f7f3ec', '#e8dfd0', '#ffffff', '#e3d5c2', '#f0c9b5'], mm: 1.6 },
+  cakil:        { base: '#8f887c', palette: ['#a39b8e', '#7c756a', '#b8b0a2', '#6b655c', '#9c8a74'], mm: 3.5, tas: [0.7, 1.5],
                   tasRenk: ['#a39b8e', '#7c756a', '#b8b0a2', '#6b655c', '#9c8a74', '#c2b7a3'] },
-  lav:          { base: '#4a2620', palette: ['#5e2e24', '#3b2420', '#6f3a2c', '#2a1a17', '#7a4030'], grain: 4, tile: 10, tas: [0.8, 1.9],
+  lav:          { base: '#4a2620', palette: ['#5e2e24', '#3b2420', '#6f3a2c', '#2a1a17', '#7a4030'], mm: 4, tas: [0.8, 1.9],
                   tasRenk: ['#6b3326', '#3b2420', '#7a3b2c', '#4f2a22', '#2e1d19'] },
-  ponza:        { base: '#d3ccbd', palette: ['#dcd6c9', '#c8c0af', '#e6e1d6', '#bdb4a2', '#d9d2c2'], grain: 4, tile: 10, tas: [0.6, 1.4],
+  ponza:        { base: '#d3ccbd', palette: ['#dcd6c9', '#c8c0af', '#e6e1d6', '#bdb4a2', '#d9d2c2'], mm: 3.5, tas: [0.6, 1.4],
                   tasRenk: ['#dcd6c9', '#c8c0af', '#e6e1d6', '#bdb4a2', '#cfc6b3'] },
   yok:          null,
 };
 
 const grainCache = new Map();
-// Zemin dokusu: renk haritası + aynı tanelerden üretilen normal haritası
+// Zemin dokusu: renk haritası + aynı tanelerden üretilen yumuşak normal haritası (dikişsiz, TILE_CM kaplar)
 function grainTextures(key) {
   if (grainCache.has(key)) return grainCache.get(key);
   const g = ZEMIN_GORUNUM[key];
-  const size = 512;
+  const size = 1024, pxPerCm = size / TILE_CM;
   const color = document.createElement('canvas'), height = document.createElement('canvas');
   color.width = color.height = height.width = height.height = size;
   const cx = color.getContext('2d'), hx = height.getContext('2d');
   cx.fillStyle = g.base; cx.fillRect(0, 0, size, size);
-  hx.fillStyle = '#303030'; hx.fillRect(0, 0, size, size);
+  hx.fillStyle = '#404040'; hx.fillRect(0, 0, size, size);
   const r = rng(hashStr(key));
-  const grain = g.grain * 2;
-  const n = Math.round((size * size) / (grain * grain * 2.0));
-  for (let i = 0; i < n; i++) {
-    const x = r() * size, y = r() * size, rad = grain * (0.5 + r() * 0.9), ang = r() * Math.PI, sq = 0.65 + r() * 0.35;
-    const col = g.palette[Math.floor(r() * g.palette.length)];
-    for (const [dx, dy] of [[0, 0], [size, 0], [-size, 0], [0, size], [0, -size]]) {
-      cx.fillStyle = col;
-      cx.beginPath(); cx.ellipse(x + dx, y + dy, rad, rad * sq, ang, 0, Math.PI * 2); cx.fill();
-      const gr = hx.createRadialGradient(x + dx - rad * 0.2, y + dy - rad * 0.2, 0, x + dx, y + dy, rad);
-      gr.addColorStop(0, '#ffffff'); gr.addColorStop(1, '#404040');
-      hx.fillStyle = gr;
-      hx.beginPath(); hx.ellipse(x + dx, y + dy, rad, rad * sq, ang, 0, Math.PI * 2); hx.fill();
+  const wrap = (x, y, rad, fn) => {
+    for (const dx of [0, size, -size]) for (const dy of [0, size, -size]) {
+      if (x + dx + rad < 0 || x + dx - rad > size || y + dy + rad < 0 || y + dy - rad > size) continue;
+      fn(x + dx, y + dy);
     }
+  };
+  // Taneler: gerçek boyutuna göre
+  const rad0 = Math.max(1.1, (g.mm / 10) * pxPerCm / 2);
+  const n = Math.min(90000, Math.round((size * size) / (rad0 * rad0 * 2.6)));
+  for (let i = 0; i < n; i++) {
+    const x = r() * size, y = r() * size, rad = rad0 * (0.6 + r() * 0.8), ang = r() * Math.PI, sq = 0.7 + r() * 0.3;
+    const col = g.palette[Math.floor(r() * g.palette.length)];
+    wrap(x, y, rad, (px, py) => {
+      cx.fillStyle = col;
+      cx.beginPath(); cx.ellipse(px, py, rad, rad * sq, ang, 0, Math.PI * 2); cx.fill();
+      hx.fillStyle = `rgb(${150 + (r() * 60) | 0},${150 + (r() * 60) | 0},${150 + (r() * 60) | 0})`;
+      hx.beginPath(); hx.ellipse(px, py, rad * 0.9, rad * sq * 0.9, ang, 0, Math.PI * 2); hx.fill();
+    });
   }
+  // Ton lekeleri: ıslak/kuru, koyu/açık bölgeler (tekrarı gizler)
+  for (let i = 0; i < 26; i++) {
+    const x = r() * size, y = r() * size, rad = size * (0.08 + r() * 0.18), dark = r() > 0.5;
+    wrap(x, y, rad, (px, py) => {
+      const gr = cx.createRadialGradient(px, py, 0, px, py, rad);
+      gr.addColorStop(0, dark ? 'rgba(20,15,10,.06)' : 'rgba(255,250,240,.05)');
+      gr.addColorStop(1, 'rgba(0,0,0,0)');
+      cx.fillStyle = gr; cx.fillRect(px - rad, py - rad, rad * 2, rad * 2);
+    });
+  }
+  // Yükseklik haritasını yumuşat → normal haritası titreşmesin
+  const soft = document.createElement('canvas');
+  soft.width = soft.height = size;
+  const sx = soft.getContext('2d');
+  sx.filter = 'blur(1.2px)';
+  sx.drawImage(height, 0, 0);
   const map = new THREE.CanvasTexture(color);
   map.wrapS = map.wrapT = THREE.RepeatWrapping;
   map.colorSpace = THREE.SRGBColorSpace;
   map.anisotropy = 8;
-  const normal = normalFromCanvas(height, 3);
+  const normal = normalFromCanvas(soft, 1.6);
+  normal.anisotropy = 8;
   const res = { map, normal };
   grainCache.set(key, res);
   return res;
@@ -737,7 +759,7 @@ function buildLampBar(L, W, H) {
   const len = L * 0.92, y = H + 7;
   const bar = new THREE.Mesh(new THREE.BoxGeometry(len, 1.1, 5), alu);
   bar.position.y = y;
-  bar.castShadow = true;
+  bar.castShadow = false; // ışığın kaynağı olduğu için zemine gölge düşürmesin
   g.add(bar);
   const led = new THREE.Mesh(new THREE.PlaneGeometry(len - 2, 3.2), new THREE.MeshStandardMaterial({ color: '#ffffff', emissive: '#f2f6ff', emissiveIntensity: 3.2 }));
   led.rotation.x = Math.PI / 2;
@@ -820,24 +842,13 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
   };
 
   /* --- Post-processing --- */
-  let composer = null, gtao = null, bloom = null;
+  let composer = null, bloom = null;
   function buildComposer() {
     const w = Math.max(1, container.clientWidth), h = Math.max(1, container.clientHeight);
     const rt = new THREE.WebGLRenderTarget(w, h, { type: THREE.HalfFloatType, samples: 4 });
     composer = new EffectComposer(renderer, rt);
     composer.addPass(new RenderPass(scene, camera));
-    gtao = new GTAOPass(scene, camera, w, h);
-    gtao.output = GTAOPass.OUTPUT.Default;
-    gtao.blendIntensity = 0.85;
-    gtao.updateGtaoMaterial({ radius: 3, distanceExponent: 1, thickness: 3, scale: 1, samples: 16 });
-    gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, rings: 2, samples: 16 });
-    // cam, su ve arka pus gibi saydam katmanlar ortam gölgesi hesabına girmesin
-    const baseOverride = gtao.overrideVisibility.bind(gtao);
-    gtao.overrideVisibility = function () {
-      baseOverride();
-      this.scene.traverse(o => { if (o.userData.noAO) o.visible = false; });
-    };
-    composer.addPass(gtao);
+    // Not: ortam gölgesi (GTAO) zemin kesitinde çizgi/şerit izleri bıraktığı için kullanılmıyor
     bloom = new UnrealBloomPass(new THREE.Vector2(w, h), 0.35, 0.5, 1.1); // yalnızca lamba gibi parlak (HDR) kaynaklar parlasın
     composer.addPass(bloom);
     composer.addPass(new OutputPass());
@@ -858,14 +869,15 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     if (!I || state.zemin === 'yok' || !ZEMIN_GORUNUM[state.zemin]) return I ? I.y0 : 0;
     const back = clamp((I.W / 2 - z) / I.W, 0, 1); // 0 ön, 1 arka
     const t = state.kalinlik;
-    const bumps = Math.sin(x * 0.21 + state.seed) * 0.25 + Math.sin(z * 0.33 + x * 0.07 + state.seed * 2) * 0.2;
-    return I.y0 + t * (0.85 + 0.75 * back * back) + bumps * Math.min(1, t / 3);
+    // düzensiz, yumuşak dalgalanma (düzenli sinüs çizgileri yerine)
+    const bumps = fbm(x * 0.03 + state.seed * 3.1, z * 0.045, state.seed * 0.37, 2) * 0.6;
+    return I.y0 + t * (0.85 + 0.75 * back * back) + bumps * Math.min(1, t / 4);
   }
 
   /* --- Akvaryum gövdesi --- */
   // Cam: yalnızca yansımaları ekler (additive), içeriği süt gibi örtmez
   const glassMat = new THREE.MeshPhysicalMaterial({
-    color: '#000000', roughness: 0.03, metalness: 0, clearcoat: 0.6, clearcoatRoughness: 0.03, envMapIntensity: 1.1,
+    color: '#000000', roughness: 0.03, metalness: 0, clearcoat: 0.25, clearcoatRoughness: 0.03, envMapIntensity: 0.45,
     transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
   });
   const glassEdgeMat = new THREE.MeshPhysicalMaterial({ color: '#86c4b0', transparent: true, opacity: 0.6, roughness: 0.05, clearcoat: 1, depthWrite: false });
@@ -955,10 +967,13 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
   }
 
   /* --- İçerik: zemin, taş/kök, bitkiler, su --- */
-  function substrateMaterial(key, extra = {}) {
+  function substrateMaterial(key, { side = false } = {}) {
     const { map, normal } = grainTextures(key);
-    const m = new THREE.MeshStandardMaterial({ map, normalMap: normal, normalScale: new THREE.Vector2(0.9, 0.9), roughness: 0.95, metalness: 0, ...extra });
-    return underwater(m, { caustics: true });
+    const m = side
+      // Cam arkasından görünen kesit: sıkışmış/ıslak, biraz daha koyu; normal haritası yok (çizgi oluşmasın)
+      ? new THREE.MeshStandardMaterial({ map, color: '#cfc7bd', roughness: 1, metalness: 0, side: THREE.DoubleSide })
+      : new THREE.MeshStandardMaterial({ map, normalMap: normal, normalScale: new THREE.Vector2(0.35, 0.35), roughness: 0.95, metalness: 0 });
+    return underwater(m, { caustics: !side });
   }
 
   function buildSubstrate(g) {
@@ -971,7 +986,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     for (let i = 0; i < pos.count; i++) pos.setY(i, surfaceY(pos.getX(i), pos.getZ(i)));
     top.computeVertexNormals();
     const uv = top.attributes.uv;
-    for (let i = 0; i < uv.count; i++) uv.setXY(i, pos.getX(i) / look.tile, pos.getZ(i) / look.tile);
+    for (let i = 0; i < uv.count; i++) uv.setXY(i, pos.getX(i) / TILE_CM, pos.getZ(i) / TILE_CM);
     const topMesh = new THREE.Mesh(top, substrateMaterial(state.zemin));
     topMesh.receiveShadow = true;
     g.add(topMesh);
@@ -992,7 +1007,6 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     edge(-I.L / 2, -I.W / 2, -I.L / 2, I.W / 2, nz);
     const altY = look.alt ? I.y0 + state.kalinlik * 0.45 : null;
     const layer = (key, yFrom, yTo) => {
-      const lk = ZEMIN_GORUNUM[key];
       const verts = [], uvs = [], idx = [];
       sides.forEach(pts => {
         const start = verts.length / 3;
@@ -1001,7 +1015,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
           if (i) run += Math.hypot(x - pts[i - 1][0], z - pts[i - 1][1]);
           const yb = yFrom, yt = yTo === null ? y : Math.min(y, yTo);
           verts.push(x, yb, z, x, yt, z);
-          uvs.push(run / lk.tile, yb / lk.tile, run / lk.tile, yt / lk.tile);
+          uvs.push(run / TILE_CM, yb / TILE_CM, run / TILE_CM, yt / TILE_CM);
         });
         for (let i = 0; i < pts.length - 1; i++) {
           const a = start + i * 2;
@@ -1013,7 +1027,9 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
       geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
       geo.setIndex(idx);
       geo.computeVertexNormals();
-      g.add(new THREE.Mesh(geo, substrateMaterial(key, { side: THREE.DoubleSide })));
+      const sideMesh = new THREE.Mesh(geo, substrateMaterial(key, { side: true }));
+      sideMesh.userData.noAO = true;
+      g.add(sideMesh);
     };
     if (look.alt) {
       layer(look.alt, I.y0, altY);
@@ -1035,7 +1051,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
       for (let i = 0; i < count; i++) {
         const s = between(r, look.tas) / 2;
         const x = (r() - 0.5) * (I.L - s * 2), z = (r() - 0.5) * (I.W - s * 2);
-        mats.push(mat4(x, surfaceY(x, z) + s * 0.1, z, r() * 3, r() * 3, r() * 3, s * (0.8 + r() * 0.5), s * (0.5 + r() * 0.3), s * (0.8 + r() * 0.5)));
+        mats.push(mat4(x, surfaceY(x, z) - s * 0.15, z, r() * 3, r() * 3, r() * 3, s * (0.8 + r() * 0.5), s * (0.5 + r() * 0.3), s * (0.8 + r() * 0.5)));
       }
       const mesh = new THREE.InstancedMesh(geo, underwater(new THREE.MeshStandardMaterial({ roughness: 0.9 }), { caustics: true }), mats.length);
       const col = new THREE.Color();
