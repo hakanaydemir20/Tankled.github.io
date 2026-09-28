@@ -168,7 +168,8 @@
   .gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(51,73,47,.35),transparent 55%);
     opacity:0;transition:opacity .4s}
   .gallery-item:hover::after{opacity:1}
-  @media(max-width:920px){ .gallery-grid{column-count:2} }
+  @media(min-width:1101px){ .gallery-grid{column-count:5;column-gap:14px} .gallery-item{margin-bottom:14px} }
+  @media(max-width:1100px){ .gallery-grid{column-count:2} }
   @media(max-width:560px){ .gallery-grid{column-count:1} }
 
   /* Steps band */
@@ -494,6 +495,7 @@
       <div class="gallery-item"><img src="assets/g-betta-moss.jpeg" alt="Moss dekorlu betta akvaryumu" loading="lazy"/></div>
       <div class="gallery-item"><img src="assets/g-paludarium-open.jpeg" alt="Ön açılır camlı paludaryum" loading="lazy"/></div>
       <div class="gallery-item"><img src="assets/g-betta-studio.jpeg" alt="Betta akvaryumu stüdyo çekimi" loading="lazy"/></div>
+      <div class="gallery-item"><img src="assets/g-betta-bos.webp" alt="Betta Serisi akvaryumun boş hali: ahşap gövde, LED aydınlatma ve cam hazne" loading="lazy" width="1086" height="1448"/></div>
       <div class="gallery-item"><img src="assets/g-lineup.png" alt="Tankled koleksiyonu bir arada" loading="lazy"/></div>
     </div>
   </div>
