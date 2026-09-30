@@ -55,6 +55,16 @@
   .card h2{font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:12px}
   .step{width:26px;height:26px;border-radius:50%;background:var(--green);color:var(--on-green);font-size:12.5px;font-weight:600;display:grid;place-items:center;flex:none}
   .hint{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+  .fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;background:var(--cream);border:1.5px solid rgba(67,96,63,.18);border-radius:12px;padding:11px 14px;font-size:14px;font-weight:600;color:var(--green-dark);transition:border-color .2s,background .2s}
+  .fold>summary::-webkit-details-marker{display:none}
+  .fold>summary:hover{border-color:var(--green)}
+  .fold>summary:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .fold>summary .fc{margin-left:auto;font-size:12px;font-weight:500;color:var(--muted)}
+  .fold>summary .chev{flex:none;transition:transform .25s}
+  .fold[open]>summary{margin-bottom:10px;background:rgba(92,122,90,.1)}
+  .fold[open]>summary .chev{transform:rotate(180deg)}
+  .light-rec{background:rgba(92,122,90,.1);border-radius:12px;padding:10px 12px;font-size:12.5px;line-height:1.55;margin-top:10px;color:var(--ink)}
+  .light-rec b{color:var(--green-dark)}
 
   .models{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .model{position:relative;display:block}
@@ -231,14 +241,7 @@
     </section>
 
     <section class="card">
-      <h2><span class="step">3</span> Taş ve kök</h2>
-      <p class="hint" style="margin:-4px 0 4px">Akvaryumcularda satılan taş ve kökler. Eklediğinizde akvaryuma yerleşir; Anubias, eğrelti ve yosun gibi bitkiler bunların üzerine tutunur.</p>
-      <div id="hsList"></div>
-      <div id="hsNotes"></div>
-    </section>
-
-    <section class="card">
-      <h2><span class="step">4</span> Işık ve CO₂</h2>
+      <h2><span class="step">3</span> Işık ve CO₂</h2>
       <div class="row2">
         <label class="field">Işık gücü (lümen)<input type="number" id="lumen" min="0" step="50" inputmode="decimal" placeholder="ör. 1500"></label>
         <div class="field">CO₂ sistemi
@@ -249,7 +252,18 @@
         </div>
       </div>
       <p class="hint" id="lightInfo">Işık bilgisini girerseniz bitki önerileri ışığınıza göre de kontrol edilir.</p>
+      <div class="light-rec" id="lightRec"></div>
       <div id="warnings"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">4</span> Taş ve kök</h2>
+      <p class="hint" style="margin:-4px 0 4px">Akvaryumcularda satılan taş ve kökler. Eklediğinizde akvaryuma yerleşir; Anubias, eğrelti ve yosun gibi bitkiler bunların üzerine tutunur.</p>
+      <details class="fold" id="hsFold">
+        <summary><span>＋ Taş ve kök ekle</span><span class="fc" id="hsCount"></span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div id="hsList"></div>
+      </details>
+      <div id="hsNotes"></div>
     </section>
 
     <section class="card">
@@ -260,7 +274,8 @@
         <button type="button" class="btn" id="shuffle">↻ Yerleşimi değiştir</button>
         <button type="button" class="btn" id="clearPlants">Bitkileri temizle</button>
       </div>
-      <h3 class="chosen-head" style="margin-bottom:10px">Bitki ekle</h3>
+      <details class="fold" id="plantFold">
+        <summary><span>＋ Bitki ekle</span><span class="fc" id="plantAvail"></span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <div class="plant-tools">
         <input type="search" id="pq" placeholder="Bitki ara…" aria-label="Bitki ara" autocomplete="off">
         <div class="seg" role="group" aria-label="Liste">
@@ -269,12 +284,16 @@
         </div>
       </div>
       <div class="plist" id="plist"></div>
+      </details>
     </section>
 
     <section class="card">
       <h2><span class="step">6</span> Balıklar</h2>
       <p class="hint" style="margin:-4px 0 8px">Eklediğiniz balıklar akvaryumda yüzer. Akvaryum hacmine ve birbirleriyle uyumuna göre kontrol edilir.</p>
-      <div class="hs-list" id="fishList"></div>
+      <details class="fold" id="fishFold">
+        <summary><span>＋ Balık ekle</span><span class="fc" id="fishCount"></span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="hs-list" id="fishList"></div>
+      </details>
       <div id="fishNotes"></div>
     </section>
 
@@ -500,6 +519,7 @@
       .filter(x => state.filter === 'tumu' || x.e.durum !== 'hayir')
       .filter(x => !state.q || (x.p.ad + ' ' + x.p.latin).toLocaleLowerCase('tr').includes(state.q))
       .sort((a, b) => order[a.e.durum] - order[b.e.durum]);
+    $('plantAvail').textContent = `${AQUA.filter(x => T.evaluate(x.p, prm).durum !== 'hayir').length} uygun bitki`;
     const label = { uygun: 'Uygun', dikkat: 'Dikkat', hayir: 'Uygun değil' };
     const qtyOf = f => state.plants.find(x => x.foto === f)?.adet || 0;
     $('plist').innerHTML = rows.length ? rows.map(({ p, cat, e }) => { const n = qtyOf(p.foto); return `
@@ -572,6 +592,8 @@
   /* ---------- Taş ve kök ---------- */
   function renderHardscape() {
     const qty = id => state.hardscape.find(x => x.id === id)?.adet || 0;
+    const nh = state.hardscape.reduce((n, x) => n + x.adet, 0);
+    $('hsCount').textContent = nh ? `${nh} parça seçili` : `${HARDSCAPE.length} çeşit`;
     const row = d => { const n = qty(d.id); return `
       <div class="hs-item${n ? ' secili' : ''}">
         <span class="swatch ${d.tur}" style="background:${d.renk}"></span>
@@ -612,6 +634,8 @@
   }
   function renderFish() {
     const label = { uygun: 'Uygun', dikkat: 'Dikkat', hayir: 'Uygun değil' };
+    const nf = state.fish.reduce((n, x) => n + x.adet, 0);
+    $('fishCount').textContent = nf ? `${nf} balık seçili` : `${BALIKLAR.length} tür`;
     $('fishList').innerHTML = BALIKLAR.map(d => {
       const n = state.fish.find(x => x.id === d.id)?.adet || 0, e = fishEval(d, n), max = d.maxAdet || 20;
       return `<div class="hs-item${n ? ' secili' : ''}">
@@ -676,6 +700,16 @@
     const lumenOneri = () => { const L = litre(), r = (a, b) => `${fmt(Math.round(L * a / 50) * 50)}–${fmt(Math.round(L * b / 50) * 50)} lm`;
       return `${fmt(L, 0)} L için önerilen: <b>Low Tech ${r(20, 30)}</b> (20–30 lm/L) · <b>High Tech ${r(50, 80)}</b> (50–80 lm/L)`; };
     const warns = [];
+    const LV = { 'Düşük': [20, 30], 'Düşük–orta': [25, 35], 'Orta': [30, 45], 'Orta–yüksek': [40, 60], 'Yüksek': [50, 80] };
+    const needy = state.plants.map(x => byFoto[x.foto].p).filter(p => LV[p.bilgi[0]])
+      .sort((a, b) => LV[b.bilgi[0]][0] - LV[a.bilgi[0]][0])[0];
+    if (needy) {
+      const [lo, hi] = LV[needy.bilgi[0]], L = litre(), r = v => fmt(Math.round(L * v / 50) * 50);
+      let t = `<b>Seçtiğiniz bitkiler için önerilen ışık: ${r(lo)}–${r(hi)} lm</b> (${lo}–${hi} lm/L, ${fmt(L, 0)} L)<br>En çok ışık isteyen: ${esc(needy.ad)} (${esc(needy.bilgi[0])} ışık)`;
+      if (d.H > 45) t += '<br>Akvaryum 45 cm’den yüksek olduğu için aralığın üst tarafını hedefleyin.';
+      if (state.lumen) t += state.lumen < L * lo ? `<br>Girdiğiniz ${fmt(state.lumen)} lm bu bitkiler için yetersiz.` : state.lumen > L * hi * 1.15 ? `<br>Girdiğiniz ${fmt(state.lumen)} lm bu bitkiler için fazla; yosun riskine dikkat edin.` : `<br>Girdiğiniz ${fmt(state.lumen)} lm bu bitkiler için uygun.`;
+      $('lightRec').innerHTML = t;
+    } else $('lightRec').innerHTML = 'Bitki eklediğinizde, seçtiğiniz bitkilere göre önerilen ışık burada gösterilir.';
     if (state.lumen) {
       const lmL = state.lumen / litre();
       $('lightInfo').innerHTML = `Litre başına <b>${fmt(lmL)} lm/L</b> · Işık seviyeniz: <b>${T.tankLevel(lmL)}</b><br>${lumenOneri()}`;
