@@ -9,6 +9,5 @@ El işçiliğiyle üretilen dekoratif akvaryum, paludaryum ve terraryumlar.
 | Sayfa | Link |
 |---|---|
 | Ana sayfa | [Tankled](https://hakanaydemir20.github.io/Tankled.github.io/) |
-| Akvaryum litre ve ışık hesaplama | [akvaryum-hesaplama](https://hakanaydemir20.github.io/Tankled.github.io/akvaryum-hesaplama/) |
 | Bitkiler rehberi ve bitki seçici | [bitkiler](https://hakanaydemir20.github.io/Tankled.github.io/bitkiler/) |
-| 3D akvaryum tasarımı | [akvaryum-olustur](https://hakanaydemir20.github.io/Tankled.github.io/akvaryum-olustur/) |
+| 3D akvaryum tasarımı (litre, ışık, zemin, bitki ve balık) | [akvaryum-olustur](https://hakanaydemir20.github.io/Tankled.github.io/akvaryum-olustur/) |
