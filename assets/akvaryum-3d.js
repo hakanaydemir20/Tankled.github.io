@@ -1110,7 +1110,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
   /* --- Akvaryum gövdesi --- */
   // Cam: yalnızca yansımaları ekler (additive), içeriği süt gibi örtmez
   const glassMat = new THREE.MeshPhysicalMaterial({
-    color: '#000000', roughness: 0.03, metalness: 0, clearcoat: 0.25, clearcoatRoughness: 0.03, envMapIntensity: 0.45,
+    color: '#000000', roughness: 0.03, metalness: 0, clearcoat: 0.1, clearcoatRoughness: 0.03, envMapIntensity: 0.18,
     transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
   });
   const glassEdgeMat = new THREE.MeshPhysicalMaterial({ color: '#86c4b0', transparent: true, opacity: 0.6, roughness: 0.05, clearcoat: 1, depthWrite: false });
@@ -1341,7 +1341,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     for (let i = 0; i < n; i++) { pp[i * 3] = (r() - 0.5) * (I.L - 2); pp[i * 3 + 1] = I.y0 + r() * h; pp[i * 3 + 2] = (r() - 0.5) * (I.W - 2); }
     const pg = new THREE.BufferGeometry();
     pg.setAttribute('position', new THREE.BufferAttribute(pp, 3));
-    particles = new THREE.Points(pg, new THREE.PointsMaterial({ color: '#ffffff', size: 0.12, transparent: true, opacity: 0.35, depthWrite: false }));
+    particles = new THREE.Points(pg, new THREE.PointsMaterial({ color: '#ffffff', size: 0.1, transparent: true, opacity: 0.2, depthWrite: false }));
     particles.userData = { noAO: true, bounds: { L: I.L - 2, W: I.W - 2, y0: I.y0, h } };
     g.add(particles);
   }
@@ -1502,6 +1502,9 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
         };
         if (def.suru) { schools[def.id] = schools[def.id] || { target: new THREE.Vector3(), timer: 0 }; f.school = schools[def.id]; }
         m.position.copy(f.pos);
+        // arka camdaki buğu katmanı (renderOrder 1) saydam yüzgeçlerin üstüne boyanmasın:
+        // balıklar ondan sonra, su yüzeyi ve camdan önce çizilir
+        m.traverse(o => { if (o.isMesh) o.renderOrder = 2; });
         g.add(m);
         swimmers.push(f);
       }
