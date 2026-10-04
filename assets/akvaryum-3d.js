@@ -776,8 +776,44 @@ function finMat(color, opacity = 0.8) {
   return new THREE.MeshStandardMaterial({ color, transparent: true, opacity, side: THREE.DoubleSide, roughness: 0.5, depthWrite: false });
 }
 
+// Blender'da modellenen, kendi yüzme animasyonu olan betta (assets/modeller/betta.glb).
+// Yüklenemezse aşağıdaki kodla çizilen betta kullanılır.
+const BETTA_GLB = '../assets/modeller/betta.glb';
+const BETTA_OLCEK = 1.8;   // Blender birimi -> cm (kuyruk dahil ~7 cm)
+let bettaGLB = null;
+const bettaHazir = new GLTFLoader().loadAsync(BETTA_GLB).then(gltf => {
+  gltf.scene.traverse(o => {
+    if (o.geometry) o.geometry.userData.shared = true;   // sahne yenilenirken silinmesin
+    if (o.material) {
+      o.material.userData.shared = true;
+      if (o.material.transparent) { o.material.depthWrite = false; o.material.side = THREE.DoubleSide; }
+    }
+    if (o.isMesh) o.castShadow = true;
+  });
+  bettaGLB = gltf;
+  return gltf;
+}).catch(e => { console.warn('Betta modeli yüklenemedi, çizim kullanılıyor:', e); return null; });
+
+function bettaModeli(r) {
+  const outer = new THREE.Group(), g = new THREE.Group();
+  g.rotation.y = -Math.PI / 2; // model +x'e bakıyor; lookAt +z kullandığı için çevir
+  outer.add(g);
+  const model = bettaGLB.scene.clone(true);
+  model.scale.setScalar(BETTA_OLCEK);
+  g.add(model);
+  const mixer = new THREE.AnimationMixer(model);
+  bettaGLB.animations.forEach(c => mixer.clipAction(c).play());
+  mixer.setTime(r() * 3);           // her betta farklı fazda yüzsün
+  outer.userData.tail = new THREE.Object3D(); // kuyruk hareketi animasyonda
+  outer.userData.inner = g;
+  outer.userData.len = 6;
+  outer.userData.mixer = mixer;
+  return outer;
+}
+
 // Tek bir balık modeli; group.userData.tail kuyruk pivotu (yüzerken sallanır)
 function buildFishModel(id, r) {
+  if (id === 'betta' && bettaGLB) return bettaModeli(r);
   const outer = new THREE.Group(), g = new THREE.Group();
   g.rotation.y = -Math.PI / 2; // model +x'e bakıyor; lookAt +z kullandığı için çevir
   outer.add(g);
@@ -1462,6 +1498,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
       // kuyruk ve yüzgeç hareketi
       const beat = f.wait > 0 ? 2 : f.def.id === 'neon' ? 12 : 7;
       f.obj.userData.tail.rotation.y = Math.sin(t * beat + f.phase) * (f.def.id === 'betta' ? 0.35 : 0.45);
+      if (f.obj.userData.mixer) f.obj.userData.mixer.update(dt * (f.wait > 0 ? 0.6 : 1));
       const inner = f.obj.userData.inner;
       inner.rotation.x = Math.sin(t * beat * 0.5 + f.phase) * 0.04;
       (inner.userData.wave || []).forEach((w, i) => { w.rotation.x = Math.sin(t * 2.2 + f.phase + i) * 0.12; });
@@ -1486,6 +1523,8 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     }
     root.add(contentGroup);
   }
+  // betta modeli sahne kurulduktan sonra yüklenirse balıkları onunla yeniden kur
+  bettaHazir.then(gltf => { if (gltf && state.fish?.some(f => f.def.id === 'betta')) rebuildContent(); });
 
   function fitLights() {
     const I = state.interior;
