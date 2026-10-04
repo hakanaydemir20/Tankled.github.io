@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /ig/
+
+Sitemap: https://hakanaydemir20.github.io/Tankled.github.io/sitemap.xml
