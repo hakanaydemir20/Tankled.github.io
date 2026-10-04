@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Galeri — Tankled</title>
+<meta name="description" content="Tankled Betta Serisi ve el yapımı kurulumlardan fotoğraflar: farklı açılar, ışık tonları ve yaşam alanları." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--green:#5c7a5a;--green-deep:#43603f;--green-dark:#33492f;--cream:#f4f1e9;--sand-deep:#b8a371;
+    --muted:#6f7a68;--on-green:#f3f1e7;--radius-sm:18px;--ease:cubic-bezier(.22,.61,.36,1)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cream);color:#2b3329;font-family:'Poppins',sans-serif;font-weight:300;line-height:1.7;
+    -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+  h1{font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--green-dark);font-size:clamp(30px,5vw,48px)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 16px;width:100%}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--sand-deep);font-weight:600;margin-bottom:12px;display:inline-block}
+  header{border-bottom:1px solid rgba(67,96,63,.1);background:var(--cream)}
+  .nav{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;height:96px}
+  .logo img{height:64px;width:auto}
+  .back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--green-deep);
+    padding:10px 20px;border-radius:100px;border:1.5px solid rgba(67,96,63,.25);transition:background .3s,border-color .3s;white-space:nowrap}
+  .back:hover{border-color:var(--green);background:rgba(92,122,90,.08)}
+  main{flex:1;padding:52px 0 80px}
+  .intro{text-align:center;max-width:640px;margin:0 auto}
+  .intro p{color:var(--muted);margin-top:12px}
+  .grid{column-count:4;column-gap:14px;margin-top:40px}
+  .item{position:relative;display:block;width:100%;border:0;padding:0;margin:0 0 14px;background:var(--green);cursor:zoom-in;
+    overflow:hidden;border-radius:var(--radius-sm);break-inside:avoid;box-shadow:0 14px 30px -26px rgba(51,73,47,.6)}
+  .item img{width:100%;height:auto;transition:transform .7s var(--ease)}
+  .item:hover img{transform:scale(1.05)}
+  @media(max-width:1100px){.grid{column-count:3}}
+  @media(max-width:560px){.grid{column-count:3;column-gap:6px;margin-top:28px} .item{margin-bottom:6px;border-radius:8px}
+    .nav{height:76px} .logo img{height:48px} .back{padding:9px 14px} main{padding:36px 0 60px}}
+  .more{text-align:center;margin-top:32px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:100px;background:var(--green);
+    color:var(--on-green);font-weight:600;font-size:14px;letter-spacing:.03em}
+  .lightbox{position:fixed;inset:0;background:rgba(20,26,19,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:16px;cursor:zoom-out}
+  .lightbox.open{display:flex}
+  .lightbox img{max-height:90vh;max-width:100%;border-radius:12px}
+  footer{padding:24px 0;font-size:13px;color:var(--muted);text-align:center;border-top:1px solid rgba(67,96,63,.1)}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../" class="logo" aria-label="Tankled ana sayfa"><img src="../assets/logo.png" alt="Tankled Aquarium" /></a>
+    <a href="../#gallery" class="back">← Ana sayfa</a>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="intro">
+      <span class="eyebrow">Galeri</span>
+      <h1>Tüm kareler</h1>
+      <p>Betta Serisi'nin farklı açıları, üç ışık tonu ve el yapımı kurulumlardan görüntüler. Büyütmek için bir kareye dokunun.</p>
+    </div>
+    <div class="grid">
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-01-tam-onden.jpg" alt="Betta Serisi önden, ışık kapalı" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-02-sol-45.jpg" alt="Betta Serisi sol çapraz açı" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-03-sag-45.jpg" alt="Betta Serisi sağ çapraz açı" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-04-tam-sag-yan.jpg" alt="Yan profil ve ışık düğmesi" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-05-tam-sol-yan.jpg" alt="Yan profil, taş düzenli kurulum" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-06-tam-arka.jpg" alt="Arka görünüm, masif tik ahşap" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-07-yuksekten-45.jpg" alt="Yukarıdan çapraz açı" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-09-ust-kapak-tepeden.jpg" alt="Üst kapak, tepeden" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-bicim-10-uzaktan-tam-govde.jpg" alt="Betta Serisi tam gövde" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-detay-11-ahsap-damari-arka.jpg" alt="Tik ahşap damar dokusu" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-detay-13-16-ust-kapak-kenari-logo.jpg" alt="Kapak kenarı ve Tankled plakası" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-isik-3000k-45-derece.jpg" alt="3000K sıcak ışık, bitkili kurulum" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-isik-3000k-onden.jpg" alt="3000K sıcak ışık" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-isik-4500k-onden.jpg" alt="4500K nötr ışık" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/galeri/urun-isik-6500k-onden.jpg" alt="6500K gün ışığı, taş düzenli kurulum" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-betta-cozy.jpeg" alt="Betta akvaryumu sıcak bir oturma odasında" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-paludarium-stand.jpeg" alt="Metal ayaklı paludaryum" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-crab.jpeg" alt="Vampir yengeç paludaryumu detayları" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-gecko.jpeg" alt="Kertenkele terraryumu orman ortamında" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-betta-bright.jpeg" alt="Betta akvaryumu aydınlık bir salonda" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-betta-moss.jpeg" alt="Moss dekorlu betta akvaryumu" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-paludarium-open.jpeg" alt="Ön açılır camlı paludaryum" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-betta-studio.jpeg" alt="Betta akvaryumu stüdyo çekimi" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-betta-bos.webp" alt="Betta Serisi akvaryumun boş hali" loading="lazy"/></button>
+      <button class="item" type="button"><img src="../assets/g-lineup.png" alt="Tankled koleksiyonu bir arada" loading="lazy"/></button>
+    </div>
+    <div class="more">
+      <a class="btn" href="https://www.instagram.com/tankled.akvaryum/" target="_blank" rel="noopener">Instagram'da daha fazlası</a>
+    </div>
+  </div>
+</main>
+<div class="lightbox" id="lb" role="dialog" aria-label="Büyük görsel"><img alt="" /></div>
+<footer>© <span id="year"></span> Tankled</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+  document.querySelectorAll('.item').forEach(b => b.addEventListener('click', () => {
+    const i = b.querySelector('img'); lbImg.src = i.src; lbImg.alt = i.alt; lb.classList.add('open');
+  }));
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+</script>
+</body>
+</html>
