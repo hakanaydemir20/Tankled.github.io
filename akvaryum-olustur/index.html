@@ -99,6 +99,12 @@
   .dims{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
   .dims[hidden]{display:none}
   .field{display:grid;gap:5px;font-size:12px;color:var(--muted);min-width:0}
+  .fonlar{display:flex;flex-wrap:wrap;gap:6px}
+  .fonlar button{display:inline-flex;align-items:center;gap:7px;border:1.5px solid rgba(67,96,63,.15);background:var(--cream);
+    border-radius:100px;padding:5px 11px 5px 6px;font-size:12.5px;font-weight:500;color:var(--ink);transition:border-color .2s}
+  .fonlar button[aria-pressed="true"]{border-color:var(--green-dark);background:var(--cream-2,#fff);box-shadow:0 0 0 1px var(--green-dark)}
+  .fonlar i{width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,.15);flex:none}
+  .fonlar i.yok{background:repeating-linear-gradient(45deg,#fff 0 3px,#e0e0e0 3px 6px)}
   .field input,.field select{width:100%;min-width:0;background:var(--cream);border:1.5px solid rgba(67,96,63,.15);border-radius:12px;
     color:var(--ink);font-family:inherit;font-size:16px;font-weight:500;padding:9px 10px;min-height:46px;transition:border-color .25s}
   .field input:focus,.field select:focus{outline:none;border-color:var(--green)}
@@ -243,6 +249,9 @@
         <div class="stat"><b id="sNet">–</b>Net su (yaklaşık)</div>
         <div class="stat light"><b id="sSize">–</b>Dış ölçü</div>
       </div>
+      <div class="field" style="margin-top:14px">Arka cam fonu
+        <div class="fonlar" id="fonlar" role="group" aria-label="Arka cam fonu"></div>
+      </div>
     </section>
 
     <section class="card">
@@ -350,7 +359,7 @@
 <script src="../assets/bitkiler-data.js"></script>
 <script src="../assets/bitki-secici.js"></script>
 <script type="module">
-  import { createAquarium, HARDSCAPE, BALIKLAR } from '../assets/akvaryum-3d.js';
+  import { createAquarium, HARDSCAPE, BALIKLAR, FONLAR } from '../assets/akvaryum-3d.js';
 
   /*
    * Tankled modelleri. 3D dosyaları assets/modeller/ klasörüne .glb olarak yüklenir;
@@ -390,6 +399,7 @@
     hardscape: [], // { id, adet }
     fish: [{ id: 'betta', adet: 1 }], // { id, adet } — örnek tasarımda bir beta yüzer
     seed: 1, filter: 'uygun', q: '',
+    fon: 'buzlu', // arka cam fonu
   };
 
   // Bağlantıdaki tasarımı oku: #m=kutu&l=60&w=30&h=36&c=6&z=aquasoil&t=5&lm=1500&co2=1&p=foto:2,foto:1&s=1
@@ -407,6 +417,7 @@
     if (h.has('hs')) state.hardscape = h.get('hs').split(',').filter(Boolean).map(x => x.split(':')).filter(([id]) => HARDSCAPE.some(d => d.id === id)).map(([id, n]) => ({ id, adet: Math.max(1, Math.min(10, parseInt(n) || 1)) }));
     state.fish = []; // paylaşılan tasarımda balık yoksa örnek beta eklenmesin
     if (h.has('fs')) state.fish = h.get('fs').split(',').filter(Boolean).map(x => x.split(':')).filter(([id]) => BALIKLAR.some(d => d.id === id)).map(([id, n]) => { const d = BALIKLAR.find(x => x.id === id); return { id, adet: Math.max(1, Math.min(d.maxAdet || 20, parseInt(n) || 1)) }; });
+    if (FONLAR.some(f => f.id === h.get('f'))) state.fon = h.get('f');
     state.seed = num('s', 1);
   })();
 
@@ -419,6 +430,7 @@
     h.set('p', state.plants.map(x => `${x.foto}:${x.adet}`).join(','));
     if (state.hardscape.length) h.set('hs', state.hardscape.map(x => `${x.id}:${x.adet}`).join(','));
     if (state.fish.length) h.set('fs', state.fish.map(x => `${x.id}:${x.adet}`).join(','));
+    if (state.fon !== 'buzlu') h.set('f', state.fon);
     h.set('s', state.seed);
     history.replaceState(null, '', '#' + h.toString());
   }
@@ -481,7 +493,7 @@
     if (aq) {
       if (m.id === 'kutu') await aq.setModel({ tip: 'kutu', L: state.L, W: state.W, H: state.H, cam: state.cam / 10 });
       else await aq.setModel({ tip: 'ozel', ...m });
-      aq.setAll({ zemin: state.zemin, kalinlik: state.zemin === 'yok' ? 0 : state.kalinlik, plants: plantList(), hardscape: hardscapeList(), fish: fishList() });
+      aq.setAll({ zemin: state.zemin, kalinlik: state.zemin === 'yok' ? 0 : state.kalinlik, plants: plantList(), hardscape: hardscapeList(), fish: fishList(), fon: state.fon });
     }
     refresh();
   }
@@ -501,6 +513,21 @@
       modelTimer = setTimeout(applyModel, 120);
     });
     $(id).addEventListener('change', () => { $(id).value = state[key]; });
+  });
+
+  /* ---------- Arka cam fonu ---------- */
+  function renderFonlar() {
+    $('fonlar').innerHTML = FONLAR.map(f => `<button type="button" data-fon="${f.id}" aria-pressed="${f.id === state.fon}">
+      <i class="${f.id === 'yok' ? 'yok' : ''}" style="${f.id === 'yok' ? '' : `background:${f.renk}`}"></i>${f.ad}</button>`).join('');
+  }
+  renderFonlar();
+  $('fonlar').addEventListener('click', e => {
+    const b = e.target.closest('button[data-fon]');
+    if (!b || b.dataset.fon === state.fon) return;
+    state.fon = b.dataset.fon;
+    renderFonlar();
+    aq?.setFon(state.fon);
+    writeHash();
   });
 
   /* ---------- 2. Zemin ---------- */

@@ -957,6 +957,94 @@ function buildFishModel(id, r) {
   return outer;
 }
 
+/* ---------- Arka cam fonu ---------- */
+// Sayfa bu listeyi seçici olarak gösterir. renk: seçicideki küçük örnek.
+export const FONLAR = [
+  { id: 'yok', ad: 'Fon yok', renk: 'transparent' },
+  { id: 'buzlu', ad: 'Buzlu folyo', renk: 'linear-gradient(#f4faf9,#c4dedc)' },
+  { id: 'siyah', ad: 'Siyah', renk: '#141414' },
+  { id: 'beyaz', ad: 'Beyaz', renk: '#f6f5f0' },
+  { id: 'mavi', ad: 'Mavi', renk: 'linear-gradient(#6fb3e8,#0d3f7a)' },
+  { id: 'sualti', ad: 'Su altı', renk: 'linear-gradient(#3fa3b8,#0b2f45)' },
+  { id: 'yesil', ad: 'Koyu yeşil', renk: 'linear-gradient(#2f5a3a,#0f2416)' },
+];
+
+const fonCache = new Map();
+function fonDokusu(id) {
+  if (fonCache.has(id)) return fonCache.get(id);
+  let t = null;
+  const dikey = (stops) => canvasTexture(8, 512, (x, w, h) => {
+    const g = x.createLinearGradient(0, 0, 0, h);
+    stops.forEach(([o, c]) => g.addColorStop(o, c));
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+  }, { repeat: false });
+  if (id === 'buzlu') t = dikey([[0, 'rgba(244,250,250,.85)'], [1, 'rgba(196,222,220,.7)']]);
+  else if (id === 'mavi') t = dikey([[0, '#7cbcec'], [0.55, '#2f78bf'], [1, '#0c3a72']]);
+  else if (id === 'yesil') t = dikey([[0, '#35613f'], [1, '#0e2215']]);
+  else if (id === 'sualti') t = canvasTexture(1024, 768, (x, w, h) => {
+    const r = rng(7);
+    // derinlik: üstte turkuaz, altta koyu lacivert
+    const g = x.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, '#5cc2cf'); g.addColorStop(0.35, '#2a8aa3'); g.addColorStop(0.75, '#124e6b'); g.addColorStop(1, '#0a2a3d');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    // yüzeyden süzülen ışık hüzmeleri
+    x.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < 9; i++) {
+      const cx = r() * w, gen = 40 + r() * 90, egim = (r() - 0.5) * 220;
+      const lg = x.createLinearGradient(0, 0, 0, h * 0.9);
+      lg.addColorStop(0, 'rgba(220,255,250,.22)'); lg.addColorStop(1, 'rgba(220,255,250,0)');
+      x.fillStyle = lg;
+      x.beginPath(); x.moveTo(cx - gen / 4, 0); x.lineTo(cx + gen / 4, 0);
+      x.lineTo(cx + egim + gen, h * 0.9); x.lineTo(cx + egim - gen, h * 0.9); x.closePath(); x.fill();
+    }
+    x.globalCompositeOperation = 'source-over';
+    // uzakta, sise karışan kaya ve bitki siluetleri
+    const siluet = (renk, taban, yuk, adet) => {
+      x.fillStyle = renk;
+      for (let i = 0; i < adet; i++) {
+        const cx = r() * w, en = 60 + r() * 160, boy = yuk * (0.5 + r() * 0.8);
+        x.beginPath(); x.ellipse(cx, taban, en, boy, 0, Math.PI, 0); x.fill();
+      }
+      for (let i = 0; i < adet * 3; i++) {   // ince su bitkileri
+        const cx = r() * w, boy = yuk * (1.2 + r() * 1.8);
+        x.strokeStyle = renk; x.lineWidth = 3 + r() * 5; x.lineCap = 'round';
+        x.beginPath(); x.moveTo(cx, taban);
+        x.bezierCurveTo(cx + (r() - 0.5) * 60, taban - boy * 0.4, cx + (r() - 0.5) * 80, taban - boy * 0.7, cx + (r() - 0.5) * 50, taban - boy);
+        x.stroke();
+      }
+    };
+    siluet('rgba(18,70,92,.55)', h, h * 0.22, 6);
+    siluet('rgba(8,40,56,.8)', h, h * 0.14, 5);
+    // süzülen partiküller
+    for (let i = 0; i < 160; i++) {
+      x.fillStyle = `rgba(230,255,250,${0.08 + r() * 0.25})`;
+      x.beginPath(); x.arc(r() * w, r() * h * 0.85, 0.6 + r() * 2.2, 0, Math.PI * 2); x.fill();
+    }
+  }, { repeat: false });
+  fonCache.set(id, t);
+  return t;
+}
+
+// Arka camın hemen içine fon yerleştirir. 'yok' ise hiçbir şey eklemez.
+function buildFon(g, id, I) {
+  if (!id || id === 'yok') return;
+  const yuk = Math.max(I.H, I.waterTop) - I.y0 + 0.5;
+  let mat;
+  if (id === 'buzlu') {
+    mat = new THREE.MeshBasicMaterial({ map: fonDokusu(id), transparent: true, opacity: 0.55, depthWrite: false });
+  } else if (id === 'siyah' || id === 'beyaz') {
+    mat = new THREE.MeshStandardMaterial({ color: id === 'siyah' ? '#121212' : '#f3f2ec', roughness: 0.85, metalness: 0 });
+  } else {
+    // renkli fonlar ışıktan bağımsız, baskı film gibi tam renkli görünsün
+    mat = new THREE.MeshBasicMaterial({ map: fonDokusu(id), toneMapped: false });
+  }
+  const fon = new THREE.Mesh(new THREE.PlaneGeometry(I.L - 0.1, yuk), mat);
+  fon.position.set(0, I.y0 + yuk / 2 - 0.25, -I.W / 2 + 0.1);
+  fon.renderOrder = id === 'buzlu' ? 1 : 0;
+  fon.userData.noAO = true;
+  g.add(fon);
+}
+
 /* ---------- Ortam: arka plan, kaide, lamba ---------- */
 
 function backgroundTexture() {
@@ -1070,7 +1158,7 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     model: { tip: 'kutu', L: 60, W: 30, H: 36, cam: 0.6 },
     interior: null, // { L, W, H, y0, waterTop }
     zemin: 'aquasoil', kalinlik: 5,
-    plants: [], hardscape: [], fish: [], seed: 1,
+    plants: [], hardscape: [], fish: [], seed: 1, fon: 'buzlu',
     quality: 'yuksek',
   };
 
@@ -1300,17 +1388,8 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
   function buildWater(g) {
     const I = state.interior;
     const h = I.waterTop - I.y0;
-    // Arka camda buzlu arka plan filmi etkisi
-    const hazeTex = canvasTexture(8, 256, (x, w, hh) => {
-      const gr = x.createLinearGradient(0, 0, 0, hh);
-      gr.addColorStop(0, 'rgba(244,250,250,.85)'); gr.addColorStop(1, 'rgba(196,222,220,.7)');
-      x.fillStyle = gr; x.fillRect(0, 0, w, hh);
-    }, { repeat: false });
-    const haze = new THREE.Mesh(new THREE.PlaneGeometry(I.L - 0.2, h), new THREE.MeshBasicMaterial({ map: hazeTex, transparent: true, opacity: 0.55, depthWrite: false }));
-    haze.position.set(0, I.y0 + h / 2, -I.W / 2 + 0.15);
-    haze.renderOrder = 1;
-    haze.userData.noAO = true;
-    g.add(haze);
+    // Arka cam fonu (seçilebilir: yok, buzlu folyo, siyah, beyaz, mavi, su altı, yeşil)
+    buildFon(g, state.fon, I);
     // Su yüzeyi: hareketli dalgacıklar ve yansıma
     if (!buildWater.normal) {
       const hc = document.createElement('canvas');
@@ -1703,8 +1782,10 @@ export function createAquarium(container, { onModelError, onQuality } = {}) {
     setPlants(list) { state.plants = list; rebuildContent(); },
     setHardscape(list) { state.hardscape = list; rebuildContent(); },
     setFish(list) { state.fish = list; rebuildContent(); },
-    setAll({ zemin, kalinlik, plants, hardscape, fish }) {
+    setFon(fon) { state.fon = fon; rebuildContent(); },
+    setAll({ zemin, kalinlik, plants, hardscape, fish, fon }) {
       if (zemin !== undefined) { state.zemin = zemin; state.kalinlik = kalinlik; }
+      if (fon) state.fon = fon;
       if (plants) state.plants = plants;
       if (hardscape) state.hardscape = hardscape;
       if (fish) state.fish = fish;
