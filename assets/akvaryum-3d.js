@@ -794,12 +794,42 @@ const bettaHazir = new GLTFLoader().loadAsync(BETTA_GLB).then(gltf => {
   return gltf;
 }).catch(e => { console.warn('Betta modeli yüklenemedi, çizim kullanılıyor:', e); return null; });
 
+// Renk seçenekleri: modelin dokusu maviyi taşır; diğer renkler ton döndürülerek elde edilir
+// (beyaz yüzgeç uçları beyaz kalır). derece: mavi tonundan döndürme açısı.
+const BETTA_RENKLERI = [
+  { ad: 'mavi', derece: 0 },
+  { ad: 'kırmızı', derece: 125 },
+];
+const bettaMalzemeleri = new Map(); // derece -> {asil malzeme uuid -> tonlu kopya}
+
+function tonluMalzeme(mat, derece) {
+  if (!derece || /goz/i.test(mat.name)) return mat;      // gözler renk değiştirmez
+  let cache = bettaMalzemeleri.get(derece);
+  if (!cache) bettaMalzemeleri.set(derece, cache = new Map());
+  if (cache.has(mat.uuid)) return cache.get(mat.uuid);
+  const m = mat.clone();
+  m.userData.shared = true;
+  const aci = THREE.MathUtils.degToRad(derece);
+  m.onBeforeCompile = sh => {
+    sh.uniforms.uTon = { value: aci };
+    sh.fragmentShader = 'uniform float uTon;\n' + sh.fragmentShader.replace('#include <map_fragment>', `#include <map_fragment>
+      { const vec3 k = vec3(0.57735);
+        float c = cos(uTon), s = sin(uTon);
+        diffuseColor.rgb = diffuseColor.rgb * c + cross(k, diffuseColor.rgb) * s + k * dot(k, diffuseColor.rgb) * (1.0 - c); }`);
+  };
+  m.customProgramCacheKey = () => 'betta-ton-' + derece;
+  cache.set(mat.uuid, m);
+  return m;
+}
+
 function bettaModeli(r) {
   const outer = new THREE.Group(), g = new THREE.Group();
   g.rotation.y = -Math.PI / 2; // model +x'e bakıyor; lookAt +z kullandığı için çevir
   outer.add(g);
   const model = bettaGLB.scene.clone(true);
   model.scale.setScalar(BETTA_OLCEK);
+  const renk = BETTA_RENKLERI[Math.floor(r() * BETTA_RENKLERI.length)];
+  if (renk.derece) model.traverse(o => { if (o.isMesh) o.material = tonluMalzeme(o.material, renk.derece); });
   g.add(model);
   const mixer = new THREE.AnimationMixer(model);
   bettaGLB.animations.forEach(c => mixer.clipAction(c).play());
