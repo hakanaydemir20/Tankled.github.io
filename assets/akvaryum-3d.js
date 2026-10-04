@@ -800,25 +800,52 @@ const BETTA_RENKLERI = [
   { ad: 'mavi', derece: 0 },
   { ad: 'kırmızı', derece: 125 },
 ];
-const bettaMalzemeleri = new Map(); // derece -> {asil malzeme uuid -> tonlu kopya}
+const bettaMalzemeleri = new Map(); // "derece|uuid" -> canlandırılmış kopya
 
-function tonluMalzeme(mat, derece) {
-  if (!derece || /goz/i.test(mat.name)) return mat;      // gözler renk değiştirmez
-  let cache = bettaMalzemeleri.get(derece);
-  if (!cache) bettaMalzemeleri.set(derece, cache = new Map());
-  if (cache.has(mat.uuid)) return cache.get(mat.uuid);
+// GLSL: ton döndürme + doygunluk artırma (ACES ton eşlemesinin soldurduğu rengi geri kazandırır)
+const BETTA_GLSL = `
+uniform float uTon;
+uniform float uBoya;
+uniform vec3 uBoyaRenk;
+vec3 bettaRenk(vec3 c) {
+  // yuzgecin acik/beyaz kisimlarini balik rengine boya (mavi; ton dondurulunce kirmizi vb.)
+  c *= mix(vec3(1.0), uBoyaRenk, uBoya);
+  const vec3 k = vec3(0.57735);
+  float cs = cos(uTon), sn = sin(uTon);
+  c = c * cs + cross(k, c) * sn + k * dot(k, c) * (1.0 - cs);
+  float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
+  return max(mix(vec3(l), c, 1.5), 0.0);
+}
+`;
+
+// Betta malzemesini canlı ve parlak yapar; derece verilirse rengini döndürür. Gözler değişmez.
+function canliMalzeme(mat, derece) {
+  if (/goz/i.test(mat.name)) return mat;
+  const anahtar = derece + '|' + mat.uuid;
+  if (bettaMalzemeleri.has(anahtar)) return bettaMalzemeleri.get(anahtar);
   const m = mat.clone();
   m.userData.shared = true;
+  m.metalness = Math.min(m.metalness, 0.12);
+  m.roughness = m.transparent ? 0.35 : 0.3;
+  m.envMapIntensity = 1.3;
+  m.emissive = new THREE.Color(1, 1, 1);
+  m.emissiveMap = m.map;                       // içten ışıma: arkadan ışık alan yüzgeç etkisi
+  m.emissiveIntensity = m.transparent ? (derece ? 0.22 : 0.5) : 0.2;
   const aci = THREE.MathUtils.degToRad(derece);
   m.onBeforeCompile = sh => {
     sh.uniforms.uTon = { value: aci };
-    sh.fragmentShader = 'uniform float uTon;\n' + sh.fragmentShader.replace('#include <map_fragment>', `#include <map_fragment>
-      { const vec3 k = vec3(0.57735);
-        float c = cos(uTon), s = sin(uTon);
-        diffuseColor.rgb = diffuseColor.rgb * c + cross(k, diffuseColor.rgb) * s + k * dot(k, diffuseColor.rgb) * (1.0 - c); }`);
+    // donmus renklerde acik tonlar pembeye kacmasin diye yuzgec daha koyu boyanir
+    sh.uniforms.uBoya = { value: m.transparent ? (derece ? 0.95 : 0.72) : 0.0 };
+    sh.uniforms.uBoyaRenk = { value: derece ? new THREE.Vector3(0.14, 0.34, 0.9) : new THREE.Vector3(0.32, 0.56, 1.0) };
+    sh.fragmentShader = BETTA_GLSL + sh.fragmentShader
+      .replace('#include <map_fragment>', `#include <map_fragment>
+        diffuseColor.rgb = bettaRenk(diffuseColor.rgb);
+        diffuseColor.a = smoothstep(0.02, 0.42, diffuseColor.a);`)
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        totalEmissiveRadiance = bettaRenk(totalEmissiveRadiance);`);
   };
-  m.customProgramCacheKey = () => 'betta-ton-' + derece;
-  cache.set(mat.uuid, m);
+  m.customProgramCacheKey = () => 'betta-canli-' + derece;
+  bettaMalzemeleri.set(anahtar, m);
   return m;
 }
 
@@ -829,7 +856,7 @@ function bettaModeli(r) {
   const model = bettaGLB.scene.clone(true);
   model.scale.setScalar(BETTA_OLCEK);
   const renk = BETTA_RENKLERI[Math.floor(r() * BETTA_RENKLERI.length)];
-  if (renk.derece) model.traverse(o => { if (o.isMesh) o.material = tonluMalzeme(o.material, renk.derece); });
+  model.traverse(o => { if (o.isMesh) o.material = canliMalzeme(o.material, renk.derece); });
   g.add(model);
   const mixer = new THREE.AnimationMixer(model);
   bettaGLB.animations.forEach(c => mixer.clipAction(c).play());
