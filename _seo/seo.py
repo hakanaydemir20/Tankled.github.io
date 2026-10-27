@@ -159,7 +159,7 @@ def isletme() -> dict:
         },
         "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Country", "name": "Türkiye"}],
         "sameAs": [INSTAGRAM],
-        "knowsAbout": ["akvaryum", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape"],
+        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape"],
     }
     if bilgi["posta_kodu"]:
         veri["address"]["postalCode"] = bilgi["posta_kodu"]
@@ -191,7 +191,8 @@ def yapisal_veri(sayfa: dict) -> list[dict]:
                  "inLanguage": "tr-TR", "publisher": {"@id": url("#isletme")}},
                 {"@type": "Product", "name": "Tankled Betta Serisi",
                  "description": "Doğal masif ahşap gövdeli, sürgülü buhar kapaklı, üç ışık tonlu LED aydınlatmalı "
-                                "14 × 14 × 20 cm el yapımı akvaryum.",
+                                "14 × 14 × 20 cm el yapımı akvaryum. Teraryum, dekoratif abajur ve bitki saksısı "
+                                "olarak da kullanılabilir.",
                  "brand": {"@type": "Brand", "name": MARKA},
                  "manufacturer": {"@id": url("#isletme")},
                  "material": "Doğal çam ahşap / Endonezya ithal doğal desenli ağaç, cam",
@@ -320,7 +321,7 @@ def ana_sayfa_bloklari() -> None:
         f'      <a class="blog-kart reveal" href="blog/{y["slug"]}/"><img src="{y["gorsel"]}" alt="{esc(y["gorsel_alt"])}" '
         f'width="{y["gorsel_g"]}" height="{y["gorsel_y"]}" loading="lazy"/><div><h3>{y["h1"]}</h3><p>{y["aciklama"]}</p></div></a>'
         for y in blog.sirali()[:3])
-    s = re.sub(r'(<div class="blog-liste">\n).*?(\n    </div>)', lambda m: m.group(1) + kartlar + m.group(2), s, count=1, flags=re.S)
+    s = re.sub(r'(<!-- BLOG -->.*?<div class="blog-liste">\n).*?(\n    </div>)', lambda m: m.group(1) + kartlar + m.group(2), s, count=1, flags=re.S)
     if sayfalar.YORUMLAR:
         ogeler = "\n".join(
             f'      <figure class="yorum reveal"><blockquote>“{esc(y["metin"])}”</blockquote>'
