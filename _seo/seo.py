@@ -130,7 +130,8 @@ def esc(s: str) -> str:
 
 
 def isletme() -> dict:
-    return {
+    bilgi = sayfalar.ISLETME
+    veri = {
         "@type": "Store",
         "@id": url("#isletme"),
         "name": MARKA,
@@ -144,7 +145,7 @@ def isletme() -> dict:
         "telephone": TELEFON,
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Ostim",
+            "streetAddress": ", ".join(p for p in [bilgi["sokak"], "Ostim"] if p),
             "addressLocality": "Yenimahalle",
             "addressRegion": "Ankara",
             "addressCountry": "TR",
@@ -153,6 +154,24 @@ def isletme() -> dict:
         "sameAs": [INSTAGRAM],
         "knowsAbout": ["akvaryum", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape"],
     }
+    if bilgi["posta_kodu"]:
+        veri["address"]["postalCode"] = bilgi["posta_kodu"]
+    if bilgi["saatler"]:
+        gunler = {"Mo": "Monday", "Tu": "Tuesday", "We": "Wednesday", "Th": "Thursday", "Fr": "Friday",
+                  "Sa": "Saturday", "Su": "Sunday"}
+        sira = list(gunler)
+
+        def gun_listesi(kod: str) -> list[str]:
+            bas, _, son = kod.partition("-")
+            return [gunler[g] for g in sira[sira.index(bas):sira.index(son or bas) + 1]]
+        veri["openingHoursSpecification"] = [
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": gun_listesi(kod), "opens": a, "closes": k}
+            for _, kod, a, k in bilgi["saatler"]]
+    if bilgi["fiyat_baslangic"]:
+        veri["priceRange"] = f"{bilgi['fiyat_baslangic']} TL+"
+    if bilgi["kurulus_yili"]:
+        veri["foundingDate"] = bilgi["kurulus_yili"]
+    return veri
 
 
 def yapisal_veri(sayfa: dict) -> list[dict]:
@@ -270,6 +289,29 @@ def yonlendirme_isle(dosya: str, hedef: str) -> None:
     yol.write_text(s, encoding="utf-8")
 
 
+def ana_sayfa_bloklari() -> None:
+    """Ana sayfadaki son blog yazisi kartlarini ve (varsa) musteri yorumlarini uretir."""
+    yol = KOK / "index.html"
+    s = yol.read_text(encoding="utf-8")
+    kartlar = "\n".join(
+        f'      <a class="blog-kart reveal" href="blog/{y["slug"]}/"><img src="{y["gorsel"]}" alt="{esc(y["gorsel_alt"])}" '
+        f'width="{y["gorsel_g"]}" height="{y["gorsel_y"]}" loading="lazy"/><div><h3>{y["h1"]}</h3><p>{y["aciklama"]}</p></div></a>'
+        for y in blog.sirali()[:3])
+    s = re.sub(r'(<div class="blog-liste">\n).*?(\n    </div>)', lambda m: m.group(1) + kartlar + m.group(2), s, count=1, flags=re.S)
+    if sayfalar.YORUMLAR:
+        ogeler = "\n".join(
+            f'      <figure class="yorum reveal"><blockquote>“{esc(y["metin"])}”</blockquote>'
+            f'<figcaption>{esc(y["ad"])} · {esc(y.get("kaynak", "Google"))}</figcaption></figure>'
+            for y in sayfalar.YORUMLAR)
+        bolum = ('<section class="section" id="yorumlar">\n  <div class="wrap">\n    <div class="sec-head reveal">\n'
+                 '      <span class="eyebrow">Müşteri Yorumları</span>\n      <h2>Müşterilerimiz ne diyor?</h2>\n    </div>\n'
+                 f'    <div class="blog-liste">\n{ogeler}\n    </div>\n  </div>\n</section>')
+    else:
+        bolum = ""
+    s = re.sub(r"<!-- YORUMLAR -->.*?<!-- /YORUMLAR -->", lambda _: f"<!-- YORUMLAR -->{bolum}<!-- /YORUMLAR -->", s, count=1, flags=re.S)
+    yol.write_text(s, encoding="utf-8")
+
+
 def sss_bolumu() -> None:
     """Ana sayfadaki gorunur SSS bolumunu yapisal veriyle ayni metinden uretir."""
     yol = KOK / "index.html"
@@ -328,6 +370,7 @@ if __name__ == "__main__":
         sayfa_isle(s)
         alt_bilgi(s)
     sss_bolumu()
+    ana_sayfa_bloklari()
     for d, h in YONLENDIRMELER:
         yonlendirme_isle(d, h)
     site_haritasi()

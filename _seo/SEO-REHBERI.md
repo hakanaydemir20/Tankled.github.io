@@ -56,3 +56,15 @@ Yerel aramalarda en büyük etken **Google İşletme Profili**dir.
 Hedef öncelikle "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "akvaryum Ankara",
 "dekoratif akvaryum" gibi daha belirli aramalar olmalı. Yeni bir sitenin sıralama kazanması
 genellikle 3-6 ay sürer.
+
+## İşletme bilgileri, fiyat ve yorumlar
+`_seo/sayfalar.py` başındaki `ISLETME` sözlüğünü doldurun (açık adres, posta kodu, çalışma saatleri,
+başlangıç fiyatı, kuruluş yılı, ustanın hikâyesi) ve `YORUMLAR` listesine yalnızca **gerçek** müşteri
+yorumlarını ekleyin. Ardından `python3 -B _seo/seo.py` çalıştırın: bilgiler İletişim, Hakkımızda,
+Betta ve Özel Ölçü sayfalarına, Google Haritalar'a ve yapısal veriye birebir aynı işlenir; boş alanlar
+gösterilmez. Adres, Google İşletme Profili'ndekiyle harfi harfine aynı olmalıdır.
+
+## Gerçek fotoğraf ve video
+Atölye, teslimat ve müşteri evi fotoğraflarını anlamlı adlarla (`mobilyali-akvaryum-ankara-salon.webp`
+gibi) `assets/` altına ekleyin; hizmet sayfalarındaki galeriler `GALERI_MOBILYALI` / `GALERI_BETTA`
+listelerinden yönetilir.

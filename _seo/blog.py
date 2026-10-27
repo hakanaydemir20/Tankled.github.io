@@ -15,6 +15,131 @@ BLOG_ACIKLAMA = ("Mobilyalı akvaryum, betta ve nano akvaryum kurulumu, bakım i
 
 YAZILAR = [
     {
+        "slug": "akvaryum-fiyatlari",
+        "baslik": "Akvaryum Fiyatları 2026: Fiyatı Ne Belirler? | Tankled",
+        "h1": "Akvaryum fiyatları 2026: akvaryumun fiyatını neler belirler?",
+        "aciklama": "Akvaryum fiyatları 2026: hazır ve el yapımı akvaryum, mobilyalı akvaryum ve kurulum maliyetini "
+                    "belirleyen ölçü, cam, malzeme ve ekipman kalemleri.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/g-betta-bright.webp", "gorsel_g": 1195, "gorsel_y": 1600,
+        "gorsel_alt": "Aydınlık bir salonda ahşap gövdeli akvaryum",
+        "etiketler": ["akvaryum fiyatları", "mobilyalı akvaryum fiyatları", "akvaryum maliyeti"],
+        "govde": """
+<p>"Akvaryum fiyatları ne kadar?" sorusunun tek bir cevabı yoktur. Aynı litredeki iki akvaryum arasında, cam kalitesine, gövde malzemesine, ekipmana ve işçiliğe göre büyük fark olabilir. Bu yazıda 2026'da bir akvaryumun toplam maliyetini oluşturan kalemleri tek tek açıklıyoruz; böylece aldığınız teklifleri doğru karşılaştırabilirsiniz.</p>
+
+<h2>1. Akvaryumun kendisi: ölçü ve cam</h2>
+<p>Fiyatı belirleyen ilk etken hacimdir; ancak litre büyüdükçe yalnızca cam miktarı değil, gereken cam kalınlığı da artar. Kenarları rodajlı (zımparalı) cam, düzgün ve kabarcıksız silikon işçiliği ve ekstra şeffaf (beyaz) cam gibi tercihler fiyatı yükseltir ama akvaryumun ömrünü ve görünümünü doğrudan etkiler.</p>
+
+<h2>2. Gövde: sehpa mı, mobilyalı akvaryum mu?</h2>
+<p>Hazır bir akvaryuma ayrıca sehpa almak çoğu zaman ilk bakışta ucuz görünür. <a href="../../mobilyali-akvaryum/">Mobilyalı akvaryum</a>da ise gövde akvaryumla birlikte tasarlanır; MDF, kontrplak ya da masif ahşap seçimi fiyatı belirler. Masif tik gibi neme dayanıklı ağaçlar daha pahalıdır ancak nemli ortamda yıllarca şeklini korur.</p>
+
+<h2>3. Ekipman</h2>
+<ul>
+  <li><strong>Filtre:</strong> Sünger, iç ya da dış filtre; akvaryum hacmine göre seçilir.</li>
+  <li><strong>Isıtıcı:</strong> Tropikal balıklar (ör. betta) için şarttır.</li>
+  <li><strong>Aydınlatma:</strong> Bitkili akvaryumda kaliteli LED, maliyetin önemli bir kısmıdır.</li>
+  <li><strong>Test kiti ve su şartlandırıcı:</strong> Küçük ama vazgeçilmez kalemlerdir.</li>
+</ul>
+<p>Hangi ekipmanın gerçekten gerekli olduğunu <a href="../../malzemeler/">malzemeler rehberimizde</a> anlattık.</p>
+
+<h2>4. Zemin, hardscape ve bitkiler</h2>
+<p>Besinli akvaryum toprağı, doğal taş ve kökler, canlı bitkiler toplam maliyeti etkiler. Low-tech bir kurulum (CO₂ tüpü olmadan, yavaş büyüyen bitkilerle) hem kurulumda hem de bakımda daha ekonomiktir.</p>
+
+<h2>5. Canlılar</h2>
+<p>Balık ve karides fiyatları türe göre değişir; ancak toplam bütçede genellikle en küçük kalemdir. Önemli olan, akvaryum hacmine uygun tür ve sayı seçmektir; <a href="../../baliklar/">balıklar rehberimiz</a> bu konuda yol gösterir.</p>
+
+<h2>6. Kurulum ve işçilik</h2>
+<p>Hazır kurulum (zemin, bitki yerleşimi, ekipman montajı ve ilk su döngüsü desteği) isteyip istemediğiniz de fiyatı değiştirir. Özellikle ilk akvaryumunuzsa hazır kurulum, deneme-yanılma ile kaybedilecek bitki ve canlı maliyetini azaltır.</p>
+
+<h2>Teklifleri karşılaştırırken sorun</h2>
+<ul>
+  <li>Cam kalınlığı ve silikon işçiliği nasıl?</li>
+  <li>Gövde hangi malzemeden ve ağırlığı taşımak için tasarlanmış mı?</li>
+  <li>Fiyata kapak, aydınlatma ve ekipman dahil mi?</li>
+  <li>Kurulum ve sonrasında destek var mı?</li>
+</ul>
+<p>Ankara'da mobilyalı ya da <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> için net fiyat almak isterseniz alanınızın ölçüsünü bize gönderin; Ostim'deki atölyemizden size özel teklif hazırlayalım.</p>
+""",
+    },
+    {
+        "slug": "ankara-akvaryum-bakim-hizmeti",
+        "baslik": "Ankara Akvaryum Bakım Hizmeti: Neler Yapılır? | Tankled",
+        "h1": "Ankara'da akvaryum bakım hizmeti: neler yapılır, ne sıklıkla?",
+        "aciklama": "Ankara'da akvaryum bakım hizmeti alırken nelere dikkat etmeli? Su değişimi, filtre ve cam "
+                    "temizliği, bitki budama ve su testi: bakımın kapsamı ve sıklığı.",
+        "tarih": "2026-10-26",
+        "gorsel": "assets/g-betta-studio.webp", "gorsel_g": 1195, "gorsel_y": 1600,
+        "gorsel_alt": "Bakımlı, bitkili ahşap gövdeli akvaryum",
+        "etiketler": ["akvaryum bakım hizmeti", "akvaryum bakımı Ankara", "akvaryum temizliği"],
+        "govde": """
+<p>Bir akvaryumun uzun yıllar sağlıklı kalması, düzenli bakıma bağlıdır. Zamanı olmayanlar, ofis ve mağazalar ya da büyük akvaryum sahipleri için <strong>akvaryum bakım hizmeti</strong> iyi bir çözümdür. Bu yazıda Ankara'da akvaryum bakım hizmeti alırken bakımın neleri kapsaması gerektiğini ve ne sıklıkla yapılması gerektiğini anlatıyoruz.</p>
+
+<h2>Profesyonel bakımın kapsamı</h2>
+<ul>
+  <li><strong>Kısmi su değişimi:</strong> Suyun %20–30'unun zemindeki artıklarla birlikte sifonlanması ve şartlandırılmış, aynı sıcaklıkta suyla yenilenmesi.</li>
+  <li><strong>Cam temizliği:</strong> İç camlardaki yosunun, dış camdaki kireç lekelerinin temizlenmesi.</li>
+  <li><strong>Filtre bakımı:</strong> Süngerin akvaryum suyunda çalkalanması; faydalı bakterileri öldürmemek için musluk suyu kullanılmaması.</li>
+  <li><strong>Bitki bakımı:</strong> Budama, çürüyen yaprakların alınması, gerekiyorsa gübre takviyesi.</li>
+  <li><strong>Su testi:</strong> Amonyak, nitrit, nitrat, pH ve KH ölçümü ve sonuca göre öneri.</li>
+  <li><strong>Ekipman kontrolü:</strong> Isıtıcı, filtre ve aydınlatmanın düzgün çalıştığının kontrolü.</li>
+  <li><strong>Canlı kontrolü:</strong> Hastalık belirtileri ve beslenme düzeninin gözden geçirilmesi.</li>
+</ul>
+
+<h2>Ne sıklıkla bakım gerekir?</h2>
+<p>Ev akvaryumlarında haftalık kısa bakım ve aylık kapsamlı bakım genellikle yeterlidir. Küçük (nano) akvaryumlarda su değerleri daha hızlı değiştiği için düzenlilik daha da önemlidir. Kendiniz yapmak isterseniz <a href="../nano-akvaryum-bakimi/">nano akvaryum bakım rutinimiz</a> adım adım yol gösterir.</p>
+
+<h2>Bakım ihtiyacını azaltmanın yolları</h2>
+<ul>
+  <li><strong>Low-tech kurulum:</strong> Yavaş büyüyen bitkiler ve düşük-orta ışık, budama ve gübre ihtiyacını azaltır.</li>
+  <li><strong>Doğru stok:</strong> Akvaryuma hacminden fazla balık koymamak su kalitesini korur.</li>
+  <li><strong>Kapak:</strong> Buhar kapağı buharlaşmayı azaltır, su eklemeyi seyrekleştirir.</li>
+  <li><strong>Az yem:</strong> Artık yem, su kalitesini en hızlı bozan etkendir.</li>
+</ul>
+
+<h2>Bakım hizmeti seçerken</h2>
+<p>Bakım yapacak kişinin su testi yapıp yapmadığını, kendi ekipmanını getirip getirmediğini, canlılara ve bitkilere dair bilgi verip vermediğini sorun. Sabit bir bakım takvimi ve her ziyaretten sonra kısa bir rapor, akvaryumunuzun durumunu takip etmenizi kolaylaştırır.</p>
+
+<p>Tankled olarak Ankara Ostim'deki atölyemizde ürettiğimiz akvaryumları low-tech, az bakım isteyen sistemler olarak tasarlıyoruz. Akvaryumunuzun bakımıyla ilgili sorularınız için <a href="../../iletisim/">bize ulaşabilirsiniz</a>.</p>
+""",
+    },
+    {
+        "slug": "akvaryum-sehpasi-olculeri",
+        "baslik": "Akvaryum Sehpası Ölçüleri ve Seçimi Rehberi | Tankled",
+        "h1": "Akvaryum sehpası ölçüleri: doğru sehpa nasıl seçilir?",
+        "aciklama": "Akvaryum sehpası ölçüleri nasıl belirlenir? Akvaryum ağırlığı, sehpa yüksekliği, taşıma "
+                    "kapasitesi ve malzeme seçimi için pratik rehber.",
+        "tarih": "2026-10-25",
+        "gorsel": "assets/g-crab.webp", "gorsel_g": 1195, "gorsel_y": 1600,
+        "gorsel_alt": "Ahşap gövde üzerinde paludaryum detayı",
+        "etiketler": ["akvaryum sehpası", "akvaryum sehpası ölçüleri", "akvaryum dolabı"],
+        "govde": """
+<p>Akvaryum sehpası, akvaryumun en çok ihmal edilen ama en kritik parçasıdır. Su dolu bir akvaryum çok ağırdır ve yükü tüm tabanına eşit dağıtılmalıdır. Bu rehberde <strong>akvaryum sehpası ölçüleri</strong>ni nasıl belirleyeceğinizi ve doğru sehpayı nasıl seçeceğinizi anlatıyoruz.</p>
+
+<h2>1. Önce ağırlığı hesaplayın</h2>
+<p>Su, litre başına yaklaşık 1 kg gelir. Buna cam, zemin, taş ve kök ağırlığı eklenir. Pratik bir kural olarak dolu bir akvaryumun ağırlığını <strong>litre × 1,2–1,5 kg</strong> olarak düşünebilirsiniz. Örneğin 100 litrelik bir akvaryum 120–150 kg civarındadır. Akvaryumunuzun litresini <a href="../../akvaryum-olustur/">3D akvaryum tasarım aracımızla</a> hesaplayabilirsiniz.</p>
+
+<h2>2. Sehpa üst yüzeyi akvaryum tabanından küçük olmamalı</h2>
+<p>Sehpanın üst yüzeyi, akvaryumun taban ölçüsüne eşit ya da biraz büyük olmalıdır. Akvaryum tabanının sehpadan taşması, camda gerilmeye ve zamanla çatlamaya yol açabilir. Üst yüzey tamamen düz ve terazide olmalıdır; küçük bir eğim bile camın köşelerine yük bindirir.</p>
+
+<h2>3. Yükseklik: izleme açısına göre</h2>
+<p>Akvaryumun ortası, oturduğunuzda göz hizanıza yakın olmalıdır. Salonda koltuktan izlenecek akvaryumlar için sehpa yüksekliği genellikle 60–80 cm arasında tercih edilir; ayakta izlenecek ya da konsol üstündeki akvaryumlarda daha yüksek olabilir. Çok yüksek sehpalar ise bakım sırasında akvaryumun içine uzanmayı zorlaştırır.</p>
+
+<h2>4. Malzeme ve dayanıklılık</h2>
+<ul>
+  <li><strong>Sıradan mobilya:</strong> Akvaryum yükü için tasarlanmamıştır; zamanla esneyebilir.</li>
+  <li><strong>MDF/sunta:</strong> Ekonomiktir ancak su ve nemle şişebilir.</li>
+  <li><strong>Metal:</strong> Çok sağlamdır; üst tablanın düzlüğüne dikkat edilmelidir.</li>
+  <li><strong>Masif ahşap:</strong> Sağlam ve dekoratiftir; tik gibi neme dayanıklı ağaçlar uzun ömürlüdür.</li>
+</ul>
+
+<h2>5. Dolap ve kablo düzeni</h2>
+<p>Kapaklı bir akvaryum dolabı; filtre, yem ve test kitini saklamanızı, kabloları gizlemenizi sağlar. Dolabın arkasında kablolar ve hortumlar için delik ya da boşluk bırakılmalıdır.</p>
+
+<h2>En kolay çözüm: mobilyalı akvaryum</h2>
+<p>Sehpa ile akvaryumu ayrı ayrı seçmek yerine ikisini birlikte tasarlamak, ölçü uyumsuzluğu ve taşıma kapasitesi sorunlarını baştan ortadan kaldırır. <a href="../../mobilyali-akvaryum/">Mobilyalı akvaryum</a> sayfamızda modellerimizi, <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> sayfamızda ölçünüze göre üretim sürecini inceleyebilirsiniz.</p>
+""",
+    },
+    {
         "slug": "ankara-akvaryum-rehberi",
         "baslik": "Akvaryum Ankara: Doğru Akvaryumu Seçme Rehberi | Tankled",
         "h1": "Ankara'da akvaryum alırken bilmeniz gereken her şey",
@@ -280,6 +405,9 @@ CSS = """
   .ilgili{margin-top:44px}
   .ilgili h2{font-size:22px;margin-bottom:6px}
   .ilgili .liste{margin-top:18px}
+  .foto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 16px}
+  .foto-grid img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:12px}
+  @media(max-width:560px){.foto-grid{grid-template-columns:repeat(2,1fr)}}
   footer{padding:24px 0;font-size:13px;color:var(--muted);text-align:center;border-top:1px solid rgba(67,96,63,.1)}
   @media(max-width:560px){.nav{height:76px} .logo img{height:48px} .back{padding:9px 14px} main{padding:30px 0 60px}}
 """

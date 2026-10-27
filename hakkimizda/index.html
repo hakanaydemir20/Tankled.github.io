@@ -80,6 +80,9 @@
   .ilgili{margin-top:44px}
   .ilgili h2{font-size:22px;margin-bottom:6px}
   .ilgili .liste{margin-top:18px}
+  .foto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 16px}
+  .foto-grid img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:12px}
+  @media(max-width:560px){.foto-grid{grid-template-columns:repeat(2,1fr)}}
   footer{padding:24px 0;font-size:13px;color:var(--muted);text-align:center;border-top:1px solid rgba(67,96,63,.1)}
   @media(max-width:560px){.nav{height:76px} .logo img{height:48px} .back{padding:9px 14px} main{padding:30px 0 60px}}
 </style>
@@ -99,6 +102,7 @@
       <h1>Hakkımızda: Ankara'da el yapımı akvaryum atölyesi</h1>
       <img class="kapak" src="../assets/g-lineup.webp" alt="Tankled atölyesinde üretilen akvaryum koleksiyonu" width="1122" height="1402" />
 <p>Tankled, bir akvaryumun yalnızca bir cam kap değil; mekânın ruhunu değiştiren, yaşayan bir tasarım nesnesi olabileceği inancıyla doğdu. <strong>Ankara Ostim</strong>'deki atölyemizde akvaryum, teraryum ve paludaryumları masif tik ahşaptan, elde ve tek tek üretiyoruz.</p>
+
 
 <h2>Yaklaşımımız</h2>
 <ul>

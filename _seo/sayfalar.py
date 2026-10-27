@@ -3,9 +3,67 @@
 Calistirmak icin: python3 -B _seo/seo.py  (seo.py once bu sayfalari uretir, sonra SEO etiketlerini yazar.)
 """
 
+from urllib.parse import quote
+
 import blog
 
 KOK = blog.KOK
+# ----------------------------------------------------------------- isletme bilgileri
+# Bos birakilan alanlar sitede gosterilmez. Doldurup `python3 -B _seo/seo.py` calistirin;
+# adres/saat/fiyat tum sayfalara ve Google'in okudugu yapisal veriye birebir ayni islenir.
+ISLETME = {
+    "sokak": "",            # ornek: "1234. Cadde No: 5"  (Google Isletme Profili ile birebir ayni)
+    "posta_kodu": "",       # ornek: "06374"
+    "saatler": [],          # ornek: [("Pazartesi-Cuma", "Mo-Fr", "09:00", "18:00"), ("Cumartesi", "Sa", "10:00", "16:00")]
+    "fiyat_baslangic": "",  # ornek: "2.500"  -> "Fiyatlar 2.500 TL'den başlar"
+    "kurulus_yili": "",     # ornek: "2021"
+    "usta_hikayesi": "",    # hakkimizda sayfasi icin birkac cumlelik HTML paragraf
+}
+
+# Yalnizca GERCEK musteri yorumlari (Google yorumlarindan izinle alinmis). Bos ise bolum gosterilmez.
+# ornek: {"ad": "Ayşe K.", "metin": "...", "kaynak": "Google"}
+YORUMLAR = []
+
+# Hizmet sayfalarindaki foto galerileri (assets/ altindaki gercek urun fotograflari)
+GALERI_MOBILYALI = [
+    ("assets/galeri/urun-isik-3000k-45-derece.jpg", "Mobilyalı akvaryum 3000K sıcak ışıkta, bitkili kurulum"),
+    ("assets/galeri/urun-bicim-02-sol-45.jpg", "Ahşap gövdeli akvaryum sol çapraz açı"),
+    ("assets/galeri/urun-detay-11-ahsap-damari-arka.jpg", "Masif tik ahşap gövdenin damar dokusu"),
+    ("assets/galeri/urun-bicim-09-ust-kapak-tepeden.jpg", "Sürgülü buhar kapağı, tepeden görünüm"),
+    ("assets/galeri/urun-isik-6500k-onden.jpg", "6500K gün ışığında taş düzenli kurulum"),
+    ("assets/galeri/urun-bicim-06-tam-arka.jpg", "Ahşap gövdenin arka görünümü"),
+]
+GALERI_BETTA = [
+    ("assets/galeri/urun-bicim-01-tam-onden.jpg", "Betta Serisi önden görünüm"),
+    ("assets/galeri/urun-isik-3000k-onden.jpg", "Betta Serisi 3000K sıcak ışık"),
+    ("assets/galeri/urun-isik-4500k-onden.jpg", "Betta Serisi 4500K nötr ışık"),
+    ("assets/galeri/urun-isik-6500k-onden.jpg", "Betta Serisi 6500K gün ışığı"),
+    ("assets/galeri/urun-bicim-04-tam-sag-yan.jpg", "Betta Serisi yan profil ve ışık düğmesi"),
+    ("assets/galeri/urun-bicim-07-yuksekten-45.jpg", "Betta Serisi yukarıdan çapraz açı"),
+]
+
+
+def fiyat_cumlesi() -> str:
+    f = ISLETME["fiyat_baslangic"]
+    return f"<p><strong>Fiyatlar {f} TL'den başlar.</strong> Ölçü, malzeme ve kuruluma göre net fiyat için bize ulaşın.</p>" if f else ""
+
+
+def adres_metni() -> str:
+    ilce = f"{ISLETME['posta_kodu']} Yenimahalle".strip()
+    return ", ".join(p for p in [ISLETME["sokak"], "Ostim", ilce, "Ankara"] if p)
+
+
+def saatler_html() -> str:
+    if not ISLETME["saatler"]:
+        return "<li><strong>Çalışma saatleri:</strong> Atölye ziyaretleri için lütfen önceden haber verin.</li>"
+    return "<li><strong>Çalışma saatleri:</strong> " + ", ".join(f"{g} {a}–{k}" for g, _, a, k in ISLETME["saatler"]) + "</li>"
+
+
+def foto_grid(fotolar: list, onek: str) -> str:
+    return ('<div class="foto-grid">' + "".join(
+        f'<img src="{onek}{y}" alt="{alt}" width="750" height="1000" loading="lazy" />' for y, alt in fotolar) + "</div>")
+
+
 WA = "https://wa.me/905312172006?text=Merhaba%20Tankled%2C%20bilgi%20almak%20istiyorum."
 
 # tur: "hizmet" -> Service, "hakkimizda" -> AboutPage, "iletisim" -> ContactPage yapisal verisi
@@ -37,6 +95,10 @@ SAYFALAR = [
   <li><strong>Sehpa akvaryum:</strong> Orta ya da yan sehpanın içine yerleştirilen, üstten izlenen modeller.</li>
   <li><strong>Teraryum ve paludaryum gövdeleri:</strong> Aynı ahşap gövde, <a href="../teraryum/">teraryum</a> ya da <a href="../paludaryum/">paludaryum</a> olarak da kurulabilir.</li>
 </ul>
+
+<h2>Fotoğraflar</h2>
+FOTO_MOBILYALI
+<p>Daha fazla kurulum için <a href="../galeri/">galeriye</a> bakın.</p>
 
 <h2>Malzeme: masif tik ahşap</h2>
 <p>Akvaryum çevresi nemli bir ortamdır. Bu yüzden gövdelerimizde, doğal yağ oranı yüksek ve neme dayanıklı olduğu için tekne yapımında da kullanılan masif tik ahşabı tercih ediyoruz. Yüzey tik yağıyla korunur; her parçanın damar deseni farklı olduğu için iki ürün birbirinin aynısı olmaz.</p>
@@ -79,6 +141,10 @@ SAYFALAR = [
   <li><strong>Teslim ve kurulum:</strong> İsterseniz hazır kurulumla teslim ederiz; ilk haftalarda bakım konusunda destek veririz.</li>
 </ol>
 
+<h2>Fiyat</h2>
+FIYAT
+<p>Özel ölçü akvaryumun fiyatı; ölçüye, cam kalınlığına, gövde malzemesine ve hazır kurulum isteyip istemediğinize göre belirlenir. Alanınızın ölçüsünü gönderin, size net teklif hazırlayalım.</p>
+
 <h2>Ölçü seçerken dikkat edilecekler</h2>
 <p>Su dolu bir akvaryum litre başına yaklaşık bir kilogram ağırlık demektir; zemin ve taşlarla bu ağırlık artar. Akvaryumun üstünde bakım için 15–20 cm boşluk bırakın, doğrudan güneş alan ve kaloriferin hemen yanındaki yerlerden kaçının. Daha fazla ipucu için <a href="../blog/ankara-akvaryum-rehberi/">Ankara'da akvaryum seçme rehberimizi</a> okuyun.</p>
 """,
@@ -105,6 +171,7 @@ SAYFALAR = [
   <li><strong>Sistem:</strong> Low-tech; CO₂ ve yoğun gübre gerektirmez</li>
 </ul>
 
+FIYAT
 <h2>Yalnızca betta için değil</h2>
 <p>Aynı ürün bitkili bir nano akvaryum, karides akvaryumu, <a href="../teraryum/">teraryum</a>, sukulent saksısı ya da dekoratif bir abajur olarak da kullanılabilir. Uygun canlıları <a href="../baliklar/">balıklar rehberimizde</a>, bitkileri <a href="../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
 
@@ -112,6 +179,7 @@ SAYFALAR = [
 <p>Talep üzerine Betta Serisi'ni zemin, canlı bitkiler ve ekipmanla hazır kurulmuş olarak teslim ediyoruz. Kendiniz kurmak isterseniz <a href="../blog/betta-akvaryumu-kurulumu/">betta akvaryumu kurulum rehberimiz</a> ve <a href="../blog/nano-akvaryum-bakimi/">nano akvaryum bakım rutinimiz</a> adım adım yol gösterir.</p>
 
 <h2>Fotoğraflar</h2>
+FOTO_BETTA
 <p>Betta Serisi'nin farklı açılardan ve üç ışık tonunda görüntülerini <a href="../galeri/">galeride</a> inceleyebilirsiniz. Daha büyük ya da farklı ölçüde bir model isterseniz <a href="../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> sayfamıza bakın.</p>
 """,
     },
@@ -187,6 +255,7 @@ SAYFALAR = [
         "govde": """
 <p>Tankled, bir akvaryumun yalnızca bir cam kap değil; mekânın ruhunu değiştiren, yaşayan bir tasarım nesnesi olabileceği inancıyla doğdu. <strong>Ankara Ostim</strong>'deki atölyemizde akvaryum, teraryum ve paludaryumları masif tik ahşaptan, elde ve tek tek üretiyoruz.</p>
 
+HIKAYE
 <h2>Yaklaşımımız</h2>
 <ul>
   <li><strong>Tasarım odaklı:</strong> Her parça mimari bir obje gibi, bulunacağı mekânla birlikte düşünülür.</li>
@@ -222,7 +291,8 @@ SAYFALAR = [
 
 <h2>İletişim bilgileri</h2>
 <ul>
-  <li><strong>Atölye:</strong> Ostim, Yenimahalle, Ankara</li>
+  <li><strong>Atölye adresi:</strong> ADRES</li>
+  SAATLER
   <li><strong>Telefon:</strong> <a href="tel:+905312172006">+90 531 217 2006</a></li>
   <li><strong>WhatsApp:</strong> <a href="WA_LINK" target="_blank" rel="noopener">WhatsApp ile yazın</a></li>
   <li><strong>E-posta:</strong> <a href="mailto:tankledaquarium@gmail.com">tankledaquarium@gmail.com</a></li>
@@ -231,7 +301,7 @@ SAYFALAR = [
 <p>Atölye ziyaretleri için önceden haber vermenizi rica ederiz. Mesajlarınıza en kısa sürede dönüş yapıyoruz.</p>
 
 <h2>Konum</h2>
-<iframe title="Tankled atölyesi konumu: Ostim, Yenimahalle, Ankara" src="https://www.google.com/maps?q=Ostim%2C%20Yenimahalle%2C%20Ankara&amp;output=embed" width="100%" height="360" style="border:0;border-radius:18px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe title="Tankled atölyesi konumu: Ostim, Yenimahalle, Ankara" src="HARITA" width="100%" height="360" style="border:0;border-radius:18px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 <h2>Göndermeden önce</h2>
 <p>Ne istediğinizden emin değilseniz <a href="../akvaryum-olustur/">3D akvaryum tasarım aracımızla</a> ölçü ve ışığı deneyebilir, <a href="../galeri/">galeride</a> örnek kurulumlara, <a href="../blog/">blogda</a> rehber yazılarımıza göz atabilirsiniz.</p>
@@ -248,11 +318,21 @@ def uret() -> None:
             kapak = f'      <img class="kapak" src="{onek}{s["gorsel"]}" alt="{s["gorsel_alt"]}"{boyut} />\n'
         else:
             kapak = ""
+        hikaye = ""
+        if ISLETME["kurulus_yili"]:
+            hikaye += f"<p>{ISLETME['kurulus_yili']} yılından bu yana Ankara'da el yapımı akvaryum üretiyoruz.</p>\n"
+        if ISLETME["usta_hikayesi"]:
+            hikaye += "<h2>Ustamızın hikâyesi</h2>\n" + ISLETME["usta_hikayesi"] + "\n"
+        harita = "https://www.google.com/maps?q=" + quote("Tankled, " + adres_metni()) + "&amp;output=embed"
+        icerik = (s["govde"].strip().replace("WA_LINK", WA).replace("FOTO_MOBILYALI", foto_grid(GALERI_MOBILYALI, onek))
+                  .replace("FOTO_BETTA", foto_grid(GALERI_BETTA, onek)).replace("FIYAT", fiyat_cumlesi())
+                  .replace("HIKAYE", hikaye).replace("ADRES", adres_metni()).replace("SAATLER", saatler_html())
+                  .replace("HARITA", harita))
         govde = f"""    <article>
       <nav class="kirinti" aria-label="Sayfa yolu"><a href="{onek}">Ana sayfa</a> › {s["kisa"]}</nav>
       <span class="eyebrow">Tankled · Ankara</span>
       <h1>{s["h1"]}</h1>
-{kapak}{s["govde"].strip().replace("WA_LINK", WA)}
+{kapak}{icerik}
       <section class="cta">
         <h2>Ankara'da el yapımı akvaryum</h2>
         <p>Ostim'deki atölyemizde masif tik ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
