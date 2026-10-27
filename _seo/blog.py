@@ -15,6 +15,135 @@ BLOG_ACIKLAMA = ("Mobilyalı akvaryum, betta ve nano akvaryum kurulumu, bakım i
 
 YAZILAR = [
     {
+        "slug": "bitkili-akvaryum-kurulumu",
+        "baslik": "Bitkili Akvaryum Nasıl Kurulur? Bitki Seçimi | Tankled",
+        "h1": "Bitkili akvaryum nasıl kurulur? Akvaryum bitkisi seçimi ve bakım",
+        "aciklama": "Bitkili akvaryum kurulumu: zemin, ışık, gübre ve CO₂; yeni başlayanlar için en kolay akvaryum "
+                    "bitkileri ve su bitkileri, yerleşim ve bakım ipuçları.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/planted.webp", "gorsel_g": 896, "gorsel_y": 1195,
+        "gorsel_alt": "Canlı akvaryum bitkileriyle kurulmuş bitkili akvaryum",
+        "etiketler": ["bitkili akvaryum", "akvaryum bitkisi", "su bitkisi"],
+        "govde": """
+<p><strong>Bitkili akvaryum</strong>, canlı akvaryum bitkilerinin balıklar kadar önemli olduğu, doğal bir su altı bahçesidir. Bitkiler yalnızca güzel görünmez: suyu temizler, oksijen üretir, yosunla besin için rekabet eder ve balıklara saklanma alanı sağlar. Bu rehberde bitkili akvaryumun nasıl kurulacağını ve hangi <strong>akvaryum bitkisi</strong>nin size uygun olduğunu adım adım anlatıyoruz.</p>
+
+<h2>Low-tech mi, high-tech mi?</h2>
+<ul>
+  <li><strong>Low-tech bitkili akvaryum:</strong> CO₂ tüpü kullanılmaz; düşük-orta ışık ve yavaş büyüyen bitkilerle kurulur. Bakımı kolaydır, yeni başlayanlar için idealdir.</li>
+  <li><strong>High-tech bitkili akvaryum:</strong> Güçlü ışık, CO₂ ve düzenli gübreleme gerektirir. Halı bitkileri ve kırmızı bitkiler gibi zor türler hızla büyür, ancak dengeyi kurmak deneyim ister.</li>
+</ul>
+
+<h2>1. Zemin: bitkilerin besin deposu</h2>
+<p>Köklerinden beslenen bitkiler (cryptocoryne, kılıç otu, halı bitkileri) için besinli akvaryum toprağı en iyi seçimdir. Köklerini taşa ve köke tutturan anubias, java eğreltisi ve bucephalandra gibi bitkiler için ise zemin önemli değildir. Zemin türlerini <a href="../akvaryum-kumu-ve-zemin/">akvaryum kumu ve zemin seçimi</a> yazımızda karşılaştırdık.</p>
+
+<h2>2. Işık</h2>
+<p>Bitkiler için 6500K civarı gün ışığı tonu idealdir. Günde 6–8 saat aydınlatma yeterlidir; daha uzun süre yosun sorununa yol açar. Bir zamanlayıcı kullanmak ışık süresini sabit tutar.</p>
+
+<h2>3. Yeni başlayanlar için en kolay akvaryum bitkileri</h2>
+<ul>
+  <li><strong>Anubias nana:</strong> Çok az ışıkla yaşar, taşa bağlanır, neredeyse bakım istemez.</li>
+  <li><strong>Java eğreltisi:</strong> Dayanıklı, köke bağlanan bir su bitkisi.</li>
+  <li><strong>Java yosunu:</strong> Taş ve köklerin üzerinde doğal bir görünüm oluşturur; karidesler sever.</li>
+  <li><strong>Cryptocoryne wendtii:</strong> Zemine dikilen, yavaş büyüyen ön-orta plan bitkisi.</li>
+  <li><strong>Hygrophila polysperma ve limnophila:</strong> Hızlı büyüyen sap bitkileri; yosunla en iyi rekabet edenler.</li>
+  <li><strong>Salvinia ve limnobium:</strong> Yüzey (yüzen) su bitkileri; fazla besini hızla tüketir.</li>
+</ul>
+<p>Tüm bitkileri ışık, sıcaklık, pH ve zorluk derecesiyle <a href="../../bitkiler/">akvaryum bitkileri rehberimizde</a> filtreleyebilirsiniz.</p>
+
+<h2>4. Yerleşim: ön, orta ve arka plan</h2>
+<p>Kısa bitkileri (halı bitkileri, cryptocoryne) öne, orta boyları (anubias, bucephalandra) taş ve köklerin çevresine, uzun sap bitkilerini (vallisneria, rotala, limnophila) arkaya yerleştirin. Bu düzen derinlik hissi verir ve tüm bitkilerin ışık almasını sağlar.</p>
+
+<h2>5. Gübre ve CO₂</h2>
+<p>Low-tech akvaryumda balık atıkları ve haftalık az miktarda sıvı gübre çoğu zaman yeterlidir. Kök bitkileri için zemine kök tableti eklenebilir. CO₂ yalnızca güçlü ışık kullanılan high-tech sistemlerde gerekir.</p>
+
+<h2>6. İlk haftalar ve bakım</h2>
+<p>Bitkiler ilk haftalarda yeni ortama alışırken bazı yaprakların erimesi normaldir. Akvaryumu bol bitkiyle başlatmak, su döngüsü sırasında yosun riskini azaltır. Düzenli budama ve haftalık su değişimi için <a href="../nano-akvaryum-bakimi/">bakım rutinimize</a> bakın; doğru filtreyi seçmek için <a href="../akvaryum-filtresi-ve-pompasi/">akvaryum filtresi ve pompası rehberimizi</a> okuyun.</p>
+
+<p>Tankled akvaryumları, üç ışık tonlu LED aydınlatmasıyla bitkili low-tech kurulumlar için tasarlanmıştır. Ankara'daki atölyemizden bitkileri yerleştirilmiş hazır kurulum için <a href="../../iletisim/">bize ulaşın</a>.</p>
+""",
+    },
+    {
+        "slug": "akvaryum-filtresi-ve-pompasi",
+        "baslik": "Akvaryum Filtresi ve Pompası Nasıl Seçilir? | Tankled",
+        "h1": "Akvaryum filtresi ve akvaryum pompası nasıl seçilir?",
+        "aciklama": "Akvaryum filtresi türleri (sünger, iç, askı, dış filtre), akvaryum pompası ve hava motoru farkı, "
+                    "doğru debi hesabı ve filtre bakımı rehberi.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/lagoon.webp", "gorsel_g": 896, "gorsel_y": 1195,
+        "gorsel_alt": "Temiz ve berrak sulu akvaryum",
+        "etiketler": ["akvaryum filtresi", "akvaryum pompası", "akvaryum hava motoru"],
+        "govde": """
+<p>Berrak ve sağlıklı bir akvaryumun kalbi <strong>akvaryum filtresi</strong>dir. Filtre yalnızca suyu görünür kirden arındırmaz; asıl görevi, balık atıklarından oluşan zehirli amonyağı ve nitriti daha zararsız nitrata çeviren faydalı bakterilere yuva olmaktır. Bu yazıda filtre türlerini, <strong>akvaryum pompası</strong> ile hava motoru arasındaki farkı ve doğru seçimi anlatıyoruz.</p>
+
+<h2>Filtrasyonun üç türü</h2>
+<ul>
+  <li><strong>Mekanik:</strong> Sünger ve elyaf, yüzen partikülleri tutar.</li>
+  <li><strong>Biyolojik:</strong> Seramik halka ve gözenekli malzemeler, faydalı bakterilere yaşam alanı sağlar. En önemli filtrasyon türüdür.</li>
+  <li><strong>Kimyasal:</strong> Aktif karbon gibi malzemeler, renk ve koku yapan maddeleri ya da ilaç kalıntılarını temizler; sürekli gerekmez.</li>
+</ul>
+
+<h2>Akvaryum filtresi türleri</h2>
+<ul>
+  <li><strong>Sünger filtre:</strong> Bir hava motoruyla çalışır; ucuz, güvenli ve akıntısı zayıftır. Betta, karides ve nano akvaryumlar için idealdir.</li>
+  <li><strong>İç filtre:</strong> Akvaryumun içine vantuzla yapışır; küçük ve orta akvaryumlar için pratiktir.</li>
+  <li><strong>Askı (şelale) filtre:</strong> Akvaryumun kenarına asılır; bakımı kolaydır ve içeride yer kaplamaz.</li>
+  <li><strong>Dış (kanister) filtre:</strong> Dolabın içinde durur; yüksek kapasiteli ve sessizdir. Büyük ve bitkili akvaryumlar için en iyi seçenektir.</li>
+</ul>
+
+<h2>Akvaryum pompası ile hava motoru arasındaki fark</h2>
+<p><strong>Akvaryum pompası</strong> (su pompası) suyu hareket ettirir: filtrelerin içinde bulunur ya da akıntı oluşturmak için ayrıca kullanılır. <strong>Hava motoru</strong> ise suya hava kabarcığı verir; sünger filtreleri çalıştırır ve yüzeyi hareketlendirerek oksijen alışverişini artırır. Bitkili ve az stoklu akvaryumlarda iyi çalışan bir filtre çoğu zaman yeterlidir; kalabalık akvaryumlarda ve sıcak yaz günlerinde ek havalandırma faydalıdır.</p>
+
+<h2>Doğru debi (saatlik akış) nasıl hesaplanır?</h2>
+<p>Genel bir kural olarak filtrenin saatlik debisi, akvaryum hacminin <strong>4–6 katı</strong> olmalıdır. Örneğin 60 litrelik bir akvaryum için 240–360 litre/saat debili bir filtre uygundur. Ancak betta gibi uzun yüzgeçli balıklar ve karidesler güçlü akıntıdan hoşlanmaz; bu durumda akış ayarlı ya da sünger filtre tercih edin. Akvaryumunuzun litresini <a href="../../akvaryum-olustur/">3D tasarım aracımızla</a> hesaplayabilirsiniz.</p>
+
+<h2>Filtre bakımı: en sık yapılan hata</h2>
+<p>Filtre süngerini musluk suyuyla yıkamak, içindeki faydalı bakterileri öldürür ve akvaryumda ani amonyak yükselmesine yol açabilir. Süngeri her zaman su değişimi sırasında çektiğiniz akvaryum suyunda hafifçe sıkın. Filtre malzemesinin tamamını aynı anda değiştirmeyin; biyolojik malzemeyi yıllarca kullanabilirsiniz.</p>
+
+<h2>Sessizlik ve yerleşim</h2>
+<p>Yatak odası ve çalışma odasındaki akvaryumlar için sessiz çalışan filtre seçin. Filtrenin giriş borusuna bir ön sünger takmak, karideslerin ve yavru balıkların emilmesini önler. Diğer ekipmanların ne işe yaradığını <a href="../../malzemeler/">akvaryum malzemeleri rehberimizde</a>, zemin seçimini <a href="../akvaryum-kumu-ve-zemin/">akvaryum kumu ve zemin</a> yazımızda bulabilirsiniz.</p>
+""",
+    },
+    {
+        "slug": "akvaryum-kumu-ve-zemin",
+        "baslik": "Akvaryum Kumu ve Zemin Seçimi Rehberi | Tankled",
+        "h1": "Akvaryum kumu ve zemin seçimi: hangi zemin hangi akvaryuma?",
+        "aciklama": "Akvaryum kumu, çakıl ve besinli akvaryum toprağı karşılaştırması: bitkili akvaryum, betta ve "
+                    "karides için doğru zemin, kalınlık ve yıkama ipuçları.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/abyss.webp", "gorsel_g": 896, "gorsel_y": 1190,
+        "gorsel_alt": "Kum ve taş zeminli akvaryum düzeni",
+        "etiketler": ["akvaryum kumu", "akvaryum zemini", "akvaryum toprağı"],
+        "govde": """
+<p>Zemin, akvaryumun hem görünümünü hem de biyolojik dengesini belirler. Yanlış seçilen zemin bitkilerin büyümesini engelleyebilir, su değerlerini değiştirebilir ya da dipte yaşayan balıklara zarar verebilir. Bu rehberde <strong>akvaryum kumu</strong>, çakıl ve akvaryum toprağını karşılaştırıyoruz.</p>
+
+<h2>1. Akvaryum kumu</h2>
+<p>İnce taneli akvaryum kumu doğal bir görünüm sağlar ve corydoras, kuhli gibi zemini eşeleyen balıklar için en güvenli seçenektir. Kum besin içermez; bu yüzden kök bitkileri için kök tableti eklenmelidir. Çok ince kum zamanla sıkışabilir; ince-orta tane boyu tercih edin. İnşaat kumu ya da deniz kumu kullanmayın: içerdiği kireç ve tuz su değerlerini değiştirir.</p>
+
+<h2>2. Akvaryum çakılı</h2>
+<p>Çakıl kolay temizlenir ve su akışına izin verir. Ancak aralarında yem artıkları birikebilir ve keskin kenarlı çakıl dip balıklarının bıyıklarına zarar verebilir. Yuvarlak kenarlı, nötr (kireç içermeyen) çakıl seçin.</p>
+
+<h2>3. Besinli akvaryum toprağı</h2>
+<p><a href="../bitkili-akvaryum-kurulumu/">Bitkili akvaryum</a> için en iyi seçenektir. Bitkilere besin sağlar ve suyu hafif yumuşatıp pH'ı düşürür; bu da karidesler ve pek çok tropikal balık için faydalıdır. İlk haftalarda bir miktar amonyak salabileceği için balık eklemeden önce su döngüsünün tamamlanması önemlidir.</p>
+
+<h2>Hangi akvaryuma hangi zemin?</h2>
+<ul>
+  <li><strong>Bitkili akvaryum:</strong> Besinli akvaryum toprağı ya da altta besin katmanı, üstte kum.</li>
+  <li><strong>Betta akvaryumu:</strong> Bitkili ise akvaryum toprağı, yalnızca epifit bitkiler (anubias, java eğreltisi) varsa ince kum.</li>
+  <li><strong>Karides akvaryumu:</strong> pH'ı düşük tutan akvaryum toprağı.</li>
+  <li><strong>Corydoras ve dip balıkları:</strong> İnce, yuvarlak taneli akvaryum kumu.</li>
+  <li><strong>Paludaryum ve teraryum:</strong> Drenaj katmanı (kil topları) üzerinde toprak karışımı.</li>
+</ul>
+
+<h2>Zemin kalınlığı</h2>
+<p>Bitkili akvaryumda zemin önde 3–4 cm, arkada 6–8 cm olacak şekilde eğimli yapılır; bu hem kök bitkilerine yer açar hem de derinlik hissi verir. Bitkisiz akvaryumlarda 2–3 cm yeterlidir.</p>
+
+<h2>Yıkama ve yerleştirme</h2>
+<p>Kum ve çakılı, su berraklaşana kadar bir kovada yıkayın. Akvaryum toprağı ise genellikle yıkanmaz; paketin üzerindeki talimata uyun. Suyu doldururken zemini dağıtmamak için suyu bir tabağın ya da poşetin üzerine yavaşça dökün.</p>
+
+<p>Zemin, filtre ve diğer malzemelerin tam listesi için <a href="../../malzemeler/">akvaryum malzemeleri rehberimize</a>, zemine uygun bitkiler için <a href="../../bitkiler/">akvaryum bitkileri rehberimize</a> bakın. Doğru filtreyi seçmek için <a href="../akvaryum-filtresi-ve-pompasi/">akvaryum filtresi ve pompası</a> yazımızı okuyun.</p>
+""",
+    },
+    {
         "slug": "akvaryum-fiyatlari",
         "baslik": "Akvaryum Fiyatları 2026: Fiyatı Ne Belirler? | Tankled",
         "h1": "Akvaryum fiyatları 2026: akvaryumun fiyatını neler belirler?",

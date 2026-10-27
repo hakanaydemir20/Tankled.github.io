@@ -43,10 +43,10 @@ SAYFALAR = [
     },
     {
         "dosya": "bitkiler/index.html", "yol": "bitkiler/", "oncelik": "0.8", "siklik": "monthly",
-        "baslik": "Akvaryum Bitkileri Rehberi: Low Tech ve Paludaryum | Tankled",
-        "aciklama": "Akvaryum ve paludaryum bitkileri rehberi: anubias, java yosunu, halı bitkileri. "
-                    "Işık, sıcaklık, pH ve bakım bilgileriyle doğru bitkiyi seçin.",
-        "kirinti": [("Bitkiler", "bitkiler/")],
+        "baslik": "Akvaryum Bitkileri ve Su Bitkileri Rehberi | Tankled",
+        "aciklama": "Bitkili akvaryum için akvaryum bitkisi ve su bitkisi rehberi: anubias, java yosunu, halı "
+                    "bitkileri. Işık, sıcaklık, pH ve bakım bilgileriyle doğru seçim.",
+        "kirinti": [("Akvaryum Bitkileri", "bitkiler/")],
     },
     {
         "dosya": "baliklar/index.html", "yol": "baliklar/", "oncelik": "0.8", "siklik": "monthly",
@@ -57,10 +57,10 @@ SAYFALAR = [
     },
     {
         "dosya": "malzemeler/index.html", "yol": "malzemeler/", "oncelik": "0.8", "siklik": "monthly",
-        "baslik": "Akvaryum Kurulumu ve Malzemeleri: Adım Adım Rehber | Tankled",
-        "aciklama": "Akvaryum nasıl kurulur? Filtre, ısıtıcı, zemin, su şartlandırıcı ve test kiti ne işe yarar, "
-                    "hangisi gerekli? Adım adım akvaryum kurulum rehberi.",
-        "kirinti": [("Malzemeler ve Kurulum", "malzemeler/")],
+        "baslik": "Akvaryum Malzemeleri: Filtre, Pompa, Kum, Isıtıcı | Tankled",
+        "aciklama": "Akvaryum filtresi, akvaryum pompası, akvaryum kumu, ısıtıcı ve su şartlandırıcı ne işe yarar? "
+                    "Adım adım akvaryum kurulum ve malzeme rehberi.",
+        "kirinti": [("Akvaryum Malzemeleri", "malzemeler/")],
     },
     {
         "dosya": "akvaryum-olustur/index.html", "yol": "akvaryum-olustur/", "oncelik": "0.7", "siklik": "monthly",
@@ -152,7 +152,7 @@ def isletme() -> dict:
         },
         "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Country", "name": "Türkiye"}],
         "sameAs": [INSTAGRAM],
-        "knowsAbout": ["akvaryum", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape"],
+        "knowsAbout": ["akvaryum", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape"],
     }
     if bilgi["posta_kodu"]:
         veri["address"]["postalCode"] = bilgi["posta_kodu"]
