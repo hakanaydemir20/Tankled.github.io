@@ -297,7 +297,7 @@ YAZILAR = [
 <p>Akvaryumu aldığınız gün balık eklemek en sık yapılan hatadır. Zemin, bitkiler ve filtre yerleştikten sonra suyun biyolojik olarak olgunlaşması (azot döngüsü) birkaç hafta sürer. Adım adım süreç için <a href="../betta-akvaryumu-kurulumu/">betta akvaryumu kurulum rehberimize</a> ve <a href="../../malzemeler/">malzemeler sayfamıza</a> göz atın.</p>
 
 <h2>Ankara'da hazır mı, ölçüye göre mi?</h2>
-<p>Hazır akvaryumlar hızlı ve ekonomiktir, ancak evinizdeki boşluğa ya da mobilyalarınıza uymayabilir. Ölçüye göre üretilen bir akvaryum ise duvar nişine, TV ünitesine ya da yatak odasındaki bir komodine tam oturacak şekilde tasarlanabilir. Tankled olarak Ankara Ostim'deki atölyemizde doğal masif ahşap gövdeli akvaryum, teraryum ve paludaryumları tek tek üretiyoruz; Ankara içinde atölyemize gelip ürünleri yerinde görebilir, Türkiye geneline gönderim için bizimle iletişime geçebilirsiniz.</p>
+<p>Hazır akvaryumlar hızlı ve ekonomiktir, ancak evinizdeki boşluğa ya da mobilyalarınıza uymayabilir. Ölçüye göre üretilen bir akvaryum ise duvar nişine, TV ünitesine ya da yatak odasındaki bir komodine tam oturacak şekilde tasarlanabilir. Tankled olarak Ankara Ostim'deki atölyemizde doğal masif ahşap gövdeli akvaryum, teraryum ve paludaryumları tek tek üretiyoruz; Ankara içinde atölyemize gelip ürünleri yerinde görebilir, Tüm modellerimizi Türkiye'nin 81 iline kargoyla gönderiyoruz; yurt dışına da kargo yapılabilir.</p>
 
 <h2>Kısa kontrol listesi</h2>
 <ul>
@@ -628,7 +628,7 @@ def uret() -> None:
 {y["govde"].strip()}
       <section class="cta">
         <h2>Ankara'da el yapımı akvaryum</h2>
-        <p>Ostim'deki atölyemizde doğal masif ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
+        <p>Ostim'deki atölyemizde doğal masif ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Türkiye'nin 81 iline ve yurt dışına kargo yapıyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
         <a class="btn" href="https://wa.me/905312172006?text=Merhaba%20Tankled%2C%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener">WhatsApp ile yazın</a>
         <a class="btn" href="{onek}#products">Koleksiyonu inceleyin</a>
       </section>

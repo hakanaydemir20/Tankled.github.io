@@ -94,9 +94,15 @@ for _y in blog.YAZILAR:
 YONLENDIRMELER = [("akvaryum-hesaplama/index.html", "akvaryum-olustur/")]
 
 SSS = [
+    ("Ankara dışına ve yurt dışına kargo yapıyor musunuz?",
+     "Evet. Tüm modellerimizi Türkiye'nin 81 iline kargoyla gönderiyoruz; yurt dışına da kargo yapılabilir. "
+     "Ayrıntılar için telefon ya da WhatsApp üzerinden bize ulaşabilirsiniz."),
+    ("Tankled akvaryum fiyatları ne kadar?",
+     "Betta Serisi 1.300 TL'den (doğal çam ahşap), Özel Betta Serisi 1.500 TL'den (Endonezya ithal ağaç), "
+     "Nano Serisi 2.500 TL'den başlayan fiyatlarla sunulur. Özel ölçüde fiyat; ölçü, malzeme ve kuruluma göre belirlenir."),
     ("Ankara'da akvaryum nereden alabilirim?",
      "Tankled'in atölyesi Ankara Ostim'dedir. El yapımı ve mobilyalı akvaryumlarımızı atölyede görebilir, "
-     "telefon ya da WhatsApp üzerinden bilgi alabilirsiniz. Türkiye geneline gönderim için de bize ulaşabilirsiniz."),
+     "telefon ya da WhatsApp üzerinden bilgi alabilirsiniz. Tüm modellerimizi Türkiye'nin 81 iline kargoyla gönderiyoruz."),
     ("Mobilyalı akvaryum nedir?",
      "Mobilyalı akvaryum, cam haznenin dolap, sehpa, konsol ya da ahşap bir gövdeyle birlikte tasarlandığı "
      "akvaryumdur. Ağırlığı güvenle taşır, kablo ve ekipmanı gizler ve evin dekorasyonuyla bütünleşir."),
@@ -195,6 +201,19 @@ def yapisal_veri(sayfa: dict) -> list[dict]:
                  "image": [url("assets/galeri/urun-bicim-01-tam-onden.jpg"), url("assets/galeri/urun-bicim-02-sol-45.jpg")],
                  "additionalProperty": [
                      {"@type": "PropertyValue", "name": "Ölçü", "value": "14 × 14 × 20 cm"},
+                     {"@type": "PropertyValue", "name": "Aydınlatma", "value": "3000K / 4500K / 6500K LED"},
+                     {"@type": "PropertyValue", "name": "Elektrik", "value": "220V"}]},
+                {"@type": "Product", "name": "Tankled Nano Serisi",
+                 "description": "Doğal masif ahşap gövdeli, menteşeli üst kapaklı, sürgülü buhar camlı, üç ışık tonlu "
+                                "LED aydınlatmalı 25 × 25 × 30 cm el yapımı nano akvaryum.",
+                 "brand": {"@type": "Brand", "name": MARKA},
+                 "manufacturer": {"@id": url("#isletme")},
+                 "image": [url("assets/lagoon.webp")],
+                 "offers": {"@type": "Offer", "priceCurrency": "TRY", "price": "2500",
+                            "availability": "https://schema.org/InStock", "url": url("#products"),
+                            "seller": {"@id": url("#isletme")}},
+                 "additionalProperty": [
+                     {"@type": "PropertyValue", "name": "Ölçü", "value": "25 × 25 × 30 cm"},
                      {"@type": "PropertyValue", "name": "Aydınlatma", "value": "3000K / 4500K / 6500K LED"},
                      {"@type": "PropertyValue", "name": "Elektrik", "value": "220V"}]},
                 {"@type": "FAQPage", "mainEntity": [

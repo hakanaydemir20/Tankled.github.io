@@ -51,7 +51,7 @@ GALERI_BETTA = [
 
 def fiyat_cumlesi() -> str:
     f = ISLETME["fiyat_baslangic"]
-    return f"<p><strong>Fiyatlar {f} TL'den başlar</strong> (hazır <a href=\"../betta-akvaryumu/\">Betta Serisi</a>). Özel ölçüde fiyat; ölçü, malzeme ve kuruluma göre belirlenir.</p>" if f else ""
+    return f"<p><strong>Fiyatlar {f} TL'den başlar</strong> (hazır <a href=\"../betta-akvaryumu/\">Betta Serisi</a>; Nano Serisi 2.500 TL'den başlar). Özel ölçüde fiyat; ölçü, malzeme ve kuruluma göre belirlenir.</p>" if f else ""
 
 
 def adres_metni() -> str:
@@ -190,6 +190,8 @@ FIYAT
   <li><strong>Özel Betta Serisi: 1.500 TL.</strong> Endonezya'dan ithal edilen, eşi benzeri olmayan doğal desenlere sahip, bambaşka bir ağaç. Her gövdenin deseni tektir.</li>
 </ul>
 FOTO_YER_SERI
+<h2>Kargo</h2>
+<p>Tüm modellerimizi Türkiye'nin 81 iline kargoyla gönderiyoruz; yurt dışına da kargo yapılabilir. Akvaryum, ahşap gövde ve cam hazne güvenli şekilde paketlenir.</p>
 <h2>Yalnızca betta için değil</h2>
 <p>Aynı ürün bitkili bir nano akvaryum, karides akvaryumu, <a href="../teraryum/">teraryum</a>, sukulent saksısı ya da dekoratif bir abajur olarak da kullanılabilir. Uygun canlıları <a href="../baliklar/">balıklar rehberimizde</a>, bitkileri <a href="../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
 
@@ -311,6 +313,7 @@ HIKAYE
 <ul>
   <li><strong>Atölye adresi:</strong> ADRES</li>
   SAATLER
+  <li><strong>Kargo:</strong> Türkiye'nin 81 iline ve yurt dışına</li>
   <li><strong>Telefon:</strong> <a href="tel:+905312172006">+90 531 217 2006</a></li>
   <li><strong>WhatsApp:</strong> <a href="WA_LINK" target="_blank" rel="noopener">WhatsApp ile yazın</a></li>
   <li><strong>E-posta:</strong> <a href="mailto:tankledaquarium@gmail.com">tankledaquarium@gmail.com</a></li>
@@ -361,7 +364,7 @@ def uret() -> None:
 {kapak}{icerik}
       <section class="cta">
         <h2>Ankara'da el yapımı akvaryum</h2>
-        <p>Ostim'deki atölyemizde doğal masif ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
+        <p>Ostim'deki atölyemizde doğal masif ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Türkiye'nin 81 iline ve yurt dışına kargo yapıyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
         <a class="btn" href="{WA}" target="_blank" rel="noopener">WhatsApp ile yazın</a>
         <a class="btn" href="tel:+905312172006">Hemen arayın</a>
       </section>
