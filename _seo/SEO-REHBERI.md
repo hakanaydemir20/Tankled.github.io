@@ -3,7 +3,7 @@
 ## Sitede yapılanlar (teknik SEO)
 - Her sayfaya anahtar kelimeli başlık (≤60 karakter) ve açıklama (≤160 karakter)
 - Canonical, robots, Open Graph (WhatsApp/Instagram önizlemesi), Twitter kartı, favicon
-- Yapısal veri (schema.org): Store (Ankara/Eryaman, telefon, e-posta, Instagram), WebSite,
+- Yapısal veri (schema.org): Store (Ankara/Ostim, telefon, e-posta, Instagram), WebSite,
   Product (Betta Serisi), FAQPage (ana sayfadaki SSS), alt sayfalarda BreadcrumbList
 - Ana sayfaya görünür "Sıkça Sorulan Sorular" bölümü (yapısal veriyle aynı metin)
 - `sitemap.xml`, `robots.txt`, `404.html`
@@ -38,7 +38,7 @@ Yerel aramalarda en büyük etken **Google İşletme Profili**dir.
 
 1. **Google İşletme Profili** (en önemli): https://business.google.com
    - Kategori: "Akvaryum mağazası" / "Evcil hayvan malzemeleri mağazası"
-   - Adres (Eryaman 3. Etap, Ankara), telefon, web sitesi, çalışma saatleri, ürün fotoğrafları
+   - Adres (Ostim, Ankara), telefon, web sitesi, çalışma saatleri, ürün fotoğrafları
    - Bilgiler sitedekiyle **birebir aynı** olsun (isim, adres, telefon)
    - Haftada 1 gönderi ve fotoğraf ekleyin
 2. **Müşteri yorumları:** Her satıştan sonra Google yorumu isteyin; yorumlara cevap verin.
@@ -46,7 +46,7 @@ Yerel aramalarda en büyük etken **Google İşletme Profili**dir.
    - Siteyi ekleyin, `sitemap.xml` gönderin, "URL denetimi" ile ana sayfayı dizine ekletin.
 4. **Bing Webmaster Tools:** https://www.bing.com/webmasters (Search Console'dan içe aktarılabilir).
 5. **Bağlantılar (backlink):** Akvaryum forumları, Ankara yerel rehberleri, Instagram/YouTube
-   açıklamaları, e-ticaret pazar yeri mağaza sayfaları, Etimesgut/Eryaman yerel rehberleri.
+   açıklamaları, e-ticaret pazar yeri mağaza sayfaları, Ostim firma rehberi.
 6. **Düzenli içerik:** Rehber sayfalarına yeni bitki/balık ekleyin; "betta akvaryumu nasıl kurulur",
    "nano akvaryum bakımı" gibi blog yazıları uzun vadede en çok trafik getiren kaynaktır.
 7. **Fotoğraflar:** Balık sayfası kartlarına gerçek fotoğraf ekleyin (`assets/baliklar/README.md`).

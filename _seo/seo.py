@@ -30,7 +30,7 @@ SAYFALAR = [
     {
         "dosya": "index.html", "yol": "", "oncelik": "1.0", "siklik": "weekly",
         "baslik": "Akvaryum Ankara | Mobilyalı ve El Yapımı Akvaryum | Tankled",
-        "aciklama": "Ankara Eryaman atölyemizde doğal ahşaptan mobilyalı akvaryum ve el yapımı dekoratif akvaryum: "
+        "aciklama": "Ankara Ostim atölyemizde doğal ahşaptan mobilyalı akvaryum ve el yapımı dekoratif akvaryum: "
                     "betta, nano akvaryum, teraryum, paludaryum. Ölçüye özel üretim.",
         "kirinti": [],
     },
@@ -95,13 +95,13 @@ YONLENDIRMELER = [("akvaryum-hesaplama/index.html", "akvaryum-olustur/")]
 
 SSS = [
     ("Ankara'da akvaryum nereden alabilirim?",
-     "Tankled'in atölyesi Ankara Eryaman'dadır. El yapımı ve mobilyalı akvaryumlarımızı atölyede görebilir, "
+     "Tankled'in atölyesi Ankara Ostim'dedir. El yapımı ve mobilyalı akvaryumlarımızı atölyede görebilir, "
      "telefon ya da WhatsApp üzerinden bilgi alabilirsiniz. Türkiye geneline gönderim için de bize ulaşabilirsiniz."),
     ("Mobilyalı akvaryum nedir?",
      "Mobilyalı akvaryum, cam haznenin dolap, sehpa, konsol ya da ahşap bir gövdeyle birlikte tasarlandığı "
      "akvaryumdur. Ağırlığı güvenle taşır, kablo ve ekipmanı gizler ve evin dekorasyonuyla bütünleşir."),
     ("Tankled akvaryumları nerede üretiliyor?",
-     "Tankled akvaryumları Ankara Eryaman'daki atölyemizde, elde ve tek tek üretilir. Her parçanın ahşap "
+     "Tankled akvaryumları Ankara Ostim'deki atölyemizde, elde ve tek tek üretilir. Her parçanın ahşap "
      "damarı farklı olduğu için her ürün kendine özgüdür."),
     ("Betta Serisi'nin ölçüleri ve malzemeleri nelerdir?",
      "Betta Serisi 14 × 14 × 20 cm ölçülerindedir. Standart seride gövde eşsiz doğal çam ahşaptan (1.300 TL), "
@@ -137,7 +137,7 @@ def isletme() -> dict:
         "@id": url("#isletme"),
         "name": MARKA,
         "alternateName": "Tankled Aquarium",
-        "description": "Ankara Eryaman'da doğal masif ahşaptan mobilyalı akvaryum, el yapımı dekoratif akvaryum, "
+        "description": "Ankara Ostim'de doğal masif ahşaptan mobilyalı akvaryum, el yapımı dekoratif akvaryum, "
                        "teraryum ve paludaryum üreten atölye.",
         "url": url(""),
         "logo": url("assets/icon-512.png"),
@@ -146,8 +146,8 @@ def isletme() -> dict:
         "telephone": TELEFON,
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": ", ".join(p for p in [bilgi["sokak"], "Eryaman 3. Etap"] if p),
-            "addressLocality": "Etimesgut",
+            "streetAddress": ", ".join(p for p in [bilgi["sokak"], "Ostim"] if p),
+            "addressLocality": "Yenimahalle",
             "addressRegion": "Ankara",
             "addressCountry": "TR",
         },
