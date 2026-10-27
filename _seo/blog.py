@@ -830,6 +830,16 @@ def kart(y: dict, onek: str, yazi_onek: str, baslik_etiketi: str = "h2") -> str:
             f'<span class="devam">Devamını oku →</span></div></a>')
 
 
+def _uretilmis_gorseller() -> None:
+    """_kaynak/gorsel/blog_gorsel.py ile uretilen assets/blog/<slug>.webp varsa kapak olarak onu kullan."""
+    for y in YAZILAR:
+        if (KOK / "assets" / "blog" / f"{y['slug']}.webp").exists():
+            y.update(gorsel=f"assets/blog/{y['slug']}.webp", gorsel_g=1200, gorsel_y=900)
+
+
+_uretilmis_gorseller()
+
+
 def sirali() -> list[dict]:
     return sorted(YAZILAR, key=lambda y: y["tarih"], reverse=True)
 

@@ -322,6 +322,12 @@ def ana_sayfa_bloklari() -> None:
         f'width="{y["gorsel_g"]}" height="{y["gorsel_y"]}" loading="lazy"/><div><h3>{y["h1"]}</h3><p>{y["aciklama"]}</p></div></a>'
         for y in blog.sirali()[:3])
     s = re.sub(r'(<!-- BLOG -->.*?<div class="blog-liste">\n).*?(\n    </div>)', lambda m: m.group(1) + kartlar + m.group(2), s, count=1, flags=re.S)
+    # Kullanim alanlari kartlari: _kaynak/gorsel/blog_gorsel.py ile uretilen gorsel varsa onu kullan
+    for href, ad in [("betta-akvaryumu/", "akvaryum"), ("teraryum/", "teraryum"),
+                     ("blog/dekoratif-abajur-fikirleri/", "abajur"), ("blog/isikli-bitki-saksisi/", "bitki-saksisi")]:
+        if (KOK / "assets" / "kullanim" / f"{ad}.webp").exists():
+            s = re.sub(rf'(<!-- KULLANIM -->.*?href="{re.escape(href)}"><img src=")[^"]*(" alt="[^"]*" width=")\d+(" height=")\d+',
+                       rf'\g<1>assets/kullanim/{ad}.webp\g<2>1200\g<3>900', s, count=1, flags=re.S)
     if sayfalar.YORUMLAR:
         ogeler = "\n".join(
             f'      <figure class="yorum reveal"><blockquote>“{esc(y["metin"])}”</blockquote>'
