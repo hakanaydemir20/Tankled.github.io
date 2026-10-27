@@ -9,6 +9,15 @@
 - `sitemap.xml`, `robots.txt`, `404.html`
 - Görseller WebP'ye çevrildi: ana sayfa ~30 MB → ~2 MB; boyut (width/height) eklendi
 - Rehber sayfaları (bitkiler, balıklar, malzemeler, galeri) arası iç bağlantılar
+- Ana sayfa "akvaryum Ankara" ve "mobilyalı akvaryum" için optimize edildi (başlık, açıklama, H1,
+  görünür "Ankara'da mobilyalı ve el yapımı akvaryum" bölümü, SSS)
+- Blog (`blog/`): 5 anahtar kelime odaklı yazı, BlogPosting + Blog + BreadcrumbList yapısal verisi,
+  yazılar arası ve rehberlere iç bağlantılar
+
+## Yeni blog yazısı eklemek
+`_seo/blog.py` içindeki `YAZILAR` listesine yeni bir sözlük ekleyin (slug, başlık ≤60, açıklama ≤160,
+tarih, görsel, gövde HTML) ve `python3 -B _seo/seo.py` çalıştırın. Blog listesi, site haritası ve
+yapısal veri otomatik güncellenir. Ana sayfadaki son 3 yazı kartı şimdilik elle güncellenir.
 
 Tüm etiketler `_seo/seo.py` içinden yönetilir. Başlık/açıklama değiştirmek için orayı
 düzenleyip çalıştırın:

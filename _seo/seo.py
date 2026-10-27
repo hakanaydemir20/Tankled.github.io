@@ -13,6 +13,8 @@ import re
 from datetime import date
 from pathlib import Path
 
+import blog
+
 # ----------------------------------------------------------------- ayarlar
 SITE = "https://hakanaydemir20.github.io/Tankled.github.io"  # sonda / yok
 MARKA = "Tankled"
@@ -26,9 +28,9 @@ KOK = Path(__file__).resolve().parent.parent
 SAYFALAR = [
     {
         "dosya": "index.html", "yol": "", "oncelik": "1.0", "siklik": "weekly",
-        "baslik": "El Yapımı Dekoratif Akvaryum | Ankara | Tankled",
-        "aciklama": "Ankara'daki atölyemizde masif tik ahşaptan el yapımı dekoratif akvaryumlar: "
-                    "betta akvaryumu, nano akvaryum, teraryum ve paludaryum. Özel tasarım yapılır.",
+        "baslik": "Akvaryum Ankara | Mobilyalı ve El Yapımı Akvaryum | Tankled",
+        "aciklama": "Ankara Ostim atölyemizde masif tik ahşaptan mobilyalı akvaryum ve el yapımı dekoratif "
+                    "akvaryum: betta, nano akvaryum, teraryum, paludaryum. Ölçüye özel üretim.",
         "kirinti": [],
     },
     {
@@ -68,10 +70,28 @@ SAYFALAR = [
     },
 ]
 
+SAYFALAR.append({
+    "dosya": "blog/index.html", "yol": "blog/", "oncelik": "0.8", "siklik": "weekly",
+    "baslik": blog.BLOG_BASLIK, "aciklama": blog.BLOG_ACIKLAMA, "tur": "blog",
+    "kirinti": [("Blog", "blog/")],
+})
+for _y in blog.YAZILAR:
+    SAYFALAR.append({
+        "dosya": f"blog/{_y['slug']}/index.html", "yol": f"blog/{_y['slug']}/", "oncelik": "0.7",
+        "siklik": "monthly", "baslik": _y["baslik"], "aciklama": _y["aciklama"], "tur": "yazi", "yazi": _y,
+        "kirinti": [("Blog", "blog/"), (_y["h1"], f"blog/{_y['slug']}/")],
+    })
+
 # Yalnizca yonlendirme yapan sayfa: dizine eklenmesin, asil sayfayi gostersin.
 YONLENDIRMELER = [("akvaryum-hesaplama/index.html", "akvaryum-olustur/")]
 
 SSS = [
+    ("Ankara'da akvaryum nereden alabilirim?",
+     "Tankled'in atölyesi Ankara Ostim'dedir. El yapımı ve mobilyalı akvaryumlarımızı atölyede görebilir, "
+     "telefon ya da WhatsApp üzerinden bilgi alabilirsiniz. Türkiye geneline gönderim için de bize ulaşabilirsiniz."),
+    ("Mobilyalı akvaryum nedir?",
+     "Mobilyalı akvaryum, cam haznenin dolap, sehpa, konsol ya da ahşap bir gövdeyle birlikte tasarlandığı "
+     "akvaryumdur. Ağırlığı güvenle taşır, kablo ve ekipmanı gizler ve evin dekorasyonuyla bütünleşir."),
     ("Tankled akvaryumları nerede üretiliyor?",
      "Tankled akvaryumları Ankara Ostim'deki atölyemizde, elde ve tek tek üretilir. Her parçanın ahşap "
      "damarı farklı olduğu için her ürün kendine özgüdür."),
@@ -107,7 +127,8 @@ def isletme() -> dict:
         "@id": url("#isletme"),
         "name": MARKA,
         "alternateName": "Tankled Aquarium",
-        "description": "Ankara'da masif tik ahşaptan el yapımı dekoratif akvaryum, teraryum ve paludaryum atölyesi.",
+        "description": "Ankara Ostim'de masif tik ahşaptan mobilyalı akvaryum, el yapımı dekoratif akvaryum, "
+                       "teraryum ve paludaryum üreten atölye.",
         "url": url(""),
         "logo": url("assets/icon-512.png"),
         "image": [url(KAPAK), url("assets/hero.webp")],
@@ -122,7 +143,7 @@ def isletme() -> dict:
         },
         "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Country", "name": "Türkiye"}],
         "sameAs": [INSTAGRAM],
-        "knowsAbout": ["akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape"],
+        "knowsAbout": ["akvaryum", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape"],
     }
 
 
@@ -150,10 +171,30 @@ def yapisal_veri(sayfa: dict) -> list[dict]:
                     for s, c in SSS]},
             ],
         }]
+    if sayfa.get("tur") == "blog":
+        ekstra = {"@context": "https://schema.org", "@type": "Blog", "@id": url("blog/#blog"), "url": url("blog/"),
+                  "name": "Tankled Blog", "description": sayfa["aciklama"], "inLanguage": "tr-TR",
+                  "publisher": {"@id": url("#isletme")},
+                  "blogPost": [{"@type": "BlogPosting", "headline": y["h1"], "url": url(f"blog/{y['slug']}/"),
+                                "datePublished": y["tarih"]} for y in blog.sirali()]}
+    elif sayfa.get("tur") == "yazi":
+        y = sayfa["yazi"]
+        ekstra = {"@context": "https://schema.org", "@type": "BlogPosting",
+                  "mainEntityOfPage": {"@type": "WebPage", "@id": url(sayfa["yol"])},
+                  "headline": y["h1"], "description": y["aciklama"], "image": [url(y["gorsel"])],
+                  "datePublished": y["tarih"], "dateModified": y["tarih"], "inLanguage": "tr-TR",
+                  "keywords": ", ".join(y["etiketler"]),
+                  "author": {"@type": "Organization", "name": MARKA, "url": url("")},
+                  "publisher": {"@type": "Organization", "name": MARKA,
+                                "logo": {"@type": "ImageObject", "url": url("assets/icon-512.png")}},
+                  "isPartOf": {"@id": url("blog/#blog")}}
+    else:
+        ekstra = None
     ogeler = [{"@type": "ListItem", "position": 1, "name": "Ana sayfa", "item": url("")}]
     for i, (ad, yol) in enumerate(sayfa["kirinti"], start=2):
         ogeler.append({"@type": "ListItem", "position": i, "name": ad, "item": url(yol)})
-    return [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": ogeler}]
+    kirinti = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": ogeler}
+    return [ekstra, kirinti] if ekstra else [kirinti]
 
 
 def blok(sayfa: dict, onek: str) -> str:
@@ -167,7 +208,7 @@ def blok(sayfa: dict, onek: str) -> str:
         '<meta name="geo.placename" content="Ankara" />',
         f'<link rel="icon" type="image/png" sizes="32x32" href="{onek}assets/favicon-32.png" />',
         f'<link rel="apple-touch-icon" href="{onek}assets/apple-touch-icon.png" />',
-        '<meta property="og:type" content="website" />',
+        f'<meta property="og:type" content="{"article" if sayfa.get("tur") == "yazi" else "website"}" />',
         f'<meta property="og:site_name" content="{MARKA}" />',
         '<meta property="og:locale" content="tr_TR" />',
         f'<meta property="og:title" content="{esc(sayfa["baslik"])}" />',
@@ -178,6 +219,8 @@ def blok(sayfa: dict, onek: str) -> str:
         '<meta property="og:image:height" content="630" />',
         '<meta name="twitter:card" content="summary_large_image" />',
     ]
+    if sayfa.get("tur") == "yazi":
+        satirlar.append(f'<meta property="article:published_time" content="{sayfa["yazi"]["tarih"]}" />')
     for veri in yapisal_veri(sayfa):
         satirlar.append('<script type="application/ld+json">'
                         + json.dumps(veri, ensure_ascii=False, separators=(",", ":")) + "</script>")
@@ -225,7 +268,7 @@ def sss_bolumu() -> None:
 
 
 ALT_BAGLANTILAR = [("Ana sayfa", ""), ("Galeri", "galeri/"), ("Bitkiler", "bitkiler/"), ("Balıklar", "baliklar/"),
-                   ("Malzemeler", "malzemeler/"), ("3D Tasarım", "akvaryum-olustur/"), ("Instagram", INSTAGRAM)]
+                   ("Malzemeler", "malzemeler/"), ("3D Tasarım", "akvaryum-olustur/"), ("Blog", "blog/"), ("Instagram", INSTAGRAM)]
 
 
 def alt_bilgi(sayfa: dict) -> None:
@@ -261,6 +304,7 @@ def site_haritasi() -> None:
 
 
 if __name__ == "__main__":
+    blog.uret()
     for s in SAYFALAR:
         sayfa_isle(s)
         alt_bilgi(s)
