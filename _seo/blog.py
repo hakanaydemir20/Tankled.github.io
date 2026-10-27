@@ -15,6 +15,243 @@ BLOG_ACIKLAMA = ("Mobilyalı akvaryum, betta ve nano akvaryum kurulumu, bakım i
 
 YAZILAR = [
     {
+        "slug": "teraryum-nasil-yapilir",
+        "baslik": "Teraryum Nasıl Yapılır? Adım Adım Kapalı Teraryum | Tankled",
+        "h1": "Teraryum nasıl yapılır? Adım adım kapalı teraryum rehberi",
+        "aciklama": "Kapalı teraryum nasıl yapılır? Drenaj katmanı, aktif karbon, toprak, bitki seçimi ve nem "
+                    "dengesiyle evde kendi kendine yaşayan bir teraryum kurun.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/g-gecko.webp", "gorsel_g": 1195, "gorsel_y": 1600,
+        "gorsel_alt": "Ahşap gövdeli kapalı teraryum, orman zemini ve yosunlar",
+        "etiketler": ["teraryum nasıl yapılır", "kapalı teraryum", "teraryum yapımı"],
+        "govde": """
+<p><strong>Teraryum</strong>, camla çevrili küçük bir bahçedir. Kapalı bir teraryumda bitkilerin terlediği su camda yoğuşur ve yeniden toprağa döner; böylece neredeyse hiç sulama gerektirmeyen, kendi kendine yaşayan bir mini ekosistem oluşur. Bu rehberde <strong>teraryum nasıl yapılır</strong> sorusunu adım adım cevaplıyoruz.</p>
+
+<h2>Gerekenler</h2>
+<ul>
+  <li>Kapaklı cam hazne (Tankled ürünlerinde sürgülü buhar kapağı bu iş için idealdir)</li>
+  <li>Drenaj katmanı: kil topu, ponza ya da ince çakıl</li>
+  <li>Aktif karbon (koku ve küf oluşumunu azaltır)</li>
+  <li>Ayırıcı katman: tül, file ya da kuru yosun</li>
+  <li>Teraryum toprağı: torf, hindistan cevizi lifi ve perlit karışımı</li>
+  <li>Nem seven küçük bitkiler, yosun, taş ve kökler</li>
+</ul>
+
+<h2>1. Drenaj katmanını oluşturun</h2>
+<p>Cam haznenin drenaj deliği olmadığı için fazla su dipte birikir. Tabana 2–3 cm kil topu ya da çakıl sererek bu suyun toprağa geri çıkmasını ve kökleri çürütmesini önleyin.</p>
+
+<h2>2. Aktif karbon ve ayırıcı</h2>
+<p>Drenajın üzerine ince bir kat aktif karbon serpin. Ardından toprağın drenaja karışmasını engellemek için bir tül ya da kuru yosun katmanı yerleştirin.</p>
+
+<h2>3. Toprak ve yerleşim</h2>
+<p>4–6 cm teraryum toprağını arkası yüksek, önü alçak olacak şekilde eğimli serin. Önce taş ve kökleri yerleştirip "manzarayı" kurun, ardından bitkileri büyükten küçüğe doğru dikin.</p>
+
+<h2>4. Bitki seçimi</h2>
+<p>Kapalı teraryum için yavaş büyüyen ve yüksek nemi seven bitkiler seçin: fittonia, peperomia prostrata, pilea, selaginella, küçük eğrelti türleri ve yosunlar. Ayrıntılar için <a href="../teraryum-bitkileri-ve-bakimi/">teraryum bitkileri ve bakımı</a> yazımıza ve <a href="../../bitkiler/">bitkiler rehberimize</a> bakın.</p>
+
+<h2>5. İlk sulama ve nem dengesi</h2>
+<p>Toprağı bir püskürtücüyle nemlendirin; su dibe göllenmemeli. Kapağı kapatın ve ilk günlerde camı gözlemleyin: Sabahları hafif buğu normaldir. Cam sürekli damlalarla kaplıysa kapağı birkaç saat aralayın; hiç buğu yoksa biraz su püskürtün.</p>
+
+<h2>6. Işık</h2>
+<p>Teraryumu doğrudan güneşe koymayın; cam, içeriyi hızla ısıtır. Dolaylı gün ışığı ya da günde 6–8 saat LED ışık yeterlidir. Tankled gövdelerindeki 6500K ışık tonu bitkiler için, 3000K tonu ise akşamları dekoratif bir <a href="../dekoratif-abajur-fikirleri/">abajur</a> etkisi için tasarlandı.</p>
+
+<p>Hazır, ahşap gövdeli ve ışıklı bir teraryum arıyorsanız <a href="../../teraryum/">teraryum sayfamıza</a> göz atın. Tankled ürünleri akvaryum, teraryum, abajur ve <a href="../isikli-bitki-saksisi/">bitki saksısı</a> olarak kullanılabilir.</p>
+""",
+    },
+    {
+        "slug": "teraryum-bitkileri-ve-bakimi",
+        "baslik": "Teraryum Bitkileri ve Teraryum Bakımı Rehberi | Tankled",
+        "h1": "Teraryum bitkileri ve teraryum bakımı: en kolay türler",
+        "aciklama": "Teraryum bitkileri hangileri? Kapalı ve açık teraryum için en uygun bitkiler, teraryum bakımı, "
+                    "sulama, ışık, küf ve buğu sorunlarına çözümler.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/paludarium.webp", "gorsel_g": 1195, "gorsel_y": 1600,
+        "gorsel_alt": "Yosun ve tropikal bitkilerle dolu teraryum",
+        "etiketler": ["teraryum bitkileri", "teraryum bakımı", "sukulent teraryum"],
+        "govde": """
+<p>Bir teraryumun uzun ömürlü olması, büyük ölçüde doğru <strong>teraryum bitkileri</strong>ni seçmeye bağlıdır. Kapalı ve açık teraryumlar çok farklı ortamlardır; birinde mutlu olan bitki diğerinde çabucak çürüyebilir. İşte iki tür için de en kolay bitkiler ve pratik <strong>teraryum bakımı</strong> ipuçları.</p>
+
+<h2>Kapalı (nemli) teraryum bitkileri</h2>
+<ul>
+  <li><strong>Fittonia (sinir otu):</strong> Renkli damarlı yapraklarıyla teraryumların yıldızı; nemi çok sever.</li>
+  <li><strong>Selaginella:</strong> Yumuşak, eğrelti benzeri dokusuyla doğal bir orman zemini görüntüsü verir.</li>
+  <li><strong>Peperomia prostrata ve pilea:</strong> Küçük yapraklı, yavaş büyüyen türlerdir.</li>
+  <li><strong>Küçük eğreltiler (ör. pteris):</strong> Arka plana yükseklik katar.</li>
+  <li><strong>Yosunlar:</strong> Zemini kaplar, nemi dengeler.</li>
+</ul>
+
+<h2>Açık (kuru) teraryum bitkileri</h2>
+<ul>
+  <li><strong>Sukulentler:</strong> Echeveria, haworthia, sedum gibi türler; düşük nem ve bol ışık ister.</li>
+  <li><strong>Kaktüsler:</strong> Kumlu, hızlı süzülen toprak ve iyi havalandırma gerekir.</li>
+  <li><strong>Tillandsia (hava bitkisi):</strong> Toprak istemez; haftada bir püskürtme ya da kısa süreli suya batırma yeterlidir.</li>
+</ul>
+<p>Sukulent ve kaktüsleri kapalı teraryuma koymayın: yüksek nem köklerini çürütür. Bunlar için kapağı açık tutun ya da ürünü <a href="../isikli-bitki-saksisi/">ışıklı bitki saksısı</a> olarak kullanın.</p>
+
+<h2>Teraryum bakımı</h2>
+<ul>
+  <li><strong>Sulama:</strong> Kapalı teraryumda aylarca sulama gerekmeyebilir; toprak kuruyunca hafifçe püskürtün. Açık teraryumda sukulentleri toprak tamamen kuruyunca sulayın.</li>
+  <li><strong>Buğu:</strong> Camın sürekli buğulu olması fazla nemin işaretidir; kapağı birkaç saat aralayın.</li>
+  <li><strong>Küf:</strong> Beyaz pamuksu küf görürseniz o kısmı alın ve havalandırmayı artırın. Aktif karbon katmanı küf riskini azaltır.</li>
+  <li><strong>Budama:</strong> Cama değen ya da hızla uzayan dalları kesin; çürüyen yaprakları hemen çıkarın.</li>
+  <li><strong>Işık:</strong> Doğrudan güneş yerine dolaylı ışık ya da LED kullanın.</li>
+</ul>
+
+<p>Kendi teraryumunuzu kurmak için <a href="../teraryum-nasil-yapilir/">teraryum nasıl yapılır</a> rehberimizi okuyun; uygun bitkileri <a href="../../bitkiler/">bitkiler rehberimizde</a> "teraryum ve paludaryum" filtresiyle bulun. Ahşap gövdeli, ışıklı teraryumlarımızı <a href="../../teraryum/">teraryum sayfamızda</a> inceleyebilirsiniz.</p>
+""",
+    },
+    {
+        "slug": "dekoratif-abajur-fikirleri",
+        "baslik": "Dekoratif Abajur Fikirleri: Ahşap ve Işıklı Abajur | Tankled",
+        "h1": "Dekoratif abajur fikirleri: içinde yaşam olan ahşap abajur",
+        "aciklama": "Salon ve yatak odası için dekoratif abajur fikirleri: ahşap abajur, sıcak ışık tonu seçimi ve "
+                    "içinde bitki ya da akvaryum olan yaşayan abajur tasarımı.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/galeri/urun-isik-3000k-onden.jpg", "gorsel_g": 750, "gorsel_y": 1000,
+        "gorsel_alt": "3000K sıcak ışıkta ahşap gövdeli dekoratif abajur",
+        "etiketler": ["dekoratif abajur", "ahşap abajur", "abajur modelleri"],
+        "govde": """
+<p>Bir <strong>abajur</strong>, odanın havasını tavan lambasından çok daha fazla belirler. Doğru yerde, doğru tonda bir abajur; salonu sıcak bir sohbet köşesine, yatak odasını dinlendirici bir sığınağa dönüştürür. Bu yazıda <strong>dekoratif abajur</strong> seçerken dikkat etmeniz gerekenleri ve sıradan bir lambadan çok daha fazlasını sunan "yaşayan abajur" fikrini anlatıyoruz.</p>
+
+<h2>1. Işık tonu: Kelvin değerine bakın</h2>
+<ul>
+  <li><strong>2700–3000K (sıcak beyaz):</strong> Abajurlar için ideal; mum ışığına yakın, dinlendirici.</li>
+  <li><strong>4000–4500K (nötr beyaz):</strong> Okuma ve çalışma köşeleri için.</li>
+  <li><strong>6500K (gün ışığı):</strong> Bitkiler için faydalı, ancak akşam saatlerinde soğuk ve uyarıcıdır.</li>
+</ul>
+<p>Birden fazla ton sunan bir abajur, gün içinde farklı ihtiyaçlara uyum sağlar.</p>
+
+<h2>2. Malzeme: ahşap abajurun sıcaklığı</h2>
+<p><strong>Ahşap abajur</strong>, metal ya da plastiğe göre çok daha sıcak bir görünüm verir ve doğal tonlu mobilyalarla kolayca uyum sağlar. Her ahşabın damar deseni farklı olduğu için iki ahşap abajur birbirinin aynısı olmaz; bu da onu seri üretim bir lambadan ayırır.</p>
+
+<h2>3. Yaşayan abajur: içinde doğa olan ışık</h2>
+<p>Tankled ürünleri, ahşap gövde ve cam hazneyi üç ışık tonlu LED ile birleştirir. İçine bitki, yosun ya da bir betta balığı koyduğunuzda abajur, ışığıyla birlikte içindeki mini doğayı da sergiler. 3000K sıcak ışıkta akşamları dekoratif bir abajur, 6500K'de gündüz bitkiler için büyüme ışığı olarak çalışır. Aynı ürünü <a href="../../betta-akvaryumu/">akvaryum</a>, <a href="../../teraryum/">teraryum</a> ya da <a href="../isikli-bitki-saksisi/">bitki saksısı</a> olarak da kullanabilirsiniz.</p>
+
+<h2>4. Abajur nereye konur?</h2>
+<ul>
+  <li><strong>Salon:</strong> Koltuk yanındaki sehpa ya da konsol; göz hizasının biraz altında.</li>
+  <li><strong>Yatak odası:</strong> Komodin üzerinde, yatağa göre yumuşak ve dolaylı ışık.</li>
+  <li><strong>Çalışma odası:</strong> Masanın köşesinde, ekrana yansımayacak açıda.</li>
+  <li><strong>Antre:</strong> Eve girerken karşılayan sıcak bir ışık noktası.</li>
+</ul>
+
+<h2>5. Hediye olarak abajur</h2>
+<p>El yapımı, ahşap ve içinde yaşam olan bir abajur; ev hediyesi, yeni iş yeri ya da doğum günü için akılda kalıcı bir seçimdir. Yatak odasında kullanımı için <a href="../gece-lambasi-olarak-isikli-teraryum/">gece lambası olarak ışıklı teraryum</a> yazımıza bakın.</p>
+""",
+    },
+    {
+        "slug": "gece-lambasi-olarak-isikli-teraryum",
+        "baslik": "Gece Lambası Fikirleri: Işıklı Teraryum Lamba | Tankled",
+        "h1": "Gece lambası fikirleri: yatak odası için ışıklı teraryum lamba",
+        "aciklama": "Yatak odası ve çocuk odası için dekoratif gece lambası fikirleri: sıcak ışıklı teraryum lamba, "
+                    "ahşap gece lambası ve uykuya uygun ışık tonu seçimi.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/galeri/urun-isik-3000k-45-derece.jpg", "gorsel_g": 750, "gorsel_y": 1000,
+        "gorsel_alt": "Sıcak ışıklı teraryum lamba yatak odasında gece lambası olarak",
+        "etiketler": ["gece lambası", "dekoratif gece lambası", "teraryum lamba"],
+        "govde": """
+<p>İyi bir <strong>gece lambası</strong>, karanlıkta yolunuzu bulmanızı sağlarken uykunuzu bölmeyecek kadar yumuşak olmalıdır. Sıradan bir priz lambası bu işi görür; ama yatak odasının dekorasyonuna hiçbir şey katmaz. İçinde bitkilerin ya da yosunların olduğu, ahşap gövdeli ışıklı bir <strong>teraryum lamba</strong> ise hem gece lambası hem de odanın en dikkat çeken objesi olabilir.</p>
+
+<h2>Uyku için doğru ışık tonu</h2>
+<p>Akşam saatlerinde mavi ağırlıklı soğuk ışık uyanıklığı artırabilir. Bu yüzden gece lambası olarak <strong>3000K ve altı sıcak beyaz</strong> tonları tercih edin ve ışığı doğrudan göze değil, çevreye yayılacak şekilde konumlandırın. Tankled ürünlerindeki 3000K ton, tam da bu kullanım için tasarlandı.</p>
+
+<h2>Neden ışıklı teraryum?</h2>
+<ul>
+  <li><strong>Yumuşak ve dolaylı ışık:</strong> Işık bitkilerin ve camın arasından süzülerek yayılır.</li>
+  <li><strong>Yaşayan dekor:</strong> İçindeki yosun ve bitkiler her gün biraz değişir; odaya canlılık katar.</li>
+  <li><strong>Sessiz:</strong> Filtre ya da motor yoktur; yatak odası için idealdir.</li>
+  <li><strong>Az bakım:</strong> Kapalı teraryum aylarca sulama istemeyebilir. Kurulum için <a href="../teraryum-nasil-yapilir/">teraryum nasıl yapılır</a> rehberimize bakın.</li>
+</ul>
+
+<h2>Çocuk odasında gece lambası</h2>
+<p>Çocuk odasında gece lambası olarak ışıklı teraryum kullanacaksanız ürünü çocuğun ulaşamayacağı bir rafa koyun ve kabloyu sabitleyin. İçine dikenli ya da zehirli olabilecek bitkiler yerine fittonia, pilea ve yosun gibi zararsız türleri seçin. Bitkilerin büyüdüğünü izlemek çocuklar için doğayı tanımanın keyifli bir yoludur.</p>
+
+<h2>Gündüz bitki ışığı, gece abajur</h2>
+<p>Üç ışık tonlu bir teraryum lamba gündüz 6500K ile bitkilerin büyümesini destekler, akşam 4500K ile okuma ışığı, gece 3000K ile gece lambası olur. Böylece tek bir ürün, gün boyu farklı görevler üstlenir. Diğer kullanım fikirleri için <a href="../dekoratif-abajur-fikirleri/">dekoratif abajur fikirleri</a> ve <a href="../isikli-bitki-saksisi/">ışıklı bitki saksısı</a> yazılarımıza göz atın.</p>
+
+<p>Tankled'ın ahşap gövdeli, ışıklı ürünlerini <a href="../../teraryum/">teraryum</a> ve <a href="../../betta-akvaryumu/">Betta Serisi</a> sayfalarımızda inceleyebilirsiniz.</p>
+""",
+    },
+    {
+        "slug": "isikli-bitki-saksisi",
+        "baslik": "Işıklı Bitki Saksısı: Sukulent ve Kaktüs Saksısı | Tankled",
+        "h1": "Işıklı bitki saksısı: sukulent ve kaktüs için cam saksı",
+        "aciklama": "Işıklı bitki saksısı ile ışık almayan köşelerde bile sukulent ve kaktüs yetiştirin. Cam saksıda "
+                    "drenaj, toprak, sulama ve LED ışık süresi rehberi.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/g-betta-bos.webp", "gorsel_g": 1086, "gorsel_y": 1448,
+        "gorsel_alt": "Ahşap gövdeli ışıklı cam bitki saksısı",
+        "etiketler": ["bitki saksısı", "sukulent saksısı", "ışıklı saksı"],
+        "govde": """
+<p>Evde bitki yetiştirmenin en büyük engeli ışıktır. Kuzeye bakan odalar, ofis masaları ve kitaplık rafları çoğu bitki için fazla karanlıktır. <strong>Işıklı bitki saksısı</strong>, kendi LED aydınlatmasıyla bu sorunu çözer ve bitkinizi pencereden bağımsız hâle getirir. Bu yazıda cam gövdeli, ışıklı bir saksıda <strong>sukulent</strong> ve kaktüs yetiştirmenin püf noktalarını anlatıyoruz.</p>
+
+<h2>1. Drenaj: cam saksının altın kuralı</h2>
+<p>Cam saksılarda drenaj deliği yoktur; fazla su dipte birikir ve kökleri çürütür. Bu yüzden tabana 2–3 cm kil topu, ponza ya da çakıl serin. Üzerine ince bir kat aktif karbon eklemek koku ve küfü önler.</p>
+
+<h2>2. Toprak</h2>
+<p>Sukulent ve kaktüsler için hızlı süzülen bir karışım kullanın: kaktüs toprağı, perlit ve ince ponza. Normal saksı toprağı suyu fazla tutar.</p>
+
+<h2>3. Sulama</h2>
+<p>Drenajsız saksıda en sık yapılan hata fazla sulamadır. Toprak tamamen kuruduktan sonra, tabana göllenmeyecek kadar az su verin; kışın sulamayı seyrekleştirin. Şüphede kaldığınızda sulamayın: sukulentler kuraklığa, çürümeden çok daha iyi dayanır.</p>
+
+<h2>4. Işık süresi ve tonu</h2>
+<p>Sukulentler bol ışık ister. Penceresiz bir köşede 6500K gün ışığı tonunda günde 8–10 saat aydınlatma, renklerin canlı kalmasını ve bitkinin ışığa doğru uzayıp şeklini bozmamasını sağlar. Akşamları 3000K tona geçerek saksıyı aynı zamanda bir <a href="../dekoratif-abajur-fikirleri/">dekoratif abajur</a> olarak kullanabilirsiniz.</p>
+
+<h2>5. Havalandırma</h2>
+<p>Sukulentler kuru havayı sever; kapalı bir cam içinde nem birikir. Kapağı açık tutun ya da sürgülü kapağı aralık bırakın. Nem seven bitkiler için ise kapağı kapatarak saksıyı bir <a href="../teraryum-nasil-yapilir/">kapalı teraryuma</a> dönüştürebilirsiniz.</p>
+
+<h2>Bu saksıda neler yetişir?</h2>
+<ul>
+  <li><strong>Sukulentler:</strong> Haworthia, echeveria, sedum, crassula</li>
+  <li><strong>Küçük kaktüsler:</strong> Mammillaria, gymnocalycium</li>
+  <li><strong>Hava bitkileri:</strong> Tillandsia (toprak gerektirmez)</li>
+  <li><strong>Gölge seven yapraklılar:</strong> Pilea, peperomia, küçük pothos çelikleri</li>
+</ul>
+
+<p>Ofis ve çalışma masası için uygun bitkiler hakkında <a href="../masa-ustu-bitki-saksisi-ofis/">masaüstü bitki saksısı</a> yazımıza bakın. Tankled ürünleri aynı zamanda <a href="../../betta-akvaryumu/">akvaryum</a> ve <a href="../../teraryum/">teraryum</a> olarak da kullanılabilir.</p>
+""",
+    },
+    {
+        "slug": "masa-ustu-bitki-saksisi-ofis",
+        "baslik": "Masaüstü Bitki Saksısı: Ofis Bitkileri Rehberi | Tankled",
+        "h1": "Masaüstü bitki saksısı: ofis ve çalışma masası için bitkiler",
+        "aciklama": "Ofis ve çalışma masası için masaüstü bitki saksısı fikirleri: az ışıkta yaşayan ofis bitkileri, "
+                    "ışıklı saksı ile bakım ve kurumsal hediye önerileri.",
+        "tarih": "2026-10-27",
+        "gorsel": "assets/g-betta-studio.webp", "gorsel_g": 1195, "gorsel_y": 1600,
+        "gorsel_alt": "Çalışma masasında ahşap gövdeli ışıklı bitki saksısı",
+        "etiketler": ["masaüstü bitki saksısı", "ofis bitkileri", "masa bitkisi"],
+        "govde": """
+<p>Çalışma masasındaki küçük bir bitki, ekran başında geçen saatleri daha yeşil ve daha sakin kılar. Ancak ofisler çoğu zaman pencereden uzak, klimalı ve az ışıklı ortamlardır; bu da pek çok bitki için zorlu bir yaşam alanı demektir. Doğru bitki ve doğru <strong>masaüstü bitki saksısı</strong> ile bu sorun kolayca aşılır.</p>
+
+<h2>Az ışıkta yaşayan ofis bitkileri</h2>
+<ul>
+  <li><strong>Pothos (salon sarmaşığı):</strong> Çok dayanıklıdır, az ışıkta bile büyür.</li>
+  <li><strong>Peperomia:</strong> Küçük boyu ve etli yapraklarıyla masa için idealdir.</li>
+  <li><strong>Pilea:</strong> Yuvarlak yapraklarıyla modern bir görünüm verir.</li>
+  <li><strong>Fittonia:</strong> Renkli yapraklıdır; nemi sevdiği için kapalı bir cam içinde en iyi hâlini alır.</li>
+  <li><strong>Java yosunu ve marimo:</strong> Su içinde yaşayan, neredeyse bakım istemeyen yeşillikler.</li>
+</ul>
+<p>Daha fazla bitkiyi ışık ve bakım ihtiyaçlarıyla <a href="../../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
+
+<h2>Neden ışıklı saksı?</h2>
+<p>Ofiste en büyük sorun ışık eksikliğidir. Kendi LED aydınlatması olan bir saksı, bitkinin ihtiyaç duyduğu ışığı pencereye bağlı kalmadan sağlar. Mesai bitiminde ışığı kapatmanız ya da bir zamanlayıcıya bağlamanız yeterlidir. Cam gövde ise klimanın kurutucu etkisinden bitkiyi korur ve nemi dengeler.</p>
+
+<h2>Masaüstü saksı seçerken</h2>
+<ul>
+  <li><strong>Boyut:</strong> Klavye ve ekranın yanına sığacak kompakt bir ölçü (ör. 14 × 14 cm taban).</li>
+  <li><strong>Su taşmasına karşı güvenlik:</strong> Drenajlı düzen ve kapalı tabanlı cam, masaya su sızmasını önler.</li>
+  <li><strong>Görünüm:</strong> Ahşap gövde, ofis mobilyalarıyla doğal bir uyum sağlar.</li>
+  <li><strong>Çok amaçlılık:</strong> Aynı ürün akşamları <a href="../dekoratif-abajur-fikirleri/">abajur</a>, isterseniz <a href="../../betta-akvaryumu/">betta akvaryumu</a> olarak da kullanılabilir.</li>
+</ul>
+
+<h2>Kurumsal hediye olarak bitki saksısı</h2>
+<p>El yapımı, ahşap gövdeli ve içinde canlı bir bitki olan ışıklı saksı; yeni ofis açılışları, çalışanlara ve iş ortaklarına verilecek hediyeler için akılda kalıcı ve uzun ömürlü bir seçimdir. Toplu siparişler için <a href="../../iletisim/">bizimle iletişime geçebilirsiniz</a>.</p>
+
+<p>Sukulent ve kaktüs yetiştirmenin ayrıntıları için <a href="../isikli-bitki-saksisi/">ışıklı bitki saksısı</a> rehberimizi okuyun.</p>
+""",
+    },
+    {
         "slug": "bitkili-akvaryum-kurulumu",
         "baslik": "Bitkili Akvaryum Nasıl Kurulur? Bitki Seçimi | Tankled",
         "h1": "Bitkili akvaryum nasıl kurulur? Akvaryum bitkisi seçimi ve bakım",

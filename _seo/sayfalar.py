@@ -192,8 +192,15 @@ FIYAT
 FOTO_YER_SERI
 <h2>Kargo</h2>
 <p>Tüm modellerimizi Türkiye'nin 81 iline kargoyla gönderiyoruz; yurt dışına da kargo yapılabilir. Akvaryum, ahşap gövde ve cam hazne güvenli şekilde paketlenir.</p>
-<h2>Yalnızca betta için değil</h2>
-<p>Aynı ürün bitkili bir nano akvaryum, karides akvaryumu, <a href="../teraryum/">teraryum</a>, sukulent saksısı ya da dekoratif bir abajur olarak da kullanılabilir. Uygun canlıları <a href="../baliklar/">balıklar rehberimizde</a>, bitkileri <a href="../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
+<h2>Tek tasarım, dört kullanım</h2>
+<p>Betta Serisi yalnızca bir akvaryum değil, ihtiyacınıza göre dönüşen bir yaşam alanıdır:</p>
+<ul>
+  <li><strong>Akvaryum:</strong> Betta, karides ya da bitkili nano akvaryum.</li>
+  <li><strong>Teraryum:</strong> Yosun ve tropikal bitkilerle kapalı bir mini orman. <a href="../blog/teraryum-nasil-yapilir/">Teraryum nasıl yapılır?</a></li>
+  <li><strong>Abajur ve gece lambası:</strong> 3000K sıcak ışığıyla salonda dekoratif abajur, yatak odasında gece lambası. <a href="../blog/dekoratif-abajur-fikirleri/">Dekoratif abajur fikirleri</a></li>
+  <li><strong>Bitki saksısı:</strong> Kendi LED ışığıyla penceresiz köşede bile sukulent ve kaktüs yetiştirin. <a href="../blog/isikli-bitki-saksisi/">Işıklı bitki saksısı rehberi</a></li>
+</ul>
+<p>Ayrıca egzotik hayvan yuvası ya da aksesuar kutusu olarak da kullanılabilir. Uygun canlıları <a href="../baliklar/">balıklar rehberimizde</a>, bitkileri <a href="../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
 
 <h2>Hazır kurulum seti</h2>
 <p>Talep üzerine Betta Serisi'ni zemin, canlı bitkiler ve ekipmanla hazır kurulmuş olarak teslim ediyoruz. Kendiniz kurmak isterseniz <a href="../blog/betta-akvaryumu-kurulumu/">betta akvaryumu kurulum rehberimiz</a> ve <a href="../blog/nano-akvaryum-bakimi/">nano akvaryum bakım rutinimiz</a> adım adım yol gösterir.</p>
@@ -226,6 +233,7 @@ FOTO_BETTA
 <p>Ahşap gövde, teraryumu bir dekorasyon objesine dönüştürür ve LED aydınlatmayı gizler. Tik yağıyla korunan ahşap yüzey nemli ortama dayanıklıdır; üç ışık tonu (3000K, 4500K, 6500K) hem bitkilerin ihtiyacını karşılar hem de akşamları yumuşak bir ortam ışığı sağlar.</p>
 
 <h2>Bakım</h2>
+<p>Kurulum ve bitki seçimi için <a href="../blog/teraryum-nasil-yapilir/">teraryum nasıl yapılır</a> ve <a href="../blog/teraryum-bitkileri-ve-bakimi/">teraryum bitkileri ve bakımı</a> rehberlerimize bakın. Aynı ahşap gövdeli teraryum akşamları sıcak ışığıyla bir <a href="../blog/gece-lambasi-olarak-isikli-teraryum/">gece lambası</a> olarak da kullanılabilir.</p>
 <p>Kapalı bitki teraryumları çok az bakım ister: ara sıra püskürtme, kuruyan yaprakların alınması ve cam yoğuşması fazlaysa kapağın kısa süre açılması yeterlidir. Teraryuma uygun bitkileri <a href="../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
 
 <p>Su ve kara bölümünü bir arada istiyorsanız <a href="../paludaryum/">paludaryum</a> sayfamıza, ölçüye özel üretim için <a href="../ozel-olcu-akvaryum/">özel ölçü</a> sayfamıza bakın.</p>
