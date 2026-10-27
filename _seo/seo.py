@@ -14,6 +14,7 @@ from datetime import date
 from pathlib import Path
 
 import blog
+import sayfalar
 
 # ----------------------------------------------------------------- ayarlar
 SITE = "https://hakanaydemir20.github.io/Tankled.github.io"  # sonda / yok
@@ -70,6 +71,13 @@ SAYFALAR = [
     },
 ]
 
+for _s in sayfalar.SAYFALAR:
+    SAYFALAR.append({
+        "dosya": f"{_s['yol']}index.html", "yol": _s["yol"],
+        "oncelik": "0.9" if _s["tur"] == "hizmet" else "0.6", "siklik": "monthly",
+        "baslik": _s["baslik"], "aciklama": _s["aciklama"], "tur": _s["tur"], "sayfa": _s,
+        "kirinti": [(_s["kisa"], _s["yol"])],
+    })
 SAYFALAR.append({
     "dosya": "blog/index.html", "yol": "blog/", "oncelik": "0.8", "siklik": "weekly",
     "baslik": blog.BLOG_BASLIK, "aciklama": blog.BLOG_ACIKLAMA, "tur": "blog",
@@ -188,6 +196,16 @@ def yapisal_veri(sayfa: dict) -> list[dict]:
                   "publisher": {"@type": "Organization", "name": MARKA,
                                 "logo": {"@type": "ImageObject", "url": url("assets/icon-512.png")}},
                   "isPartOf": {"@id": url("blog/#blog")}}
+    elif sayfa.get("tur") == "hizmet":
+        ekstra = {"@context": "https://schema.org", "@type": "Service", "name": sayfa["sayfa"]["hizmet"],
+                  "serviceType": sayfa["sayfa"]["hizmet"], "description": sayfa["aciklama"], "url": url(sayfa["yol"]),
+                  "image": url(sayfa["sayfa"]["gorsel"]), "provider": isletme(),
+                  "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Country", "name": "Türkiye"}]}
+    elif sayfa.get("tur") in ("hakkimizda", "iletisim"):
+        ekstra = {"@context": "https://schema.org",
+                  "@type": "AboutPage" if sayfa["tur"] == "hakkimizda" else "ContactPage",
+                  "name": sayfa["baslik"], "description": sayfa["aciklama"], "url": url(sayfa["yol"]),
+                  "inLanguage": "tr-TR", "about": isletme()}
     else:
         ekstra = None
     ogeler = [{"@type": "ListItem", "position": 1, "name": "Ana sayfa", "item": url("")}]
@@ -267,7 +285,7 @@ def sss_bolumu() -> None:
     yol.write_text(s, encoding="utf-8")
 
 
-ALT_BAGLANTILAR = [("Ana sayfa", ""), ("Galeri", "galeri/"), ("Bitkiler", "bitkiler/"), ("Balıklar", "baliklar/"),
+ALT_BAGLANTILAR = [("Ana sayfa", ""), ("Mobilyalı Akvaryum", "mobilyali-akvaryum/"), ("Hakkımızda", "hakkimizda/"), ("İletişim", "iletisim/"), ("Galeri", "galeri/"), ("Bitkiler", "bitkiler/"), ("Balıklar", "baliklar/"),
                    ("Malzemeler", "malzemeler/"), ("3D Tasarım", "akvaryum-olustur/"), ("Blog", "blog/"), ("Instagram", INSTAGRAM)]
 
 
@@ -305,6 +323,7 @@ def site_haritasi() -> None:
 
 if __name__ == "__main__":
     blog.uret()
+    sayfalar.uret()
     for s in SAYFALAR:
         sayfa_isle(s)
         alt_bilgi(s)
