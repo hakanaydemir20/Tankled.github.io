@@ -15,9 +15,15 @@ ISLETME = {
     "sokak": "",            # ornek: "1234. Cadde No: 5"  (Google Isletme Profili ile birebir ayni)
     "posta_kodu": "",       # ornek: "06374"
     "saatler": [],          # ornek: [("Pazartesi-Cuma", "Mo-Fr", "09:00", "18:00"), ("Cumartesi", "Sa", "10:00", "16:00")]
-    "fiyat_baslangic": "",  # ornek: "2.500"  -> "Fiyatlar 2.500 TL'den başlar"
+    "fiyat_baslangic": "1.300",  # ornek: "2.500"  -> "Fiyatlar 2.500 TL'den başlar"
     "kurulus_yili": "",     # ornek: "2021"
-    "usta_hikayesi": "",    # hakkimizda sayfasi icin birkac cumlelik HTML paragraf
+    "usta_hikayesi": """<h2>Hikâyemiz</h2>
+<p>Tankled'ın temelinde, imalat sektöründe <strong>on yılı aşan üretim tecrübesi</strong> ve bir mühendisin titizliği var. Akvaryuma bir tutku olarak, hobi olarak başladık. Ama çok geçmeden raflardaki akvaryumların bize yetmediğini fark ettik: Çoğu, içi doldurulmayı bekleyen cansız bir cam kutudan ibaretti.</p>
+<p>Biz başka bir şey istiyorduk. Her köşesi doğal, nefes alan, bulunduğu mekânla bütünleşen ve bir kez baktığınızda gözünüzü ayıramadığınız <strong>yaşayan bir obje</strong>. Bu fikrin peşinden giderek <strong>altı ay süren bir Ar-Ge ve geliştirme süreci</strong> yürüttük. Oranlardan ahşap birleşimlerine, buhar kapağının sürgüsünden ışığın renk sıcaklığına kadar her detayı mühendislik disipliniyle tasarladık, prototipledik ve defalarca test ettik.</p>
+<p>Bu sürecin sonunda ortaya <a href="../betta-akvaryumu/">Betta Serisi</a> çıktı: Estetiği işlevden, zanaati mühendislikten ayırmayan bir tasarım.</p>
+<h2>Her parça, elde ve tek tek</h2>
+<p>Bugün <strong>Ankara Eryaman</strong>'daki atölyemizde her parçayı en ince dokunuşlarla, her detayını düşünerek, elimizle ve özenle üretiyoruz. Seri üretim yapmıyoruz; çünkü her ahşabın damarı farklı ve her parça kendi karakterini taşımayı hak ediyor.</p>
+FOTO_YER_ATOLYE""",    # hakkimizda sayfasi icin birkac cumlelik HTML paragraf
 }
 
 # Yalnizca GERCEK musteri yorumlari (Google yorumlarindan izinle alinmis). Bos ise bolum gosterilmez.
@@ -28,7 +34,7 @@ YORUMLAR = []
 GALERI_MOBILYALI = [
     ("assets/galeri/urun-isik-3000k-45-derece.jpg", "Mobilyalı akvaryum 3000K sıcak ışıkta, bitkili kurulum"),
     ("assets/galeri/urun-bicim-02-sol-45.jpg", "Ahşap gövdeli akvaryum sol çapraz açı"),
-    ("assets/galeri/urun-detay-11-ahsap-damari-arka.jpg", "Masif tik ahşap gövdenin damar dokusu"),
+    ("assets/galeri/urun-detay-11-ahsap-damari-arka.jpg", "Doğal masif ahşap gövdenin damar dokusu"),
     ("assets/galeri/urun-bicim-09-ust-kapak-tepeden.jpg", "Sürgülü buhar kapağı, tepeden görünüm"),
     ("assets/galeri/urun-isik-6500k-onden.jpg", "6500K gün ışığında taş düzenli kurulum"),
     ("assets/galeri/urun-bicim-06-tam-arka.jpg", "Ahşap gövdenin arka görünümü"),
@@ -45,18 +51,25 @@ GALERI_BETTA = [
 
 def fiyat_cumlesi() -> str:
     f = ISLETME["fiyat_baslangic"]
-    return f"<p><strong>Fiyatlar {f} TL'den başlar.</strong> Ölçü, malzeme ve kuruluma göre net fiyat için bize ulaşın.</p>" if f else ""
+    return f"<p><strong>Fiyatlar {f} TL'den başlar</strong> (hazır <a href=\"../betta-akvaryumu/\">Betta Serisi</a>). Özel ölçüde fiyat; ölçü, malzeme ve kuruluma göre belirlenir.</p>" if f else ""
 
 
 def adres_metni() -> str:
-    ilce = f"{ISLETME['posta_kodu']} Yenimahalle".strip()
-    return ", ".join(p for p in [ISLETME["sokak"], "Ostim", ilce, "Ankara"] if p)
+    ilce = f"{ISLETME['posta_kodu']} Etimesgut".strip()
+    return ", ".join(p for p in [ISLETME["sokak"], "Eryaman 3. Etap", ilce, "Ankara"] if p)
 
 
 def saatler_html() -> str:
     if not ISLETME["saatler"]:
         return "<li><strong>Çalışma saatleri:</strong> Atölye ziyaretleri için lütfen önceden haber verin.</li>"
     return "<li><strong>Çalışma saatleri:</strong> " + ", ".join(f"{g} {a}–{k}" for g, _, a, k in ISLETME["saatler"]) + "</li>"
+
+
+def foto_yer(kutular: list) -> str:
+    """Henuz eklenmemis gercek fotograflar icin bos kutular. Fotograf gelince GALERI listelerine tasiyin."""
+    return ('<div class="foto-grid">' + "".join(
+        f'<figure class="foto-yer"><!-- {dosya} --><span>Fotoğraf eklenecek</span><figcaption>{alt}</figcaption></figure>'
+        for dosya, alt in kutular) + "</div>")
 
 
 def foto_grid(fotolar: list, onek: str) -> str:
@@ -72,13 +85,13 @@ SAYFALAR = [
         "yol": "mobilyali-akvaryum/", "tur": "hizmet", "kisa": "Mobilyalı Akvaryum",
         "hizmet": "Mobilyalı akvaryum üretimi",
         "baslik": "Mobilyalı Akvaryum Ankara | Ahşap Gövdeli Akvaryum | Tankled",
-        "aciklama": "Ankara Ostim atölyemizde masif tik ahşaptan mobilyalı akvaryum üretiyoruz: konsol, sehpa, "
+        "aciklama": "Ankara Eryaman atölyemizde doğal masif ahşaptan mobilyalı akvaryum üretiyoruz: konsol, sehpa, "
                     "TV ünitesi ve masaüstü modeller, ölçüye özel tasarım.",
         "h1": "Mobilyalı akvaryum: Ankara'da el yapımı, ahşap gövdeli",
         "gorsel": "assets/about.webp", "gorsel_g": 893, "gorsel_y": 1600,
-        "gorsel_alt": "Masif tik ahşap gövdeli mobilyalı akvaryum salonda",
+        "gorsel_alt": "Doğal masif ahşap gövdeli mobilyalı akvaryum salonda",
         "govde": """
-<p>Tankled <strong>mobilyalı akvaryum</strong>ları, cam hazne ile ahşap gövdenin baştan birlikte tasarlandığı, Ankara Ostim'deki atölyemizde elde üretilen akvaryumlardır. Akvaryum, salonunuzda teknik bir cihaz gibi değil; konsolunuz, sehpanız ya da kitaplığınızla aynı dili konuşan bir mobilya gibi durur.</p>
+<p>Tankled <strong>mobilyalı akvaryum</strong>ları, cam hazne ile ahşap gövdenin baştan birlikte tasarlandığı, Ankara Eryaman'daki atölyemizde elde üretilen akvaryumlardır. Akvaryum, salonunuzda teknik bir cihaz gibi değil; konsolunuz, sehpanız ya da kitaplığınızla aynı dili konuşan bir mobilya gibi durur.</p>
 
 <h2>Neden mobilyalı akvaryum?</h2>
 <ul>
@@ -100,8 +113,8 @@ SAYFALAR = [
 FOTO_MOBILYALI
 <p>Daha fazla kurulum için <a href="../galeri/">galeriye</a> bakın.</p>
 
-<h2>Malzeme: masif tik ahşap</h2>
-<p>Akvaryum çevresi nemli bir ortamdır. Bu yüzden gövdelerimizde, doğal yağ oranı yüksek ve neme dayanıklı olduğu için tekne yapımında da kullanılan masif tik ahşabı tercih ediyoruz. Yüzey tik yağıyla korunur; her parçanın damar deseni farklı olduğu için iki ürün birbirinin aynısı olmaz.</p>
+<h2>Malzeme: doğal masif ahşap</h2>
+<p>Gövdelerimizde iki seçenek sunuyoruz: sıcak tonlu, <strong>eşsiz doğal çam ahşap</strong> ve <strong>Endonezya'dan ithal edilen, eşi benzeri olmayan doğal desenlere sahip özel ağaç</strong>. Akvaryum çevresi nemli bir ortam olduğu için yüzey tik yağıyla korunur. Her parçanın damar deseni farklı olduğu için iki ürün birbirinin aynısı olmaz.</p>
 
 <h2>Nasıl sipariş verilir?</h2>
 <ol>
@@ -122,12 +135,12 @@ FOTO_MOBILYALI
         "gorsel": "assets/galeri/urun-bicim-10-uzaktan-tam-govde.jpg", "gorsel_g": 750, "gorsel_y": 1000,
         "gorsel_alt": "Ölçüye özel üretilmiş ahşap gövdeli akvaryum tam görünüm",
         "govde": """
-<p>Hazır akvaryumlar çoğu zaman evinizdeki boşluğa ya da mobilyalarınıza tam uymaz. <strong>Özel ölçü akvaryum</strong> ise duvar nişine, TV ünitesine, konsolun üstüne ya da bir köşeye santimi santimine oturacak şekilde tasarlanır. Tankled olarak tüm akvaryumlarımızı Ankara Ostim'deki atölyemizde elde üretiyoruz; bu yüzden ölçü, ahşap, ışık ve kapak detaylarını size göre değiştirebiliyoruz.</p>
+<p>Hazır akvaryumlar çoğu zaman evinizdeki boşluğa ya da mobilyalarınıza tam uymaz. <strong>Özel ölçü akvaryum</strong> ise duvar nişine, TV ünitesine, konsolun üstüne ya da bir köşeye santimi santimine oturacak şekilde tasarlanır. Tankled olarak tüm akvaryumlarımızı Ankara Eryaman'daki atölyemizde elde üretiyoruz; bu yüzden ölçü, ahşap, ışık ve kapak detaylarını size göre değiştirebiliyoruz.</p>
 
 <h2>Neleri size göre belirliyoruz?</h2>
 <ul>
   <li><strong>Ölçü ve hacim:</strong> Genişlik, derinlik, yükseklik; bakmak istediğiniz canlılara uygun litre.</li>
-  <li><strong>Gövde:</strong> Masif tik ahşap gövde, yüzey yağı ve renk tonu.</li>
+  <li><strong>Gövde:</strong> Doğal masif ahşap gövde, yüzey yağı ve renk tonu.</li>
   <li><strong>Aydınlatma:</strong> 3000K sıcak, 4500K nötr ve 6500K gün ışığı LED seçenekleri.</li>
   <li><strong>Kullanım:</strong> Akvaryum, <a href="../paludaryum/">paludaryum</a> ya da <a href="../teraryum/">teraryum</a>.</li>
   <li><strong>Kurulum:</strong> Boş teslim ya da zemin, bitki ve ekipmanla hazır kurulum.</li>
@@ -153,25 +166,30 @@ FIYAT
         "yol": "betta-akvaryumu/", "tur": "hizmet", "kisa": "Betta Akvaryumu",
         "hizmet": "Betta akvaryumu",
         "baslik": "Betta Akvaryumu: Ahşap Gövdeli Betta Serisi | Tankled",
-        "aciklama": "Tankled Betta Serisi: 14 × 14 × 20 cm, masif tik ahşap gövde, sürgülü buhar kapağı ve üç "
+        "aciklama": "Tankled Betta Serisi: 14 × 14 × 20 cm, doğal masif ahşap gövde, sürgülü buhar kapağı ve üç "
                     "ışık tonlu LED. Ankara'da el yapımı betta akvaryumu.",
         "h1": "Betta akvaryumu: Tankled Betta Serisi",
         "gorsel": "assets/g-betta-cozy.webp", "gorsel_g": 1195, "gorsel_y": 1600,
         "gorsel_alt": "Tankled Betta Serisi betta akvaryumu oturma odasında",
         "govde": """
-<p><strong>Betta Serisi</strong>, betta balığı için tasarladığımız, Ankara'daki atölyemizde masif tik ahşaptan elde üretilen kompakt bir akvaryumdur. Çalışma masası, komodin ya da kitaplık rafı için idealdir; akşamları sıcak ışığıyla bir abajur gibi, gündüz gün ışığı tonuyla bitkili bir mini doğa gibi görünür.</p>
+<p><strong>Betta Serisi</strong>, betta balığı için tasarladığımız, Ankara'daki atölyemizde doğal masif ahşaptan elde üretilen kompakt bir akvaryumdur. Çalışma masası, komodin ya da kitaplık rafı için idealdir; akşamları sıcak ışığıyla bir abajur gibi, gündüz gün ışığı tonuyla bitkili bir mini doğa gibi görünür.</p>
 
 <h2>Teknik özellikler</h2>
 <ul>
   <li><strong>Ölçü:</strong> 14 × 14 × 20 cm</li>
-  <li><strong>Gövde:</strong> Tik yağıyla korunan masif tik ahşap</li>
+  <li><strong>Gövde:</strong> Doğal çam ahşap ya da Endonezya'dan ithal doğal desenli ağaç (Özel Betta Serisi); yüzey tik yağıyla korunur</li>
   <li><strong>Kapak:</strong> Sürgülü buhar kapağı (buharlaşmayı azaltır, bettanın zıplamasını önler)</li>
   <li><strong>Aydınlatma:</strong> 3000K, 4500K ve 6500K olmak üzere üç ışık tonlu LED</li>
   <li><strong>Elektrik:</strong> 220V</li>
   <li><strong>Sistem:</strong> Low-tech; CO₂ ve yoğun gübre gerektirmez</li>
 </ul>
 
-FIYAT
+<h2>Seriler ve fiyatlar</h2>
+<ul>
+  <li><strong>Betta Serisi: 1.300 TL.</strong> Sıcak tonlu, eşsiz doğal çam ahşap gövde.</li>
+  <li><strong>Özel Betta Serisi: 1.500 TL.</strong> Endonezya'dan ithal edilen, eşi benzeri olmayan doğal desenlere sahip, bambaşka bir ağaç. Her gövdenin deseni tektir.</li>
+</ul>
+FOTO_YER_SERI
 <h2>Yalnızca betta için değil</h2>
 <p>Aynı ürün bitkili bir nano akvaryum, karides akvaryumu, <a href="../teraryum/">teraryum</a>, sukulent saksısı ya da dekoratif bir abajur olarak da kullanılabilir. Uygun canlıları <a href="../baliklar/">balıklar rehberimizde</a>, bitkileri <a href="../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
 
@@ -187,13 +205,13 @@ FOTO_BETTA
         "yol": "teraryum/", "tur": "hizmet", "kisa": "Teraryum",
         "hizmet": "Teraryum üretimi",
         "baslik": "Teraryum Ankara: El Yapımı Ahşap Teraryum | Tankled",
-        "aciklama": "Ankara'da el yapımı teraryum: masif tik ahşap gövdeli, ışıklı ve kapaklı teraryumlar. "
+        "aciklama": "Ankara'da el yapımı teraryum: doğal masif ahşap gövdeli, ışıklı ve kapaklı teraryumlar. "
                     "Bitki teraryumu ve gecko gibi egzotik hayvanlar için yaşam alanı.",
         "h1": "Teraryum: Ankara'da el yapımı, ahşap gövdeli",
         "gorsel": "assets/g-gecko.webp", "gorsel_g": 1195, "gorsel_y": 1600,
         "gorsel_alt": "Orman temalı ahşap gövdeli teraryum",
         "govde": """
-<p><strong>Teraryum</strong>, bitkilerin ya da küçük kara hayvanlarının yaşadığı, camla çevrili bir mini ekosistemdir. Tankled teraryumları, akvaryumlarımızla aynı masif tik ahşap gövde ve LED aydınlatmayla Ankara Ostim'deki atölyemizde elde üretilir.</p>
+<p><strong>Teraryum</strong>, bitkilerin ya da küçük kara hayvanlarının yaşadığı, camla çevrili bir mini ekosistemdir. Tankled teraryumları, akvaryumlarımızla aynı doğal masif ahşap gövde ve LED aydınlatmayla Ankara Eryaman'daki atölyemizde elde üretilir.</p>
 
 <h2>Teraryum türleri</h2>
 <ul>
@@ -203,7 +221,7 @@ FOTO_BETTA
 </ul>
 
 <h2>Neden ahşap gövdeli teraryum?</h2>
-<p>Ahşap gövde, teraryumu bir dekorasyon objesine dönüştürür ve LED aydınlatmayı gizler. Tik ahşap nemli ortama dayanıklıdır; üç ışık tonu (3000K, 4500K, 6500K) hem bitkilerin ihtiyacını karşılar hem de akşamları yumuşak bir ortam ışığı sağlar.</p>
+<p>Ahşap gövde, teraryumu bir dekorasyon objesine dönüştürür ve LED aydınlatmayı gizler. Tik yağıyla korunan ahşap yüzey nemli ortama dayanıklıdır; üç ışık tonu (3000K, 4500K, 6500K) hem bitkilerin ihtiyacını karşılar hem de akşamları yumuşak bir ortam ışığı sağlar.</p>
 
 <h2>Bakım</h2>
 <p>Kapalı bitki teraryumları çok az bakım ister: ara sıra püskürtme, kuruyan yaprakların alınması ve cam yoğuşması fazlaysa kapağın kısa süre açılması yeterlidir. Teraryuma uygun bitkileri <a href="../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
@@ -221,7 +239,7 @@ FOTO_BETTA
         "gorsel": "assets/g-paludarium-open.webp", "gorsel_g": 1195, "gorsel_y": 1600,
         "gorsel_alt": "Ön açılır camlı el yapımı paludaryum",
         "govde": """
-<p><strong>Paludaryum</strong>, bir bölümü su, bir bölümü kara olan; akvaryum ile teraryumu birleştiren yaşam alanıdır. Nehir kıyısı, bataklık ya da yağmur ormanı zemini gibi doğal ortamları evinize taşır. Tankled paludaryumları Ankara Ostim'deki atölyemizde elde üretilir.</p>
+<p><strong>Paludaryum</strong>, bir bölümü su, bir bölümü kara olan; akvaryum ile teraryumu birleştiren yaşam alanıdır. Nehir kıyısı, bataklık ya da yağmur ormanı zemini gibi doğal ortamları evinize taşır. Tankled paludaryumları Ankara Eryaman'daki atölyemizde elde üretilir.</p>
 
 <h2>Paludaryumda neler yaşar?</h2>
 <ul>
@@ -232,7 +250,7 @@ FOTO_BETTA
 
 <h2>Tankled paludaryum özellikleri</h2>
 <ul>
-  <li>Masif tik ahşap gövde ve metal ayaklı modeller</li>
+  <li>Doğal masif ahşap gövde ve metal ayaklı modeller</li>
   <li>Bakımı kolaylaştıran ön açılır cam seçeneği</li>
   <li>Bitkiler için ayarlanabilir LED aydınlatma</li>
   <li>Ölçüye özel üretim ve hazır kurulum</li>
@@ -246,14 +264,14 @@ FOTO_BETTA
     },
     {
         "yol": "hakkimizda/", "tur": "hakkimizda", "kisa": "Hakkımızda",
-        "baslik": "Hakkımızda: Ankara Ostim Akvaryum Atölyesi | Tankled",
-        "aciklama": "Tankled, Ankara Ostim'de masif tik ahşaptan mobilyalı akvaryum, teraryum ve paludaryum "
+        "baslik": "Hakkımızda: Ankara Eryaman Akvaryum Atölyesi | Tankled",
+        "aciklama": "Tankled, Ankara Eryaman'da doğal masif ahşaptan mobilyalı akvaryum, teraryum ve paludaryum "
                     "üreten bir el yapımı akvaryum atölyesidir. Hikayemiz ve yaklaşımımız.",
         "h1": "Hakkımızda: Ankara'da el yapımı akvaryum atölyesi",
         "gorsel": "assets/g-lineup.webp", "gorsel_g": 1122, "gorsel_y": 1402,
         "gorsel_alt": "Tankled atölyesinde üretilen akvaryum koleksiyonu",
         "govde": """
-<p>Tankled, bir akvaryumun yalnızca bir cam kap değil; mekânın ruhunu değiştiren, yaşayan bir tasarım nesnesi olabileceği inancıyla doğdu. <strong>Ankara Ostim</strong>'deki atölyemizde akvaryum, teraryum ve paludaryumları masif tik ahşaptan, elde ve tek tek üretiyoruz.</p>
+<p>Tankled, bir akvaryumun yalnızca bir cam kap değil; mekânın ruhunu değiştiren, yaşayan bir tasarım nesnesi olabileceği inancıyla doğdu. <strong>Ankara Eryaman</strong>'daki atölyemizde akvaryum, teraryum ve paludaryumları doğal masif ahşaptan, elde ve tek tek üretiyoruz.</p>
 
 HIKAYE
 <h2>Yaklaşımımız</h2>
@@ -276,15 +294,15 @@ HIKAYE
 <p>Akvaryumun keyifli olması doğru bilgiyle başlar. Bu yüzden <a href="../bitkiler/">bitkiler</a>, <a href="../baliklar/">balıklar</a> ve <a href="../malzemeler/">malzemeler</a> rehberlerimizi ve <a href="../blog/">blog yazılarımızı</a> herkesin kullanımına açık tutuyoruz.</p>
 
 <h2>Atölyemizi ziyaret edin</h2>
-<p>Ürünlerimizi Ankara Ostim'deki atölyemizde yerinde görebilirsiniz. Ziyaret öncesinde <a href="../iletisim/">iletişim sayfamızdan</a> bize ulaşmanızı öneririz.</p>
+<p>Ürünlerimizi Ankara Eryaman'daki atölyemizde yerinde görebilirsiniz. Ziyaret öncesinde <a href="../iletisim/">iletişim sayfamızdan</a> bize ulaşmanızı öneririz.</p>
 """,
     },
     {
         "yol": "iletisim/", "tur": "iletisim", "kisa": "İletişim",
-        "baslik": "İletişim: Tankled Akvaryum Atölyesi Ostim, Ankara",
-        "aciklama": "Tankled iletişim: Ostim, Yenimahalle, Ankara. Telefon +90 531 217 2006, WhatsApp ve e-posta. "
+        "baslik": "İletişim: Tankled Akvaryum Atölyesi Eryaman, Ankara",
+        "aciklama": "Tankled iletişim: Eryaman 3. Etap, Etimesgut, Ankara. Telefon +90 531 217 2006, WhatsApp ve e-posta. "
                     "Mobilyalı ve özel ölçü akvaryum için bize ulaşın.",
-        "h1": "İletişim: Ankara Ostim'deki atölyemize ulaşın",
+        "h1": "İletişim: Ankara Eryaman'daki atölyemize ulaşın",
         "gorsel": None,
         "govde": """
 <p>Mobilyalı akvaryum, özel ölçü akvaryum, betta akvaryumu, teraryum ya da paludaryum için bize aşağıdaki kanallardan ulaşabilirsiniz. Alanınızın ölçüsünü ve bir fotoğrafını paylaşırsanız size en uygun seçeneği birlikte belirleyelim.</p>
@@ -301,7 +319,7 @@ HIKAYE
 <p>Atölye ziyaretleri için önceden haber vermenizi rica ederiz. Mesajlarınıza en kısa sürede dönüş yapıyoruz.</p>
 
 <h2>Konum</h2>
-<iframe title="Tankled atölyesi konumu: Ostim, Yenimahalle, Ankara" src="HARITA" width="100%" height="360" style="border:0;border-radius:18px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe title="Tankled atölyesi konumu: Eryaman 3. Etap, Etimesgut, Ankara" src="HARITA" width="100%" height="360" style="border:0;border-radius:18px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 <h2>Göndermeden önce</h2>
 <p>Ne istediğinizden emin değilseniz <a href="../akvaryum-olustur/">3D akvaryum tasarım aracımızla</a> ölçü ve ışığı deneyebilir, <a href="../galeri/">galeride</a> örnek kurulumlara, <a href="../blog/">blogda</a> rehber yazılarımıza göz atabilirsiniz.</p>
@@ -322,11 +340,19 @@ def uret() -> None:
         if ISLETME["kurulus_yili"]:
             hikaye += f"<p>{ISLETME['kurulus_yili']} yılından bu yana Ankara'da el yapımı akvaryum üretiyoruz.</p>\n"
         if ISLETME["usta_hikayesi"]:
-            hikaye += "<h2>Ustamızın hikâyesi</h2>\n" + ISLETME["usta_hikayesi"] + "\n"
+            hikaye += ISLETME["usta_hikayesi"] + "\n"
         harita = "https://www.google.com/maps?q=" + quote("Tankled, " + adres_metni()) + "&amp;output=embed"
         icerik = (s["govde"].strip().replace("WA_LINK", WA).replace("FOTO_MOBILYALI", foto_grid(GALERI_MOBILYALI, onek))
                   .replace("FOTO_BETTA", foto_grid(GALERI_BETTA, onek)).replace("FIYAT", fiyat_cumlesi())
-                  .replace("HIKAYE", hikaye).replace("ADRES", adres_metni()).replace("SAATLER", saatler_html())
+                  .replace("HIKAYE", hikaye)
+                  .replace("FOTO_YER_ATOLYE", foto_yer([
+                      ("assets/hakkimizda/tankled-atolye-eryaman-ankara.webp", "Eryaman'daki atölyemiz"),
+                      ("assets/hakkimizda/el-yapimi-akvaryum-uretim.webp", "Elde üretim süreci"),
+                      ("assets/hakkimizda/betta-serisi-ar-ge-prototip.webp", "Betta Serisi Ar-Ge ve prototipler")]))
+                  .replace("FOTO_YER_SERI", foto_yer([
+                      ("assets/betta/betta-serisi-cam-ahsap.webp", "Betta Serisi: doğal çam ahşap"),
+                      ("assets/betta/ozel-betta-serisi-endonezya-agac.webp", "Özel Betta Serisi: Endonezya ağacı"),
+                      ("assets/betta/ozel-betta-serisi-ahsap-desen.webp", "Özel seri doğal ahşap deseni")])).replace("ADRES", adres_metni()).replace("SAATLER", saatler_html())
                   .replace("HARITA", harita))
         govde = f"""    <article>
       <nav class="kirinti" aria-label="Sayfa yolu"><a href="{onek}">Ana sayfa</a> › {s["kisa"]}</nav>
@@ -335,7 +361,7 @@ def uret() -> None:
 {kapak}{icerik}
       <section class="cta">
         <h2>Ankara'da el yapımı akvaryum</h2>
-        <p>Ostim'deki atölyemizde masif tik ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
+        <p>Eryaman'daki atölyemizde doğal masif ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
         <a class="btn" href="{WA}" target="_blank" rel="noopener">WhatsApp ile yazın</a>
         <a class="btn" href="tel:+905312172006">Hemen arayın</a>
       </section>

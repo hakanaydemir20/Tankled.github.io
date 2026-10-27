@@ -30,8 +30,8 @@ SAYFALAR = [
     {
         "dosya": "index.html", "yol": "", "oncelik": "1.0", "siklik": "weekly",
         "baslik": "Akvaryum Ankara | Mobilyalı ve El Yapımı Akvaryum | Tankled",
-        "aciklama": "Ankara Ostim atölyemizde masif tik ahşaptan mobilyalı akvaryum ve el yapımı dekoratif "
-                    "akvaryum: betta, nano akvaryum, teraryum, paludaryum. Ölçüye özel üretim.",
+        "aciklama": "Ankara Eryaman atölyemizde doğal ahşaptan mobilyalı akvaryum ve el yapımı dekoratif akvaryum: "
+                    "betta, nano akvaryum, teraryum, paludaryum. Ölçüye özel üretim.",
         "kirinti": [],
     },
     {
@@ -95,16 +95,17 @@ YONLENDIRMELER = [("akvaryum-hesaplama/index.html", "akvaryum-olustur/")]
 
 SSS = [
     ("Ankara'da akvaryum nereden alabilirim?",
-     "Tankled'in atölyesi Ankara Ostim'dedir. El yapımı ve mobilyalı akvaryumlarımızı atölyede görebilir, "
+     "Tankled'in atölyesi Ankara Eryaman'dadır. El yapımı ve mobilyalı akvaryumlarımızı atölyede görebilir, "
      "telefon ya da WhatsApp üzerinden bilgi alabilirsiniz. Türkiye geneline gönderim için de bize ulaşabilirsiniz."),
     ("Mobilyalı akvaryum nedir?",
      "Mobilyalı akvaryum, cam haznenin dolap, sehpa, konsol ya da ahşap bir gövdeyle birlikte tasarlandığı "
      "akvaryumdur. Ağırlığı güvenle taşır, kablo ve ekipmanı gizler ve evin dekorasyonuyla bütünleşir."),
     ("Tankled akvaryumları nerede üretiliyor?",
-     "Tankled akvaryumları Ankara Ostim'deki atölyemizde, elde ve tek tek üretilir. Her parçanın ahşap "
+     "Tankled akvaryumları Ankara Eryaman'daki atölyemizde, elde ve tek tek üretilir. Her parçanın ahşap "
      "damarı farklı olduğu için her ürün kendine özgüdür."),
     ("Betta Serisi'nin ölçüleri ve malzemeleri nelerdir?",
-     "Betta Serisi 14 × 14 × 20 cm ölçülerindedir. Gövdesi tik yağıyla korunan masif tik ahşaptır; "
+     "Betta Serisi 14 × 14 × 20 cm ölçülerindedir. Standart seride gövde eşsiz doğal çam ahşaptan (1.300 TL), "
+     "Özel Betta Serisi'nde Endonezya'dan ithal, doğal desenli ağaçtan (1.500 TL) üretilir; "
      "sürgülü buhar kapaklı cam hazne ve 3000K, 4500K ve 6500K olmak üzere üç ışık tonlu LED aydınlatma bulunur."),
     ("Tankled ürünleri yalnızca akvaryum olarak mı kullanılır?",
      "Hayır. Aynı ürün betta akvaryumu, bitkili akvaryum, teraryum, egzotik hayvan yuvası, sukulent saksısı, "
@@ -136,7 +137,7 @@ def isletme() -> dict:
         "@id": url("#isletme"),
         "name": MARKA,
         "alternateName": "Tankled Aquarium",
-        "description": "Ankara Ostim'de masif tik ahşaptan mobilyalı akvaryum, el yapımı dekoratif akvaryum, "
+        "description": "Ankara Eryaman'da doğal masif ahşaptan mobilyalı akvaryum, el yapımı dekoratif akvaryum, "
                        "teraryum ve paludaryum üreten atölye.",
         "url": url(""),
         "logo": url("assets/icon-512.png"),
@@ -145,8 +146,8 @@ def isletme() -> dict:
         "telephone": TELEFON,
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": ", ".join(p for p in [bilgi["sokak"], "Ostim"] if p),
-            "addressLocality": "Yenimahalle",
+            "streetAddress": ", ".join(p for p in [bilgi["sokak"], "Eryaman 3. Etap"] if p),
+            "addressLocality": "Etimesgut",
             "addressRegion": "Ankara",
             "addressCountry": "TR",
         },
@@ -183,11 +184,14 @@ def yapisal_veri(sayfa: dict) -> list[dict]:
                 {"@type": "WebSite", "@id": url("#site"), "url": url(""), "name": MARKA,
                  "inLanguage": "tr-TR", "publisher": {"@id": url("#isletme")}},
                 {"@type": "Product", "name": "Tankled Betta Serisi",
-                 "description": "Masif tik ahşap gövdeli, sürgülü buhar kapaklı, üç ışık tonlu LED aydınlatmalı "
+                 "description": "Doğal masif ahşap gövdeli, sürgülü buhar kapaklı, üç ışık tonlu LED aydınlatmalı "
                                 "14 × 14 × 20 cm el yapımı akvaryum.",
                  "brand": {"@type": "Brand", "name": MARKA},
                  "manufacturer": {"@id": url("#isletme")},
-                 "material": "Masif tik ahşap, cam",
+                 "material": "Doğal çam ahşap / Endonezya ithal doğal desenli ağaç, cam",
+                 "offers": {"@type": "AggregateOffer", "priceCurrency": "TRY", "lowPrice": "1300",
+                            "highPrice": "1500", "offerCount": "2", "availability": "https://schema.org/InStock",
+                            "url": url("betta-akvaryumu/"), "seller": {"@id": url("#isletme")}},
                  "image": [url("assets/galeri/urun-bicim-01-tam-onden.jpg"), url("assets/galeri/urun-bicim-02-sol-45.jpg")],
                  "additionalProperty": [
                      {"@type": "PropertyValue", "name": "Ölçü", "value": "14 × 14 × 20 cm"},

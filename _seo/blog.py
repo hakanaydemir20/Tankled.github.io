@@ -187,7 +187,7 @@ YAZILAR = [
   <li>Fiyata kapak, aydınlatma ve ekipman dahil mi?</li>
   <li>Kurulum ve sonrasında destek var mı?</li>
 </ul>
-<p>Ankara'da mobilyalı ya da <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> için net fiyat almak isterseniz alanınızın ölçüsünü bize gönderin; Ostim'deki atölyemizden size özel teklif hazırlayalım.</p>
+<p>Ankara'da mobilyalı ya da <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> için net fiyat almak isterseniz alanınızın ölçüsünü bize gönderin; Eryaman'daki atölyemizden size özel teklif hazırlayalım.</p>
 """,
     },
     {
@@ -228,7 +228,7 @@ YAZILAR = [
 <h2>Bakım hizmeti seçerken</h2>
 <p>Bakım yapacak kişinin su testi yapıp yapmadığını, kendi ekipmanını getirip getirmediğini, canlılara ve bitkilere dair bilgi verip vermediğini sorun. Sabit bir bakım takvimi ve her ziyaretten sonra kısa bir rapor, akvaryumunuzun durumunu takip etmenizi kolaylaştırır.</p>
 
-<p>Tankled olarak Ankara Ostim'deki atölyemizde ürettiğimiz akvaryumları low-tech, az bakım isteyen sistemler olarak tasarlıyoruz. Akvaryumunuzun bakımıyla ilgili sorularınız için <a href="../../iletisim/">bize ulaşabilirsiniz</a>.</p>
+<p>Tankled olarak Ankara Eryaman'daki atölyemizde ürettiğimiz akvaryumları low-tech, az bakım isteyen sistemler olarak tasarlıyoruz. Akvaryumunuzun bakımıyla ilgili sorularınız için <a href="../../iletisim/">bize ulaşabilirsiniz</a>.</p>
 """,
     },
     {
@@ -273,13 +273,13 @@ YAZILAR = [
         "baslik": "Akvaryum Ankara: Doğru Akvaryumu Seçme Rehberi | Tankled",
         "h1": "Ankara'da akvaryum alırken bilmeniz gereken her şey",
         "aciklama": "Ankara'da akvaryum mu arıyorsunuz? Ölçü, cam, aydınlatma, mobilyalı akvaryum ve kurulum "
-                    "seçeneklerini karşılaştırın; Ostim atölyemizden ipuçları.",
+                    "seçeneklerini karşılaştırın; Eryaman atölyemizden ipuçları.",
         "tarih": "2026-10-27",
         "gorsel": "assets/g-lineup.webp", "gorsel_g": 1122, "gorsel_y": 1402,
         "gorsel_alt": "Ankara atölyesinde üretilen Tankled el yapımı akvaryum koleksiyonu",
         "etiketler": ["akvaryum Ankara", "Ankara akvaryumcu", "el yapımı akvaryum"],
         "govde": """
-<p><strong>Akvaryum Ankara</strong> aramasıyla karşınıza çıkan seçenekler genellikle iki gruba ayrılır: hazır seri üretim cam tanklar satan mağazalar ve ölçüye göre üretim yapan atölyeler. Hangisinin size uygun olduğu; evinizdeki alana, ayırabileceğiniz bakım zamanına ve akvaryumun salonunuzda nasıl görünmesini istediğinize bağlıdır. Bu rehberde Ankara'da akvaryum alırken dikkat etmeniz gereken noktaları, Ostim'deki atölyemizde müşterilerimize en sık anlattığımız sırayla topladık.</p>
+<p><strong>Akvaryum Ankara</strong> aramasıyla karşınıza çıkan seçenekler genellikle iki gruba ayrılır: hazır seri üretim cam tanklar satan mağazalar ve ölçüye göre üretim yapan atölyeler. Hangisinin size uygun olduğu; evinizdeki alana, ayırabileceğiniz bakım zamanına ve akvaryumun salonunuzda nasıl görünmesini istediğinize bağlıdır. Bu rehberde Ankara'da akvaryum alırken dikkat etmeniz gereken noktaları, Eryaman'daki atölyemizde müşterilerimize en sık anlattığımız sırayla topladık.</p>
 
 <h2>1. Önce yeri, sonra akvaryumu seçin</h2>
 <p>Akvaryum, doğrudan güneş almayan, kalorifer peteğine ve kapıya yakın olmayan, sağlam bir zemine konmalıdır. Su dolu bir akvaryum litre başına yaklaşık bir kilogram ağırlık demektir; 60 litrelik bir kurulum zemin, taş ve camla birlikte 80 kilogramı rahatlıkla geçer. Bu yüzden akvaryumu koyacağınız mobilyanın bu yüke uygun olması şarttır. Akvaryumu ve gövdesini birlikte düşünen <a href="../mobilyali-akvaryum-nedir/">mobilyalı akvaryum</a> modelleri bu sorunu baştan çözer.</p>
@@ -297,7 +297,7 @@ YAZILAR = [
 <p>Akvaryumu aldığınız gün balık eklemek en sık yapılan hatadır. Zemin, bitkiler ve filtre yerleştikten sonra suyun biyolojik olarak olgunlaşması (azot döngüsü) birkaç hafta sürer. Adım adım süreç için <a href="../betta-akvaryumu-kurulumu/">betta akvaryumu kurulum rehberimize</a> ve <a href="../../malzemeler/">malzemeler sayfamıza</a> göz atın.</p>
 
 <h2>Ankara'da hazır mı, ölçüye göre mi?</h2>
-<p>Hazır akvaryumlar hızlı ve ekonomiktir, ancak evinizdeki boşluğa ya da mobilyalarınıza uymayabilir. Ölçüye göre üretilen bir akvaryum ise duvar nişine, TV ünitesine ya da yatak odasındaki bir komodine tam oturacak şekilde tasarlanabilir. Tankled olarak Ankara Ostim'deki atölyemizde masif tik ahşap gövdeli akvaryum, teraryum ve paludaryumları tek tek üretiyoruz; Ankara içinde atölyemize gelip ürünleri yerinde görebilir, Türkiye geneline gönderim için bizimle iletişime geçebilirsiniz.</p>
+<p>Hazır akvaryumlar hızlı ve ekonomiktir, ancak evinizdeki boşluğa ya da mobilyalarınıza uymayabilir. Ölçüye göre üretilen bir akvaryum ise duvar nişine, TV ünitesine ya da yatak odasındaki bir komodine tam oturacak şekilde tasarlanabilir. Tankled olarak Ankara Eryaman'daki atölyemizde doğal masif ahşap gövdeli akvaryum, teraryum ve paludaryumları tek tek üretiyoruz; Ankara içinde atölyemize gelip ürünleri yerinde görebilir, Türkiye geneline gönderim için bizimle iletişime geçebilirsiniz.</p>
 
 <h2>Kısa kontrol listesi</h2>
 <ul>
@@ -333,7 +333,7 @@ YAZILAR = [
 <p>En önemli neden <strong>güvenliktir</strong>: Su dolu bir akvaryum çok ağırdır ve sıradan bir sehpa bu yükü uzun süre taşımak için tasarlanmamıştır. Akvaryuma özel üretilen gövde, ağırlığı düzgün dağıtır ve zamanla esneme yapmaz. İkinci neden <strong>görünümdür</strong>: kablolar, hortumlar ve filtre gözden kaybolur; akvaryum evin geri kalan mobilyalarıyla aynı dili konuşur. Üçüncüsü ise <strong>kullanım kolaylığıdır</strong>: bakım malzemeleri akvaryumun hemen yanında, düzenli biçimde saklanır.</p>
 
 <h2>Malzeme seçimi: neden masif ahşap?</h2>
-<p>Mobilyalı akvaryumlarda en sık kullanılan malzemeler MDF, kontrplak ve masif ahşaptır. Akvaryum çevresi nemli bir ortam olduğu için suya ve buhara dayanıklılık belirleyicidir. Tik ağacı, doğal yağ oranı yüksek olduğu için tekne yapımında da kullanılan, neme karşı dirençli bir ağaçtır. Tankled akvaryumlarının gövdesi tik yağıyla korunan masif tik ahşaptan üretilir; her parçanın damar deseni farklı olduğu için iki ürün birbirinin aynısı olmaz. Ahşap gövdeli modeller hakkında daha fazla fikir için <a href="../ahsap-akvaryum-fikirleri/">ahşap akvaryum fikirleri</a> yazımıza bakabilirsiniz.</p>
+<p>Mobilyalı akvaryumlarda en sık kullanılan malzemeler MDF, kontrplak ve masif ahşaptır. Akvaryum çevresi nemli bir ortam olduğu için suya ve buhara dayanıklılık belirleyicidir. Tik ağacı, doğal yağ oranı yüksek olduğu için tekne yapımında da kullanılan, neme karşı dirençli bir ağaçtır. Tankled akvaryumlarının gövdesi eşsiz doğal çam ahşaptan ya da Endonezya'dan ithal doğal desenli ağaçtan üretilir ve tik yağıyla korunur; her parçanın damar deseni farklı olduğu için iki ürün birbirinin aynısı olmaz. Ahşap gövdeli modeller hakkında daha fazla fikir için <a href="../ahsap-akvaryum-fikirleri/">ahşap akvaryum fikirleri</a> yazımıza bakabilirsiniz.</p>
 
 <h2>Mobilyalı akvaryum alırken nelere dikkat edilmeli?</h2>
 <ol>
@@ -345,7 +345,7 @@ YAZILAR = [
 </ol>
 
 <h2>Ankara'da mobilyalı akvaryum yaptırmak</h2>
-<p>Ankara'da mobilyalı akvaryum arayanlar için en büyük avantaj ürünü üretildiği atölyede görebilmektir. Tankled olarak Ankara Ostim'deki atölyemizde ölçüye göre özel tasarım yapıyoruz: evinizdeki nişe, TV ünitesine ya da çalışma masanıza uygun ölçüyü birlikte belirliyor, malzemeyi ve ışık tonunu sizinle seçiyoruz. Ankara'da akvaryum seçerken nelere dikkat etmeniz gerektiğini <a href="../ankara-akvaryum-rehberi/">Ankara akvaryum rehberimizde</a> ayrıntılı anlattık.</p>
+<p>Ankara'da mobilyalı akvaryum arayanlar için en büyük avantaj ürünü üretildiği atölyede görebilmektir. Tankled olarak Ankara Eryaman'daki atölyemizde ölçüye göre özel tasarım yapıyoruz: evinizdeki nişe, TV ünitesine ya da çalışma masanıza uygun ölçüyü birlikte belirliyor, malzemeyi ve ışık tonunu sizinle seçiyoruz. Ankara'da akvaryum seçerken nelere dikkat etmeniz gerektiğini <a href="../ankara-akvaryum-rehberi/">Ankara akvaryum rehberimizde</a> ayrıntılı anlattık.</p>
 """,
     },
     {
@@ -433,7 +433,7 @@ YAZILAR = [
   <li><strong>Suyu dökmeden bakım:</strong> Su değişimini hortumla yapmak gövdeye su sıçramasını engeller.</li>
 </ul>
 
-<p>Kendi akvaryumunuzu tasarlamadan önce ölçüleri, ışığı ve bitkileri <a href="../../akvaryum-olustur/">3D akvaryum tasarım aracımızda</a> deneyebilir, gerçek kurulumlardan örnekleri <a href="../../galeri/">galeride</a> görebilirsiniz. Ankara'da ölçüye göre ahşap akvaryum yaptırmak için Ostim'deki atölyemizle iletişime geçebilirsiniz.</p>
+<p>Kendi akvaryumunuzu tasarlamadan önce ölçüleri, ışığı ve bitkileri <a href="../../akvaryum-olustur/">3D akvaryum tasarım aracımızda</a> deneyebilir, gerçek kurulumlardan örnekleri <a href="../../galeri/">galeride</a> görebilirsiniz. Ankara'da ölçüye göre ahşap akvaryum yaptırmak için Eryaman'daki atölyemizle iletişime geçebilirsiniz.</p>
 """,
     },
     {
@@ -537,6 +537,9 @@ CSS = """
   .foto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 16px}
   .foto-grid img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:12px}
   @media(max-width:560px){.foto-grid{grid-template-columns:repeat(2,1fr)}}
+  .foto-yer{aspect-ratio:3/4;border:2px dashed rgba(67,96,63,.3);border-radius:12px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:6px;padding:10px;text-align:center;background:rgba(92,122,90,.05)}
+  .foto-yer span{font-size:13px;color:var(--muted)} .foto-yer figcaption{font-size:12px;color:var(--green-deep);font-weight:500}
   footer{padding:24px 0;font-size:13px;color:var(--muted);text-align:center;border-top:1px solid rgba(67,96,63,.1)}
   @media(max-width:560px){.nav{height:76px} .logo img{height:48px} .back{padding:9px 14px} main{padding:30px 0 60px}}
 """
@@ -601,7 +604,7 @@ def uret() -> None:
     <div class="intro">
       <span class="eyebrow">Tankled Blog</span>
       <h1>Akvaryum blogu: Ankara atölyemizden rehberler</h1>
-      <p>Mobilyalı akvaryum seçiminden betta ve nano akvaryum kurulumuna, bakım rutinlerinden dekorasyon fikirlerine kadar Ankara Ostim'deki atölyemizde edindiğimiz deneyimleri paylaşıyoruz.</p>
+      <p>Mobilyalı akvaryum seçiminden betta ve nano akvaryum kurulumuna, bakım rutinlerinden dekorasyon fikirlerine kadar Ankara Eryaman'daki atölyemizde edindiğimiz deneyimleri paylaşıyoruz.</p>
     </div>
     <div class="liste">
 {kartlar}
@@ -625,7 +628,7 @@ def uret() -> None:
 {y["govde"].strip()}
       <section class="cta">
         <h2>Ankara'da el yapımı akvaryum</h2>
-        <p>Ostim'deki atölyemizde masif tik ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
+        <p>Eryaman'daki atölyemizde doğal masif ahşaptan mobilyalı ve dekoratif akvaryumlar üretiyoruz. Ölçünüze özel tasarım için bize ulaşın.</p>
         <a class="btn" href="https://wa.me/905312172006?text=Merhaba%20Tankled%2C%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener">WhatsApp ile yazın</a>
         <a class="btn" href="{onek}#products">Koleksiyonu inceleyin</a>
       </section>
