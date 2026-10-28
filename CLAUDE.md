@@ -26,8 +26,10 @@ Fotoğraflar gelince WebP'ye çevir, bu adlarla kaydet ve kutuların yerine ger�
 - Gerçek müşteri yorumları (izinli; uydurma yorum ekleme)
 - Endonezya'dan gelen özel seri ağacının adı (tik mi?) ve "tik yağı ile korumalı" bilgisinin doğruluğu
 
-### 4. Bilinen hata
-Ana sayfada `assets/aydinlatma-bari.jpg` görseli eksik (kırık görsel). Kullanıcıdan görseli iste ya da referansı kaldır.
+### 4. Hosting'e yüklenmeyi bekleyenler
+Kullanıcı kararı (2026-10-29): geliştirmeler önce yalnızca GitHub demo sitesine; kullanıcı söyleyince hosting'e
+(DirectAdmin dosya yöneticisi, zip yükle + aç). Bekleyen: İmza Avize kartı, aydınlatma barı görselleri, galeriye
+eklenen 6 görsel (assets/avize, assets/lamba, index.html, galeri/index.html).
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
