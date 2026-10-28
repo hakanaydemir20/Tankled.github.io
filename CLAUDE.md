@@ -10,28 +10,12 @@ Ayrıntılar: `_seo/SEO-REHBERI.md`, `_kaynak/gorsel/BENIOKU.md`.
 Kullanıcı "projeyi çek" dediğinde önce `git pull`, sonra aşağıdaki açık maddeleri kullanıcıya hatırlat
 ve onayını alarak yap. Biten maddeyi bu listeden sil ve commit et.
 
-### 1. Kalan 5 Gemini görselini üret
-16 blog/kart görseli 2026-10-28'de üretildi ve yayında (ultra gerçekçi istem, 3 ürün referansı, 2K).
-Gemini projesinin aylık harcama limiti dolduğu için şu 5'i kaldı (o sayfalar şimdilik eski fotoğrafı kullanır):
-`teraryum-nasil-yapilir`, `nano-akvaryum-bakimi`, `kullanim/teraryum`, `kullanim/abajur`, `kullanim/bitki-saksisi`.
-Limit yükselince (https://ai.studio/spend) teker teker üret (paralel istek 429 veriyor), kontrol et,
-`python3 -B _seo/seo.py`, commit + push:
-
-```bash
-../tankled-otomasyon/.venv/bin/python _kaynak/gorsel/blog_gorsel.py teraryum-nasil-yapilir
-```
-Ayrıca kullanıcı şu 3 kapağı beğenmedi (karanlık, ışık etkisi yok); istemleri yeniden yazıldı, `--yeniden` ile üret:
-`dekoratif-abajur-fikirleri`, `gece-lambasi-olarak-isikli-teraryum`, `isikli-bitki-saksisi`.
-```bash
-for a in dekoratif-abajur-fikirleri gece-lambasi-olarak-isikli-teraryum isikli-bitki-saksisi; do ../tankled-otomasyon/.venv/bin/python _kaynak/gorsel/blog_gorsel.py $a --yeniden; done
-```
-Galeri (2026-10-28): sade/arka plansız ürün fotoğrafları kaldırıldı, yerine gerçekçi kullanım sahneleri geldi.
-Limit açılınca 8 yeni galeri sahnesini üret (`galeri/sahne-*` anahtarları, `blog_gorsel.py` içinde) ve her birini
-`galeri/index.html` ızgarasına `<button class="item">` kartı olarak (açıklayıcı alt metinle) ekle:
-```bash
-for a in balkon-bitkili mutfak-tezgahi otel-resepsiyonu magaza-vitrini restoran-masasi toplanti-odasi bahce-masasi gekko-yuvasi; do ../tankled-otomasyon/.venv/bin/python _kaynak/gorsel/blog_gorsel.py galeri/sahne-$a; done
-```
-Kullanıcı kararı: görsellere "yapay zekâ ile üretilmiştir" notu EKLENMEZ.
+### 1. Gemini görselleri — TAMAMLANDI (2026-10-28)
+Tüm blog kapakları, kullanım kartları ve galeri sahneleri üretildi (son 16'sı 1K, 1024×768).
+Kullanıcı kararları: "yapay zekâ ile üretilmiştir" notu EKLENMEZ; maliyet için 1K yeterli; üretmeden önce
+adet/konu tablosu sunup onay al. Açık karar: şu 8 görselde istem hatasıyla üst üste fincan var, kullanıcı onay
+verirse (`--yeniden`, istem düzeltildi) yeniden üret: blog/gece-lambasi-olarak-isikli-teraryum, kullanim/abajur,
+kullanim/bitki-saksisi, galeri/sahne-{balkon-bitkili,mutfak-tezgahi,restoran-masasi,toplanti-odasi,bahce-masasi}.
 
 ### 2. Kullanıcıdan gelecek gerçek fotoğrafları yerleştir
 Hakkımızda ve Betta sayfalarında "Fotoğraf eklenecek" kutuları var (`_seo/sayfalar.py` → `foto_yer`).
