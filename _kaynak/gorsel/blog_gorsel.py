@@ -69,6 +69,15 @@ SAHNE = {
     "betta-akvaryumu-kurulumu": (True, "as a planted betta aquarium with a vivid blue and red halfmoon betta fish, driftwood, anubias and floating plants, on a study desk"),
     "ahsap-akvaryum-fikirleri": (True, "on a wooden bookshelf among books and ceramics as a decorative planted aquarium, Scandinavian interior"),
     "nano-akvaryum-bakimi": (True, "as a nano aquarium with shrimp and moss on a kitchen counter, a small water jug and fish food beside it"),
+    # galeri sahneleri (assets/galeri/<ad>.webp) -> uretildikten sonra galeri/index.html'e kart olarak eklenir
+    "galeri/sahne-balkon-bitkili": (True, OLCEK + "as a planted aquarium on a small teak side table on a sunny city balcony with potted herbs, golden hour light"),
+    "galeri/sahne-mutfak-tezgahi": (True, OLCEK + "as an illuminated herb and moss planter on a white marble kitchen counter beside a cutting board and a bowl of lemons, morning light"),
+    "galeri/sahne-otel-resepsiyonu": (True, OLCEK + "as a decorative planted aquarium on a boutique hotel reception desk with brass details, warm elegant lighting"),
+    "galeri/sahne-magaza-vitrini": (True, OLCEK + "as a display piece with a single succulent on a minimalist boutique shop shelf next to ceramics, soft spotlight"),
+    "galeri/sahne-restoran-masasi": (True, OLCEK + "as a glowing table lamp with smooth stones inside on a restaurant table set for dinner, candle-like warm ambience"),
+    "galeri/sahne-toplanti-odasi": (True, OLCEK + "as a planted betta aquarium on a long oak meeting table in a bright modern office meeting room, notebooks and glasses of water"),
+    "galeri/sahne-bahce-masasi": (True, OLCEK + "as a moss terrarium on a weathered wooden garden table outdoors, lush greenery softly blurred, soft overcast light"),
+    "galeri/sahne-gekko-yuvasi": (True, OLCEK + "as a small dry habitat with bark, moss and a tiny leopard gecko inside, on a wooden shelf in a calm room"),
     # ana sayfa kullanim kartlari
     "kullanim/akvaryum": (True, "as a planted aquarium with a red betta fish, warm cozy living room background"),
     "kullanim/teraryum": (True, "as a closed forest terrarium with moss, ferns and a small piece of wood, condensation on the glass"),

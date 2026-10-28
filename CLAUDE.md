@@ -25,6 +25,12 @@ Ayrıca kullanıcı şu 3 kapağı beğenmedi (karanlık, ışık etkisi yok); i
 ```bash
 for a in dekoratif-abajur-fikirleri gece-lambasi-olarak-isikli-teraryum isikli-bitki-saksisi; do ../tankled-otomasyon/.venv/bin/python _kaynak/gorsel/blog_gorsel.py $a --yeniden; done
 ```
+Galeri (2026-10-28): sade/arka plansız ürün fotoğrafları kaldırıldı, yerine gerçekçi kullanım sahneleri geldi.
+Limit açılınca 8 yeni galeri sahnesini üret (`galeri/sahne-*` anahtarları, `blog_gorsel.py` içinde) ve her birini
+`galeri/index.html` ızgarasına `<button class="item">` kartı olarak (açıklayıcı alt metinle) ekle:
+```bash
+for a in balkon-bitkili mutfak-tezgahi otel-resepsiyonu magaza-vitrini restoran-masasi toplanti-odasi bahce-masasi gekko-yuvasi; do ../tankled-otomasyon/.venv/bin/python _kaynak/gorsel/blog_gorsel.py galeri/sahne-$a; done
+```
 Kullanıcı kararı: görsellere "yapay zekâ ile üretilmiştir" notu EKLENMEZ.
 
 ### 2. Kullanıcıdan gelecek gerçek fotoğrafları yerleştir
