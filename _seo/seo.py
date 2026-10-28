@@ -17,7 +17,7 @@ import blog
 import sayfalar
 
 # ----------------------------------------------------------------- ayarlar
-SITE = "https://hakanaydemir20.github.io/Tankled.github.io"  # sonda / yok
+SITE = "https://tankled.com.tr"  # sonda / yok
 MARKA = "Tankled"
 INSTAGRAM = "https://www.instagram.com/tankled.akvaryum/"
 EPOSTA = "tankledaquarium@gmail.com"
