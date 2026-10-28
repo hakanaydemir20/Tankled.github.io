@@ -37,8 +37,8 @@ def anahtar() -> str:
     sys.exit("GEMINI_API_KEY bulunamadi (ortam degiskeni ya da ../tankled-otomasyon/.env).")
 
 
-OLCEK = ("It is a SMALL object, about 14 x 14 x 20 cm (similar in height to a coffee mug stack), "
-         "so show it at true scale next to everyday objects. ")
+OLCEK = ("It is a SMALL object, about 14 x 14 x 20 cm, roughly twice the height of a single coffee mug, "
+         "so show it at true scale next to a few everyday objects (never stacked cups). ")
 
 # (hedef dosya, urun gorunsun mu, sahne)
 SAHNE = {
@@ -115,7 +115,7 @@ def uret(ad: str, ist_anahtar: str) -> str:
                                              "data": base64.b64encode(ref.read_bytes()).decode()}})
     govde = json.dumps({"contents": [{"parts": parcalar}],
                         "generationConfig": {"responseModalities": ["IMAGE"],
-                                             "imageConfig": {"aspectRatio": "4:3", "imageSize": "2K"}}}).encode()
+                                             "imageConfig": {"aspectRatio": "4:3", "imageSize": "1K"}}}).encode()
     istek = urllib.request.Request(
         f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent",
         data=govde, headers={"Content-Type": "application/json", "x-goog-api-key": ist_anahtar})
@@ -123,7 +123,7 @@ def uret(ad: str, ist_anahtar: str) -> str:
         with urllib.request.urlopen(istek, timeout=300) as y:
             cevap = json.load(y)
         veri = next(p["inlineData"]["data"] for p in cevap["candidates"][0]["content"]["parts"] if "inlineData" in p)
-        im = ImageOps.fit(Image.open(io.BytesIO(base64.b64decode(veri))).convert("RGB"), (1200, 900), Image.LANCZOS)
+        im = ImageOps.fit(Image.open(io.BytesIO(base64.b64decode(veri))).convert("RGB"), (1024, 768), Image.LANCZOS)
         hedef.parent.mkdir(parents=True, exist_ok=True)
         im.save(hedef, "WEBP", quality=84, method=6)
         return "ok"
