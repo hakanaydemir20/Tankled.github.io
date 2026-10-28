@@ -1,0 +1,50 @@
+# Siteyi her main gonderiminde Guzel Hosting'e (tankled.com.tr) FTP ile yukler.
+# Gerekli gizli degerler (Settings > Secrets > Actions): FTP_SUNUCU, FTP_KULLANICI, FTP_SIFRE
+# Yalnizca degisen dosyalar gonderilir; yoksa is atlanir (hata vermez).
+name: Hostinge yukle
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: hosting
+  cancel-in-progress: false
+
+jobs:
+  yukle:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SUNUCU: ${{ secrets.FTP_SUNUCU }}
+    steps:
+      - name: FTP bilgisi var mi
+        id: kontrol
+        run: |
+          if [ -z "$FTP_SUNUCU" ]; then echo "FTP bilgileri eklenmemis, yukleme atlandi."; echo "var=0" >> "$GITHUB_OUTPUT"; else echo "var=1" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.kontrol.outputs.var == '1'
+      - name: FTP ile yukle
+        if: steps.kontrol.outputs.var == '1'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SUNUCU }}
+          username: ${{ secrets.FTP_KULLANICI }}
+          password: ${{ secrets.FTP_SIFRE }}
+          protocol: ftps
+          local-dir: ./
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            _kaynak/**
+            _seo/**
+            CLAUDE.md
+            README.md
+            assets/*.jpeg
+            assets/abyss.png
+            assets/atlantis.png
+            assets/g-lineup.png
+            assets/lagoon.png
+            assets/planted.png
