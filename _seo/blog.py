@@ -107,7 +107,7 @@ YAZILAR = [
         "aciklama": "Salon ve yatak odası için dekoratif abajur fikirleri: ahşap abajur, sıcak ışık tonu seçimi ve "
                     "içinde bitki ya da akvaryum olan yaşayan abajur tasarımı.",
         "tarih": "2026-10-27",
-        "gorsel": "assets/galeri/urun-isik-3000k-onden.jpg", "gorsel_g": 750, "gorsel_y": 1000,
+        "gorsel": "assets/galeri/urun-isik-3000k-45-derece.jpg", "gorsel_g": 750, "gorsel_y": 1000,
         "gorsel_alt": "3000K sıcak ışıkta ahşap gövdeli dekoratif abajur",
         "etiketler": ["dekoratif abajur", "ahşap abajur", "abajur modelleri"],
         "govde": """

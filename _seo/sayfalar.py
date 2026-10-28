@@ -41,7 +41,6 @@ GALERI_MOBILYALI = [
 ]
 GALERI_BETTA = [
     ("assets/galeri/urun-bicim-01-tam-onden.jpg", "Betta Serisi önden görünüm"),
-    ("assets/galeri/urun-isik-3000k-onden.jpg", "Betta Serisi 3000K sıcak ışık"),
     ("assets/galeri/urun-isik-4500k-onden.jpg", "Betta Serisi 4500K nötr ışık"),
     ("assets/galeri/urun-isik-6500k-onden.jpg", "Betta Serisi 6500K gün ışığı"),
     ("assets/galeri/urun-bicim-04-tam-sag-yan.jpg", "Betta Serisi yan profil ve ışık düğmesi"),
