@@ -367,7 +367,8 @@ def alt_bilgi(sayfa: dict) -> None:
         + (' target="_blank" rel="noopener"' if h.startswith("http") else "") + f">{ad}</a>"
         for ad, h in ALT_BAGLANTILAR if h != sayfa["yol"])
     yeni = (f'<footer><nav class="alt-nav" style="margin-bottom:6px">{baglantilar}</nav>'
-            f'© <span id="year"></span> Tankled · El yapımı akvaryum, Ankara</footer>')
+            f'© <span id="year"></span> Tankled · El yapımı akvaryum, Ankara'
+            f'<div style="font-size:12px;opacity:.75;margin-top:6px">Bu web sitesinin tüm tasarımı Hakan Aydemir tarafından yapılmıştır.</div></footer>')
     s, n = re.subn(r"<footer>.*?</footer>", lambda _: yeni, s, count=1, flags=re.S)
     if n:
         yol.write_text(s, encoding="utf-8")
