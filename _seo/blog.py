@@ -107,8 +107,8 @@ YAZILAR = [
         "aciklama": "Salon ve yatak odası için dekoratif abajur fikirleri: ahşap abajur, sıcak ışık tonu seçimi ve "
                     "içinde bitki ya da akvaryum olan yaşayan abajur tasarımı.",
         "tarih": "2026-10-27",
-        "gorsel": "assets/galeri/urun-isik-3000k-onden.jpg", "gorsel_g": 750, "gorsel_y": 1000,
-        "gorsel_alt": "3000K sıcak ışıkta ahşap gövdeli dekoratif abajur",
+        "gorsel": "assets/hero.webp", "gorsel_g": 893, "gorsel_y": 1600,
+        "gorsel_alt": "Koltuk yanında sıcak ışıkla yanan ahşap gövdeli dekoratif abajur",
         "etiketler": ["dekoratif abajur", "ahşap abajur", "abajur modelleri"],
         "govde": """
 <p>Bir <strong>abajur</strong>, odanın havasını tavan lambasından çok daha fazla belirler. Doğru yerde, doğru tonda bir abajur; salonu sıcak bir sohbet köşesine, yatak odasını dinlendirici bir sığınağa dönüştürür. Bu yazıda <strong>dekoratif abajur</strong> seçerken dikkat etmeniz gerekenleri ve sıradan bir lambadan çok daha fazlasını sunan "yaşayan abajur" fikrini anlatıyoruz.</p>
@@ -146,8 +146,8 @@ YAZILAR = [
         "aciklama": "Yatak odası ve çocuk odası için dekoratif gece lambası fikirleri: sıcak ışıklı teraryum lamba, "
                     "ahşap gece lambası ve uykuya uygun ışık tonu seçimi.",
         "tarih": "2026-10-27",
-        "gorsel": "assets/galeri/urun-isik-3000k-45-derece.jpg", "gorsel_g": 750, "gorsel_y": 1000,
-        "gorsel_alt": "Sıcak ışıklı teraryum lamba yatak odasında gece lambası olarak",
+        "gorsel": "assets/planted.webp", "gorsel_g": 896, "gorsel_y": 1195,
+        "gorsel_alt": "Karanlıkta sıcak ışıkla parlayan ahşap gövdeli ışıklı teraryum lamba",
         "etiketler": ["gece lambası", "dekoratif gece lambası", "teraryum lamba"],
         "govde": """
 <p>İyi bir <strong>gece lambası</strong>, karanlıkta yolunuzu bulmanızı sağlarken uykunuzu bölmeyecek kadar yumuşak olmalıdır. Sıradan bir priz lambası bu işi görür; ama yatak odasının dekorasyonuna hiçbir şey katmaz. İçinde bitkilerin ya da yosunların olduğu, ahşap gövdeli ışıklı bir <strong>teraryum lamba</strong> ise hem gece lambası hem de odanın en dikkat çeken objesi olabilir.</p>
