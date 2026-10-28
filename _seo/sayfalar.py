@@ -15,7 +15,7 @@ ISLETME = {
     "sokak": "100. Yıl Blv.",          # ornek: "1234. Cadde No: 5"  (Google Isletme Profili ile birebir ayni)
     "posta_kodu": "06374",     # ornek: "06374"
     "saatler": [("Pazartesi-Cumartesi", "Mo-Sa", "10:00", "16:00")],        # ornek: [("Pazartesi-Cuma", "Mo-Fr", "09:00", "18:00"), ("Cumartesi", "Sa", "10:00", "16:00")]
-    "fiyat_baslangic": "1.300",  # ornek: "2.500"  -> "Fiyatlar 2.500 TL'den başlar"
+    "fiyat_baslangic": "",       # ornek: "2.500"  -> "Fiyatlar 2.500 TL'den başlar"
     "kurulus_yili": "",     # ornek: "2021"
     "usta_hikayesi": """<h2>Hikâyemiz</h2>
 <p>Tankled'ın temelinde, imalat sektöründe <strong>on yılı aşan üretim tecrübesi</strong> ve bir mühendisin titizliği var. Akvaryuma bir tutku olarak, hobi olarak başladık. Ama çok geçmeden raflardaki akvaryumların bize yetmediğini fark ettik: Çoğu, içi doldurulmayı bekleyen cansız bir cam kutudan ibaretti.</p>
@@ -154,8 +154,7 @@ FOTO_MOBILYALI
 </ol>
 
 <h2>Fiyat</h2>
-FIYAT
-<p>Özel ölçü akvaryumun fiyatı; ölçüye, cam kalınlığına, gövde malzemesine ve hazır kurulum isteyip istemediğinize göre belirlenir. Alanınızın ölçüsünü gönderin, size net teklif hazırlayalım.</p>
+<p>Özel ölçü akvaryumun fiyatı; ölçüye, cam kalınlığına, gövde malzemesine ve hazır kurulum isteyip istemediğinize göre belirlenir. Alanınızın ölçüsünü <a href="WA_LINK" target="_blank" rel="noopener">WhatsApp'tan</a> gönderin, size net teklif hazırlayalım.</p>
 
 <h2>Ölçü seçerken dikkat edilecekler</h2>
 <p>Su dolu bir akvaryum litre başına yaklaşık bir kilogram ağırlık demektir; zemin ve taşlarla bu ağırlık artar. Akvaryumun üstünde bakım için 15–20 cm boşluk bırakın, doğrudan güneş alan ve kaloriferin hemen yanındaki yerlerden kaçının. Daha fazla ipucu için <a href="../blog/ankara-akvaryum-rehberi/">Ankara'da akvaryum seçme rehberimizi</a> okuyun.</p>
@@ -183,11 +182,12 @@ FIYAT
   <li><strong>Sistem:</strong> Low-tech; CO₂ ve yoğun gübre gerektirmez</li>
 </ul>
 
-<h2>Seriler ve fiyatlar</h2>
+<h2>Seriler</h2>
 <ul>
-  <li><strong>Betta Serisi: 1.300 TL.</strong> Sıcak tonlu, eşsiz doğal çam ahşap gövde.</li>
-  <li><strong>Özel Betta Serisi: 1.500 TL.</strong> Endonezya'dan ithal edilen, eşi benzeri olmayan doğal desenlere sahip, bambaşka bir ağaç. Her gövdenin deseni tektir.</li>
+  <li><strong>Betta Serisi:</strong> Sıcak tonlu, eşsiz doğal çam ahşap gövde.</li>
+  <li><strong>Özel Betta Serisi:</strong> Endonezya'dan ithal edilen, eşi benzeri olmayan doğal desenlere sahip, bambaşka bir ağaç. Her gövdenin deseni tektir.</li>
 </ul>
+<p><strong>Fiyat bilgisi ve sipariş için <a href="WA_LINK" target="_blank" rel="noopener">WhatsApp'tan bize ulaşın</a>.</strong></p>
 FOTO_YER_SERI
 <h2>Kargo</h2>
 <p>Tüm modellerimizi Türkiye'nin 81 iline kargoyla gönderiyoruz; yurt dışına da kargo yapılabilir. Akvaryum, ahşap gövde ve cam hazne güvenli şekilde paketlenir.</p>

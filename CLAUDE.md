@@ -31,6 +31,6 @@ Ana sayfada `assets/aydinlatma-bari.jpg` görseli eksik (kırık görsel). Kulla
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
-- Betta Serisi 1.300 TL (doğal çam ahşap), Özel Betta Serisi 1.500 TL (Endonezya ithal ağaç), Nano Serisi 2.500 TL'den
+- Betta Serisi (doğal çam ahşap), Özel Betta Serisi (Endonezya ithal ağaç), Nano Serisi. SİTEDE FİYAT YAZILMAZ (kullanıcı kararı 2026-10-28): "Sipariş için WhatsApp'tan ulaşın" denir; yapısal veride de fiyat yok
 - Türkiye'nin 81 iline ve yurt dışına kargo
 - Ürünler akvaryum, teraryum, abajur ve bitki saksısı olarak kullanılabilir

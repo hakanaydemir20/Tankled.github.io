@@ -98,8 +98,8 @@ SSS = [
      "Evet. Tüm modellerimizi Türkiye'nin 81 iline kargoyla gönderiyoruz; yurt dışına da kargo yapılabilir. "
      "Ayrıntılar için telefon ya da WhatsApp üzerinden bize ulaşabilirsiniz."),
     ("Tankled akvaryum fiyatları ne kadar?",
-     "Betta Serisi 1.300 TL'den (doğal çam ahşap), Özel Betta Serisi 1.500 TL'den (Endonezya ithal ağaç), "
-     "Nano Serisi 2.500 TL'den başlayan fiyatlarla sunulur. Özel ölçüde fiyat; ölçü, malzeme ve kuruluma göre belirlenir."),
+     "Güncel fiyat bilgisi ve sipariş için WhatsApp'tan (+90 531 217 2006) bize ulaşın. Fiyat; seri, ahşap türü, "
+     "ölçü ve hazır kurulum isteyip istemediğinize göre belirlenir."),
     ("Ankara'da akvaryum nereden alabilirim?",
      "Tankled'in atölyesi Ankara Ostim'dedir. El yapımı ve mobilyalı akvaryumlarımızı atölyede görebilir, "
      "telefon ya da WhatsApp üzerinden bilgi alabilirsiniz. Tüm modellerimizi Türkiye'nin 81 iline kargoyla gönderiyoruz."),
@@ -110,8 +110,8 @@ SSS = [
      "Tankled akvaryumları Ankara Ostim'deki atölyemizde, elde ve tek tek üretilir. Her parçanın ahşap "
      "damarı farklı olduğu için her ürün kendine özgüdür."),
     ("Betta Serisi'nin ölçüleri ve malzemeleri nelerdir?",
-     "Betta Serisi 14 × 14 × 20 cm ölçülerindedir. Standart seride gövde eşsiz doğal çam ahşaptan (1.300 TL), "
-     "Özel Betta Serisi'nde Endonezya'dan ithal, doğal desenli ağaçtan (1.500 TL) üretilir; "
+     "Betta Serisi 14 × 14 × 20 cm ölçülerindedir. Standart seride gövde eşsiz doğal çam ahşaptan, "
+     "Özel Betta Serisi'nde Endonezya'dan ithal, doğal desenli ağaçtan üretilir; "
      "sürgülü buhar kapaklı cam hazne ve 3000K, 4500K ve 6500K olmak üzere üç ışık tonlu LED aydınlatma bulunur."),
     ("Tankled ürünleri yalnızca akvaryum olarak mı kullanılır?",
      "Hayır. Aynı ürün betta akvaryumu, bitkili akvaryum, teraryum, egzotik hayvan yuvası, sukulent saksısı, "
@@ -196,9 +196,6 @@ def yapisal_veri(sayfa: dict) -> list[dict]:
                  "brand": {"@type": "Brand", "name": MARKA},
                  "manufacturer": {"@id": url("#isletme")},
                  "material": "Doğal çam ahşap / Endonezya ithal doğal desenli ağaç, cam",
-                 "offers": {"@type": "AggregateOffer", "priceCurrency": "TRY", "lowPrice": "1300",
-                            "highPrice": "1500", "offerCount": "2", "availability": "https://schema.org/InStock",
-                            "url": url("betta-akvaryumu/"), "seller": {"@id": url("#isletme")}},
                  "image": [url("assets/galeri/urun-bicim-01-tam-onden.jpg"), url("assets/galeri/urun-bicim-02-sol-45.jpg")],
                  "additionalProperty": [
                      {"@type": "PropertyValue", "name": "Ölçü", "value": "14 × 14 × 20 cm"},
@@ -210,9 +207,6 @@ def yapisal_veri(sayfa: dict) -> list[dict]:
                  "brand": {"@type": "Brand", "name": MARKA},
                  "manufacturer": {"@id": url("#isletme")},
                  "image": [url("assets/lagoon.webp")],
-                 "offers": {"@type": "Offer", "priceCurrency": "TRY", "price": "2500",
-                            "availability": "https://schema.org/InStock", "url": url("#products"),
-                            "seller": {"@id": url("#isletme")}},
                  "additionalProperty": [
                      {"@type": "PropertyValue", "name": "Ölçü", "value": "25 × 25 × 30 cm"},
                      {"@type": "PropertyValue", "name": "Aydınlatma", "value": "3000K / 4500K / 6500K LED"},
