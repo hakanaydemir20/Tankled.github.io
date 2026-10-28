@@ -20,6 +20,11 @@ Limit yükselince (https://ai.studio/spend) teker teker üret (paralel istek 429
 ```bash
 ../tankled-otomasyon/.venv/bin/python _kaynak/gorsel/blog_gorsel.py teraryum-nasil-yapilir
 ```
+Ayrıca kullanıcı şu 3 kapağı beğenmedi (karanlık, ışık etkisi yok); istemleri yeniden yazıldı, `--yeniden` ile üret:
+`dekoratif-abajur-fikirleri`, `gece-lambasi-olarak-isikli-teraryum`, `isikli-bitki-saksisi`.
+```bash
+for a in dekoratif-abajur-fikirleri gece-lambasi-olarak-isikli-teraryum isikli-bitki-saksisi; do ../tankled-otomasyon/.venv/bin/python _kaynak/gorsel/blog_gorsel.py $a --yeniden; done
+```
 Kullanıcı kararı: görsellere "yapay zekâ ile üretilmiştir" notu EKLENMEZ.
 
 ### 2. Kullanıcıdan gelecek gerçek fotoğrafları yerleştir

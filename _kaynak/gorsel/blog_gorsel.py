@@ -37,14 +37,26 @@ def anahtar() -> str:
     sys.exit("GEMINI_API_KEY bulunamadi (ortam degiskeni ya da ../tankled-otomasyon/.env).")
 
 
+OLCEK = ("It is a SMALL object, about 14 x 14 x 20 cm (similar in height to a coffee mug stack), "
+         "so show it at true scale next to everyday objects. ")
+
 # (hedef dosya, urun gorunsun mu, sahne)
 SAHNE = {
     # blog yazilari
     "teraryum-nasil-yapilir": (True, "used as a closed terrarium with layered drainage pebbles, soil, moss, a small fern and fittonia, on a wooden workbench with terrarium tools"),
     "teraryum-bitkileri-ve-bakimi": (False, "close-up of terrarium plants: pink and green fittonia, selaginella, small ferns and cushion moss inside a glass terrarium, droplets on the glass"),
-    "dekoratif-abajur-fikirleri": (True, "used as a decorative table lamp glowing with warm 3000K light, holding moss and small plants, on a side table next to a linen sofa in a cozy living room at dusk"),
-    "gece-lambasi-olarak-isikli-teraryum": (True, "used as a night light on a bedside table in a calm dark bedroom, glowing softly with warm light through moss and plants, a book and bed linen beside it"),
-    "isikli-bitki-saksisi": (True, "used as an illuminated planter with succulents and a small cactus on a pebble drainage layer, LED on, on a shelf in a room corner without windows"),
+    # Kullanici geri bildirimi (2026-10-28): karanlik/kasvetli, isik etkisi yok, ic karisik -> yeniden yazildi
+    "dekoratif-abajur-fikirleri": (True, OLCEK + "used as a decorative table lamp in the evening: the room's main lights are off, "
+        "the product's warm 3000K LED is the hero light, casting a soft warm pool of light on a walnut side table and a gentle glow "
+        "on the wall behind. Inside the glass only a few smooth river stones and a small tuft of moss, very minimal and tidy. "
+        "A ceramic mug and a hardcover book beside it, a linen armchair softly blurred. Cozy, elegant, magazine-quality interior photo"),
+    "gece-lambasi-olarak-isikli-teraryum": (True, OLCEK + "used as a night light on a bedside table at night: the bedroom is dark and "
+        "calm, the product glows with a soft warm amber light that softly illuminates the nightstand, a folded book and the edge of "
+        "crisp white bed linen. Inside the glass a neat little moss landscape with one small fern. Peaceful, inviting, high-end "
+        "lifestyle photo with deep shadows but a clearly visible, beautiful glow"),
+    "isikli-bitki-saksisi": (True, OLCEK + "used as a bright illuminated planter on a light oak desk in a sunny Scandinavian room: "
+        "inside the glass a tidy, healthy arrangement of three echeveria succulents and one small cactus on white pebbles, LED on. "
+        "Bright natural daylight, clean white wall, a small notebook and a pencil next to it. Fresh, airy, premium product photo"),
     "masa-ustu-bitki-saksisi-ofis": (True, "used as a desktop planter with a small pothos and peperomia on a modern office desk next to a laptop and a coffee mug, LED on"),
     "bitkili-akvaryum-kurulumu": (False, "a lush low-tech planted freshwater aquarium with anubias, java fern, cryptocoryne and stem plants, driftwood and stones, natural light"),
     "akvaryum-filtresi-ve-pompasi": (False, "a clean small planted aquarium with a sponge filter producing gentle bubbles, crystal clear water, close-up"),
@@ -60,8 +72,10 @@ SAHNE = {
     # ana sayfa kullanim kartlari
     "kullanim/akvaryum": (True, "as a planted aquarium with a red betta fish, warm cozy living room background"),
     "kullanim/teraryum": (True, "as a closed forest terrarium with moss, ferns and a small piece of wood, condensation on the glass"),
-    "kullanim/abajur": (True, "as a glowing decorative table lamp with warm light in a dim elegant room, moss inside"),
-    "kullanim/bitki-saksisi": (True, "as an illuminated succulent planter with echeveria and haworthia on a pebble layer, LED on, minimal desk"),
+    "kullanim/abajur": (True, OLCEK + "as a glowing decorative table lamp in the evening: warm 3000K light pools on a walnut side table "
+        "and the wall, only a few smooth stones and a tuft of moss inside, tidy and elegant, cozy living room softly blurred"),
+    "kullanim/bitki-saksisi": (True, OLCEK + "as a bright illuminated planter with three echeveria succulents on white pebbles, LED on, "
+        "on a light oak desk in bright daylight, clean minimal styling"),
 }
 
 
