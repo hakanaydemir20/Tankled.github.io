@@ -12,9 +12,9 @@ KOK = blog.KOK
 # Bos birakilan alanlar sitede gosterilmez. Doldurup `python3 -B _seo/seo.py` calistirin;
 # adres/saat/fiyat tum sayfalara ve Google'in okudugu yapisal veriye birebir ayni islenir.
 ISLETME = {
-    "sokak": "",            # ornek: "1234. Cadde No: 5"  (Google Isletme Profili ile birebir ayni)
-    "posta_kodu": "",       # ornek: "06374"
-    "saatler": [],          # ornek: [("Pazartesi-Cuma", "Mo-Fr", "09:00", "18:00"), ("Cumartesi", "Sa", "10:00", "16:00")]
+    "sokak": "100. Yıl Blv.",          # ornek: "1234. Cadde No: 5"  (Google Isletme Profili ile birebir ayni)
+    "posta_kodu": "06374",     # ornek: "06374"
+    "saatler": [("Pazartesi-Cumartesi", "Mo-Sa", "10:00", "16:00")],        # ornek: [("Pazartesi-Cuma", "Mo-Fr", "09:00", "18:00"), ("Cumartesi", "Sa", "10:00", "16:00")]
     "fiyat_baslangic": "1.300",  # ornek: "2.500"  -> "Fiyatlar 2.500 TL'den başlar"
     "kurulus_yili": "",     # ornek: "2021"
     "usta_hikayesi": """<h2>Hikâyemiz</h2>

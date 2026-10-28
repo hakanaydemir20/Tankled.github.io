@@ -23,7 +23,6 @@ Kutulardaki HTML yorumunda önerilen dosya adı yazıyor (ör. `assets/hakkimizd
 Fotoğraflar gelince WebP'ye çevir, bu adlarla kaydet ve kutuların yerine gerçek görselleri koy.
 
 ### 3. Kullanıcıdan beklenen bilgiler (gelince `_seo/sayfalar.py` → `ISLETME` / `YORUMLAR`)
-- Atölyenin açık adresi (sokak, no, posta kodu; Ostim, Yenimahalle, Ankara) ve çalışma saatleri
 - Gerçek müşteri yorumları (izinli; uydurma yorum ekleme)
 - Endonezya'dan gelen özel seri ağacının adı (tik mi?) ve "tik yağı ile korumalı" bilgisinin doğruluğu
 
@@ -31,7 +30,7 @@ Fotoğraflar gelince WebP'ye çevir, bu adlarla kaydet ve kutuların yerine ger�
 Ana sayfada `assets/aydinlatma-bari.jpg` görseli eksik (kırık görsel). Kullanıcıdan görseli iste ya da referansı kaldır.
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
-- Atölye: Ostim, Yenimahalle, Ankara · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
+- Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
 - Betta Serisi 1.300 TL (doğal çam ahşap), Özel Betta Serisi 1.500 TL (Endonezya ithal ağaç), Nano Serisi 2.500 TL'den
 - Türkiye'nin 81 iline ve yurt dışına kargo
 - Ürünler akvaryum, teraryum, abajur ve bitki saksısı olarak kullanılabilir
