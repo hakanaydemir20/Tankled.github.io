@@ -19,7 +19,9 @@ sys.path.insert(0, str(SITE / "_seo"))
 import blog  # noqa: E402
 
 MODEL = "gemini-3.1-flash-image"
-REFERANS = SITE / "assets/galeri/urun-bicim-01-tam-onden.jpg"
+# Urunu her acidan dogru cizsin diye birden fazla gercek urun fotografi gonderilir
+REFERANSLAR = [SITE / "assets/galeri" / ad for ad in (
+    "urun-bicim-01-tam-onden.jpg", "urun-bicim-02-sol-45.jpg", "urun-isik-3000k-45-derece.jpg")]
 URUN = ("Keep the product from the reference photo exactly as it is: a small handmade square glass tank "
         "with a natural solid wood base and a wooden top cap with an integrated LED light. Do not change its "
         "shape, proportions or materials and do not add any logo or text to it. ")
@@ -63,10 +65,19 @@ SAHNE = {
 }
 
 
+GERCEKCI = (
+    "Ultra-realistic photograph, indistinguishable from a real camera photo: shot on a full-frame camera "
+    "with a 35mm or 50mm lens at f/2.8, natural window light with soft shadows, true-to-life textures "
+    "(real wood grain, glass reflections, water clarity, leaf veins), subtle real-world imperfections, "
+    "accurate scale and perspective, natural white balance and restrained colors. "
+    "Not CGI, not 3D render, not illustration, no plastic look, no oversaturation, no HDR halo. "
+)
+
+
 def istem(urun: bool, sahne: str) -> str:
-    on = (URUN + "Place this product in a new scene: the product is " + sahne) if urun else ("Show " + sahne)
-    return (on + ". Realistic high-end interior and nature photography, natural colors, soft light, shallow depth "
-            "of field, horizontal 4:3 framing. No text, no labels, no watermark, no people's faces.")
+    on = (URUN + "The reference photos show the same real product from several angles. Place this product "
+          "in a new scene: the product is " + sahne) if urun else ("Show " + sahne)
+    return (on + ". " + GERCEKCI + "Horizontal 4:3 framing. No text, no labels, no watermark, no people's faces.")
 
 
 def uret(ad: str, ist_anahtar: str) -> str:
@@ -76,21 +87,22 @@ def uret(ad: str, ist_anahtar: str) -> str:
         return "var"
     parcalar = [{"text": istem(urun, sahne)}]
     if urun:
-        parcalar.append({"inline_data": {"mime_type": "image/jpeg",
-                                         "data": base64.b64encode(REFERANS.read_bytes()).decode()}})
+        for ref in REFERANSLAR:
+            parcalar.append({"inline_data": {"mime_type": "image/jpeg",
+                                             "data": base64.b64encode(ref.read_bytes()).decode()}})
     govde = json.dumps({"contents": [{"parts": parcalar}],
                         "generationConfig": {"responseModalities": ["IMAGE"],
-                                             "imageConfig": {"aspectRatio": "4:3"}}}).encode()
+                                             "imageConfig": {"aspectRatio": "4:3", "imageSize": "2K"}}}).encode()
     istek = urllib.request.Request(
         f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent",
         data=govde, headers={"Content-Type": "application/json", "x-goog-api-key": ist_anahtar})
     try:
-        with urllib.request.urlopen(istek, timeout=180) as y:
+        with urllib.request.urlopen(istek, timeout=300) as y:
             cevap = json.load(y)
         veri = next(p["inlineData"]["data"] for p in cevap["candidates"][0]["content"]["parts"] if "inlineData" in p)
         im = ImageOps.fit(Image.open(io.BytesIO(base64.b64decode(veri))).convert("RGB"), (1200, 900), Image.LANCZOS)
         hedef.parent.mkdir(parents=True, exist_ok=True)
-        im.save(hedef, "WEBP", quality=80, method=6)
+        im.save(hedef, "WEBP", quality=84, method=6)
         return "ok"
     except Exception as e:  # noqa: BLE001
         return f"HATA {e}"[:160]

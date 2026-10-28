@@ -10,21 +10,17 @@ Ayrıntılar: `_seo/SEO-REHBERI.md`, `_kaynak/gorsel/BENIOKU.md`.
 Kullanıcı "projeyi çek" dediğinde önce `git pull`, sonra aşağıdaki açık maddeleri kullanıcıya hatırlat
 ve onayını alarak yap. Biten maddeyi bu listeden sil ve commit et.
 
-### 1. Blog ve kullanım kartı görsellerini Gemini ile üret
-Bulut oturumunda Gemini anahtarı olmadığı için yapılamadı. Mac'te anahtar
-`../tankled-otomasyon/.env` içindeki `GEMINI_API_KEY`'den otomatik okunur.
+### 1. Kalan 5 Gemini görselini üret
+16 blog/kart görseli 2026-10-28'de üretildi ve yayında (ultra gerçekçi istem, 3 ürün referansı, 2K).
+Gemini projesinin aylık harcama limiti dolduğu için şu 5'i kaldı (o sayfalar şimdilik eski fotoğrafı kullanır):
+`teraryum-nasil-yapilir`, `nano-akvaryum-bakimi`, `kullanim/teraryum`, `kullanim/abajur`, `kullanim/bitki-saksisi`.
+Limit yükselince (https://ai.studio/spend) teker teker üret (paralel istek 429 veriyor), kontrol et,
+`python3 -B _seo/seo.py`, commit + push:
 
 ```bash
-python3 _kaynak/gorsel/blog_gorsel.py     # 17 blog kapağı + 4 kullanım kartı (assets/blog, assets/kullanim)
+../tankled-otomasyon/.venv/bin/python _kaynak/gorsel/blog_gorsel.py teraryum-nasil-yapilir
 ```
-
-- Üretilen her görseli aç ve kontrol et: ürün tasarımı (ahşap gövde, cam hazne, üst LED) bozulmuş mu,
-  yazı/logo/filigran var mı, sahne yazının konusuyla uyumlu mu? Kötü olanı yeniden üret:
-  `python3 _kaynak/gorsel/blog_gorsel.py <slug> --yeniden` (kart için `kullanim/abajur` gibi).
-- Sonra `python3 -B _seo/seo.py` çalıştır; sayfalar yeni görselleri otomatik kullanır.
-- Blog yazılarına ve kullanım kartlarına küçük bir "Bazı görseller yapay zekâ ile üretilmiş temsilî
-  görsellerdir." notu ekle (bitkiler sayfasındaki gibi).
-- Görselleri kullanıcıya gösterip onay aldıktan sonra commit et, push et ve `main`'e al.
+Kullanıcı kararı: görsellere "yapay zekâ ile üretilmiştir" notu EKLENMEZ.
 
 ### 2. Kullanıcıdan gelecek gerçek fotoğrafları yerleştir
 Hakkımızda ve Betta sayfalarında "Fotoğraf eklenecek" kutuları var (`_seo/sayfalar.py` → `foto_yer`).
