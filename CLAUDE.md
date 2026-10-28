@@ -29,7 +29,7 @@ Fotoğraflar gelince WebP'ye çevir, bu adlarla kaydet ve kutuların yerine ger�
 ### 4. Hosting'e yüklenmeyi bekleyenler
 Kullanıcı kararı (2026-10-29): geliştirmeler önce yalnızca GitHub demo sitesine; kullanıcı söyleyince hosting'e
 (DirectAdmin dosya yöneticisi, zip yükle + aç). Bekleyen: İmza Avize kartı, aydınlatma barı görselleri ve 30–40 cm stok bilgisi, Betta/Nano/Paludarium
-kart slaytları, galeriye eklenen 6 görsel (assets/avize, assets/lamba, index.html, galeri/index.html).
+kart slaytları, hero sloganı ("Su, ışık ve ustalığın buluştuğu yer."; SEO H1 küçük üst satırda), galeriye eklenen 6 görsel (assets/avize, assets/lamba, index.html, galeri/index.html).
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
