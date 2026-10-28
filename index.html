@@ -192,6 +192,11 @@
   .add-btn{width:46px;height:46px;border-radius:14px;background:var(--green);color:var(--cream);border:none;cursor:pointer;
     display:grid;place-items:center;transition:all .3s}
   .add-btn:hover{background:var(--sand);color:var(--green-dark);transform:rotate(90deg)}
+  .slayt img{position:absolute;inset:0;opacity:0;transition:opacity .9s ease,transform .7s var(--ease)}
+  .slayt img.on{opacity:1}
+  .slayt-nokta{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
+  .slayt-nokta button{width:9px;height:9px;padding:0;border-radius:50%;border:none;background:rgba(244,241,233,.55);cursor:pointer}
+  .slayt-nokta button.on{background:var(--cream)}
 
   /* About */
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -493,6 +498,27 @@
           </div>
         </div>
       </article>
+      <article class="product-card reveal" data-cat="aydinlatma">
+        <div class="product-media slayt">
+          <span class="product-tag">İmza</span>
+          <img class="on" src="assets/avize/salon-modern.webp" alt="Modern salonda sıcak ışıkta Tankled ahşap avize" width="1024" height="768" loading="lazy"/>
+          <img src="assets/avize/yemek-alani.webp" alt="Yemek masası üzerinde Tankled doğal çam ahşap avize" width="1024" height="768" loading="lazy"/>
+          <img src="assets/avize/salon-iskandinav.webp" alt="İskandinav tarzı aydınlık salonda Tankled ahşap avize" width="1024" height="768" loading="lazy"/>
+        </div>
+        <div class="product-body">
+          <h3>İmza Avize</h3>
+          <p>Tankled yaşam tarzı ortamınıza doğallıkla uyum sağlar. Akvaryumdan daha fazlası: aydınlatma ürünleri.</p>
+          <ul class="specs">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18c4-1 12-1 16 0M5 14c3.5-.8 10.5-.8 14 0"/><path d="M6 10h12l-1 8H7z"/></svg><span><b>Doğal çam ahşap</b> gövde</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6 6l-1.5-1.5M19.5 19.5 18 18"/><circle cx="12" cy="12" r="4"/></svg><span><b>3 renk ışık</b>, dimlenebilir</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M12 6v2M10 12h4"/></svg><span><b>Uzaktan kumandalı</b></span></li>
+          </ul>
+          <div class="product-meta">
+            <a class="price" href="https://wa.me/905312172006?text=Merhaba%20Tankled%2C%20imza%20avize%20i%C3%A7in%20sipari%C5%9F%20vermek%20istiyorum." target="_blank" rel="noopener">Sipariş için WhatsApp'tan ulaşın</a>
+            <button class="add-btn" aria-label="Ekle"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -754,6 +780,19 @@
     cards.forEach(card=>{ card.hidden = f!=='all' && !card.dataset.cat.split(' ').includes(f); });
     document.getElementById('products').scrollIntoView({behavior:'smooth'});
   }));
+
+  // Kart slaytlari
+  document.querySelectorAll('.slayt').forEach(m=>{
+    const imgs=[...m.querySelectorAll('img')]; if(imgs.length<2) return;
+    const nok=document.createElement('div'); nok.className='slayt-nokta';
+    let i=0, t;
+    const git=n=>{ imgs[i].classList.remove('on'); nok.children[i].classList.remove('on');
+      i=(n+imgs.length)%imgs.length; imgs[i].classList.add('on'); nok.children[i].classList.add('on'); };
+    imgs.forEach((_,k)=>{ const b=document.createElement('button'); b.setAttribute('aria-label',`Görsel ${k+1}`);
+      if(!k) b.className='on'; b.addEventListener('click',()=>{ git(k); clearInterval(t); }); nok.appendChild(b); });
+    m.appendChild(nok);
+    t=setInterval(()=>git(i+1),4000);
+  });
 
   // Reveal on scroll
   const io = new IntersectionObserver((entries)=>{
