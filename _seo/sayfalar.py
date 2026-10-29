@@ -170,7 +170,7 @@ FOTO_MOBILYALI
         "gorsel": "assets/g-betta-cozy.webp", "gorsel_g": 1195, "gorsel_y": 1600,
         "gorsel_alt": "Tankled Betta Serisi betta akvaryumu oturma odasında",
         "govde": """
-<p><strong>Betta Serisi</strong>, betta balığı için tasarladığımız, Ankara'daki atölyemizde doğal masif ahşaptan elde üretilen kompakt bir akvaryumdur. Çalışma masası, komodin ya da kitaplık rafı için idealdir; akşamları sıcak ışığıyla bir abajur gibi, gündüz gün ışığı tonuyla bitkili bir mini doğa gibi görünür.</p>
+<p><strong>Betta Serisi</strong>, betta (beta) balığı için tasarladığımız, Ankara'daki atölyemizde doğal masif ahşaptan elde üretilen kompakt bir akvaryumdur. Çalışma masası, komodin ya da kitaplık rafı için idealdir; akşamları sıcak ışığıyla bir abajur gibi, gündüz gün ışığı tonuyla bitkili bir mini doğa gibi görünür.</p>
 
 <h2>Teknik özellikler</h2>
 <ul>

@@ -30,8 +30,8 @@ SAYFALAR = [
     {
         "dosya": "index.html", "yol": "", "oncelik": "1.0", "siklik": "weekly",
         "baslik": "Akvaryum Ankara | Mobilyalı ve El Yapımı Akvaryum | Tankled",
-        "aciklama": "Ankara Ostim atölyemizde doğal ahşaptan mobilyalı akvaryum ve el yapımı dekoratif akvaryum: "
-                    "betta, nano akvaryum, teraryum, paludaryum. Ölçüye özel üretim.",
+        "aciklama": "Tankled akvaryum: Ankara Ostim'de doğal ahşaptan mobilyalı akvaryum, bitkili akvaryum ve "
+                    "balık akvaryumu. Betta, nano akvaryum, teraryum; ölçüye özel üretim.",
         "kirinti": [],
     },
     {
@@ -121,6 +121,18 @@ SSS = [
      "kurulum seti de sunuyoruz."),
     ("Özel ölçü ya da tasarım yaptırabilir miyim?",
      "Evet. İletişim formundan ya da telefonla bize ulaşarak hayalinizdeki akvaryumu birlikte tasarlayabiliriz."),
+    ("Evde balık beslemek zor mu? Nereden başlamalıyım?",
+     "Hayır, doğru kurulumla zor değildir. Önce bir balık akvaryumu kurup suyu 2–4 hafta olgunlaştırın, sonra az sayıda "
+     "dayanıklı balıkla başlayın; günde bir kez az yem verin ve haftada bir %20–30 su değiştirin. Ayrıntılar için "
+     "evde balık beslemek rehberimize bakın."),
+    ("Akvaryum camı kaç mm olmalı?",
+     "Cam kalınlığını en çok akvaryumun yüksekliği belirler. Genel bir kural olarak 30 cm'ye kadar yükseklikte 4–5 mm, "
+     "30–45 cm'de 6–8 mm, 45–60 cm'de 8–10 mm cam kullanılır; uzun ve büyük akvaryum tanklarında daha kalın cam ve "
+     "destek çıtası gerekir. Özel ölçü akvaryumlarda cam kalınlığını ölçüye göre biz belirleriz."),
+    ("Betta (beta) akvaryumunda filtre, motor ve ısıtıcı gerekli mi?",
+     "Betta 24–28 °C suyu sever; oda sıcaklığı bunun altına düşüyorsa küçük bir akvaryum ısıtıcısı gerekir. Betta güçlü "
+     "akıntıyı sevmediği için filtre ya da akvaryum motoru kullanılacaksa akışı yumuşak olmalıdır. Bol bitkili, "
+     "low-tech bir nano akvaryumda düzenli su değişimiyle su kalitesi korunur."),
     ("Akvaryuma hangi bitki ve balıkları koyabilirim?",
      "Bitkiler, Balıklar ve Malzemeler rehberlerimizde akvaryumunuza uygun canlıları, bakım koşullarını ve "
      "adım adım kurulumu bulabilirsiniz."),
@@ -142,7 +154,7 @@ def isletme() -> dict:
         "@type": "Store",
         "@id": url("#isletme"),
         "name": MARKA,
-        "alternateName": "Tankled Aquarium",
+        "alternateName": ["Tankled Aquarium", "Tankled Akvaryum"],
         "description": "Ankara Ostim'de doğal masif ahşaptan mobilyalı akvaryum, el yapımı dekoratif akvaryum, "
                        "teraryum ve paludaryum üreten atölye.",
         "url": url(""),
@@ -159,7 +171,7 @@ def isletme() -> dict:
         },
         "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Country", "name": "Türkiye"}],
         "sameAs": [INSTAGRAM],
-        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape"],
+        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape", "akvaryum camı", "cam akvaryum", "akvaryum tankı", "balık akvaryumu", "akvaryum balıkları", "akvaryum bitkisi", "evde balık beslemek", "akvaryum kasası", "akvaryum ısıtıcı", "akvaryum motoru"],
     }
     if bilgi["posta_kodu"]:
         veri["address"]["postalCode"] = bilgi["posta_kodu"]

@@ -718,6 +718,91 @@ YAZILAR = [
 <p>Henüz akvaryumunuzu kurmadıysanız önce <a href="../betta-akvaryumu-kurulumu/">betta akvaryumu kurulum rehberimizi</a> okuyun; aynı adımlar tüm nano akvaryumlar için geçerlidir. Tankled Betta Serisi gibi buhar kapaklı ve ayarlanabilir ışıklı bir nano akvaryum, buharlaşmayı azaltıp ışık süresini kontrol etmeyi kolaylaştırarak bakımı daha da basitleştirir. Ankara'da nano akvaryum ve kurulum seti için bizimle iletişime geçebilirsiniz.</p>
 """,
     },
+    {
+        "slug": "evde-balik-beslemek",
+        "baslik": "Evde Balık Beslemek: Başlangıç Rehberi 2026 | Tankled",
+        "h1": "Evde balık beslemek: balık akvaryumu kurmaktan bakıma başlangıç rehberi",
+        "aciklama": "Evde balık beslemek için balık akvaryumu seçimi, su olgunlaştırma, akvaryum balıkları, yem, "
+                    "filtre, akvaryum motoru ve ısıtıcı: yeni başlayanlar için adım adım rehber.",
+        "tarih": "2026-10-29",
+        "gorsel": "assets/galeri/sahne-salon-kirmizi-betta.webp", "gorsel_g": 1100, "gorsel_y": 825,
+        "gorsel_alt": "Salonda ahşap gövdeli balık akvaryumunda kırmızı betta balığı",
+        "etiketler": ["evde balık beslemek", "balık akvaryumu", "akvaryum balıkları"],
+        "govde": """
+<p>Evde balık beslemek; doğru kurulmuş bir akvaryumla sakin, keyifli ve çocuklar için de öğretici bir hobidir. Akvaryum balıkları köpek ya da kedi kadar zaman istemez, ama suyun dengesini korumayı öğrenmek gerekir. Bu rehberde ilk balık akvaryumunuzu kurmaktan günlük bakıma kadar bilmeniz gerekenleri sırayla anlatıyoruz.</p>
+
+<h2>1. Doğru balık akvaryumunu seçin</h2>
+<p>Akvaryum büyüdükçe su değerleri daha yavaş değişir; bu yüzden çok küçük fanuslar yerine filtresi ya da bol bitkisi olan bir akvaryum tercih edin. Tek bir betta (beta) balığı için 5–10 litrelik bir nano akvaryum yeterlidir; neon tetra ya da rasbora gibi sürü balıkları için en az 40–60 litre gerekir. Akvaryumu doğrudan güneş almayan, kaloriferden uzak ve sağlam bir zemine koyun; su dolu bir akvaryum litre başına yaklaşık 1 kg ağırlık demektir. Ağırlığı güvenle taşıyan bir zemin için <a href="../../mobilyali-akvaryum/">mobilyalı akvaryum</a> iyi bir seçenektir.</p>
+
+<h2>2. Gerekli malzemeler</h2>
+<ul>
+  <li><strong>Zemin ve bitkiler:</strong> Kum ya da bitki toprağı ve kolay akvaryum bitkileri (anubias, java yosunu, kriptokorin).</li>
+  <li><strong>Filtre ya da akvaryum motoru:</strong> Suyu dolaştırır ve faydalı bakterilere yaşam alanı sağlar. Betta gibi yavaş yüzen balıklarda akış yumuşak olmalıdır.</li>
+  <li><strong>Akvaryum ısıtıcı:</strong> Tropikal balıkların çoğu 24–28 °C ister. Oda sıcaklığı bunun altına düşüyorsa termostatlı bir ısıtıcı kullanın.</li>
+  <li><strong>Aydınlatma:</strong> Bitkiler için günde 6–8 saat ışık yeterlidir; fazlası yosun yapar.</li>
+  <li><strong>Su şartlandırıcı ve test kiti:</strong> Musluk suyundaki kloru giderir, su değerlerini takip etmenizi sağlar.</li>
+</ul>
+<p>Malzemelerin ne işe yaradığını <a href="../../malzemeler/">akvaryum malzemeleri rehberimizde</a> ayrıntılı anlattık.</p>
+
+<h2>3. Suyu olgunlaştırın (en önemli adım)</h2>
+<p>Yeni kurulan bir akvaryumda, balık atığını zararsız hale getiren faydalı bakteriler henüz yoktur. Balık eklemeden önce akvaryumu bitkilerle 2–4 hafta çalıştırın; bu sürece azot döngüsü denir. Acele edip balığı ilk gün eklemek, yeni başlayanların en sık yaptığı hatadır. Bitkili bir akvaryum bu süreci hızlandırır ve dengeyi korur; adımlar için <a href="../bitkili-akvaryum-kurulumu/">bitkili akvaryum kurulumu</a> yazımıza bakın.</p>
+
+<h2>4. Başlangıç için uygun akvaryum balıkları</h2>
+<ul>
+  <li><strong>Betta (beta) balığı:</strong> Renkli, zeki ve küçük akvaryumda tek başına yaşayabilen bir tür. Erkek bettaları birbirleriyle aynı akvaryuma koymayın.</li>
+  <li><strong>Neon tetra ve rasbora:</strong> Sakin sürü balıklarıdır; en az 6–8 tane birlikte tutulmalıdır.</li>
+  <li><strong>Corydoras:</strong> Zeminde yaşayan, artık yemleri temizleyen huzurlu bir tür.</li>
+  <li><strong>Neocaridina karides ve nerit salyangozu:</strong> Yosun temizliğine yardımcı olur, nano akvaryumlar için idealdir.</li>
+</ul>
+<p>Her türün boyutunu, sıcaklık ve pH aralığını <a href="../../baliklar/">akvaryum balıkları rehberimizde</a> bulabilirsiniz.</p>
+
+<h2>5. Günlük ve haftalık bakım</h2>
+<ul>
+  <li><strong>Yem:</strong> Günde bir ya da iki kez, 2–3 dakikada bitecek kadar verin. Fazla yem suyu bozar.</li>
+  <li><strong>Su değişimi:</strong> Haftada bir suyun %20–30'unu şartlandırılmış, aynı sıcaklıktaki suyla değiştirin.</li>
+  <li><strong>Gözlem:</strong> Balıkların iştahına, yüzgeçlerine ve davranışına bakın; ani değişiklikler su kalitesinin işaretidir.</li>
+</ul>
+
+<h2>Evde balık beslemeye hazır mısınız?</h2>
+<p>Tankled akvaryumları Ankara Ostim'deki atölyemizde doğal ahşaptan elde üretilir; buhar kapağı ve üç ışık tonlu LED aydınlatmasıyla bakımı kolay bir balık akvaryumu sunar. İlk akvaryumunuz için <a href="../betta-akvaryumu-kurulumu/">betta akvaryumu kurulum rehberimizi</a> okuyabilir, hazır kurulum seti için WhatsApp'tan bize ulaşabilirsiniz.</p>
+""",
+    },
+    {
+        "slug": "akvaryum-cami-ve-akvaryum-tanki",
+        "baslik": "Akvaryum Camı ve Akvaryum Tankı Seçimi | Tankled",
+        "h1": "Akvaryum camı ve akvaryum tankı: cam akvaryum seçerken nelere dikkat edilir?",
+        "aciklama": "Akvaryum camı kaç mm olmalı? Cam akvaryum, akvaryum tankı ve akvaryum kasası seçerken cam "
+                    "kalınlığı, silikon işçiliği, ölçü ve taşıyıcı gövde rehberi.",
+        "tarih": "2026-10-29",
+        "gorsel": "assets/g-betta-bos.webp", "gorsel_g": 1086, "gorsel_y": 1448,
+        "gorsel_alt": "Ahşap gövdeli boş cam akvaryum tankı",
+        "etiketler": ["akvaryum camı", "akvaryum tankı", "cam akvaryum"],
+        "govde": """
+<p>Bir akvaryumun güvenliği ve ömrü büyük ölçüde camına bağlıdır. Akvaryum camı yanlış kalınlıkta seçilirse ya da silikon işçiliği zayıfsa, akvaryum tankı zamanla sızdırabilir veya çatlayabilir. Bu rehberde cam akvaryum alırken ya da özel ölçü akvaryum yaptırırken bakmanız gerekenleri anlatıyoruz.</p>
+
+<h2>Akvaryum camı kaç mm olmalı?</h2>
+<p>Camın taşıdığı basıncı en çok su yüksekliği belirler; uzunluk arttıkça da cam daha fazla esner. Aşağıdaki değerler genel bir başlangıç noktasıdır:</p>
+<ul>
+  <li><strong>30 cm'ye kadar yükseklik:</strong> 4–5 mm cam (nano ve masaüstü akvaryumlar)</li>
+  <li><strong>30–45 cm yükseklik:</strong> 6–8 mm cam</li>
+  <li><strong>45–60 cm yükseklik:</strong> 8–10 mm cam</li>
+  <li><strong>60 cm üzeri ve 120 cm'den uzun tanklar:</strong> 10–12 mm ve üzeri cam, üstte destek çıtası</li>
+</ul>
+<p>Kesin kalınlık ölçüye, camın türüne ve kullanılacak destek çıtalarına göre hesaplanmalıdır. Özel ölçü akvaryumlarda cam kalınlığını üretici belirlemelidir.</p>
+
+<h2>Cam türü: float cam ve ekstra şeffaf (optiwhite) cam</h2>
+<p>Standart float cam kenardan bakıldığında hafif yeşil görünür. Ekstra şeffaf cam (optiwhite) ise demir oranı düşük olduğu için renkleri olduğu gibi gösterir; özellikle bitkili akvaryum ve aquascape'te fark edilir. Kenarları rodajlı (zımparalı) cam hem güvenli hem daha temiz görünür.</p>
+
+<h2>Silikon işçiliği</h2>
+<p>İyi bir akvaryum tankında silikon düzgün, kabarcıksız ve camın birleşim yüzeyine tamamen yayılmış olmalıdır. Akvaryuma özel, küf önleyici içermeyen silikon kullanılır. Yeni bir akvaryumu yerine koymadan önce birkaç gün su dolu bekletip sızıntı testi yapmak iyi bir alışkanlıktır.</p>
+
+<h2>Akvaryum kasası ve taşıyıcı gövde</h2>
+<p>Su dolu bir akvaryum litre başına yaklaşık 1 kg gelir; 100 litrelik bir akvaryum zemin ve taşlarla 130–150 kg'ı bulabilir. Akvaryum kasası (sehpa ya da dolap) bu ağırlığı tüm tabana eşit dağıtmalı ve tamamen düz olmalıdır. Akvaryumla birlikte tasarlanan <a href="../../mobilyali-akvaryum/">mobilyalı akvaryum</a> gövdeleri hem bu yükü güvenle taşır hem de kablo ve ekipmanı gizler; doğru ölçüler için <a href="../akvaryum-sehpasi-olculeri/">akvaryum sehpası ölçüleri</a> yazımıza bakın.</p>
+
+<h2>Hazır cam akvaryum mı, özel ölçü mü?</h2>
+<p>Hazır cam akvaryumlar standart ölçülerde ve hızlı bulunur. Evinizdeki bir nişe, TV ünitesine ya da duvar boşluğuna tam oturan bir akvaryum istiyorsanız <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> daha doğru bir seçimdir. Tankled olarak Ankara Ostim'deki atölyemizde cam hazneyi ve ahşap gövdeyi birlikte tasarlıyor, cam kalınlığını ölçüye göre belirliyoruz.</p>
+""",
+    },
 ]
 
 CSS = """
