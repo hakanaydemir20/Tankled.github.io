@@ -636,9 +636,9 @@ YAZILAR = [
     },
     {
         "slug": "ahsap-akvaryum-fikirleri",
-        "baslik": "Ahşap Akvaryum Fikirleri ve Akvaryum Dekorasyonu | Tankled",
-        "h1": "Ahşap akvaryum fikirleri: akvaryumu dekorasyonun parçası yapın",
-        "aciklama": "Ahşap gövdeli akvaryum, akvaryum dolabı ve dekoratif akvaryum fikirleri: salon, çalışma odası "
+        "baslik": "Ahşap (Tahta) Akvaryum Fikirleri ve Dekorasyon | Tankled",
+        "h1": "Ahşap akvaryum fikirleri: tahta akvaryumu dekorasyonun parçası yapın",
+        "aciklama": "Ahşap (tahta) akvaryum, akvaryum dolabı ve dekoratif akvaryum fikirleri: salon, çalışma odası "
                     "ve yatak odası için ilham veren yerleşim önerileri.",
         "tarih": "2026-10-16",
         "gorsel": "assets/g-paludarium-stand.webp", "gorsel_g": 1195, "gorsel_y": 1600,

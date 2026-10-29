@@ -212,14 +212,14 @@ FOTO_BETTA
     {
         "yol": "teraryum/", "tur": "hizmet", "kisa": "Teraryum",
         "hizmet": "Teraryum üretimi",
-        "baslik": "Teraryum Ankara: El Yapımı Ahşap Teraryum | Tankled",
-        "aciklama": "Ankara'da el yapımı teraryum: doğal masif ahşap gövdeli, ışıklı ve kapaklı teraryumlar. "
+        "baslik": "Teraryum (Terraryum) Ankara: Ahşap Teraryum | Tankled",
+        "aciklama": "Ankara'da el yapımı teraryum (terraryum): doğal ahşap gövdeli, ışıklı ve kapaklı teraryumlar. "
                     "Bitki teraryumu ve gecko gibi egzotik hayvanlar için yaşam alanı.",
         "h1": "Teraryum: Ankara'da el yapımı, ahşap gövdeli",
         "gorsel": "assets/g-gecko.webp", "gorsel_g": 1195, "gorsel_y": 1600,
         "gorsel_alt": "Orman temalı ahşap gövdeli teraryum",
         "govde": """
-<p><strong>Teraryum</strong>, bitkilerin ya da küçük kara hayvanlarının yaşadığı, camla çevrili bir mini ekosistemdir. Tankled teraryumları, akvaryumlarımızla aynı doğal masif ahşap gövde ve LED aydınlatmayla Ankara Ostim'deki atölyemizde elde üretilir.</p>
+<p><strong>Teraryum</strong> (terraryum), bitkilerin ya da küçük kara hayvanlarının yaşadığı, camla çevrili bir mini ekosistemdir. Tankled teraryumları, akvaryumlarımızla aynı doğal masif ahşap gövde ve LED aydınlatmayla Ankara Ostim'deki atölyemizde elde üretilir.</p>
 
 <h2>Teraryum türleri</h2>
 <ul>

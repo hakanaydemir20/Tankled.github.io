@@ -134,6 +134,13 @@ SSS = [
      "akıntıyı sevmediği için filtre ya da akvaryum motoru kullanılacaksa akışı yumuşak olmalıdır. Bol bitkili, "
      "low-tech bir nano akvaryumda düzenli su değişimiyle su kalitesi korunur. Tek bir beta balığı için 5–10 litrelik "
      "bir beta akvaryumu yeterlidir."),
+    ("Ahşap (tahta) akvaryum suya dayanıklı mı?",
+     "Tankled ahşap akvaryumlarda su, silikonla birleştirilmiş cam haznenin içindedir; ahşap gövde suyla doğrudan temas "
+     "etmez. Gövde doğal ahşaptan üretilir ve yüzeyi yağla korunur; sıçrayan suyu kuru bir bezle silmek yeterlidir."),
+    ("Akvaryum aydınlatması günde kaç saat açık kalmalı?",
+     "Bitkili akvaryumda akvaryum aydınlatması günde 6–8 saat açık kalmalıdır; daha uzun süre yosun yapar. Bitkiler için "
+     "6500K gün ışığı tonu idealdir; akşamları 3000K sıcak ışık akvaryumu dekoratif bir abajur gibi gösterir. Tankled "
+     "akvaryumlarda üç ışık tonu (3000K, 4500K, 6500K) bulunur, ayrıca ince alüminyum LED aydınlatma barımız da var."),
     ("Karides akvaryumu nasıl kurulur?",
      "Karides akvaryumu için en az 10 litrelik, bol bitkili ve olgunlaşmış bir akvaryum, yumuşak akışlı süngerli filtre "
      "ve 20–26 °C su yeterlidir. Neocaridina (red cherry) karides yeni başlayanlar için en kolay türdür; bakır içeren "
@@ -176,7 +183,7 @@ def isletme() -> dict:
         },
         "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Country", "name": "Türkiye"}],
         "sameAs": [INSTAGRAM],
-        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape", "akvaryum camı", "cam akvaryum", "akvaryum tankı", "balık akvaryumu", "akvaryum balıkları", "akvaryum bitkisi", "evde balık beslemek", "akvaryum kasası", "akvaryum ısıtıcı", "akvaryum motoru", "karides akvaryumu", "neocaridina karides", "beta akvaryumu", "beta balığı", "betta balığı"],
+        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape", "akvaryum camı", "cam akvaryum", "akvaryum tankı", "balık akvaryumu", "akvaryum balıkları", "akvaryum bitkisi", "evde balık beslemek", "akvaryum kasası", "akvaryum ısıtıcı", "akvaryum motoru", "karides akvaryumu", "neocaridina karides", "beta akvaryumu", "beta balığı", "betta balığı", "ahşap akvaryum", "tahta akvaryum", "terraryum", "akvaryum aydınlatması", "akvaryum led"],
     }
     if bilgi["posta_kodu"]:
         veri["address"]["postalCode"] = bilgi["posta_kodu"]
