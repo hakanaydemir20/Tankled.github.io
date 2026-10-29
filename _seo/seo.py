@@ -133,6 +133,10 @@ SSS = [
      "Betta 24–28 °C suyu sever; oda sıcaklığı bunun altına düşüyorsa küçük bir akvaryum ısıtıcısı gerekir. Betta güçlü "
      "akıntıyı sevmediği için filtre ya da akvaryum motoru kullanılacaksa akışı yumuşak olmalıdır. Bol bitkili, "
      "low-tech bir nano akvaryumda düzenli su değişimiyle su kalitesi korunur."),
+    ("Karides akvaryumu nasıl kurulur?",
+     "Karides akvaryumu için en az 10 litrelik, bol bitkili ve olgunlaşmış bir akvaryum, yumuşak akışlı süngerli filtre "
+     "ve 20–26 °C su yeterlidir. Neocaridina (red cherry) karides yeni başlayanlar için en kolay türdür; bakır içeren "
+     "ilaçlardan ve ani su değişimlerinden kaçının. Ayrıntılar karides akvaryumu rehberimizde."),
     ("Akvaryuma hangi bitki ve balıkları koyabilirim?",
      "Bitkiler, Balıklar ve Malzemeler rehberlerimizde akvaryumunuza uygun canlıları, bakım koşullarını ve "
      "adım adım kurulumu bulabilirsiniz."),
@@ -171,7 +175,7 @@ def isletme() -> dict:
         },
         "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Country", "name": "Türkiye"}],
         "sameAs": [INSTAGRAM],
-        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape", "akvaryum camı", "cam akvaryum", "akvaryum tankı", "balık akvaryumu", "akvaryum balıkları", "akvaryum bitkisi", "evde balık beslemek", "akvaryum kasası", "akvaryum ısıtıcı", "akvaryum motoru"],
+        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape", "akvaryum camı", "cam akvaryum", "akvaryum tankı", "balık akvaryumu", "akvaryum balıkları", "akvaryum bitkisi", "evde balık beslemek", "akvaryum kasası", "akvaryum ısıtıcı", "akvaryum motoru", "karides akvaryumu", "neocaridina karides"],
     }
     if bilgi["posta_kodu"]:
         veri["address"]["postalCode"] = bilgi["posta_kodu"]

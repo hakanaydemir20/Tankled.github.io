@@ -803,6 +803,51 @@ YAZILAR = [
 <p>Hazır cam akvaryumlar standart ölçülerde ve hızlı bulunur. Evinizdeki bir nişe, TV ünitesine ya da duvar boşluğuna tam oturan bir akvaryum istiyorsanız <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> daha doğru bir seçimdir. Tankled olarak Ankara Ostim'deki atölyemizde cam hazneyi ve ahşap gövdeyi birlikte tasarlıyor, cam kalınlığını ölçüye göre belirliyoruz.</p>
 """,
     },
+    {
+        "slug": "karides-akvaryumu",
+        "baslik": "Karides Akvaryumu Kurulumu: Neocaridina Rehberi | Tankled",
+        "h1": "Karides akvaryumu: neocaridina ve amano karides için kurulum ve bakım rehberi",
+        "aciklama": "Karides akvaryumu nasıl kurulur? Neocaridina (red cherry) ve amano karides için akvaryum boyutu, "
+                    "su değerleri, filtre, bitki, yem ve üreme: adım adım rehber.",
+        "tarih": "2026-10-29",
+        "gorsel": "assets/galeri/sahne-kitaplik-bitkili-akvaryum.webp", "gorsel_g": 1100, "gorsel_y": 825,
+        "gorsel_alt": "Kitaplık rafında bitkili nano karides akvaryumu",
+        "etiketler": ["karides akvaryumu", "neocaridina karides", "nano akvaryum"],
+        "govde": """
+<p>Karides akvaryumu, nano akvaryum dünyasının en keyifli ve en kolay başlangıçlarından biridir. Neocaridina (red cherry) karidesleri küçük, renkli ve dayanıklıdır; gün boyu bitkilerin ve taşların üzerinde yosun ve artık yem toplayarak akvaryumu canlı tutarlar. Bu rehberde karides akvaryumu kurmak için gerekenleri sırayla anlatıyoruz.</p>
+
+<h2>Hangi karides türüyle başlanır?</h2>
+<ul>
+  <li><strong>Neocaridina davidi (red cherry, blue dream, yellow):</strong> Yeni başlayanlar için en kolay tür. Geniş su değeri aralığına uyum sağlar ve akvaryumda kendiliğinden ürer.</li>
+  <li><strong>Amano karidesi (Caridina multidentata):</strong> Daha büyük ve en iyi yosun temizleyicilerden biridir; tatlı suda üremez.</li>
+  <li><strong>Caridina (crystal red, taiwan bee):</strong> Yumuşak ve asidik su ister; deneyim kazandıktan sonra tercih edilmelidir.</li>
+</ul>
+<p>Türlerin ayrıntılı bilgilerini <a href="../../baliklar/">akvaryum balıkları ve karides rehberimizde</a> bulabilirsiniz.</p>
+
+<h2>Akvaryum boyutu ve su değerleri</h2>
+<p>Küçük bir neocaridina kolonisi için en az 10 litrelik bir akvaryum önerilir; hacim arttıkça su değerleri daha dengeli kalır. Neocaridina için uygun aralık genellikle 20–26 °C sıcaklık, 6,5–8 pH ve orta sertlikte sudur. Karidesler ani değişimlere hassastır; su değişimlerini küçük (%10–20) ve aynı sıcaklıkta yapın.</p>
+
+<h2>Filtre, zemin ve bitkiler</h2>
+<ul>
+  <li><strong>Süngerli filtre:</strong> Yavru karidesleri emmez ve üzerinde karideslerin beslendiği biyofilm oluşur. Akvaryum motoru ya da dış filtre kullanılıyorsa girişine sünger takın.</li>
+  <li><strong>Zemin:</strong> Neocaridina için sıradan akvaryum kumu ya da bitki toprağı yeterlidir.</li>
+  <li><strong>Bitkiler:</strong> Java yosunu, christmas yosunu, anubias ve yüzey bitkileri karideslere saklanma ve beslenme alanı sağlar. Uygun türler <a href="../../bitkiler/">akvaryum bitkileri rehberimizde</a>.</li>
+</ul>
+
+<h2>Suyu olgunlaştırın</h2>
+<p>Karidesler yeni kurulmuş bir akvaryumda zorlanır. Akvaryumu bitkilerle en az 3–4 hafta çalıştırıp azot döngüsünün tamamlanmasını bekleyin; yüzeylerde ince bir biyofilm oluşması karidesler için idealdir. Kurulum adımları için <a href="../bitkili-akvaryum-kurulumu/">bitkili akvaryum kurulumu</a> yazımıza bakın.</p>
+
+<h2>Yem ve bakım</h2>
+<ul>
+  <li><strong>Az yem:</strong> Karidesler akvaryumda kendi besinini büyük ölçüde bulur; 2–3 günde bir, birkaç saatte bitecek kadar karides yemi ya da haşlanmış sebze yeterlidir.</li>
+  <li><strong>Bakırdan kaçının:</strong> Bakır içeren balık ilaçları ve bazı gübreler karidesler için zehirlidir.</li>
+  <li><strong>Uygun komşular:</strong> Karidesleri büyük ya da yırtıcı balıklarla tutmayın. Betta bazen karides avlayabilir; bol bitki ve saklanma alanı riski azaltır.</li>
+</ul>
+
+<h2>Karides akvaryumu için doğru akvaryum</h2>
+<p>Buhar kapaklı ve ışığı ayarlanabilir bir nano akvaryum, karides akvaryumunda sıcaklığı ve buharlaşmayı dengede tutmayı kolaylaştırır. Tankled akvaryumları Ankara Ostim'deki atölyemizde doğal ahşaptan elde üretilir; üç ışık tonlu LED aydınlatmasıyla bitkili bir karides akvaryumu için uygundur. Daha büyük bir karides kolonisi için <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> yaptırabilir, bakım ipuçları için <a href="../nano-akvaryum-bakimi/">nano akvaryum bakımı</a> yazımızı okuyabilirsiniz.</p>
+""",
+    },
 ]
 
 CSS = """
