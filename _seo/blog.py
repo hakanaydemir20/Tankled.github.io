@@ -723,7 +723,7 @@ YAZILAR = [
         "baslik": "Evde Balık Beslemek: Başlangıç Rehberi 2026 | Tankled",
         "h1": "Evde balık beslemek: balık akvaryumu kurmaktan bakıma başlangıç rehberi",
         "aciklama": "Evde balık beslemek için balık akvaryumu seçimi, su olgunlaştırma, akvaryum balıkları, yem, "
-                    "filtre, akvaryum motoru ve ısıtıcı: yeni başlayanlar için adım adım rehber.",
+                    "filtre, motor ve ısıtıcı: adım adım başlangıç rehberi.",
         "tarih": "2026-10-29",
         "gorsel": "assets/galeri/sahne-salon-kirmizi-betta.webp", "gorsel_g": 1100, "gorsel_y": 825,
         "gorsel_alt": "Salonda ahşap gövdeli balık akvaryumunda kırmızı betta balığı",
