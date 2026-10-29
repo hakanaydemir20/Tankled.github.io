@@ -31,6 +31,8 @@ Güzel Hosting DirectAdmin; Let's Encrypt SSL otomatik (wildcard, kendini yenile
 GitHub demo sitesine; kullanıcı söyleyince hosting'e yüklenir: dosya yöneticisinde public_html'e <10 MB zip
 parçaları yükle, "Merge and overwrite" ile aç, zip'leri sil. DirectAdmin'e müşteri panelinden "Tek Tıkla Giriş"
 (guzel.net.tr clientarea productdetails id=389417); oturum düşerse kullanıcı müşteri paneline kendisi girer.
+Google Search Console: alan adı mülkü sc-domain:tankled.com.tr doğrulandı (DNS TXT google-site-verification,
+DirectAdmin DNS'te; SİLME), sitemap.xml gönderildi, ana sayfa için dizine ekleme istendi (2026-10-29).
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
