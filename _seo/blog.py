@@ -587,10 +587,10 @@ YAZILAR = [
     },
     {
         "slug": "betta-akvaryumu-kurulumu",
-        "baslik": "Betta Akvaryumu Nasıl Kurulur? Adım Adım Rehber | Tankled",
+        "baslik": "Betta (Beta) Akvaryumu Nasıl Kurulur? Rehber | Tankled",
         "h1": "Betta akvaryumu nasıl kurulur? Adım adım rehber",
-        "aciklama": "Betta balığı için akvaryum kurulumu: hacim, sıcaklık, filtre, bitki seçimi ve su döngüsü. "
-                    "Yeni başlayanlar için adım adım betta akvaryumu rehberi.",
+        "aciklama": "Betta (beta) balığı için akvaryum kurulumu: hacim, sıcaklık, filtre, bitki seçimi ve su döngüsü. "
+                    "Yeni başlayanlar için adım adım beta akvaryumu rehberi.",
         "tarih": "2026-10-20",
         "gorsel": "assets/g-betta-cozy.webp", "gorsel_g": 1195, "gorsel_y": 1600,
         "gorsel_alt": "Bitkili betta akvaryumu sıcak ışıklı bir oturma odasında",

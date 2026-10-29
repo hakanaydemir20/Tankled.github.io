@@ -163,10 +163,10 @@ FOTO_MOBILYALI
     {
         "yol": "betta-akvaryumu/", "tur": "hizmet", "kisa": "Betta Akvaryumu",
         "hizmet": "Betta akvaryumu",
-        "baslik": "Betta Akvaryumu: Ahşap Gövdeli Betta Serisi | Tankled",
-        "aciklama": "Tankled Betta Serisi: 14 × 14 × 20 cm, doğal masif ahşap gövde, sürgülü buhar kapağı ve üç "
-                    "ışık tonlu LED. Ankara'da el yapımı betta akvaryumu.",
-        "h1": "Betta akvaryumu: Tankled Betta Serisi",
+        "baslik": "Betta (Beta) Akvaryumu: Ahşap Betta Serisi | Tankled",
+        "aciklama": "Betta (beta) akvaryumu: Tankled Betta Serisi 14 × 14 × 20 cm, doğal ahşap gövde, buhar kapağı ve "
+                    "üç ışık tonlu LED. Ankara'da el yapımı beta balığı akvaryumu.",
+        "h1": "Betta (beta) akvaryumu: Tankled Betta Serisi",
         "gorsel": "assets/g-betta-cozy.webp", "gorsel_g": 1195, "gorsel_y": 1600,
         "gorsel_alt": "Tankled Betta Serisi betta akvaryumu oturma odasında",
         "govde": """
