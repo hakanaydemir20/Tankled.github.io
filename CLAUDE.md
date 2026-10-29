@@ -26,10 +26,11 @@ Fotoğraflar gelince WebP'ye çevir, bu adlarla kaydet ve kutuların yerine ger�
 - Gerçek müşteri yorumları (izinli; uydurma yorum ekleme)
 - Endonezya'dan gelen özel seri ağacının adı (tik mi?) ve "tik yağı ile korumalı" bilgisinin doğruluğu
 
-### 4. Hosting'e yüklenmeyi bekleyenler
-Kullanıcı kararı (2026-10-29): geliştirmeler önce yalnızca GitHub demo sitesine; kullanıcı söyleyince hosting'e
-(DirectAdmin dosya yöneticisi, zip yükle + aç). Bekleyen: İmza Avize kartı, aydınlatma barı görselleri ve 30–40 cm stok bilgisi, Betta/Nano/Paludarium
-kart slaytları, hero sloganı ("Su, ışık ve ustalığın buluştuğu yer."; SEO H1 küçük üst satırda), alt bilgide tasarım imzası, galeriye eklenen 6 görsel (assets/avize, assets/lamba, index.html, galeri/index.html).
+### 4. Hosting (tankled.com.tr) — YAYINDA (2026-10-29)
+Güzel Hosting DirectAdmin; Let's Encrypt SSL otomatik (wildcard, kendini yeniler). Kural: geliştirmeler önce
+GitHub demo sitesine; kullanıcı söyleyince hosting'e yüklenir: dosya yöneticisinde public_html'e <10 MB zip
+parçaları yükle, "Merge and overwrite" ile aç, zip'leri sil. DirectAdmin'e müşteri panelinden "Tek Tıkla Giriş"
+(guzel.net.tr clientarea productdetails id=389417); oturum düşerse kullanıcı müşteri paneline kendisi girer.
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
