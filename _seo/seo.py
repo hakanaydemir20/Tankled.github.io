@@ -181,9 +181,9 @@ def isletme() -> dict:
             "addressRegion": "Ankara",
             "addressCountry": "TR",
         },
-        "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Country", "name": "Türkiye"}],
+        "areaServed": [{"@type": "City", "name": "Ankara"}, {"@type": "Place", "name": "Ostim, Ankara"}, {"@type": "Place", "name": "Yenimahalle, Ankara"}, {"@type": "Place", "name": "Batıkent, Ankara"}, {"@type": "Place", "name": "Eryaman, Ankara"}, {"@type": "Place", "name": "Etimesgut, Ankara"}, {"@type": "Place", "name": "Sincan, Ankara"}, {"@type": "Country", "name": "Türkiye"}],
         "sameAs": [INSTAGRAM],
-        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape", "akvaryum camı", "cam akvaryum", "akvaryum tankı", "balık akvaryumu", "akvaryum balıkları", "akvaryum bitkisi", "evde balık beslemek", "akvaryum kasası", "akvaryum ısıtıcı", "akvaryum motoru", "karides akvaryumu", "neocaridina karides", "beta akvaryumu", "beta balığı", "betta balığı", "ahşap akvaryum", "tahta akvaryum", "terraryum", "akvaryum aydınlatması", "akvaryum led"],
+        "knowsAbout": ["akvaryum", "dekoratif abajur", "bitki saksısı", "bitkili akvaryum", "akvaryum bitkileri", "akvaryum filtresi", "akvaryum kumu", "mobilyalı akvaryum", "el yapımı akvaryum", "ahşap akvaryum", "betta akvaryumu", "nano akvaryum", "teraryum", "paludaryum", "aquascape", "akvaryum camı", "cam akvaryum", "akvaryum tankı", "balık akvaryumu", "akvaryum balıkları", "akvaryum bitkisi", "evde balık beslemek", "akvaryum kasası", "akvaryum ısıtıcı", "akvaryum motoru", "karides akvaryumu", "neocaridina karides", "beta akvaryumu", "beta balığı", "betta balığı", "ahşap akvaryum", "tahta akvaryum", "terraryum", "akvaryum aydınlatması", "akvaryum led", "ostim akvaryum", "yenimahalle akvaryum", "batıkent akvaryum", "eryaman akvaryum", "sincan akvaryum"],
     }
     if bilgi["posta_kodu"]:
         veri["address"]["postalCode"] = bilgi["posta_kodu"]

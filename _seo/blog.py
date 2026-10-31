@@ -583,6 +583,9 @@ YAZILAR = [
 
 <h2>Ankara'da mobilyalı akvaryum yaptırmak</h2>
 <p>Ankara'da mobilyalı akvaryum arayanlar için en büyük avantaj ürünü üretildiği atölyede görebilmektir. Tankled olarak Ankara Ostim'deki atölyemizde ölçüye göre özel tasarım yapıyoruz: evinizdeki nişe, TV ünitesine ya da çalışma masanıza uygun ölçüyü birlikte belirliyor, malzemeyi ve ışık tonunu sizinle seçiyoruz. Ankara'da akvaryum seçerken nelere dikkat etmeniz gerektiğini <a href="../ankara-akvaryum-rehberi/">Ankara akvaryum rehberimizde</a> ayrıntılı anlattık.</p>
+
+<h2>Semtinize göre akvaryum rehberleri</h2>
+<p>Atölyemize yakın semtler için hazırladığımız rehberler: <a href="../yenimahalle-akvaryum/">Yenimahalle akvaryum</a>, <a href="../batikent-akvaryum/">Batıkent akvaryum</a>, <a href="../eryaman-akvaryum/">Eryaman akvaryum</a> ve <a href="../sincan-akvaryum/">Sincan akvaryum</a>. Bu semtlere eve teslimat ve yerinde kurulum yapıyoruz.</p>
 """,
     },
     {
@@ -846,6 +849,168 @@ YAZILAR = [
 
 <h2>Karides akvaryumu için doğru akvaryum</h2>
 <p>Buhar kapaklı ve ışığı ayarlanabilir bir nano akvaryum, karides akvaryumunda sıcaklığı ve buharlaşmayı dengede tutmayı kolaylaştırır. Tankled akvaryumları Ankara Ostim'deki atölyemizde doğal ahşaptan elde üretilir; üç ışık tonlu LED aydınlatmasıyla bitkili bir karides akvaryumu için uygundur. Daha büyük bir karides kolonisi için <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> yaptırabilir, bakım ipuçları için <a href="../nano-akvaryum-bakimi/">nano akvaryum bakımı</a> yazımızı okuyabilirsiniz.</p>
+""",
+    },
+    {
+        "slug": 'eryaman-akvaryum',
+        "baslik": 'Eryaman Akvaryum: Ahşap ve Mobilyalı Akvaryum | Tankled',
+        "h1": "Eryaman akvaryum: Eryaman'da ahşap ve mobilyalı akvaryum, teslimat ve kurulum",
+        "aciklama": "Eryaman akvaryum arayanlara: el yapımı ahşap ve mobilyalı akvaryum, betta ve nano akvaryum. Eryaman ve Etimesgut'a eve teslimat ve yerinde kurulum.",
+        "tarih": "2026-10-31",
+        "gorsel": 'assets/galeri/sahne-salon-konsolu-betta.webp', "gorsel_g": 1100, "gorsel_y": 825,
+        "gorsel_alt": "Eryaman'da bir salonda konsol üzerinde ahşap gövdeli akvaryum",
+        "etiketler": ['eryaman akvaryum', 'etimesgut akvaryum', 'mobilyalı akvaryum'],
+        "govde": """
+<p><strong>Eryaman akvaryum</strong> arayışınızda hazır cam bir kutu yerine evinizin dekorasyonuna uyan bir parça istiyorsanız doğru yerdesiniz. Tankled, Ostim'deki atölyesinde doğal ahşaptan el yapımı akvaryumlar üretiyor; Eryaman ve Etimesgut'taki evlere eve teslimat ve yerinde kurulum yapıyoruz. Atölyemiz Eryaman'a yakın olduğu için ürünü görmek ya da özel ölçü konuşmak da kolay.</p>
+
+<h2>Eryaman evlerine uygun akvaryum seçimi</h2>
+<p>Eryaman'daki konutların çoğu geniş salonlu site daireleridir. Bu salonlarda akvaryum genellikle TV ünitesinin yanında, bir konsolun üzerinde ya da salonla mutfak arasındaki geçişte durur. Böyle alanlar için iki seçenek öne çıkar:</p>
+<ul>
+  <li><strong>Mobilyalı akvaryum:</strong> Cam hazne ile ahşap gövde birlikte tasarlanır; ağırlığı güvenle taşır, kablolar gövdede kaybolur. Konsol, sehpa ya da TV ünitesi ölçünüze göre <a href="../../mobilyali-akvaryum/">mobilyalı akvaryum</a> üretiyoruz.</li>
+  <li><strong>Masaüstü akvaryum:</strong> Çalışma odası, çocuk odası ya da komodin için 14 × 14 × 20 cm'lik <a href="../../betta-akvaryumu/">Betta Serisi</a>; üç ışık tonuyla akşamları abajur gibi de kullanılır.</li>
+</ul>
+<p>Salonunuz güneyden güneş alıyorsa akvaryumu doğrudan güneş gören pencere önüne koymayın; fazla ışık yosun yapar. Kaloriferin hemen yanı da su sıcaklığını oynatır. Uygun yeri kurulum sırasında birlikte belirliyoruz.</p>
+
+<h2>Eryaman'da yeni taşınanlar için akvaryum</h2>
+<p>Eryaman, son yıllarda çok sayıda ailenin taşındığı bir semt. Yeni bir evde akvaryum, salonu ilk günden yaşayan bir köşeye dönüştürür. Taşınma döneminde mobilya yerleşimi henüz netleşmediyse önce küçük bir masaüstü akvaryumla başlayıp, salon düzeni oturunca ölçüye göre mobilyalı akvaryuma geçebilirsiniz. Ahşap gövdenin tonunu parke, kapı ya da mutfak dolaplarınızla uyumlu seçiyoruz; böylece akvaryum sonradan eklenmiş bir eşya gibi değil, evin bir parçası gibi durur.</p>
+
+<h2>Eryaman'a teslimat ve yerinde kurulum</h2>
+<p>Siparişinizi Eryaman'daki adresinize teslim ediyor, akvaryumu yerinde kuruyoruz: zemin ve bitkiler yerleştirilir, ekipman bağlanır, su doldurulur. İsterseniz hazır kurulum setiyle teslim ederiz; ilk haftalarda suyun olgunlaşması ve bakım konusunda destek veririz. Teslim günü ve ayrıntılar için WhatsApp'tan bize yazmanız yeterli.</p>
+
+<h2>Eryaman'da hangi akvaryumu kurmalı?</h2>
+<ul>
+  <li><strong>İlk akvaryum:</strong> Tek bir betta balığı ve kolay bitkilerle küçük bir nano akvaryum; kurulumu <a href="../betta-akvaryumu-kurulumu/">betta akvaryumu kurulum rehberimizde</a>.</li>
+  <li><strong>Çocuklu aileler:</strong> Buhar kapaklı, kapağı sürgülü bir akvaryum hem güvenli hem bakımı kolaydır; balık bakımını öğrenmek için <a href="../evde-balik-beslemek/">evde balık beslemek</a> yazımıza bakın.</li>
+  <li><strong>Bitki sevenler:</strong> <a href="../../teraryum/">Teraryum</a> ya da bol bitkili bir akvaryum; balık bakımı istemeyenler için güzel bir alternatif.</li>
+</ul>
+
+<h2>Sık sorulanlar</h2>
+<p><strong>Eryaman'a teslimat ve kurulum yapıyor musunuz?</strong> Evet. Eryaman ve Etimesgut'a eve teslimat ve yerinde kurulum yapıyoruz.</p>
+<p><strong>Eryaman'dan atölyenizi ziyaret edebilir miyim?</strong> Evet; atölyemiz Ostim OSB'de, pazartesi–cumartesi 10:00–16:00 arası açık.</p>
+<p><strong>Özel ölçü yaptırabilir miyim?</strong> Evet; nişinizin ya da ünitenizin ölçüsünü gönderin, size uygun <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> tasarlayalım.</p>
+
+<h2>Eryaman'dan atölyemize</h2>
+<p>Eryaman'dan Ostim'e geçip atölyemizde Betta ve Nano serilerini yerinde görebilirsiniz; adresimiz Ostim OSB, 100. Yıl Bulvarı. Pazartesi–cumartesi 10:00–16:00 arası açığız. Gelmeden önce WhatsApp'tan yazarsanız istediğiniz modeli ve ahşap desenlerini hazır ederiz.</p>
+""",
+    },
+    {
+        "slug": 'batikent-akvaryum',
+        "baslik": 'Batıkent Akvaryum: El Yapımı Ahşap Akvaryum | Tankled',
+        "h1": "Batıkent akvaryum: Batıkent'te el yapımı ahşap akvaryum, teslimat ve kurulum",
+        "aciklama": "Batıkent akvaryum: Ostim'deki atölyemizde üretilen ahşap, mobilyalı ve betta akvaryumlar. Batıkent'e eve teslimat, yerinde kurulum ve bakım desteği.",
+        "tarih": "2026-10-31",
+        "gorsel": 'assets/galeri/sahne-aydinlik-salon-betta.webp', "gorsel_g": 1100, "gorsel_y": 825,
+        "gorsel_alt": "Batıkent'te aydınlık bir salonda ahşap gövdeli betta akvaryumu",
+        "etiketler": ['batıkent akvaryum', 'batıkent akvaryumcu', 'ahşap akvaryum'],
+        "govde": """
+<p><strong>Batıkent akvaryum</strong> arayanlar için en büyük avantaj, Tankled atölyesinin hemen yanı başında olmasıdır: Ostim, Batıkent'in komşusu. Doğal ahşaptan el yapımı akvaryumlarımızı atölyede görebilir, Batıkent'teki evinize eve teslimat ve yerinde kurulum hizmetiyle alabilirsiniz.</p>
+
+<h2>Batıkent'te akvaryum alırken nelere bakmalı?</h2>
+<p>Batıkent'te kooperatif ve site daireleri yaygındır; salonlar genellikle balkonla birleşir ve gün boyu bol ışık alır. Bu yüzden akvaryumun yeri seçilirken üç noktaya dikkat edin:</p>
+<ul>
+  <li><strong>Işık:</strong> Akvaryumu balkon kapısının ya da pencerenin tam önüne koymayın. Doğal güneş yosunu hızlandırır; akvaryumun kendi LED ışığı yeterlidir.</li>
+  <li><strong>Zemin:</strong> Su dolu bir akvaryum litre başına yaklaşık 1 kg gelir. Eski bir sehpa yerine akvaryumla birlikte tasarlanmış bir gövde kullanın; ayrıntılar <a href="../akvaryum-sehpasi-olculeri/">akvaryum sehpası ölçüleri</a> yazımızda.</li>
+  <li><strong>Priz ve erişim:</strong> Akvaryumun üstünde bakım için 15–20 cm boşluk ve yakında bir priz olmalı.</li>
+</ul>
+
+<h2>Batıkent'e uygun Tankled modelleri</h2>
+<ul>
+  <li><strong>Betta Serisi (14 × 14 × 20 cm):</strong> Komodin, masa ya da kitaplık rafı için; üç ışık tonlu LED. <a href="../../betta-akvaryumu/">Betta akvaryumu</a> sayfasında ayrıntılar.</li>
+  <li><strong>Nano Serisi:</strong> Biraz daha geniş bir bitkili akvaryum isteyenler için; bakım ipuçları <a href="../nano-akvaryum-bakimi/">nano akvaryum bakımı</a> yazımızda.</li>
+  <li><strong>Mobilyalı ve özel ölçü:</strong> Salon nişine ya da TV ünitesine tam oturan <a href="../../mobilyali-akvaryum/">mobilyalı akvaryum</a>.</li>
+  <li><strong>Aydınlatma:</strong> Mevcut akvaryumunuz için 30–40 cm ince alüminyum LED aydınlatma barı.</li>
+</ul>
+
+<h2>Batıkent'te balkon ve salon için fikirler</h2>
+<p>Batıkent'te pek çok salon kapalı balkonla birleşiktir. Bu alanı doğrudan güneş almayan bir köşesinde ışıklı bir teraryum ya da bitkili nano akvaryumla değerlendirebilirsiniz. Akşamları 3000K sıcak ışıkta akvaryum, salonda dekoratif bir abajur gibi görünür; gündüz 6500K gün ışığıyla bitkiler büyür. Çocukların odasında ise bir betta balığı, sorumluluk duygusunu öğreten küçük ve sakin bir arkadaştır. Fikirler için <a href="../dekoratif-abajur-fikirleri/">dekoratif abajur fikirleri</a> yazımıza bakabilirsiniz.</p>
+
+<h2>Batıkent'e teslimat ve yerinde kurulum</h2>
+<p>Batıkent'teki adresinize teslim ediyor, akvaryumu yerinde kuruyoruz. Kurulumda zemini, bitkileri ve ekipmanı yerleştiriyor, suyu dolduruyoruz; isteyene hazır kurulum seti sunuyoruz. Atölyemiz çok yakın olduğu için kurulumdan sonra bakım sorularınızda da hızlıca destek olabiliyoruz.</p>
+
+<h2>Sık sorulanlar</h2>
+<p><strong>Batıkent'e teslimat ve kurulum yapıyor musunuz?</strong> Evet, Batıkent'e eve teslimat ve yerinde kurulum yapıyoruz.</p>
+<p><strong>Batıkent'ten atölyeye nasıl gelirim?</strong> Atölyemiz Ostim OSB, 100. Yıl Bulvarı'nda; pazartesi–cumartesi 10:00–16:00 arası açığız.</p>
+<p><strong>Bitkili akvaryum kurmak zor mu?</strong> Hayır; kolay bitkilerle başlamak için <a href="../bitkili-akvaryum-kurulumu/">bitkili akvaryum kurulumu</a> rehberimize bakın.</p>
+
+<h2>Batıkent'e en yakın akvaryum atölyesi</h2>
+<p>Batıkent'ten birkaç dakikalık yoldaki atölyemiz Ostim OSB, 100. Yıl Bulvarı'nda; pazartesi–cumartesi 10:00–16:00 arası ziyaret edebilirsiniz. Ölçü almak, ahşap tonu seçmek ya da sadece akvaryumları incelemek için uğrayın; sipariş için WhatsApp'tan da yazabilirsiniz.</p>
+""",
+    },
+    {
+        "slug": 'yenimahalle-akvaryum',
+        "baslik": 'Yenimahalle Akvaryum: Ostim Atölyesinden | Tankled',
+        "h1": 'Yenimahalle akvaryum: Ostim atölyemizden el yapımı akvaryum, teslimat ve kurulum',
+        "aciklama": "Yenimahalle akvaryum: Ostim OSB'deki atölyemizde üretilen ahşap, mobilyalı ve betta akvaryumlar. Yenimahalle'ye eve teslimat ve yerinde kurulum.",
+        "tarih": "2026-10-31",
+        "gorsel": 'assets/galeri/sahne-atolye-el-yapimi.webp', "gorsel_g": 1100, "gorsel_y": 825,
+        "gorsel_alt": "Ostim Yenimahalle'deki atölyede el yapımı Tankled akvaryumlar",
+        "etiketler": ['yenimahalle akvaryum', 'ostim akvaryum', 'el yapımı akvaryum'],
+        "govde": """
+<p><strong>Yenimahalle akvaryum</strong> aramasının en yakın cevabı Tankled'in kendi atölyesidir: akvaryumlarımızı Yenimahalle sınırları içindeki Ostim OSB'de, doğal ahşaptan elde üretiyoruz. Yenimahalle'nin tüm mahallelerine (Demetevler, Karşıyaka, Ergazi, Batıkent ve çevresi) eve teslimat ve yerinde kurulum yapıyoruz.</p>
+
+<h2>Akvaryumu üretildiği yerde görün</h2>
+<p>Bir akvaryumu fotoğraftan seçmek zordur; ahşabın dokusunu, camın işçiliğini ve ışığın tonunu yerinde görmek gerekir. Yenimahalle'de oturuyorsanız atölyemize uğrayıp Betta Serisi'ni, Nano Serisi'ni ve aydınlatma ürünlerimizi inceleyebilir, ahşap desenini kendiniz seçebilirsiniz. Her gövde elde yapıldığı için deseni birbirinden farklıdır.</p>
+
+<h2>Yenimahalle'de akvaryum için öneriler</h2>
+<ul>
+  <li><strong>Apartman daireleri:</strong> Kompakt ve buhar kapaklı bir <a href="../../betta-akvaryumu/">betta akvaryumu</a> az yer kaplar, buharlaşmayı ve bakımı azaltır.</li>
+  <li><strong>Geniş salonlar:</strong> Konsol ya da TV ünitesiyle bütünleşen <a href="../../mobilyali-akvaryum/">mobilyalı akvaryum</a>.</li>
+  <li><strong>Ofisler ve iş yerleri:</strong> Ostim ve İvedik'teki ofisler için masa üstü akvaryum ya da ışıklı bitki saksısı; fikirler <a href="../masa-ustu-bitki-saksisi-ofis/">ofis bitki saksısı</a> yazımızda.</li>
+  <li><strong>Balık istemeyenler:</strong> Aynı ahşap gövdeyle <a href="../../teraryum/">teraryum</a> ya da <a href="../../paludaryum/">paludaryum</a>.</li>
+</ul>
+
+<h2>Yenimahalle'de iş yerleri için akvaryum</h2>
+<p>Ostim, İvedik ve Yenimahalle'deki ofis, mağaza ve klinikler için akvaryum, bekleme alanını sakinleştiren ve müşteride iz bırakan bir detaydır. İş yerlerinde bakım kolaylığı önemli olduğu için low-tech, bol bitkili ve buhar kapaklı akvaryumlar öneriyoruz; haftada bir kısa su değişimi yeterli olur. Resepsiyon bankosu ya da toplantı odası için ölçüye göre <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> üretiyor, logonuza uygun ahşap tonu seçebiliyoruz. Balık bakımı istemeyen iş yerleri için ışıklı teraryum iyi bir alternatiftir.</p>
+
+<h2>Yenimahalle'ye teslimat, kurulum ve bakım desteği</h2>
+<p>Akvaryumunuzu Yenimahalle'deki adresinize teslim ediyor ve yerinde kuruyoruz. Kurulumdan sonra suyun olgunlaşması, bitki seçimi ve balık ekleme zamanı gibi konularda destek veriyoruz. Bakımın temellerini <a href="../ankara-akvaryum-bakim-hizmeti/">Ankara akvaryum bakım</a> yazımızda anlattık.</p>
+
+<h2>Sık sorulanlar</h2>
+<p><strong>Yenimahalle'ye teslimat ve kurulum yapıyor musunuz?</strong> Evet; Yenimahalle'nin tüm mahallelerine eve teslimat ve yerinde kurulum yapıyoruz.</p>
+<p><strong>Ostim'deki atölye nerede?</strong> Ostim OSB, 100. Yıl Bulvarı, 06374 Yenimahalle/Ankara.</p>
+<p><strong>Çalışma saatleriniz nedir?</strong> Pazartesi–cumartesi 10:00–16:00; pazar kapalıyız.</p>
+
+<h2>Ostim'deki atölyemiz</h2>
+<p>Yenimahalle'deki atölyemiz Ostim OSB, 100. Yıl Bulvarı, 06374 adresinde. Pazartesi–cumartesi 10:00–16:00 arası kapımız açık; pazar günleri kapalıyız. Siparişlerinizi WhatsApp'tan da alıyoruz; Ankara dışındaki müşterilerimize 81 ile kargo gönderiyoruz.</p>
+""",
+    },
+    {
+        "slug": 'sincan-akvaryum',
+        "baslik": 'Sincan Akvaryum: Ahşap ve Betta Akvaryumu | Tankled',
+        "h1": "Sincan akvaryum: Sincan'da ahşap akvaryum, teraryum, teslimat ve kurulum",
+        "aciklama": "Sincan akvaryum arayanlara: el yapımı ahşap akvaryum, betta akvaryumu, teraryum ve paludaryum. Sincan'a eve teslimat ve yerinde kurulum.",
+        "tarih": "2026-10-31",
+        "gorsel": 'assets/galeri/sahne-ahsap-masa-teraryum.webp', "gorsel_g": 880, "gorsel_y": 1100,
+        "gorsel_alt": "Sincan'da ahşap masa üzerinde bitkili Tankled teraryum",
+        "etiketler": ['sincan akvaryum', 'sincan akvaryumcu', 'teraryum'],
+        "govde": """
+<p><strong>Sincan akvaryum</strong> arayanlar için Tankled; Ostim'deki atölyesinde doğal ahşaptan üretilen akvaryum, teraryum ve paludaryumlarıyla yakın bir adres. Sincan'daki evlere ve iş yerlerine eve teslimat ve yerinde kurulum yapıyoruz; ürünleri atölyede görmek isterseniz de bekleriz.</p>
+
+<h2>Sincan'da akvaryum mu, teraryum mu?</h2>
+<p>Sincan'da müstakil ve bahçeli evler de, yeni site daireleri de yaygındır. Akvaryum ya da teraryum seçerken evinizin düzenine ve ne kadar bakım ayırabileceğinize bakın:</p>
+<ul>
+  <li><strong>Balık akvaryumu:</strong> Canlı bir su dünyası isteyenlere; bir betta balığıyla küçük bir akvaryum en kolay başlangıçtır. Bkz. <a href="../../betta-akvaryumu/">Betta Serisi</a>.</li>
+  <li><strong>Teraryum:</strong> Yosun ve tropik bitkilerle kapalı bir mini orman; su değişimi gerektirmez. <a href="../teraryum-nasil-yapilir/">Teraryum nasıl yapılır</a> yazımızda adımlar var.</li>
+  <li><strong>Paludaryum:</strong> Su ve kara bölümü bir arada; yengeç ya da semender gibi canlılar ve bitkiler için. <a href="../../paludaryum/">Paludaryum</a> sayfamıza bakın.</li>
+  <li><strong>Karides akvaryumu:</strong> Renkli neocaridina karidesleriyle bakımı kolay bir nano akvaryum; <a href="../karides-akvaryumu/">karides akvaryumu rehberi</a>.</li>
+</ul>
+
+<h2>Sincan'ın iklimine dikkat</h2>
+<p>Ankara'nın batısında kışlar soğuk geçer; ısıtması zayıf odalarda tropik balıklar için küçük bir akvaryum ısıtıcısı gerekebilir. Akvaryumu dış kapıya ve soğuk pencereye yakın koymayın, kaloriferin hemen yanından da kaçının. Yazın doğrudan güneş alan yerler suyu ısıtır ve yosun yapar. Kurulum günü evinizde en uygun köşeyi beraber seçiyoruz.</p>
+
+<h2>Sincan'da çocuklar için ilk akvaryum</h2>
+<p>Bahçeli evlerde büyüyen çocuklar doğayı yakından tanır; evin içinde küçük bir akvaryum ya da teraryum bu merakı dört mevsim sürdürür. İlk akvaryum için küçük, kapaklı ve ışığı ayarlanabilir bir model seçin; bir betta balığı ya da birkaç karidesle başlayın. Yemleme ve haftalık su değişimini çocukla birlikte yapmak hem eğlenceli hem öğreticidir. Hangi canlıların uygun olduğunu <a href="../../baliklar/">akvaryum balıkları rehberimizde</a>, bitki seçeneklerini <a href="../../bitkiler/">bitkiler rehberimizde</a> bulabilirsiniz.</p>
+
+<h2>Sincan'a teslimat ve yerinde kurulum</h2>
+<p>Siparişinizi Sincan'daki adresinize teslim edip yerinde kuruyoruz: zemin, bitki ve ekipman yerleştirilir, su doldurulur. Hazır kurulum seti isteyebilir, ilk haftalarda bakım konusunda bize danışabilirsiniz. İlk kez akvaryum kuracaksanız <a href="../evde-balik-beslemek/">evde balık beslemek</a> rehberimiz iyi bir başlangıç.</p>
+
+<h2>Sık sorulanlar</h2>
+<p><strong>Sincan'a teslimat ve kurulum yapıyor musunuz?</strong> Evet; Sincan'a eve teslimat ve yerinde kurulum yapıyoruz.</p>
+<p><strong>Akvaryum dışında ne üretiyorsunuz?</strong> Teraryum, paludaryum, ahşap LED avize ve akvaryum aydınlatma barı.</p>
+<p><strong>Atölyenizi ziyaret edebilir miyim?</strong> Evet; Ostim OSB'deki atölyemiz pazartesi–cumartesi 10:00–16:00 arası açık.</p>
+
+<h2>Sincan'dan sipariş ve ziyaret</h2>
+<p>Sincan'dan siparişinizi WhatsApp'tan verebilir ya da Ostim OSB, 100. Yıl Bulvarı'ndaki atölyemize gelip ürünleri yerinde görebilirsiniz. Atölyemiz pazartesi–cumartesi 10:00–16:00 arası açık. Hazır kurulum seti, ahşap tonu ve ölçü seçimini ziyaretinizde birlikte yapabiliriz.</p>
 """,
     },
 ]

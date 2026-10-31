@@ -34,6 +34,9 @@ parçaları yükle, "Merge and overwrite" ile aç, zip'leri sil. DirectAdmin'e m
 Google Search Console: alan adı mülkü sc-domain:tankled.com.tr doğrulandı (DNS TXT google-site-verification,
 DirectAdmin DNS'te; SİLME), sitemap.xml gönderildi, ana sayfa için dizine ekleme istendi (2026-10-29).
 Hosting güncel (2026-10-29, SEO anahtar kelime güncellemesi dahil).
+Hosting'e yüklenmeyi bekleyen (GitHub'da hazır, 2026-10-31): semt SEO yazıları (blog/eryaman-akvaryum, batikent-akvaryum,
+yenimahalle-akvaryum, sincan-akvaryum), ana sayfa/iletişim hizmet bölgeleri, areaServed semtleri, evde-balik-beslemek açıklama kısaltması.
+Kullanıcı kararı: bu semtlere eve teslimat + yerinde kurulum yapılıyor.
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com

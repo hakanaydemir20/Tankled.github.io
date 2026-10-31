@@ -320,6 +320,7 @@ HIKAYE
 <ul>
   <li><strong>Atölye adresi:</strong> ADRES</li>
   SAATLER
+  <li><strong>Teslimat ve kurulum:</strong> <a href="../blog/yenimahalle-akvaryum/">Yenimahalle</a> (Ostim), <a href="../blog/batikent-akvaryum/">Batıkent</a>, <a href="../blog/eryaman-akvaryum/">Eryaman</a> ve <a href="../blog/sincan-akvaryum/">Sincan</a>'a eve teslimat ve yerinde kurulum</li>
   <li><strong>Kargo:</strong> Türkiye'nin 81 iline ve yurt dışına</li>
   <li><strong>Telefon:</strong> <a href="tel:+905312172006">+90 531 217 2006</a></li>
   <li><strong>WhatsApp:</strong> <a href="WA_LINK" target="_blank" rel="noopener">WhatsApp ile yazın</a></li>
