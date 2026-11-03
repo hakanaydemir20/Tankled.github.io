@@ -834,7 +834,7 @@ YAZILAR = [
 <ul>
   <li><strong>Süngerli filtre:</strong> Yavru karidesleri emmez ve üzerinde karideslerin beslendiği biyofilm oluşur. Akvaryum motoru ya da dış filtre kullanılıyorsa girişine sünger takın.</li>
   <li><strong>Zemin:</strong> Neocaridina için sıradan akvaryum kumu ya da bitki toprağı yeterlidir.</li>
-  <li><strong>Bitkiler:</strong> Java yosunu, christmas yosunu, anubias ve yüzey bitkileri karideslere saklanma ve beslenme alanı sağlar. Uygun türler <a href="../../bitkiler/">akvaryum bitkileri rehberimizde</a>.</li>
+  <li><strong>Bitkiler:</strong> Java yosunu, christmas yosunu, anubias ve yüzey bitkileri karideslere saklanma ve beslenme alanı sağlar. Yosunu nasıl bağlayacağınızı <a href="../java-yosunu-akvaryum-yosunu/">java yosunu rehberimizde</a> anlattık. Uygun türler <a href="../../bitkiler/">akvaryum bitkileri rehberimizde</a>.</li>
 </ul>
 
 <h2>Suyu olgunlaştırın</h2>
@@ -1011,6 +1011,100 @@ YAZILAR = [
 
 <h2>Sincan'dan sipariş ve ziyaret</h2>
 <p>Sincan'dan siparişinizi WhatsApp'tan verebilir ya da Ostim OSB, 100. Yıl Bulvarı'ndaki atölyemize gelip ürünleri yerinde görebilirsiniz. Atölyemiz pazartesi–cumartesi 10:00–16:00 arası açık. Hazır kurulum seti, ahşap tonu ve ölçü seçimini ziyaretinizde birlikte yapabiliriz.</p>
+""",
+    },
+    {
+        "slug": 'lepistes-baligi-bakimi',
+        "baslik": 'Lepistes (Guppy) Balığı Bakımı ve Akvaryumu | Tankled',
+        "h1": 'Lepistes balığı bakımı: lepistes (guppy) akvaryumu, beslenme ve üreme rehberi',
+        "aciklama": 'Lepistes balığı bakımı: lepistes akvaryumu kaç litre olmalı, su sıcaklığı, yem, erkek-dişi oranı, üreme ve yavru bakımı. Guppy için başlangıç rehberi.',
+        "tarih": "2026-11-03",
+        "gorsel": 'assets/baliklar/lepistes.jpg', "gorsel_g": 800, "gorsel_y": 600,
+        "gorsel_alt": 'Renkli kuyruklu lepistes (guppy) balığı',
+        "etiketler": ['lepistes', 'lepistes balığı bakımı', 'guppy'],
+        "govde": """
+<p>Lepistes (guppy, <em>Poecilia reticulata</em>), son aylarda Türkiye'de en çok aranan akvaryum balıklarından biri. Renkli kuyrukları, sakin karakteri ve kolay bakımıyla yeni başlayanların ilk tercihi. Bu rehberde lepistes balığı bakımını; akvaryum boyutundan yeme, erkek–dişi oranından üremeye kadar adım adım anlatıyoruz.</p>
+
+<h2>Lepistes balığını tanıyalım</h2>
+<ul>
+  <li><strong>Boyut:</strong> Erkekler 3–4 cm, dişiler 5–6 cm.</li>
+  <li><strong>Su sıcaklığı:</strong> 22–28 °C; ideal aralık 24–26 °C.</li>
+  <li><strong>pH:</strong> 7,0–8,0; hafif sert suyu sever.</li>
+  <li><strong>Karakter:</strong> Barışçıl, sürü halinde yaşar; canlı doğuran (yumurta değil yavru doğuran) bir türdür.</li>
+  <li><strong>Ömür:</strong> İyi koşullarda genellikle 2–3 yıl.</li>
+</ul>
+
+<h2>Lepistes akvaryumu kaç litre olmalı?</h2>
+<p>Lepistesler küçük balıklardır ama hareketli ve kalabalık yaşarlar; hızla da çoğalırlar. Küçük bir grup için en az 30 litre önerilir; hacim büyüdükçe su değerleri daha dengeli kalır. 5–10 litrelik nano akvaryumlar lepistes için küçüktür; bu boyutta tek bir betta balığı ya da karides daha uygundur. Lepistes akvaryumunu bol bitkiyle kurun: java yosunu ve yüzey bitkileri hem suyu temizler hem de yavrulara saklanma alanı olur. Kurulum için <a href="../bitkili-akvaryum-kurulumu/">bitkili akvaryum kurulumu</a> ve <a href="../evde-balik-beslemek/">evde balık beslemek</a> yazılarımıza bakın.</p>
+
+<h2>Erkek–dişi oranı neden önemli?</h2>
+<p>Erkek lepistesler dişileri sürekli kovalar. Dişilerin yorulmaması için her erkeğe 2–3 dişi düşecek şekilde grup kurun. Üreme istemiyorsanız yalnızca erkeklerden oluşan bir grup tutabilirsiniz; erkekler zaten en renkli olanlardır.</p>
+
+<h2>Lepistes ne yer? Beslenme</h2>
+<ul>
+  <li><strong>Pul ve granül yem:</strong> Temel besin; günde 1–2 kez, 2–3 dakikada bitecek kadar verin.</li>
+  <li><strong>Canlı ve dondurulmuş yem:</strong> Artemia ve dafniya haftada birkaç kez renkleri canlandırır.</li>
+  <li><strong>Sebze:</strong> Haşlanmış ıspanak ya da bezelye sindirime yardımcı olur.</li>
+</ul>
+<p>Fazla yem suyu bozar; akvaryumda kalan yemi birkaç dakika sonra alın.</p>
+
+<h2>Lepistes üremesi ve yavru bakımı</h2>
+<p>Lepistes dişisi yaklaşık 4 haftalık gebelikten sonra tek seferde 20–50 yavru doğurabilir. Yetişkinler yavruları yiyebildiği için yoğun yosun ve yüzey bitkileri yavruların hayatta kalmasını sağlar; isterseniz doğumdan önce dişiyi ayrı bir yavruluğa alabilirsiniz. Yavrular toz yem ya da ezilmiş pul yemle beslenir ve birkaç ayda yetişkin boyuna ulaşır. Akvaryumunuzun kısa sürede kalabalıklaşmaması için grup büyüklüğünü kontrol edin.</p>
+
+<h2>Lepistes ve betta aynı akvaryumda olur mu?</h2>
+<p>Önerilmez. Erkek betta, lepistesin uzun ve renkli kuyruğunu rakip sanıp saldırabilir; lepistesler de bettanın yüzgeçlerini çekiştirebilir. Lepistes için ayrı, daha geniş bir akvaryum kurmak en doğrusudur. Betta için uygun kurulumu <a href="../betta-akvaryumu-kurulumu/">betta akvaryumu kurulum</a> rehberimizde anlattık.</p>
+
+<h2>Lepistesle uyumlu canlılar</h2>
+<p>Neon tetra, rasbora, corydoras, otocinclus, nerit salyangozu ve amano karidesi lepistesle uyumludur. Tüm türlerin boyut, sıcaklık ve pH bilgilerini <a href="../../baliklar/">akvaryum balıkları rehberimizde</a> bulabilirsiniz.</p>
+
+<h2>Lepistes akvaryumu için Tankled</h2>
+<p>Tankled akvaryumları Ankara Ostim'deki atölyemizde doğal ahşaptan elde üretilir. Bir lepistes grubu için yeterli hacimde <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> ya da salonunuza uyan bir <a href="../../mobilyali-akvaryum/">mobilyalı akvaryum</a> tasarlayabiliriz. Sipariş ve bilgi için WhatsApp'tan bize yazabilirsiniz.</p>
+""",
+    },
+    {
+        "slug": 'java-yosunu-akvaryum-yosunu',
+        "baslik": 'Java Yosunu (Moss) Bakımı: Akvaryum Yosunu Rehberi | Tankled',
+        "h1": 'Java yosunu ve akvaryum yosunu (moss) bitkisi: ekme, bağlama ve bakım rehberi',
+        "aciklama": 'Java yosunu (moss bitkisi) nasıl ekilir ve bakılır? Akvaryum yosunu türleri, odun ve taşa bağlama, ışık, sıcaklık ve yosun duvarı. Low-tech rehber.',
+        "tarih": "2026-11-03",
+        "gorsel": 'assets/g-betta-moss.webp', "gorsel_g": 1195, "gorsel_y": 1600,
+        "gorsel_alt": 'Yosunlu ahşap gövdeli akvaryumda betta balığı',
+        "etiketler": ['java yosunu', 'moss bitkisi', 'akvaryum yosunu'],
+        "govde": """
+<p>"Moss bitkisi" ve java yosunu aramaları son aylarda hızla artıyor. Akvaryum yosunları; CO₂ ve özel gübre istemeyen, düşük ışıkta büyüyen, odun ve taşları doğal bir yeşil örtüyle kaplayan su bitkileridir. Bu rehberde java yosunu başta olmak üzere akvaryum yosunlarını nasıl ekeceğinizi, bağlayacağınızı ve bakımını anlatıyoruz.</p>
+
+<h2>Java yosunu nedir?</h2>
+<p>Java yosunu (<em>Taxiphyllum barbieri</em>), Güneydoğu Asya kökenli, köksüz bir su yosunudur. Toprağa ekilmez; odun, taş ya da filelere tutunarak büyür. Yaklaşık 18–28 °C suda ve geniş bir pH aralığında yaşar, düşük-orta ışıkta yavaş ama kesintisiz büyür. Bu yüzden low-tech ve nano akvaryumların en kolay bitkilerinden biridir.</p>
+
+<h2>Akvaryum yosunu türleri</h2>
+<ul>
+  <li><strong>Java yosunu:</strong> En dayanıklı ve en kolay tür; dağınık, doğal bir görünüm verir.</li>
+  <li><strong>Christmas yosunu:</strong> Dalları çam ağacı gibi düzenli dizilir; aquascape'te sık kullanılır.</li>
+  <li><strong>Flame yosunu:</strong> Yukarı doğru alev gibi kıvrılarak büyür.</li>
+  <li><strong>Marimo:</strong> Gerçek bir yosun değil, top şeklinde bir yeşil alg; serin suyu sever ve çok yavaş büyür.</li>
+</ul>
+<p>Tüm yosun ve bitki türlerinin ışık ve sıcaklık ihtiyaçları <a href="../../bitkiler/">akvaryum bitkileri rehberimizde</a>.</p>
+
+<h2>Java yosunu nasıl ekilir? Bağlama yöntemleri</h2>
+<ol>
+  <li><strong>Odun ya da taşa bağlama:</strong> İnce bir yosun tutamını oduna yayın ve misina ya da pamuk iple sarın. Pamuk ip birkaç haftada çürür; o zamana kadar yosun tutunmuş olur.</li>
+  <li><strong>Akvaryuma uygun yapıştırıcı:</strong> Siyanoakrilat jel yapıştırıcıyla küçük parçaları taşa sabitleyebilirsiniz.</li>
+  <li><strong>Yosun duvarı ve halı:</strong> Yosunu iki paslanmaz fileler arasına yayıp arka cama ya da zemine yerleştirin; birkaç ayda yeşil bir duvar ya da halı oluşur.</li>
+</ol>
+
+<h2>Java yosunu bakımı</h2>
+<ul>
+  <li><strong>Işık:</strong> Düşük-orta ışık yeterli; günde 6–8 saat. Çok güçlü ışık yosunun arasında ip yosunu (alg) büyütebilir.</li>
+  <li><strong>Akış ve temizlik:</strong> Yosun artık yem ve tortu tutar; su değişiminde hortumla üzerinden hafifçe çekin.</li>
+  <li><strong>Budama:</strong> Fazla uzayan kısımları makasla kesin; kesilen parçalar yeni bir yere bağlanabilir.</li>
+  <li><strong>Gübre:</strong> Low-tech akvaryumda çoğu zaman gerekmez; çok yavaş büyüyorsa az miktarda sıvı gübre verilebilir.</li>
+</ul>
+
+<h2>Yosun hangi canlılar için faydalı?</h2>
+<p>Akvaryum yosunu karidesler için hem besin (üzerinde biyofilm oluşur) hem saklanma alanıdır; <a href="../karides-akvaryumu/">karides akvaryumu</a> kuranlar için neredeyse zorunludur. Lepistes ve diğer canlı doğuran balıkların yavruları da yosunun içinde saklanarak hayatta kalır; ayrıntılar <a href="../lepistes-baligi-bakimi/">lepistes balığı bakımı</a> yazımızda. Betta balığı da dinlenmek için yoğun yosunlu köşeleri sever.</p>
+
+<h2>Yosunlu bir nano akvaryum kurun</h2>
+<p>Tankled Betta Serisi gibi buhar kapaklı ve ışığı ayarlanabilir bir nano akvaryum, java yosunu için idealdir: düşük ışık modunda yosun düzenli büyür, kapak buharlaşmayı azaltır. Doğal ahşap gövdeli akvaryumlarımızı Ankara Ostim'deki atölyemizde üretiyoruz; <a href="../../betta-akvaryumu/">Betta Serisi</a> ve <a href="../nano-akvaryum-bakimi/">nano akvaryum bakımı</a> sayfalarımızda ayrıntılar var.</p>
 """,
     },
 ]
