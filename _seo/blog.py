@@ -1055,7 +1055,7 @@ YAZILAR = [
 <p>Önerilmez. Erkek betta, lepistesin uzun ve renkli kuyruğunu rakip sanıp saldırabilir; lepistesler de bettanın yüzgeçlerini çekiştirebilir. Lepistes için ayrı, daha geniş bir akvaryum kurmak en doğrusudur. Betta için uygun kurulumu <a href="../betta-akvaryumu-kurulumu/">betta akvaryumu kurulum</a> rehberimizde anlattık.</p>
 
 <h2>Lepistesle uyumlu canlılar</h2>
-<p>Neon tetra, rasbora, corydoras, otocinclus, nerit salyangozu ve amano karidesi lepistesle uyumludur. Tüm türlerin boyut, sıcaklık ve pH bilgilerini <a href="../../baliklar/">akvaryum balıkları rehberimizde</a> bulabilirsiniz.</p>
+<p>Neon tetra, rasbora, corydoras, otocinclus, nerit salyangozu, amano karidesi ve <a href="../plati-baligi-bakimi/">plati</a> lepistesle uyumludur. Tüm türlerin boyut, sıcaklık ve pH bilgilerini <a href="../../baliklar/">akvaryum balıkları rehberimizde</a> bulabilirsiniz.</p>
 
 <h2>Lepistes akvaryumu için Tankled</h2>
 <p>Tankled akvaryumları Ankara Ostim'deki atölyemizde doğal ahşaptan elde üretilir. Bir lepistes grubu için yeterli hacimde <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> ya da salonunuza uyan bir <a href="../../mobilyali-akvaryum/">mobilyalı akvaryum</a> tasarlayabiliriz. Sipariş ve bilgi için WhatsApp'tan bize yazabilirsiniz.</p>
@@ -1105,6 +1105,98 @@ YAZILAR = [
 
 <h2>Yosunlu bir nano akvaryum kurun</h2>
 <p>Tankled Betta Serisi gibi buhar kapaklı ve ışığı ayarlanabilir bir nano akvaryum, java yosunu için idealdir: düşük ışık modunda yosun düzenli büyür, kapak buharlaşmayı azaltır. Doğal ahşap gövdeli akvaryumlarımızı Ankara Ostim'deki atölyemizde üretiyoruz; <a href="../../betta-akvaryumu/">Betta Serisi</a> ve <a href="../nano-akvaryum-bakimi/">nano akvaryum bakımı</a> sayfalarımızda ayrıntılar var.</p>
+""",
+    },
+    {
+        "slug": 'japon-baligi-bakimi',
+        "baslik": 'Japon Balığı Bakımı: Akvaryum, Fanus ve Yem | Tankled',
+        "h1": 'Japon balığı bakımı: japon balığı akvaryumu, su sıcaklığı, yem ve sık yapılan hatalar',
+        "aciklama": 'Japon balığı bakımı: japon balığı fanusta yaşar mı, akvaryum kaç litre olmalı, su sıcaklığı, filtre, yem ve ömür. Yeni başlayanlar için rehber.',
+        "tarih": "2026-11-05",
+        "gorsel": 'assets/abyss.webp', "gorsel_g": 896, "gorsel_y": 1190,
+        "gorsel_alt": 'Ahşap gövdeli cam akvaryumlar',
+        "etiketler": ['japon balığı', 'japon balığı bakımı', 'akvaryum balıkları'],
+        "govde": """
+<p>Japon balığı (<em>Carassius auratus</em>) son haftalarda Türkiye'de en hızlı yükselen akvaryum balığı aramalarından biri. Çoğu evin ilk balığıdır; ama en çok yanlış bakılan balık da odur. Bu rehberde japon balığı bakımını; doğru akvaryumdan beslemeye, sıcaklıktan ömrüne kadar anlatıyoruz.</p>
+
+<h2>Japon balığı fanusta yaşar mı?</h2>
+<p>Kısa cevap: sağlıklı yaşamaz. Japon balığı sanıldığı gibi küçük kalmaz; iyi koşullarda 15–20 cm'ye kadar büyür ve 10 yılı aşkın yaşayabilir. Çok atık ürettiği için küçük, filtresiz bir fanusta su birkaç gün içinde amonyakla kirlenir. Fanus, japon balığının ömrünü kısaltan en yaygın hatadır.</p>
+
+<h2>Japon balığı akvaryumu kaç litre olmalı?</h2>
+<ul>
+  <li><strong>Tek bir japon balığı için:</strong> en az 60–80 litre.</li>
+  <li><strong>Her ek balık için:</strong> yaklaşık 30–40 litre daha.</li>
+  <li><strong>Filtre:</strong> Akvaryum hacminin en az 3–4 katını saatte dolaştıran güçlü bir filtre gerekir.</li>
+  <li><strong>Kapak:</strong> Japon balıkları zıplayabilir; kapaklı akvaryum tercih edin.</li>
+</ul>
+<p>Bu yüzden 5–20 litrelik nano akvaryumlar japon balığı için uygun değildir; bu boyutlar betta, karides ya da küçük sürü balıkları içindir. Japon balığı için ölçüye göre bir <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> ya da ağırlığı güvenle taşıyan bir <a href="../../mobilyali-akvaryum/">mobilyalı akvaryum</a> doğru seçimdir.</p>
+
+<h2>Su sıcaklığı ve değerleri</h2>
+<p>Japon balığı soğuk su balığıdır; 18–23 °C arasındaki oda sıcaklığı ona uygundur ve çoğu zaman ısıtıcı gerekmez. pH 7,0–8,0 aralığını sever. Tropik balıklarla (betta, neon tetra gibi) aynı akvaryumda tutulmamalıdır; sıcaklık ihtiyaçları farklıdır.</p>
+
+<h2>Japon balığı ne yer? Beslenme</h2>
+<ul>
+  <li><strong>Japon balığı yemi:</strong> Batan granül yem, yüzen pul yeme göre daha iyidir; yüzeyden hava yutmayı ve şişkinliği azaltır.</li>
+  <li><strong>Sebze:</strong> Haşlanmış bezelye (kabuğu soyulmuş) ve ıspanak sindirime yardımcı olur.</li>
+  <li><strong>Miktar:</strong> Günde 1–2 kez, 1–2 dakikada bitecek kadar. Japon balığı sürekli yem ister gibi görünür; fazla yem en büyük su kirliliği nedenidir.</li>
+</ul>
+
+<h2>Bakım: su değişimi ve temizlik</h2>
+<p>Haftada bir suyun %25–30'unu şartlandırılmış, aynı sıcaklıktaki suyla değiştirin ve dipteki artıkları sifonla çekin. Filtre süngerini musluk suyunda değil, akvaryumdan çektiğiniz suda çalkalayın; faydalı bakteriler korunur. Yeni akvaryumu balık eklemeden önce 2–4 hafta olgunlaştırın; ayrıntılar <a href="../evde-balik-beslemek/">evde balık beslemek</a> yazımızda.</p>
+
+<h2>Japon balığı türleri</h2>
+<p>Uzun gövdeli "komet" ve "şubunkin" türleri hızlı yüzer ve daha büyük akvaryum ister. Yuvarlak gövdeli "fantezi" türler (oranda, ryukin, teleskop göz) daha yavaş yüzer; sivri dekorlardan kolay yaralanabilecekleri için yumuşak bitkiler ve pürüzsüz taşlar kullanın. Hızlı ve yavaş türleri aynı akvaryuma koymamak yem rekabetini azaltır.</p>
+
+<h2>Japon balığına uygun bitkiler</h2>
+<p>Japon balıkları yumuşak yapraklı bitkileri yiyebilir. Anubias, java eğreltisi ve <a href="../java-yosunu-akvaryum-yosunu/">java yosunu</a> gibi sert yapraklı, oduna bağlanan bitkiler hem dayanır hem de suyu temizler. Diğer seçenekler için <a href="../../bitkiler/">akvaryum bitkileri rehberimize</a> bakın.</p>
+
+<h2>Sık sorulanlar</h2>
+<p><strong>Japon balığı kaç yıl yaşar?</strong> Doğru akvaryum ve bakımla 10–15 yıl, hatta daha fazla yaşayabilir.</p>
+<p><strong>Japon balığı için ısıtıcı gerekir mi?</strong> Genellikle hayır; 18–23 °C oda sıcaklığı yeterlidir.</p>
+<p><strong>Japon balığı ve betta birlikte yaşar mı?</strong> Hayır; sıcaklık ihtiyaçları ve karakterleri farklıdır. Betta için <a href="../betta-akvaryumu-kurulumu/">betta akvaryumu kurulum</a> rehberimize bakın.</p>
+""",
+    },
+    {
+        "slug": 'plati-baligi-bakimi',
+        "baslik": 'Plati (Platy) Balığı Bakımı ve Üretimi | Tankled',
+        "h1": 'Plati balığı bakımı: platy akvaryumu, beslenme, renkler ve üreme',
+        "aciklama": 'Plati (platy) balığı bakımı: akvaryum kaç litre olmalı, su sıcaklığı, yem, uyumlu balıklar, renk çeşitleri, üreme ve yavru bakımı. Kolay başlangıç balığı.',
+        "tarih": "2026-11-05",
+        "gorsel": 'assets/planted.webp', "gorsel_g": 896, "gorsel_y": 1195,
+        "gorsel_alt": 'Bitkili ahşap gövdeli akvaryum',
+        "etiketler": ['plati balığı', 'platy', 'canlı doğuran balıklar'],
+        "govde": """
+<p>Plati (platy, <em>Xiphophorus maculatus</em>) son dönemde aramaları hızla artan, yeni başlayanlar için en kolay akvaryum balıklarından biri. Kırmızı, turuncu, sarı, mavi ve "mickey mouse" desenli renk çeşitleri, sakin karakteri ve dayanıklılığıyla hem çocuklu evlerde hem de ilk akvaryumda çok sevilir. Bu rehberde plati balığı bakımını adım adım anlatıyoruz.</p>
+
+<h2>Plati balığını tanıyalım</h2>
+<ul>
+  <li><strong>Boyut:</strong> 4–6 cm.</li>
+  <li><strong>Su sıcaklığı:</strong> 20–26 °C.</li>
+  <li><strong>pH:</strong> 7,0–8,0; orta sert suyu sever.</li>
+  <li><strong>Karakter:</strong> Barışçıl, grup halinde yaşar.</li>
+  <li><strong>Üreme:</strong> Canlı doğuran bir türdür; yumurta değil, yüzebilen yavru doğurur.</li>
+  <li><strong>Ömür:</strong> Genellikle 2–4 yıl.</li>
+</ul>
+
+<h2>Plati akvaryumu kaç litre olmalı?</h2>
+<p>Küçük bir plati grubu (3–5 balık) için en az 40 litre önerilir. Platiler hareketlidir ve hızla çoğalır; hacim büyüdükçe su değerleri daha dengeli kalır. Bol bitkili bir akvaryum yavrulara saklanma alanı sağlar, suyu temizler ve yosunu azaltır. Kurulum adımları için <a href="../bitkili-akvaryum-kurulumu/">bitkili akvaryum kurulumu</a> yazımıza bakın.</p>
+
+<h2>Erkek ve dişi plati nasıl ayırt edilir?</h2>
+<p>Erkeğin anal yüzgeci ince ve sivridir (gonopodyum); dişininki yelpaze gibi geniştir ve dişi genellikle daha iri ve dolgun gövdelidir. Dişilerin yorulmaması için her erkeğe 2–3 dişi düşecek şekilde grup kurun.</p>
+
+<h2>Plati ne yer? Beslenme</h2>
+<p>Platiler hepçildir. Pul ya da mikro granül yem temel besinleri olur; haftada birkaç kez artemia veya dafniya ile haşlanmış ıspanak, kabak gibi sebzeler verebilirsiniz. Akvaryumdaki yosunu da otlarlar. Günde 1–2 kez, birkaç dakikada bitecek kadar yem verin.</p>
+
+<h2>Plati üremesi ve yavru bakımı</h2>
+<p>Plati dişisi yaklaşık 4 haftalık gebeliğin ardından 20–80 yavru doğurabilir. Yetişkinler yavruları yiyebildiği için yoğun bitki, yosun ve yüzey bitkileri yavruların hayatta kalmasına yardım eder. Yavrular toz yemle beslenir ve birkaç ayda renklenir. Akvaryum çok kalabalıklaşmaya başlarsa yavruları tanıdık akvaryumculara verebilir ya da yalnızca tek cinsiyetten grup tutabilirsiniz.</p>
+
+<h2>Platiyle uyumlu balıklar</h2>
+<p>Lepistes, molly, corydoras, neon tetra, rasbora, otocinclus ve nerit salyangozu platiyle uyumludur. Lepistesle bakım koşulları çok benzer; ayrıntılar <a href="../lepistes-baligi-bakimi/">lepistes balığı bakımı</a> yazımızda. Japon balığı ise soğuk su balığıdır; platiyle aynı akvaryumda tutulmamalıdır (bkz. <a href="../japon-baligi-bakimi/">japon balığı bakımı</a>). Tüm türlerin bilgileri <a href="../../baliklar/">akvaryum balıkları rehberimizde</a>.</p>
+
+<h2>Sık sorulanlar</h2>
+<p><strong>Plati balığı için ısıtıcı gerekir mi?</strong> Oda sıcaklığı 20 °C'nin altına düşmüyorsa çoğu zaman gerekmez; kışın soğuk odalarda küçük bir ısıtıcı faydalıdır.</p>
+<p><strong>Plati ve lepistes birlikte yaşar mı?</strong> Evet, su değerleri ve karakterleri uyumludur.</p>
+<p><strong>Plati nano akvaryumda olur mu?</strong> 5–10 litrelik akvaryumlar plati için küçüktür; en az 40 litre önerilir. Size uygun ölçüde <a href="../../ozel-olcu-akvaryum/">özel ölçü akvaryum</a> üretebiliriz.</p>
 """,
     },
 ]

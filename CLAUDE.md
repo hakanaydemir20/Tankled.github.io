@@ -42,7 +42,7 @@ Ana sayfada "Özel Betta Serisi" kartı; tıklayınca stok penceresi (index.html
 Stoktaki modeller ÖB-01..ÖB-05 = ~/Desktop/b1/bt1, bt3, bt5, bt7, bt9 (fotoğraflar eğimi düzeltilmiş; yedek:
 ../yedekler/ozel-betta-bt1-bt13-2026-11-05.zip). Görseller assets/ozel/ (sahne: btN.webp Gemini, gerçek: btN/*.webp).
 Model satılınca OZEL listesinden çıkar. Diğer modeller (bt2,4,6,8,10-13) henüz sitede yok.
-Hosting'e yüklenmeyi bekliyor: Özel Betta kartı + assets/ozel.
+Hosting'e yüklenmeyi bekliyor: Özel Betta kartı + assets/ozel, blog/japon-baligi-bakimi, blog/plati-baligi-bakimi.
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
