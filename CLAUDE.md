@@ -37,6 +37,13 @@ Hosting güncel (2026-10-29, SEO anahtar kelime güncellemesi dahil).
 Hosting güncel (2026-11-03): semt yazıları + trend yazıları (lepistes-baligi-bakimi, java-yosunu-akvaryum-yosunu).
 Kullanıcı kararı: bu semtlere eve teslimat + yerinde kurulum yapılıyor.
 
+### 5. Özel Betta Serisi stok kartı (2026-11-05)
+Ana sayfada "Özel Betta Serisi" kartı; tıklayınca stok penceresi (index.html içinde `const OZEL = [...]`).
+Stoktaki modeller ÖB-01..ÖB-05 = ~/Desktop/b1/bt1, bt3, bt5, bt7, bt9 (fotoğraflar eğimi düzeltilmiş; yedek:
+../yedekler/ozel-betta-bt1-bt13-2026-11-05.zip). Görseller assets/ozel/ (sahne: btN.webp Gemini, gerçek: btN/*.webp).
+Model satılınca OZEL listesinden çıkar. Diğer modeller (bt2,4,6,8,10-13) henüz sitede yok.
+Hosting'e yüklenmeyi bekliyor: Özel Betta kartı + assets/ozel.
+
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
 - Betta Serisi (doğal çam ahşap), Özel Betta Serisi (Endonezya ithal ağaç), Nano Serisi. SİTEDE FİYAT YAZILMAZ (kullanıcı kararı 2026-10-28): "Sipariş için WhatsApp'tan ulaşın" denir; yapısal veride de fiyat yok
