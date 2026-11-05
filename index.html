@@ -195,6 +195,8 @@
   .add-btn:hover{background:var(--sand);color:var(--green-dark);transform:rotate(90deg)}
   .slayt img{position:absolute;inset:0;opacity:0;transition:opacity .9s ease,transform .7s var(--ease)}
   .ozel-tikla{cursor:pointer}
+  .ozel-slogan{font-family:'Poppins',sans-serif;font-weight:800;font-size:19px !important;line-height:1.25;color:var(--green-dark) !important;margin:2px 0 8px !important;letter-spacing:-.01em}
+  .ozel-slogan em{font-style:italic;color:var(--sand-deep, #a8925e)}
   .ozel-btn{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:10px 16px;border-radius:100px;border:1.5px solid var(--green);background:transparent;color:var(--green-dark);font:600 13px 'Poppins',sans-serif;cursor:pointer}
   .ozel-btn:hover{background:var(--green);color:var(--cream)}
   .ozel-modal{position:fixed;inset:0;z-index:1000;background:rgba(28,36,27,.72);display:none;overflow-y:auto;padding:24px 16px}
@@ -465,6 +467,7 @@
         </div>
         <div class="product-body">
           <h3>Özel Betta Serisi</h3>
+          <p class="ozel-slogan">Rengini ve desenini <em>siz seçin.</em></p>
           <p>Endonezya'dan ithal, doğal desenli ağaçtan üretilen betta akvaryumları. Her gövdenin damarı ve rengi farklı; aynısından ikincisi yok.</p>
           <button type="button" class="ozel-btn" data-ozel-ac>Stoktaki modelleri gör →</button>
           <ul class="specs">
@@ -821,8 +824,8 @@
 <div class="ozel-modal" id="ozelModal" role="dialog" aria-modal="true" aria-labelledby="ozelBaslik">
   <div class="ozel-kutu">
     <button class="ozel-kapat" type="button" aria-label="Kapat" data-ozel-kapat>×</button>
-    <span class="eyebrow">Stokta · her biri tek</span>
-    <h2 id="ozelBaslik">Özel Betta Serisi: stoktaki modeller</h2>
+    <span class="eyebrow">Özel Betta Serisi · stokta · her biri tek</span>
+    <h2 id="ozelBaslik">Rengini ve desenini siz seçin</h2>
     <p class="lead">Endonezya ağacının her gövdesi farklı damar ve renktedir. Aşağıdaki 13 model şu an stokta ve fotoğraflar atölyemizde çekilmiş gerçek fotoğraflardır; her biri tek parça olduğu için satıldığında listeden kalkar. Fotoğraflara dokunup büyütebilirsiniz.</p>
     <div class="ozel-grid" id="ozelGrid"></div>
   </div>
