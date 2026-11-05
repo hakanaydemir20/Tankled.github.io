@@ -209,7 +209,7 @@
   .kolaj button{border:none;padding:0;background:#ddd;cursor:zoom-in;display:block;overflow:hidden;position:relative}
   .kolaj img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s var(--ease)}
   .kolaj button:hover img{transform:scale(1.05)}
-  .kolaj .ana{grid-column:1/5;aspect-ratio:4/3}
+  .kolaj .ana{grid-column:1/5;aspect-ratio:4/5}
   .kolaj .kucuk{aspect-ratio:3/4}
   .kolaj .daha span{position:absolute;inset:0;display:grid;place-items:center;background:rgba(28,36,27,.55);color:#fff;font:600 15px 'Poppins',sans-serif}
   .ozel-bilgi{padding:14px 16px 18px}
@@ -457,11 +457,11 @@
       <article class="product-card reveal ozel-tikla" data-cat="akvaryum" id="ozel-betta-kart" tabindex="0" aria-label="Özel Betta Serisi: stoktaki modelleri gör">
         <div class="product-media slayt">
           <span class="product-tag">Her biri tek</span>
-          <img class="on" src="assets/ozel/bt1.webp" alt="Özel Betta Serisi ÖB-01 – Açık bal tonu ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
-          <img src="assets/ozel/bt3.webp" alt="Özel Betta Serisi ÖB-02 – Koyu, budaklı ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
-          <img src="assets/ozel/bt5.webp" alt="Özel Betta Serisi ÖB-03 – Açık zemin, koyu şerit ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
-          <img src="assets/ozel/bt7.webp" alt="Özel Betta Serisi ÖB-04 – Kızıl damarlı ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
-          <img src="assets/ozel/bt9.webp" alt="Özel Betta Serisi ÖB-05 – Pembe-kızıl damar ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
+          <img class="on" src="assets/ozel/bt1.webp" alt="Özel Betta Serisi Endonezya ağacı ahşap betta akvaryumu, kullanım örneği" width="1024" height="768" loading="lazy"/>
+          <img src="assets/ozel/bt3.webp" alt="Özel Betta Serisi Endonezya ağacı ahşap betta akvaryumu, kullanım örneği" width="1024" height="768" loading="lazy"/>
+          <img src="assets/ozel/bt5.webp" alt="Özel Betta Serisi Endonezya ağacı ahşap betta akvaryumu, kullanım örneği" width="1024" height="768" loading="lazy"/>
+          <img src="assets/ozel/bt7.webp" alt="Özel Betta Serisi Endonezya ağacı ahşap betta akvaryumu, kullanım örneği" width="1024" height="768" loading="lazy"/>
+          <img src="assets/ozel/bt9.webp" alt="Özel Betta Serisi Endonezya ağacı ahşap betta akvaryumu, kullanım örneği" width="1024" height="768" loading="lazy"/>
         </div>
         <div class="product-body">
           <h3>Özel Betta Serisi</h3>
@@ -823,7 +823,7 @@
     <button class="ozel-kapat" type="button" aria-label="Kapat" data-ozel-kapat>×</button>
     <span class="eyebrow">Stokta · her biri tek</span>
     <h2 id="ozelBaslik">Özel Betta Serisi: stoktaki modeller</h2>
-    <p class="lead">Endonezya ağacının her gövdesi farklı damar ve renktedir. Aşağıdaki modeller şu an stokta; her biri tek parça olduğu için satıldığında listeden kalkar. Fotoğraflara dokunup büyütebilirsiniz.</p>
+    <p class="lead">Endonezya ağacının her gövdesi farklı damar ve renktedir. Aşağıdaki 13 model şu an stokta ve fotoğraflar atölyemizde çekilmiş gerçek fotoğraflardır; her biri tek parça olduğu için satıldığında listeden kalkar. Fotoğraflara dokunup büyütebilirsiniz.</p>
     <div class="ozel-grid" id="ozelGrid"></div>
   </div>
 </div>
@@ -894,17 +894,18 @@
   });
 
   // Ozel Betta stok penceresi (model satilinca OZEL listesinden cikarin)
-  const OZEL = [{"kod": "ÖB-01", "ad": "Açık bal tonu", "sahne": "assets/ozel/bt1.webp", "foto": ["assets/ozel/bt1/bt1-01.webp", "assets/ozel/bt1/bt1-02.webp", "assets/ozel/bt1/bt1-03.webp", "assets/ozel/bt1/bt1-04.webp", "assets/ozel/bt1/bt1-05.webp", "assets/ozel/bt1/bt1-06.webp", "assets/ozel/bt1/bt1-07.webp", "assets/ozel/bt1/bt1-08.webp", "assets/ozel/bt1/bt1-09.webp", "assets/ozel/bt1/bt1-10.webp"]}, {"kod": "ÖB-02", "ad": "Koyu, budaklı", "sahne": "assets/ozel/bt3.webp", "foto": ["assets/ozel/bt3/bt3-01.webp", "assets/ozel/bt3/bt3-02.webp", "assets/ozel/bt3/bt3-03.webp", "assets/ozel/bt3/bt3-04.webp", "assets/ozel/bt3/bt3-05.webp", "assets/ozel/bt3/bt3-06.webp", "assets/ozel/bt3/bt3-07.webp", "assets/ozel/bt3/bt3-08.webp", "assets/ozel/bt3/bt3-09.webp"]}, {"kod": "ÖB-03", "ad": "Açık zemin, koyu şerit", "sahne": "assets/ozel/bt5.webp", "foto": ["assets/ozel/bt5/bt5-01.webp", "assets/ozel/bt5/bt5-02.webp", "assets/ozel/bt5/bt5-03.webp", "assets/ozel/bt5/bt5-04.webp", "assets/ozel/bt5/bt5-05.webp", "assets/ozel/bt5/bt5-06.webp", "assets/ozel/bt5/bt5-07.webp", "assets/ozel/bt5/bt5-08.webp", "assets/ozel/bt5/bt5-09.webp", "assets/ozel/bt5/bt5-10.webp", "assets/ozel/bt5/bt5-11.webp"]}, {"kod": "ÖB-04", "ad": "Kızıl damarlı", "sahne": "assets/ozel/bt7.webp", "foto": ["assets/ozel/bt7/bt7-01.webp", "assets/ozel/bt7/bt7-02.webp", "assets/ozel/bt7/bt7-03.webp", "assets/ozel/bt7/bt7-04.webp", "assets/ozel/bt7/bt7-05.webp", "assets/ozel/bt7/bt7-06.webp", "assets/ozel/bt7/bt7-07.webp", "assets/ozel/bt7/bt7-08.webp", "assets/ozel/bt7/bt7-09.webp", "assets/ozel/bt7/bt7-10.webp"]}, {"kod": "ÖB-05", "ad": "Pembe-kızıl damar", "sahne": "assets/ozel/bt9.webp", "foto": ["assets/ozel/bt9/bt9-01.webp", "assets/ozel/bt9/bt9-02.webp", "assets/ozel/bt9/bt9-03.webp", "assets/ozel/bt9/bt9-04.webp", "assets/ozel/bt9/bt9-05.webp", "assets/ozel/bt9/bt9-06.webp", "assets/ozel/bt9/bt9-07.webp", "assets/ozel/bt9/bt9-08.webp", "assets/ozel/bt9/bt9-09.webp", "assets/ozel/bt9/bt9-10.webp", "assets/ozel/bt9/bt9-11.webp"]}];
+  const OZEL = [{"kod": "ÖB-01", "ad": "Açık bal tonu", "foto": ["bt1-02.webp", "bt1-01.webp", "bt1-03.webp", "bt1-05.webp", "bt1-06.webp", "bt1-07.webp", "bt1-08.webp", "bt1-09.webp", "bt1-10.webp", "bt1-04.webp"], "k": "bt1"}, {"kod": "ÖB-02", "ad": "Açık, ortada koyu damar", "foto": ["bt2-01.webp", "bt2-02.webp", "bt2-03.webp", "bt2-04.webp", "bt2-06.webp", "bt2-07.webp", "bt2-08.webp", "bt2-05.webp"], "k": "bt2"}, {"kod": "ÖB-03", "ad": "Koyu, budaklı", "foto": ["bt3-01.webp", "bt3-02.webp", "bt3-03.webp", "bt3-05.webp", "bt3-06.webp", "bt3-07.webp", "bt3-08.webp", "bt3-09.webp", "bt3-04.webp"], "k": "bt3"}, {"kod": "ÖB-04", "ad": "Koyu, belirgin damarlı", "foto": ["bt4-01.webp", "bt4-02.webp", "bt4-03.webp", "bt4-04.webp", "bt4-05.webp", "bt4-06.webp", "bt4-07.webp", "bt4-08.webp", "bt4-10.webp", "bt4-11.webp", "bt4-09.webp"], "k": "bt4"}, {"kod": "ÖB-05", "ad": "Açık zemin, koyu şerit", "foto": ["bt5-01.webp", "bt5-02.webp", "bt5-03.webp", "bt5-04.webp", "bt5-05.webp", "bt5-06.webp", "bt5-07.webp", "bt5-08.webp", "bt5-09.webp", "bt5-10.webp", "bt5-11.webp"], "k": "bt5"}, {"kod": "ÖB-06", "ad": "Orta ton", "foto": ["bt6-01.webp", "bt6-02.webp", "bt6-03.webp", "bt6-04.webp", "bt6-05.webp", "bt6-06.webp", "bt6-07.webp", "bt6-08.webp", "bt6-09.webp", "bt6-10.webp"], "k": "bt6"}, {"kod": "ÖB-07", "ad": "Kızıl, koyu dikey şerit", "foto": ["bt7-01.webp", "bt7-02.webp", "bt7-03.webp", "bt7-04.webp", "bt7-05.webp", "bt7-06.webp", "bt7-07.webp", "bt7-08.webp", "bt7-09.webp", "bt7-10.webp"], "k": "bt7"}, {"kod": "ÖB-08", "ad": "Açık, budaklı", "foto": ["bt8-01.webp", "bt8-02.webp", "bt8-03.webp", "bt8-04.webp", "bt8-05.webp", "bt8-06.webp", "bt8-07.webp", "bt8-08.webp", "bt8-09.webp", "bt8-10.webp"], "k": "bt8"}, {"kod": "ÖB-09", "ad": "Pembe-kızıl damar", "foto": ["bt9-01.webp", "bt9-02.webp", "bt9-03.webp", "bt9-04.webp", "bt9-05.webp", "bt9-06.webp", "bt9-07.webp", "bt9-08.webp", "bt9-09.webp", "bt9-10.webp", "bt9-11.webp"], "k": "bt9"}, {"kod": "ÖB-10", "ad": "Koyu kahve", "foto": ["bt10-01.webp", "bt10-02.webp", "bt10-03.webp", "bt10-04.webp", "bt10-05.webp", "bt10-06.webp", "bt10-07.webp", "bt10-08.webp", "bt10-09.webp", "bt10-10.webp", "bt10-11.webp", "bt10-12.webp"], "k": "bt10"}, {"kod": "ÖB-11", "ad": "Açık-orta ton", "foto": ["bt11-01.webp", "bt11-02.webp", "bt11-03.webp", "bt11-04.webp", "bt11-05.webp", "bt11-06.webp", "bt11-07.webp", "bt11-08.webp", "bt11-09.webp", "bt11-10.webp"], "k": "bt11"}, {"kod": "ÖB-12", "ad": "Açık, ince damarlı", "foto": ["bt12-01.webp", "bt12-02.webp", "bt12-03.webp", "bt12-04.webp", "bt12-05.webp", "bt12-06.webp", "bt12-07.webp", "bt12-08.webp", "bt12-09.webp", "bt12-10.webp", "bt12-11.webp"], "k": "bt12"}, {"kod": "ÖB-13", "ad": "Orta ton, budaklı", "foto": ["bt13-01.webp", "bt13-02.webp", "bt13-03.webp", "bt13-04.webp", "bt13-05.webp", "bt13-06.webp", "bt13-07.webp", "bt13-08.webp", "bt13-09.webp", "bt13-10.webp", "bt13-11.webp", "bt13-12.webp"], "k": "bt13"}];
   const WA_OZEL = "https://wa.me/905312172006?text=";
   const ozelModal=document.getElementById('ozelModal'), ozelGrid=document.getElementById('ozelGrid');
+  const ozelYol=(m,f,k)=>`assets/ozel/${m.k}/${k?'k/':''}${f}`;
   OZEL.forEach((m,mi)=>{
-    const tum=[m.sahne,...m.foto], kucuk=tum.slice(1,5), kalan=tum.length-5;
+    const kucuk=m.foto.slice(1,5), kalan=m.foto.length-5;
     const el=document.createElement('article'); el.className='ozel-model';
     el.innerHTML=`<div class="kolaj">
-      <button type="button" class="ana" data-m="${mi}" data-i="0"><img src="${m.sahne}" alt="Özel Betta ${m.kod} – ${m.ad}" loading="lazy"></button>
-      ${kucuk.map((f,k)=>`<button type="button" class="kucuk${k===3&&kalan>0?' daha':''}" data-m="${mi}" data-i="${k+1}"><img src="${f}" alt="Özel Betta ${m.kod} gerçek fotoğraf ${k+1}" loading="lazy">${k===3&&kalan>0?`<span>+${kalan}</span>`:''}</button>`).join('')}
+      <button type="button" class="ana" data-m="${mi}" data-i="0"><img src="${ozelYol(m,m.foto[0],1)}" alt="Özel Betta ${m.kod} – ${m.ad}" loading="lazy"></button>
+      ${kucuk.map((f,k)=>`<button type="button" class="kucuk${k===3&&kalan>0?' daha':''}" data-m="${mi}" data-i="${k+1}"><img src="${ozelYol(m,f,1)}" alt="Özel Betta ${m.kod} fotoğraf ${k+2}" loading="lazy">${k===3&&kalan>0?`<span>+${kalan}</span>`:''}</button>`).join('')}
     </div>
-    <div class="ozel-bilgi"><h3>${m.kod} · ${m.ad}</h3><p>Endonezya ağacı · 14 × 14 × 20 cm · ${tum.length-1} gerçek fotoğraf</p>
+    <div class="ozel-bilgi"><h3>${m.kod} · ${m.ad}</h3><p>Endonezya ağacı · 14 × 14 × 20 cm · ${m.foto.length} fotoğraf</p>
     <a href="${WA_OZEL}${encodeURIComponent('Merhaba Tankled, Özel Betta Serisi '+m.kod+' modelini sipariş etmek istiyorum.')}" target="_blank" rel="noopener">Bu modeli sipariş et</a></div>`;
     ozelGrid.appendChild(el);
   });
@@ -918,7 +919,7 @@
   ozelModal.addEventListener('click',e=>{ if(e.target===ozelModal) ozelKapat(); });
   const lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lbYazi=lb.querySelector('.lb-yazi');
   let lbM=0, lbI=0;
-  const lbGoster=()=>{ const m=OZEL[lbM], tum=[m.sahne,...m.foto]; lbI=(lbI+tum.length)%tum.length; lbImg.src=tum[lbI]; lbImg.alt='Özel Betta '+m.kod; lbYazi.textContent=`${m.kod} · ${m.ad} — ${lbI+1} / ${tum.length}${lbI===0?' (kullanım örneği)':''}`; };
+  const lbGoster=()=>{ const m=OZEL[lbM], n=m.foto.length; lbI=(lbI+n)%n; lbImg.src=ozelYol(m,m.foto[lbI],0); lbImg.alt='Özel Betta '+m.kod; lbYazi.textContent=`${m.kod} · ${m.ad} — ${lbI+1} / ${n}`; };
   ozelGrid.addEventListener('click',e=>{ const b=e.target.closest('button[data-m]'); if(!b) return; lbM=+b.dataset.m; lbI=+b.dataset.i; lbGoster(); lb.classList.add('acik'); });
   lb.querySelector('.lb-kapat').addEventListener('click',()=>lb.classList.remove('acik'));
   lb.querySelector('.lb-onceki').addEventListener('click',()=>{ lbI--; lbGoster(); });

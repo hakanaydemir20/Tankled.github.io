@@ -39,9 +39,9 @@ Kullanıcı kararı: bu semtlere eve teslimat + yerinde kurulum yapılıyor.
 
 ### 5. Özel Betta Serisi stok kartı (2026-11-05)
 Ana sayfada "Özel Betta Serisi" kartı; tıklayınca stok penceresi (index.html içinde `const OZEL = [...]`).
-Stoktaki modeller ÖB-01..ÖB-05 = ~/Desktop/b1/bt1, bt3, bt5, bt7, bt9 (fotoğraflar eğimi düzeltilmiş; yedek:
-../yedekler/ozel-betta-bt1-bt13-2026-11-05.zip). Görseller assets/ozel/ (sahne: btN.webp Gemini, gerçek: btN/*.webp).
-Model satılınca OZEL listesinden çıkar. Diğer modeller (bt2,4,6,8,10-13) henüz sitede yok.
+Stokta 13 model: ÖB-NN = ~/Desktop/b1/btN (N=1..13). Stok penceresinde YALNIZ gerçek fotoğraflar (kullanıcı kararı):
+assets/ozel/btN/*.webp (büyük) ve assets/ozel/btN/k/ (küçük). Kart slaytında 5 Gemini sahnesi (assets/ozel/bt1,3,5,7,9.webp).
+Fotoğraflar eğimi düzeltilmiş; yedek: ../yedekler/ozel-betta-bt1-bt13-2026-11-05.zip. Model satılınca OZEL listesinden çıkar.
 Hosting'e yüklenmeyi bekliyor: Özel Betta kartı + assets/ozel, blog/japon-baligi-bakimi, blog/plati-baligi-bakimi.
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
