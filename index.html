@@ -194,6 +194,35 @@
     display:grid;place-items:center;transition:all .3s}
   .add-btn:hover{background:var(--sand);color:var(--green-dark);transform:rotate(90deg)}
   .slayt img{position:absolute;inset:0;opacity:0;transition:opacity .9s ease,transform .7s var(--ease)}
+  .ozel-tikla{cursor:pointer}
+  .ozel-btn{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:10px 16px;border-radius:100px;border:1.5px solid var(--green);background:transparent;color:var(--green-dark);font:600 13px 'Poppins',sans-serif;cursor:pointer}
+  .ozel-btn:hover{background:var(--green);color:var(--cream)}
+  .ozel-modal{position:fixed;inset:0;z-index:1000;background:rgba(28,36,27,.72);display:none;overflow-y:auto;padding:24px 16px}
+  .ozel-modal.acik{display:block}
+  .ozel-kutu{max-width:1100px;margin:0 auto;background:var(--cream);border-radius:var(--radius);padding:28px 22px;position:relative}
+  .ozel-kutu h2{font-size:clamp(24px,3vw,34px);color:var(--green-dark);margin-bottom:6px}
+  .ozel-kutu .lead{color:var(--muted);font-size:14px;margin-bottom:22px;max-width:70ch}
+  .ozel-kapat{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:none;background:var(--cream-2);font-size:24px;cursor:pointer;color:var(--green-dark)}
+  .ozel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
+  .ozel-model{background:var(--cream-2);border-radius:var(--radius-sm);overflow:hidden;box-shadow:0 14px 30px -26px rgba(51,73,47,.6)}
+  .kolaj{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+  .kolaj button{border:none;padding:0;background:#ddd;cursor:zoom-in;display:block;overflow:hidden;position:relative}
+  .kolaj img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s var(--ease)}
+  .kolaj button:hover img{transform:scale(1.05)}
+  .kolaj .ana{grid-column:1/5;aspect-ratio:4/3}
+  .kolaj .kucuk{aspect-ratio:3/4}
+  .kolaj .daha span{position:absolute;inset:0;display:grid;place-items:center;background:rgba(28,36,27,.55);color:#fff;font:600 15px 'Poppins',sans-serif}
+  .ozel-bilgi{padding:14px 16px 18px}
+  .ozel-bilgi h3{font-size:18px;color:var(--green-dark)}
+  .ozel-bilgi p{font-size:13px;color:var(--muted);margin:2px 0 12px}
+  .ozel-bilgi a{display:inline-block;background:#25d366;color:#fff;text-decoration:none;font:600 13px 'Poppins',sans-serif;padding:9px 16px;border-radius:100px}
+  .lb{position:fixed;inset:0;z-index:1100;background:rgba(10,12,10,.94);display:none;align-items:center;justify-content:center}
+  .lb.acik{display:flex}
+  .lb img{max-width:92vw;max-height:84vh;object-fit:contain;border-radius:8px}
+  .lb button{position:absolute;background:rgba(255,255,255,.14);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:26px;cursor:pointer}
+  .lb .lb-kapat{top:16px;right:16px}.lb .lb-onceki{left:12px;top:50%;transform:translateY(-50%)}.lb .lb-sonraki{right:12px;top:50%;transform:translateY(-50%)}
+  .lb .lb-yazi{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#eee;font:500 13px 'Poppins',sans-serif}
+
   .slayt img.on{opacity:1}
   .slayt-nokta{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
   .slayt-nokta button{width:9px;height:9px;padding:0;border-radius:50%;border:none;background:rgba(244,241,233,.55);cursor:pointer}
@@ -422,6 +451,30 @@
           <div class="product-meta">
             <a class="price" href="https://wa.me/905312172006?text=Merhaba%20Tankled%2C%20sipari%C5%9F%20vermek%20istiyorum." target="_blank" rel="noopener">Sipariş için WhatsApp'tan ulaşın</a>
             <button class="add-btn" aria-label="Ekle"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+      <article class="product-card reveal ozel-tikla" data-cat="akvaryum" id="ozel-betta-kart" tabindex="0" aria-label="Özel Betta Serisi: stoktaki modelleri gör">
+        <div class="product-media slayt">
+          <span class="product-tag">Her biri tek</span>
+          <img class="on" src="assets/ozel/bt1.webp" alt="Özel Betta Serisi ÖB-01 – Açık bal tonu ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
+          <img src="assets/ozel/bt3.webp" alt="Özel Betta Serisi ÖB-02 – Koyu, budaklı ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
+          <img src="assets/ozel/bt5.webp" alt="Özel Betta Serisi ÖB-03 – Açık zemin, koyu şerit ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
+          <img src="assets/ozel/bt7.webp" alt="Özel Betta Serisi ÖB-04 – Kızıl damarlı ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
+          <img src="assets/ozel/bt9.webp" alt="Özel Betta Serisi ÖB-05 – Pembe-kızıl damar ahşap betta akvaryumu" width="1024" height="768" loading="lazy"/>
+        </div>
+        <div class="product-body">
+          <h3>Özel Betta Serisi</h3>
+          <p>Endonezya'dan ithal, doğal desenli ağaçtan üretilen betta akvaryumları. Her gövdenin damarı ve rengi farklı; aynısından ikincisi yok.</p>
+          <button type="button" class="ozel-btn" data-ozel-ac>Stoktaki modelleri gör →</button>
+          <ul class="specs">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/></svg><span><b>Cam ölçüleri:</b> 14 × 14 × 20 cm</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18c4-1 12-1 16 0M5 14c3.5-.8 10.5-.8 14 0"/><path d="M6 10h12l-1 8H7z"/></svg><span><b>Endonezya ithal ağaç</b>, her parça tek</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6 6l-1.5-1.5M19.5 19.5 18 18"/><circle cx="12" cy="12" r="4"/></svg><span><b>3 renk LED:</b> 3000K · 4500K · 6500K</span></li>
+          </ul>
+          <div class="product-meta">
+            <a class="price" href="https://wa.me/905312172006?text=Merhaba%20Tankled%2C%20%C3%96zel%20Betta%20Serisi%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener">Sipariş için WhatsApp'tan ulaşın</a>
+            <button class="add-btn" type="button" aria-label="Stoktaki modelleri gör" data-ozel-ac><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
           </div>
         </div>
       </article>
@@ -764,6 +817,24 @@
   </div>
 </section>
 
+<!-- OZEL BETTA STOK -->
+<div class="ozel-modal" id="ozelModal" role="dialog" aria-modal="true" aria-labelledby="ozelBaslik">
+  <div class="ozel-kutu">
+    <button class="ozel-kapat" type="button" aria-label="Kapat" data-ozel-kapat>×</button>
+    <span class="eyebrow">Stokta · her biri tek</span>
+    <h2 id="ozelBaslik">Özel Betta Serisi: stoktaki modeller</h2>
+    <p class="lead">Endonezya ağacının her gövdesi farklı damar ve renktedir. Aşağıdaki modeller şu an stokta; her biri tek parça olduğu için satıldığında listeden kalkar. Fotoğraflara dokunup büyütebilirsiniz.</p>
+    <div class="ozel-grid" id="ozelGrid"></div>
+  </div>
+</div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Büyük fotoğraf">
+  <button class="lb-kapat" type="button" aria-label="Kapat">×</button>
+  <button class="lb-onceki" type="button" aria-label="Önceki">‹</button>
+  <img alt=""/>
+  <button class="lb-sonraki" type="button" aria-label="Sonraki">›</button>
+  <div class="lb-yazi"></div>
+</div>
+<!-- /OZEL BETTA STOK -->
 <footer><nav class="alt-nav" style="margin-bottom:6px"><a href="">Ana sayfa</a> · <a href="mobilyali-akvaryum/">Mobilyalı Akvaryum</a> · <a href="hakkimizda/">Hakkımızda</a> · <a href="iletisim/">İletişim</a> · <a href="bitkiler/">Bitkiler</a> · <a href="baliklar/">Balıklar</a> · <a href="malzemeler/">Malzemeler</a> · <a href="akvaryum-olustur/">3D Tasarım</a> · <a href="blog/">Blog</a> · <a href="https://www.instagram.com/tankled.akvaryum/" target="_blank" rel="noopener">Instagram</a></nav>© <span id="year"></span> Tankled · El yapımı akvaryum, Ankara<div style="font-size:12px;opacity:.75;margin-top:6px">Bu web sitesinin tüm tasarımı Hakan Aydemir tarafından yapılmıştır.</div></footer>
 
 <a class="wa-btn" href="https://wa.me/905312172006?text=Merhaba%20Tankled%2C%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp ile yazın">
@@ -821,6 +892,44 @@
     m.appendChild(nok);
     t=setInterval(()=>git(i+1),4000);
   });
+
+  // Ozel Betta stok penceresi (model satilinca OZEL listesinden cikarin)
+  const OZEL = [{"kod": "ÖB-01", "ad": "Açık bal tonu", "sahne": "assets/ozel/bt1.webp", "foto": ["assets/ozel/bt1/bt1-01.webp", "assets/ozel/bt1/bt1-02.webp", "assets/ozel/bt1/bt1-03.webp", "assets/ozel/bt1/bt1-04.webp", "assets/ozel/bt1/bt1-05.webp", "assets/ozel/bt1/bt1-06.webp", "assets/ozel/bt1/bt1-07.webp", "assets/ozel/bt1/bt1-08.webp", "assets/ozel/bt1/bt1-09.webp", "assets/ozel/bt1/bt1-10.webp"]}, {"kod": "ÖB-02", "ad": "Koyu, budaklı", "sahne": "assets/ozel/bt3.webp", "foto": ["assets/ozel/bt3/bt3-01.webp", "assets/ozel/bt3/bt3-02.webp", "assets/ozel/bt3/bt3-03.webp", "assets/ozel/bt3/bt3-04.webp", "assets/ozel/bt3/bt3-05.webp", "assets/ozel/bt3/bt3-06.webp", "assets/ozel/bt3/bt3-07.webp", "assets/ozel/bt3/bt3-08.webp", "assets/ozel/bt3/bt3-09.webp"]}, {"kod": "ÖB-03", "ad": "Açık zemin, koyu şerit", "sahne": "assets/ozel/bt5.webp", "foto": ["assets/ozel/bt5/bt5-01.webp", "assets/ozel/bt5/bt5-02.webp", "assets/ozel/bt5/bt5-03.webp", "assets/ozel/bt5/bt5-04.webp", "assets/ozel/bt5/bt5-05.webp", "assets/ozel/bt5/bt5-06.webp", "assets/ozel/bt5/bt5-07.webp", "assets/ozel/bt5/bt5-08.webp", "assets/ozel/bt5/bt5-09.webp", "assets/ozel/bt5/bt5-10.webp", "assets/ozel/bt5/bt5-11.webp"]}, {"kod": "ÖB-04", "ad": "Kızıl damarlı", "sahne": "assets/ozel/bt7.webp", "foto": ["assets/ozel/bt7/bt7-01.webp", "assets/ozel/bt7/bt7-02.webp", "assets/ozel/bt7/bt7-03.webp", "assets/ozel/bt7/bt7-04.webp", "assets/ozel/bt7/bt7-05.webp", "assets/ozel/bt7/bt7-06.webp", "assets/ozel/bt7/bt7-07.webp", "assets/ozel/bt7/bt7-08.webp", "assets/ozel/bt7/bt7-09.webp", "assets/ozel/bt7/bt7-10.webp"]}, {"kod": "ÖB-05", "ad": "Pembe-kızıl damar", "sahne": "assets/ozel/bt9.webp", "foto": ["assets/ozel/bt9/bt9-01.webp", "assets/ozel/bt9/bt9-02.webp", "assets/ozel/bt9/bt9-03.webp", "assets/ozel/bt9/bt9-04.webp", "assets/ozel/bt9/bt9-05.webp", "assets/ozel/bt9/bt9-06.webp", "assets/ozel/bt9/bt9-07.webp", "assets/ozel/bt9/bt9-08.webp", "assets/ozel/bt9/bt9-09.webp", "assets/ozel/bt9/bt9-10.webp", "assets/ozel/bt9/bt9-11.webp"]}];
+  const WA_OZEL = "https://wa.me/905312172006?text=";
+  const ozelModal=document.getElementById('ozelModal'), ozelGrid=document.getElementById('ozelGrid');
+  OZEL.forEach((m,mi)=>{
+    const tum=[m.sahne,...m.foto], kucuk=tum.slice(1,5), kalan=tum.length-5;
+    const el=document.createElement('article'); el.className='ozel-model';
+    el.innerHTML=`<div class="kolaj">
+      <button type="button" class="ana" data-m="${mi}" data-i="0"><img src="${m.sahne}" alt="Özel Betta ${m.kod} – ${m.ad}" loading="lazy"></button>
+      ${kucuk.map((f,k)=>`<button type="button" class="kucuk${k===3&&kalan>0?' daha':''}" data-m="${mi}" data-i="${k+1}"><img src="${f}" alt="Özel Betta ${m.kod} gerçek fotoğraf ${k+1}" loading="lazy">${k===3&&kalan>0?`<span>+${kalan}</span>`:''}</button>`).join('')}
+    </div>
+    <div class="ozel-bilgi"><h3>${m.kod} · ${m.ad}</h3><p>Endonezya ağacı · 14 × 14 × 20 cm · ${tum.length-1} gerçek fotoğraf</p>
+    <a href="${WA_OZEL}${encodeURIComponent('Merhaba Tankled, Özel Betta Serisi '+m.kod+' modelini sipariş etmek istiyorum.')}" target="_blank" rel="noopener">Bu modeli sipariş et</a></div>`;
+    ozelGrid.appendChild(el);
+  });
+  const ozelAc=e=>{ if(e) e.stopPropagation(); ozelModal.classList.add('acik'); document.body.style.overflow='hidden'; };
+  const ozelKapat=()=>{ ozelModal.classList.remove('acik'); document.body.style.overflow=''; };
+  const ozelKart=document.getElementById('ozel-betta-kart');
+  ozelKart.addEventListener('click',e=>{ if(e.target.closest('a,.slayt-nokta')) return; ozelAc(); });
+  ozelKart.addEventListener('keydown',e=>{ if(e.key==='Enter') ozelAc(); });
+  document.querySelectorAll('[data-ozel-ac]').forEach(b=>b.addEventListener('click',ozelAc));
+  document.querySelector('[data-ozel-kapat]').addEventListener('click',ozelKapat);
+  ozelModal.addEventListener('click',e=>{ if(e.target===ozelModal) ozelKapat(); });
+  const lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lbYazi=lb.querySelector('.lb-yazi');
+  let lbM=0, lbI=0;
+  const lbGoster=()=>{ const m=OZEL[lbM], tum=[m.sahne,...m.foto]; lbI=(lbI+tum.length)%tum.length; lbImg.src=tum[lbI]; lbImg.alt='Özel Betta '+m.kod; lbYazi.textContent=`${m.kod} · ${m.ad} — ${lbI+1} / ${tum.length}${lbI===0?' (kullanım örneği)':''}`; };
+  ozelGrid.addEventListener('click',e=>{ const b=e.target.closest('button[data-m]'); if(!b) return; lbM=+b.dataset.m; lbI=+b.dataset.i; lbGoster(); lb.classList.add('acik'); });
+  lb.querySelector('.lb-kapat').addEventListener('click',()=>lb.classList.remove('acik'));
+  lb.querySelector('.lb-onceki').addEventListener('click',()=>{ lbI--; lbGoster(); });
+  lb.querySelector('.lb-sonraki').addEventListener('click',()=>{ lbI++; lbGoster(); });
+  lb.addEventListener('click',e=>{ if(e.target===lb) lb.classList.remove('acik'); });
+  document.addEventListener('keydown',e=>{
+    if(lb.classList.contains('acik')){ if(e.key==='Escape') lb.classList.remove('acik'); if(e.key==='ArrowLeft'){lbI--;lbGoster();} if(e.key==='ArrowRight'){lbI++;lbGoster();} }
+    else if(e.key==='Escape' && ozelModal.classList.contains('acik')) ozelKapat();
+  });
+  let lbX=null; lb.addEventListener('touchstart',e=>{lbX=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',e=>{ if(lbX===null) return; const dx=e.changedTouches[0].clientX-lbX; if(Math.abs(dx)>40){ lbI+=dx<0?1:-1; lbGoster(); } lbX=null; });
 
   // Reveal on scroll
   const io = new IntersectionObserver((entries)=>{

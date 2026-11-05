@@ -41,7 +41,20 @@ SAHNE_LAMBA = {
                      "a light wooden console next to a desk, the light bar on top switched on with crisp 6500K "
                      "daylight white light, clearly visible and highlighted",
 }
+OZEL = ("Keep the product from the reference photos exactly as it is, including the exact natural wood grain pattern "
+        "and wood color of THIS specific piece: a small handmade C-shaped nano aquarium, about 14 x 14 x 20 cm, "
+        "with a solid wood back column, a wooden top cap with a white LED panel under it, a square rimless glass "
+        "tank with thin black edge trim and a wooden base. Do not change the grain, knots, color, shape or "
+        "proportions, do not add logos or text. Show it with a few green aquatic plants and a betta fish inside. ")
+SAHNE_OZEL = {
+    "bt1": "on a bright Scandinavian home office desk in soft morning daylight, next to a laptop, a ceramic mug and a small plant",
+    "bt3": "in a cozy dark-toned reading nook on a walnut side table next to an armchair and books, warm evening lamp light",
+    "bt5": "on a modern living room console with neutral decor, natural daylight from a large window",
+    "bt7": "on a bedroom nightstand at night, the aquarium glowing with warm 3000K light like a night lamp, linen bedding",
+    "bt9": "on a kitchen coffee corner shelf with green herbs in pots and a coffee machine nearby, soft daylight",
+}
 URUNLER = {
+    "ozel": (OZEL, SAHNE_OZEL, "It is a SMALL object, roughly twice the height of a coffee mug; show it at true scale. "),
     "avize": (AVIZE, SAHNE_AVIZE, "Show the whole light at realistic size (about 60 x 40 cm) on a normal 2.7 m ceiling. "),
     "lamba": (LAMBA, SAHNE_LAMBA, "The bar spans the full width of the aquarium at realistic scale. "),
 }
@@ -49,7 +62,7 @@ URUNLER = {
 
 def uret(urun: str, ad: str, k: str) -> str:
     tarif, sahneler, olcek = URUNLER[urun]
-    ref = sorted((SITE / f"_kaynak/gorsel/{urun}-ref").glob("*.jpg"))
+    ref = sorted((SITE / f"_kaynak/gorsel/{urun}-ref").glob(f"{ad}-*.jpg")) or sorted((SITE / f"_kaynak/gorsel/{urun}-ref").glob("*.jpg"))
     hedef = SITE / f"assets/{urun}" / f"{ad}.webp"
     if hedef.exists() and "--yeniden" not in sys.argv:
         return "var"
