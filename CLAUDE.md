@@ -34,7 +34,7 @@ parçaları yükle, "Merge and overwrite" ile aç, zip'leri sil. DirectAdmin'e m
 Google Search Console: alan adı mülkü sc-domain:tankled.com.tr doğrulandı (DNS TXT google-site-verification,
 DirectAdmin DNS'te; SİLME), sitemap.xml gönderildi, ana sayfa için dizine ekleme istendi (2026-10-29).
 Hosting güncel (2026-10-29, SEO anahtar kelime güncellemesi dahil).
-Hosting güncel (2026-11-03): semt yazıları + trend yazıları (lepistes-baligi-bakimi, java-yosunu-akvaryum-yosunu).
+Hosting güncel (2026-11-16): Özel Betta (13 model), semt + trend yazıları dahil son commit 41266f6.
 Kullanıcı kararı: bu semtlere eve teslimat + yerinde kurulum yapılıyor.
 
 ### 5. Özel Betta Serisi stok kartı (2026-11-05)
@@ -42,7 +42,6 @@ Ana sayfada "Özel Betta Serisi" kartı; tıklayınca stok penceresi (index.html
 Stokta 13 model: ÖB-NN = ~/Desktop/b1/btN (N=1..13). Stok penceresinde YALNIZ gerçek fotoğraflar (kullanıcı kararı):
 assets/ozel/btN/*.webp (büyük) ve assets/ozel/btN/k/ (küçük). Kart slaytında 5 Gemini sahnesi (assets/ozel/bt1,3,5,7,9.webp).
 Fotoğraflar eğimi düzeltilmiş; yedek: ../yedekler/ozel-betta-bt1-bt13-2026-11-05.zip. Model satılınca OZEL listesinden çıkar.
-Hosting'e yüklenmeyi bekliyor: Özel Betta kartı + assets/ozel, blog/japon-baligi-bakimi, blog/plati-baligi-bakimi.
 
 ## Bilinen işletme bilgileri (değiştirme, her yerde birebir aynı olmalı)
 - Atölye: Ostim OSB, 100. Yıl Blv., 06374 Yenimahalle/Ankara (Google profiliyle aynı) · Pzt–Cmt 10:00–16:00, Pazar kapalı · Tel: +90 531 217 2006 · tankledaquarium@gmail.com
